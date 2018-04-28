@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= com.env.seo.title %>认证成功</title>
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+</head>
+
+<body>
+<% include ../parent/top.ejs %>
+<div class="personal_warp">
+
+
+    <div class="personal " style="background: #fff">
+        <div class="valide">
+            <img src="/img/success.png" class="pull-left" style="width:150px;">
+            <div class="pull-right">
+                <P><%= err?err:'邮箱认证成功！' %></P>
+                <a href="/account">返回我的账户</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+<% include ../parent/bottom.ejs %>
+</html>

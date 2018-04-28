@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 财务管理 <span class="c-gray en">&gt;</span> 邀请奖励 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+    <div class="">
+        <div style="width:360px;float: left;">
+            日期范围&nbsp;:&nbsp;
+            <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'eTime\')||\'%y-%M-%d\'}'})" id="bTime" class="input-text Wdate" value="" style="width:120px;" name="bTime" readonly="true"/>
+            &nbsp;-&nbsp;
+            <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'bTime\')}',maxDate:'%y-%M-%d'})" id="eTime" class="input-text Wdate" style="width:120px;" value="" name="eTime" readonly="true"/>
+        </div>
+        <input type="text" id="param" placeholder="邀请人手机号、真实姓名" style="width:350px" class="input-text">
+        <button name="" id="" class="btn btn-success" type="button" onclick="ZC_api.loadInviteAwardList(1,20,false)"><i class="Hui-iconfont">&#xe665;</i> 搜索
+        </button>
+        <button name="" id="" class="btn btn-success" type="button" onclick="ZC_api.loadInviteAwardList(1, $('#pageTotal').val(),true);"><i class="Hui-iconfont">&#xe644;</i> 导出
+        </button>
+        <button name="" id="" class="btn btn-success" type="button" onclick="ZC_api.loadInviteAwardList(1, $('#pageTotal').val(),false,true);"><i class="Hui-iconfont">&#xe644;</i> 发送至邮箱
+        </button>
+    </div>
+    <div class="mt-20">
+        <table class="table table-border table-bordered table-bg table-hover table-sort">
+            <thead>
+            <tr class="text-c">
+                <th width="25"><input type="checkbox" name="" value=""></th>
+                <th width="80">投资时间</th>
+                <th width="60">邀请人姓名</th>
+                <th width="60">邀请人手机号</th>
+                <th width="60">被邀请人姓名</th>
+                <th width="60">被邀请人手机号</th>
+                <th width="60">投资金额</th>
+                <th width="60">标的名称</th>
+                <th width="60">奖励系数</th>
+                <th width="60">奖励金额</th>
+            </tr>
+            </thead>
+            <script type="text/template" id="invite_tmpl">
+                <tr class="text-c">
+                    <td><input type="checkbox" value="" name=""></td>
+                    <td>{time}</td>
+                    <td>{realName}</td>
+                    <td>{mobile}</td>
+                    <td>{inviteRealName}</td>
+                    <td>{inviteMobile}</td>
+                    <td>{buy_amount}</td>
+                    <td>{title}</td>
+                    <td>{rate}</td>
+                    <td>{amount}</td>
+                </tr>
+            </script>
+            <tbody id="invite_list">
+
+            </tbody>
+        </table>
+        <div id="page"></div>
+        <input type="hidden" id="pageTotal"/>
+    </div>
+</div>
+
+
+</body>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+    load();
+    function load() {
+        ZC_api.loadInviteAwardList(1, 20,false);
+    }
+</script>
+</html>

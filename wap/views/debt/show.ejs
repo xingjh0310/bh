@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>产品详情页</title>
+</head>
+<body>
+<div class="header show_head"><a class="iconfont" href="/debts"><img src="/img/fh2.png"
+                                                                     class="fh_img"></a><%= debt.title %></div>
+<div class="item_mes">
+    <p class="p1">预期年化收益<span>
+            <% if(debt.awardNumber > 0){ if (debt.awardType == _global.awardType.Scale.v){ %>
+            <span class="awardspan" style="margin-left:8px;">奖<%= ((debt.awardNumber) * 100).toFixed(2) %>
+                %</span>
+            <% }else if(debt.awardType == _global.awardType.Fixed.v) { %>
+            <span class="awardspan" style="margin-left:8px;"> 奖<%= debt.awardNumber %>元</span>
+            <% }} %>
+        </span>
+        <% if(debt.isNew){ %>
+        <span class="awardspan">首投</span>
+        <%}if(debt.increaseRate){ %>
+        <span class="awardspan" style="display: inline-block;float: none;">加息</span>
+        <% } %>
+        <% if((debt.schedule * 100).toFixed(0) >= 80 && (debt.schedule * 100).toFixed(0) <100 && new Date() > new Date('2017/12/31 23:59:59') &&  !debt.isCut){ %>
+        <span class="awardspan" style="display: inline-block;float: none;">满奖¥10</span>
+        <%}%>
+        <span class="awardspan" style="padding:0"><%= debt.isCut ? '已截标' : '' %></span>
+    </p>
+    <p class="p2">
+        <span>
+            <%if(debt.increaseRate && parseFloat(debt.increaseRate)>0 && parseFloat(debt.increaseRate)<debt.rate){%>
+            <%= parseFloat(((debt.rate-debt.increaseRate) * 100).toFixed(2)) %><label style="font-size: 24px">+</label><label style="font-size: 26px"><%=parseFloat((debt.increaseRate * 100).toFixed(2))%> </label>
+            <%}else{%>
+            <%= parseFloat((debt.rate * 100).toFixed(2)) %>
+            <%}%>
+        </span>%</p>
+    <p class="p3">
+        <span class="sp1">期限<%= debt.period %><%= debt.periodUnit == _global.periodUnit.Month.v ? '个月' : '天' %></span>
+        <i></i>
+        <span class="sp2"><%= debt.minInvestAmount %>元起投</span>
+    </p>
+    <div class="progress_div">
+        <img src="/img/ic.png" style="left:<%= (debt.schedule * 100).toFixed(0) %>%" class="wow slideInLeft">
+        <div class="progress">
+            <div class="progress-bar bar wow" w="<%= (debt.schedule * 100).toFixed(2) %>" style="width:<%= (debt.schedule * 100).toFixed(2) %>% "></div>
+        </div>
+        <span style="left:<%= (debt.schedule * 100).toFixed(0) %>%"><%= (debt.schedule * 100).toFixed(0) %>%</span>
+    </div>
+    <p class="p4"><span>项目总额<%= debt.amount %>元</span><span class="pull-right">剩余金额<i><%= (debt.amount - debt.investedAmount).toFixed(2) %></i>元</span></p>
+</div>
+<a href="/activity" class="show_xx"><span class="iconfont">&#xe625;</span>多重壕礼，呼朋唤友享福利！<p style="margin-left:0.4rem">查看详情~</p></a>
+<div class="item_tab">
+    <ul class="ul1">
+        <li><span>开始时间</span><i class="pull-right"><%= new Date(debt.beginTime).Format('yyyy-MM-dd') %></i></li>
+        <li>产品类型<i class="pull-right"><%= _global.productType[debt.productType].desc %></i></li>
+        <li>最高限投<i class="pull-right"><%= debt.maxInvestAmount %>元</i></li>
+        <li>计息方式<i class="pull-right"><%= _global.getDesc(_global.interestType, debt.interestType) %></i></li>
+        <li>还款方式<i class="pull-right"><%= _global.getDesc(_global.paymentType, debt.paymentType) %></i></li>
+        <li>详情<i class="iconfont">&#xe644;</i></li>
+    </ul>
+    <input type="hidden" id="full_flag" value="<%=(debt.amount==debt.investedAmount && new Date() > new Date('2017/12/31 23:59:59') && !debt.isCut)?'1':'0'%>"/>
+    <div class="item_list">
+        <ul class="ul2">
+            <li class="active"><span>项目介绍</span></li>
+            <li><span>项目资料</span></li>
+            <li><span>投资记录</span></li>
+        </ul>
+        <%if(showDetail){%>
+            <div class="details_t setTabMain">
+                <div style="display: block; padding: 0.5rem 0.3rem; background: #fff;">
+                    <%- debt.safeguard %>
+                </div>
+                <div class="div2" style="padding: 0.5rem 0; background: #fff;">
+                    <ul class="gallery item_ol1" style="padding: 0;">
+                        <%
+                        if(debt.imgFiles){var arr = debt.imgFiles.split('|');
+                        for(var i = 1;i < arr.length;i++){
+                        %>
+                        <li><a href="<%= arr[i] %>"> <img src="<%= arr[i] %>"/><span></span><i></i></a></li>
+                        <% }} %>
+                    </ul>
+
+                </div>
+                <div>
+                    <input id="debtId" name="debtId" type="hidden" value="<%= debt.id %>"/>
+                    <script type="text/template" id="invest_tmpl">
+                        <li>
+                            <div class="pull-left">
+                                <p class="p1" style="position:relative;">{mobile}</p>
+                                <p class="p2">{time}</p>
+                            </div>
+                            <div class="pull-right">
+                                <p class="p3"><span>{amount}</span>元</p>
+                            </div>
+                        </li>
+                    </script>
+                    <ul id="invest_list" class="ul3">
+                    </ul>
+                </div>
+            </div>
+        <%}else{%>
+        <%if(debt.state>com.biz.fields.debtState.ApprovalPass.v && !user){%>
+            <div style="margin:0.8rem auto;padding-bottom:0.8rem;display: table">
+                <img src="/img/default.png" style="width: 1.3rem;margin: auto"/>
+                <p style="text-align: center;margin-top:0.2rem;color: #ff8200">您未登录，请先登录！</p>
+                <a href="/login" style="display: block;width: 1.8rem;border-radius: 4px;margin: auto;margin-top: 0.2rem;height: 0.4rem;text-align: center;color: #fff;line-height: 0.4rem;background-color: #ff8200">去登录</a>
+            </div>
+        <%}else{%>
+            <div style="margin:0.8rem auto;padding-bottom:0.8rem;display: table">
+                <img src="/img/default.png" style="width: 1.3rem;margin: auto"/>
+                <p style="text-align: center;margin-top:0.2rem;color: #ff8200">募集完成，无法查看详情。</p>
+                <a href="/debts" style="display: block;width: 1.8rem;border-radius: 4px;margin: auto;margin-top: 0.2rem;height: 0.4rem;text-align: center;color: #fff;line-height: 0.4rem;background-color: #ff8200">查看其它标的</a>
+            </div>
+        <% }}%>
+    </div>
+</div>
+    <% if(debt.beginTime > (new Date().getTime())){ %>
+        <a class="show_btn btn_input btn_tz"  href="javascript:;"  style="" ><div class="countdown" systime="<%= (debt.beginTime - (new Date().getTime()))/1000 %>" sysstr="后开始"></div></a>
+    <% }else if(debt.state == _global.debtState.ApprovalPass.v){ %>
+        <a href="/detail/<%= debt.id %>" class="show_btn btn_input btn_tz " style="background:#ff8200;">立即投资</a>
+    <% }else if(debt.state == _global.debtState.EndPayment.v) { %>
+        <input type="button" class="show_btn btn_input btn_tz " disabled="disabled" value="已还款">
+    <% }else if(debt.state == _global.debtState.InPayment.v || debt.state == _global.debtState.Overdue.v){ %>
+        <input type="button" class="show_btn btn_input btn_tz " disabled="disabled" value="还款中">
+    <% } %>
+<input type="hidden" value="1" id="pageNo"/>
+<% include ../parent/slide_nav.ejs %>
+<script>
+    ZC_api.loadInvests(1, 10,true);
+    $('#pageNo').val(1);
+    $(".countdown").wenCount();
+    $(window).scroll(function () {
+        var scrollTop = $(this).scrollTop();
+        var scrollHeight = $(document).height();
+        var windowHeight = $(this).height();
+        if (scrollTop + windowHeight == scrollHeight) {
+            $.ShowLoadIng();
+            var pageNo = parseInt($('#pageNo').val()) + 1;
+            ZC_api.loadInvests(pageNo, 10, false);
+        }
+    });
+
+</script>
+</body>
+</html>

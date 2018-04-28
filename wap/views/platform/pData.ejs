@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>平台数据</title>
+    <link rel="stylesheet" href="/css/base/BH_base.css">
+    <link rel="stylesheet" href="/css/jquery.fullPage.css">
+    <link rel="stylesheet" href="/css/BH/pData.css">
+</head>
+<body>
+    <div class="platform-data">
+        <div class="section section1">
+            <div class="section1-title-box">
+                <img src="/img/platform/section1_title.png">
+            </div>
+            <img class="month" src="" alt="">
+            <div class="section1-bt">
+                <img src="/img/platform/section1_img.png" alt="">
+            </div>
+            <div class="up-down fadeInOutUp"></div>
+        </div>
+        <div class="section section2">
+            <div class="section2-title">
+                <img src="/img/platform/section2_title.png" alt="">
+            </div>
+            <ul class="section2-cont">
+                <li class="item">
+                    <p class="item-title">累计投资金额</p>
+                    <p class="item-data"><span id="data1"><%= total[0] %></span> 元</p>
+                </li>
+                <li class="item">
+                    <p class="item-title">累计为用户赚取收益</p>
+                    <p class="item-data"><span id="data2"><%= total[1] %></span> 元</p>
+                </li>
+                <li class="item">
+                    <p class="item-title">累计注册人数</p>
+                    <p class="item-data"><span id="data3"><%= total[2] %></span> 人</p>
+                </li>
+                <li class="item">
+                    <p class="item-title">累计发布项目个数</p>
+                    <p class="item-data"><span id="data4"><%= total[3] %></span> 个</p>
+                </li>
+            </ul>
+            <div class="up-down fadeInOutUp"></div>
+        </div>
+        <div class="section section3">
+            <div class="section2-title">
+                <img src="/img/platform/section3_title.png" alt="">
+            </div>
+            <div class="age-box">
+                <input type="hidden" id="yearRate1" value="<%= Rate.yearRate35_45 %>">
+                <input type="hidden" id="yearRate2" value="<%= Rate.yearRate25_35 %>">
+                <input type="hidden" id="yearRate3" value="<%= Rate.yearRate18_25 %>">
+                <input type="hidden" id="yearRate4" value="<%= Rate.yearRate45_ %>">
+                <div id="age-chart" style="width: 100%;height:5.48rem;">
+
+                </div>
+            </div>
+            <div class="sex-box">
+                <div id="sex-chart" style="width: 3.06rem;height:3.06rem;"></div>
+                <div class="sex-data-show">
+                    <ul class=boy-wrap>
+                        <li class="b-left"></li>
+                        <li class="b-right">
+                            <div class="b-data" id="bData"><span><%= Rate.sexRate_boy %></span>%</div>
+                            <div class="b-txt">男性投资用户占比</div>
+                        </li>
+                    </ul>
+                    <ul class="girl-wrap">
+                        <li class="b-left g-left"></li>
+                        <li class="b-right g-right">
+                            <div class="b-data g-data" id="gData"><span><%= Rate.sexRate_girl %></span>%</div>
+                            <div class="b-txt">女性投资用户占比</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="up-down fadeInOutUp"></div>
+        </div>
+        <div class="section section4">
+            <div class="section2-title">
+                <img src="/img/platform/section4_title.png" alt="">
+                <ul id="list-chart-data" style="display: none;">
+                    <% if(sortList.length > 0){ %>
+                        <% for (var i = 0;i < sortList.length;i++){ %>
+                            <li>
+                                <span><%= sortList[i].value %></span>
+                            </li>
+                        <% } %>
+                    <% } %>
+                </ul>
+                <div class="list-chart-box" style="position:relative;width:7.5rem;">
+                    <div id="list-chart" style="margin-top:1.18rem;width: 100%; height: 7.32rem;"></div>
+                    <div style="position:absolute;bottom:0.4rem;left:0.55rem;color:#6fb9ff;"><%= sortList[0].name %></div>
+                    <div style="position:absolute;bottom:0;left:1.55rem;color:#6fb9ff;"><%= sortList[1].name %></div>
+                    <div style="position:absolute;bottom:0.4rem;left:2.68rem;color:#6fb9ff;"><%= sortList[2].name %></div>
+                    <div style="position:absolute;bottom:0;right:1.55rem;color:#6fb9ff;"><%= sortList[3].name %></div>
+                    <div style="position:absolute;bottom:0.4rem;right:0.55rem;color:#6fb9ff;"><%= sortList[4].name %></div>
+                </div>
+            </div>
+            <div class="up-down fadeInOutUp"></div>
+        </div>
+    </div>
+
+</body>
+    <script src="/js/plugins/jquery-2.1.4.min.js"></script>
+    <script src="/js/plugins/jquery.fullPage.min.js"></script>
+    <script src="/js/countUp.min.js"></script>
+    <script src="/js/Echarts/echarts.simple.min.js"></script>
+    <script>
+
+        // Echarts图表
+        /*年龄段比例*/
+        function fnAgeChart(){
+            var ageChart = echarts.init(document.getElementById('age-chart'));
+            ageChart.setOption({
+                tooltip: {
+                    trigger: 'item'
+                },
+                series: [
+                    {
+                        type:'pie',
+                        radius: ['55%', '38%'],
+                        minAngle:'15',
+                        data:[
+                            {value:$('#yearRate1').val(), name:'35~45岁',itemStyle:{color:'#d75054'}},
+                            {value:$('#yearRate2').val(), name:'25~35岁',itemStyle:{color:'#fedb65'}},
+                            {value:$('#yearRate3').val(), name:'18~25岁',itemStyle:{color:'#03bf72'}},
+                            {value:$('#yearRate4').val(), name:'45岁及以上',itemStyle:{color:'#158dfd'}}
+                        ]
+                    }
+                ]
+            });
+        }
+        /*性别比例*/
+        function fnSexChart() {
+            var bData =$('#bData span').text();
+            var gData = $('#gData span').text();
+            var sexChart = echarts.init(document.getElementById('sex-chart'));
+            sexChart.setOption({
+                tooltip: {
+                    trigger: 'item'
+                },
+                series: [
+                    {
+                        name:'男女投资占比',
+                        type:'pie',
+                        radius: ['100%', '70%'],
+                        label: {
+                            normal: {
+                                show: false,
+                                position: 'center'
+                            }
+                        },
+                        data:[
+                            {value:$('#gData span').text(), name:'女',itemStyle:{color:'#d75054'}},
+                            {value:$('#bData span').text(), name:'男',itemStyle:{color:'#158dfd'}}
+                        ]
+                    }
+                ]
+            });
+        }
+
+        /*排行榜比例*/
+        function fnListChart() {
+            var listChartData = [];
+            for(var i=1; i<=5; i++){
+                var nowIdx = i-1;
+                listChartData[nowIdx] = $('#list-chart-data li:nth-child('+i+') span').text();
+            }
+            var maxNum = listChartData[0];
+            var addNum = 10;
+            if(listChartData[0]/10 > 100 && listChartData[0]/10 <= 1000){
+                maxNum = listChartData[0] - (listChartData[0]) % 1000 + 1000;
+                addNum = 1000;
+            }else if(listChartData[0]/10 > 10 && listChartData[0]/10 <= 100){
+                maxNum = listChartData[0] - (listChartData[0]) % 100 + 100;
+                addNum = 100;
+            }else if(listChartData[0]/10 <= 10){
+                maxNum = listChartData[0] - (listChartData[0]) % 10 + 10;
+                addNum = 10;
+            }
+            var myChart = echarts.init(document.getElementById('list-chart'));
+            myChart.setOption({
+                xAxis : [
+                    {
+                        type : 'category',
+                        axisLabel: {
+                            interval :0,
+                            textStyle:{
+                                color:"#f0f0f0"
+                            }
+                        },
+                        axisLine:{
+                            lineStyle:{
+                                color:'#aaa',
+                                width:1
+                            }
+                        },
+                        data: ["第一名","第二名","第三名","第四名","第五名"]
+                    }
+                ],
+                yAxis : [
+                    {
+                        type : 'value',
+                        name:'(万/元)',
+                        min: 0,
+                        max: maxNum,
+                        interval: addNum,
+                        axisLabel: {
+                            formatter: '{value}'
+                        },
+                        axisLine:{
+                            lineStyle:{
+                                color:'#aaa',
+                                width:1
+                            }
+                        }
+                    }
+                ],
+                series : [
+                    {
+                        name: '年龄段投资比例',
+                        type: 'bar',
+                        itemStyle: {
+                            normal: {
+                                color: function(params) {
+                                    var colorList = [
+                                        '#158dfd','#d75054','#158dfd','#d75054','#158dfd'
+                                    ];
+                                    return colorList[params.dataIndex]
+                                },
+                                label: {
+                                    show: true,
+                                    position: 'top',
+                                }
+                            }
+                        },
+                        barWidth:15,
+                        data: listChartData
+                    }
+                ]
+            })
+        }
+
+        $(function () {
+            $('.month').attr('src','/img/platform/month/'+(new Date().getMonth()+1)+'.png');/*月份*/
+            //全屏滚动
+            $('.platform-data').fullpage({
+                verticalCentered: true,
+                continuousVertical:true,
+                afterLoad: function(anchorLink, index) {
+                    if (index == 3) {
+                        // Echarts图表
+                        fnAgeChart();/*年龄段比例*/
+                        fnSexChart();/*性别比例*/
+                    }
+                    if(index == 4){
+                        fnListChart();/*排行榜比例*/
+                    }
+                }
+            });
+            var options = {
+                useEasing: true,
+                useGrouping: true,
+                separator: ',',
+                decimal: '.',
+            };
+            var demo1 = new CountUp('data1', 0, $('#data1').text(), 0, 2.5, options);
+            demo1.start();
+            var demo2 = new CountUp('data2', 0, $('#data2').text(), 0, 2.5, options);
+            demo2.start();
+            var demo3 = new CountUp('data3', 0, $('#data3').text(), 0, 2.5, options);
+            demo3.start();
+            var demo4 = new CountUp('data4', 0, $('#data4').text(), 0, 2.5, options);
+            demo4.start();
+
+        });
+    </script>
+</html>

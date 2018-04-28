@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>媒体资讯</title>
+    <link rel="stylesheet" type="text/css" href="/css/BH/aboutus/about_nav.css"/>
+</head>
+<body>
+
+<% include ../parent/top.ejs  %>
+
+<div class="about_warp">
+    <div class="about_nav_w">
+        <ul class="about_nav">
+            <li style="margin-left:120px;">
+                <a href="/aboutus" >
+                    <span class="iconabout">&#xe657;</span>
+                    <p>公司介绍</p></a>
+            <li>
+                <a href="/aboutus/team" >
+                    <span class="iconabout" style="line-height: 43px">&#xe639;</span>
+                    <p>运营团队</p></a>
+            </li>
+            <li class="active">
+                <a href="/aboutus/news_list" >
+                    <span class="iconabout">&#xe687;</span>
+                    <p>媒体资讯</p></a>
+            </li>
+            <li>
+                <a href="/aboutus/announce_list" >
+                    <span class="iconabout"style="line-height: 43px">&#xe60d;</span>
+                    <p>平台公告</p></a>
+            </li>
+            <li>
+                <a href="/aboutus/contact" >
+                    <span class="iconabout">&#xe6ac;</span>
+                    <p>联系我们</p></a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="about_main">
+        <div style="width:1050px;margin:0 auto">
+            <div class="about_gg about_zx">
+                <P class="p1"><a href="/aboutus/news_list"><< 返回列表</a></P>
+                <h3><%=news.title%></h3>
+                <p CLASS="p2"><%= new Date(news.time).Format('yyyy-MM-dd hh:mm') %><span style="margin-left:5px;">作者：<%= news.author %></span></p>
+                <div style="margin-top:30px;"><%- news.content %></div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<% include ../parent/bottom.ejs  %>
+
+
+</body>
+
+</html>

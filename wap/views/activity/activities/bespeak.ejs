@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>约投专享</title>
+    <link rel="stylesheet" href="/css/base/BH_base.css">
+    <link rel="stylesheet" href="/css/activities/bespeak.css">
+</head>
+<body>
+
+    <div class="bespeak-page">
+        <ul class="top-box">
+            <li class="top-title-wrap">
+                <div class="activity-time">活动开始时间 2018.04.15</div>
+            </li>
+            <li><img src="/img/activities/bespeak/top_img2.png"></li>
+        </ul>
+        <div class="main-box">
+            <div class="main1">
+                <img src="/img/activities/bespeak/main1.png" alt="">
+            </div>
+            <div class="main2">
+                <img src="/img/activities/bespeak/main2_title.png" alt="">
+                <img src="/img/activities/bespeak/main2_img1.png" alt="">
+                <img src="/img/activities/bespeak/main2_img2.png" alt="">
+                <img src="/img/activities/bespeak/main2_img3.png" alt="">
+                <img src="/img/activities/bespeak/main2_img4.png" alt="">
+            </div>
+            <div class="main3 rule-box">
+                <img src="/img/activities/bespeak/rule_title.png" alt="">
+                <img src="/img/activities/bespeak/rule_img1.png" alt="">
+                <img src="/img/activities/bespeak/rule_img2.png" alt="">
+                <img src="/img/activities/bespeak/rule.png" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="fixed-btn-box" style="display: none;">
+        <div class="fixed-btn" onclick="showPop()"></div>
+    </div>
+    <div class="popUp-box" onclick="hidePop()">
+        <div class="popUp">
+            <div class="popUp-btn">
+                <a class="popUp-left pull-left" onclick="hidePop()"></a>
+                <% if(fromWrap){ %>
+                    <input type="hidden" value="<%= fromWrap %>" id="isWrap">
+                    <a class="popUp-right pull-right" id="callPhone" href="tel:4001888686"></a>
+                <% }else { %>
+                    <input type="hidden" value="<%= 0 %>" id="isWrap">
+                    <div class="popUp-right pull-right" id="callPhone"></div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="/js/plugins/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="/js/BH/public.js"></script>
+<script>
+    $(function(){
+        var systemType = phoneType();
+        var isWrap = $('#isWrap').val() == 0 ? false: true;
+        if(systemType == 1 || isWrap){
+            $('.fixed-btn-box').show();
+        }
+    })
+    var popUp = $('.popUp-box');
+    function showPop() {
+        event.stopPropagation();
+        popUp.show();
+        fnNonRolling();
+    }
+    function hidePop() {
+        popUp.hide();
+        fnRolling();
+    }
+
+    $('#callPhone').click(function () {
+        var isWrap = $('#isWrap').val() == 0 ? false: true;
+        if(!isWrap){
+            hidePop();
+            goAppPage(5);
+        }
+    })
+
+
+</script>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <% include ../../parent/static.ejs %>
+    <title><%= com.env.seo.title %>约投专享</title>
+</head>
+<body>
+<style>
+    .container{
+        width:100%;
+        height:auto;
+        padding-bottom: 100px;
+        background: url("/img/activity/ordinaryActivities/banner_yueXiang.png") no-repeat;
+        background-size:1920px 2038px;
+        background-position: top;
+        background-color:#ff6f5e;
+    }
+    .margin{
+        width: 1024px;
+        height:auto;
+        margin:0 auto;
+    }
+    .container .banner{
+        width:100%;
+        height: 1896px;
+        margin:0 auto;
+        background: url("/img/activity/ordinaryActivities/banner_text.png") no-repeat;
+        background-size:100% 1200px;
+        background-position: center 5%
+    }
+    .content1{
+        width:100%;
+        height: 504px;
+        padding-left: 62px;
+        padding-right: 62px;
+        padding-top: 146px;
+        box-sizing: border-box;
+        font-size: 35px;
+        margin:0 auto;
+        background: url("/img/activity/ordinaryActivities/Yb_content1.png") no-repeat;
+        background-size: 100%;
+        position: relative;
+        top:1356px;
+    }
+    .content1>p{
+        color: #666666;
+        line-height: 56px;
+    }
+    .content2{
+        width:100%;
+        height:1260px;
+        margin:0 auto;
+        background: url("/img/activity/ordinaryActivities/Yb_content.png") no-repeat;
+        background-size: 100% 100%;
+        overflow: hidden;
+    }
+    .content2>div{
+        width: 983px;
+        margin:0 auto;
+        display: flex;
+        display: -webkit-flex;
+    }
+    .content2>div>div{
+        flex: 1;
+        -webkit-flex:1;
+        height:100%;
+        overflow: hidden;
+    }
+    .num{
+        display: inline-block;
+        width: 59px;
+        height: 59px;
+        background: #ff9487;
+        padding: 4px;
+        box-sizing: border-box;
+        border-radius: 50%;
+    }
+    .num>span{
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        background: #ff6f5e;
+        text-align: center;
+        line-height: 50px;
+        margin:0 auto;
+        border-radius: 50%;
+        color: #fff;
+        font-size: 30px;
+    }
+    .tit{
+        font-size: 38px;
+        font-weight:400;
+        margin-top: 34px;
+        margin-left: 140px;
+        color:#666666
+    }
+    .tit2{
+        font-size: 38px;
+        font-weight:400;
+        margin-top: 42px;
+        margin-left: 122px;
+        color:#666666
+    }
+    .content2 .p{
+        font-size: 30px;
+        width: 380px;
+        padding-left: 100px;
+        color: #999999;
+        margin-top:20px;
+    }
+    .content2 .p2{
+        font-size: 30px;
+        color: #999999;
+        margin-top:40px;
+        float: right;
+        text-align: right;
+    }
+    .content3{
+        width: 100%;
+        height: 1608px;
+        margin:0 auto;
+        background: url("/img/activity/ordinaryActivities/Yb_content3.png") no-repeat;
+        background-size: 100% 100%;
+        margin-top: 55px;
+        padding-left: 26px;
+        padding-right: 26px;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+    .content3 p{
+        color: #666666;
+        font-size: 33px;
+    }
+    .right_btn{
+        width: 110px;
+        height: 200px;
+        border-radius: 50px;
+        background-color: #ff9c00;
+        position: fixed;
+        cursor: pointer;
+        right:5%;
+        z-index: 99;
+    }
+    .yuebiao{
+        background: url("/img/activity/ordinaryActivities/btn1.png") no-repeat;
+        background-size: 100%;
+        top:320px;
+    }
+    .record{
+        background: url("/img/activity/ordinaryActivities/btn2.png") no-repeat;
+        background-size: 100%;
+        top:520px;
+    }
+</style>
+<% include ../../parent/top.ejs %>
+<div class="container">
+    <div class="margin">
+        <!--<div class="right_btn yuebiao" id="yuebiao" onclick="window.location.href='/debts'"></div>-->
+        <!--<div class="right_btn record" onclick="window.location.href='/account/invests'"></div>-->
+        <div class="banner">
+            <div class="content1">
+                <p>
+                    约标，是铂恒金服为投资人提供的尊贵VIP级别理财方式，<br>
+                    投资人可根据自己的需求在<i style="color: #ff7200;">投资时间、投资周期以及投资</i><br>
+                    <i style="color: #ff7200">金额</i>上进行<i style="color: #ff7200">个性化订制</i>，<br>
+                    然后由平台为投资人寻找匹配对应项目，<br>
+                    最后由投资人在约定时间内投标，完成整个约标流程。
+                </p>
+            </div>
+        </div>
+        <div class="content2">
+            <div style="margin-top: 200px;height: 240px;">
+                <div>
+                    <div class="num" style="float: left;margin-top: 30px;margin-left:58px;">
+                        <span>1</span>
+                    </div>
+                    <div class="tit">提出约标申请</div>
+                    <p class="p">
+                        联系铂恒金服在线客 <br>
+                        服，提交订制项目需求
+                    </p>
+                </div>
+                <div style="background: url('/img/activity/ordinaryActivities/step11.png') no-repeat   center;"></div>
+            </div>
+            <div style="height: 256px;">
+                <div style="background: url('/img/activity/ordinaryActivities/step2.png') no-repeat   center;"></div>
+                <div>
+                    <div class="num" style="float: right;margin-top: 42px;margin-right: 58px;">
+                        <span>2</span>
+                    </div>
+                    <div class="tit2">等待信息反馈</div>
+                    <p class="p2">
+                        等待客服联系确认
+                    </p>
+                </div>
+            </div>
+            <div style="height: 254px;">
+                <div>
+                    <div class="num" style="float: left;margin-top: 30px;margin-left: 58px;">
+                        <span>3</span>
+                    </div>
+                    <div class="tit">匹配优质项目</div>
+                    <p class="p">
+                        根据订制条件为您<br>
+                        匹配优质项目
+                    </p>
+                </div>
+                <div  style="background: url('/img/activity/ordinaryActivities/step13.png') no-repeat   center;"></div>
+            </div>
+            <div style="height: 254px;">
+                <div style="background: url('/img/activity/ordinaryActivities/step4.png') no-repeat   center;"></div>
+                <div>
+                    <div class="num" style="float: right;margin-top: 42px;margin-right: 58px;">
+                        <span>4</span>
+                    </div>
+                    <div class="tit2">等待信息反馈</div>
+                    <p class="p2">
+                        发布订制项目，用户在 <br>
+                        铂恒金服理财列表进行投标
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="content3">
+            <p style="margin-top: 160px;line-height: 66px">
+                1．约标金额须≥10万元，理财周期范围32天-180天，最高
+                享额外加息1.3%，具体内容如下：
+            </p>
+            <p style="margin-top: 810px;line-height: 66px">
+                2、约标用户可以提前预约任何周期标的(新手标除外)，约标后，
+                发布定制标前，客服会与约标用户再次确认；
+            </p>
+            <p style="margin-top: 30px;line-height: 66px">
+                3、约标享受最高额外1.3%的年化奖励(年化加息部分直接体现
+                在产品利率上)；
+            </p>
+            <p style="margin-top: 30px;line-height: 66px">
+                4、第一次忘记投标，铂恒金服会为您重新进行约投程序，但累
+                计超过两次未按时进行约标，我们将不再继续为您提供约投服务。
+            </p>
+            <!--<p style="margin-top: 30px;line-height: 55px">-->
+                <!--5．约标用户账户余额必须大于等于约标金额，否则约标失败-->
+            <!--</p>-->
+        </div>
+    </div>
+</div>
+
+<% include ../../parent/bottom.ejs %>
+
+</body>
+</html>

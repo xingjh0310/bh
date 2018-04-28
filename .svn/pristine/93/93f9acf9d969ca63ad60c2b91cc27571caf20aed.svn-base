@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html>
+
+<% include ../main/top.ejs %>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 管理员设置 <span
+            class="c-gray en">&gt;</span> 模块选择 <a class="btn btn-success radius r mr-20"
+                                                  style="line-height:1.6em;margin-top:3px"
+                                                  href="javascript:location.replace(location.href);" title="刷新"><i
+                class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+    <div class="codeView docs-example">
+        <legend> <%= role.name %></legend>
+        <input type="hidden" value="<%= req.param('id') || 0 %>" id="roleId"/>
+        <div class="row cl">
+            <% for(var i = 0;i < rights.length;i++){ %>
+            <div class="skin-minimal">
+                <div class="check-box parent">
+                    <input type="checkbox" value="<%= rights[i].id %>" <%= rights[i].check ? 'checked="checked"' : '' %>
+                           id="<%= rights[i].id %>">
+                    <label
+                            style=" font-size:15px;font-weight: bold; color: #1b1b1b;"><%= rights[i].name %></label>
+                </div>
+                <br>
+
+                <div id="child_<%= rights[i].id %>">
+                    <% for(var j = 0;j < rights[i].childList.length;j++){ %>
+                    <div class="check-box child">
+                        <input value="<%= rights[i].childList[j].id %>" _parentId="<%= rights[i].id %>" type="checkbox"
+                               id="checkbox-<%= rights[i].childList[j].id %>" <%= rights[i].childList[j].check ? 'checked="checked"' : '' %>>
+                        <label style="font-size:12px; color: #7e8795;"><%= rights[i].childList[j].name %></label>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+            <br>
+            <% } %>
+        </div>
+        <div class="row cl">
+            <div class="col-10 col-offset-3">
+                <button id="sub" class="btn btn-primary radius" type="button"><i
+                            class="Hui-iconfont">&#xe632;</i> 保存
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+
+    $('.parent input').click(function () {
+        if ($(this).is(':checked')) {
+            $('#child_' + $(this).attr('id') + ' input').iCheck('check');
+        } else
+            $('#child_' + $(this).attr('id') + ' input').iCheck('uncheck');
+    });
+    $('.child input').click(function () {
+        var parentId = $(this).attr('_parentId');
+        if ($('#child_' + parentId).find('input[type=checkbox]:checked').length > 0) {
+            $('#' + parentId).iCheck('check');
+        } else
+            $('#' + parentId).iCheck('uncheck');
+    });
+    $('#sub').click(function () {
+        var arr = [];
+        $.each($('input[type="checkbox"]'), function (i, item) {
+            if ($(item).is(':checked')) arr.push($(item).val())
+            if (i == $('input[type="checkbox"]').length - 1) {
+                $.ajax({
+                    url: '/supervisors/saveRights',
+                    type: 'post',
+                    data: {roleId: $('#roleId').val(), ids: arr.join(',')},
+                    success: function (msg) {
+                        if (!msg.err) {
+                            Huimodal_alert('保存成功', 1000, function () {
+                                layer_close();
+                            });
+                        }
+                        else {
+                            Huimodal_alert(msg.err, 1000, function () {
+                            });
+                        }
+                    }
+                })
+            }
+        })
+
+    });
+
+</script>
+</html>

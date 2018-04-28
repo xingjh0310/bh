@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>铂恒与安全保障</title>
+    <link rel="stylesheet" href="/css/base/BH_base.css">
+    <link rel="stylesheet" href="/css/BH/rule.css">
+</head>
+<body>
+    <div class="rule-page">
+        <div class="rule-title">什么是P2P？</div>
+        <ul class="rule-list">
+            <li>P2P的来源于一个专业名词“peer to peer”，借贷双方在互联网上直接对接，双方直接签订借贷合同。
+                P2P网贷平台的职责，是提供信息发布、信用评定、贷中服务及部分贷后管理等第三方服务，收取相应的 服务费。
+                平台进行借贷撮合，自身并不参与交易，借款人的利息全部给到平台上的投资人，只收取服务费用</li>
+        </ul>
+
+        <div class="rule-title">风险准备金使用用途？</div>
+        <ul class="rule-list">
+            <li>在项目发生逾期后，平台会启用风险垫付金先行垫付给投资人</li>
+        </ul>
+
+        <div class="rule-title">电子合同有效吗？</div>
+        <ul class="rule-list">
+            <li>有效。我国新合同法第十一条规定: 书面形式合同是指合同书、信件和数据电文（包括电报、电传、传真、 电子数据交换和电子邮件）等可以有形地表现所载内容的形式。
+                因此电子合同属于书面形式的 合同一种， 是受到法律保护的。
+                本平台中的合同文本都由经济法律师起草，确保通过本平台的所有交易都具备法律效力。</li>
+        </ul>
+
+        <div class="rule-title">逾期、坏账怎么处理？</div>
+        <ul class="rule-list">
+            <li>发生逾期时先由第三方保付机构进行垫付或者债权回购，如果第三方未及时垫付回购时，平台将启用风险垫付准备金先行垫付投资人。</li>
+        </ul>
+    </div>
+</body>
+</html>

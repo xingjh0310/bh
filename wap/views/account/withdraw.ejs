@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>提现</title>
+</head>
+
+<body>
+<div class="header show_head" ><a class="iconfont" href="/account"><img src="/img/fh2.png" class="fh_img"></a>提现 <a href="/account/withdrawlist" class="rule">提现记录</a> </div>
+<div class="with_main">
+    <form class="form-horizontal" >
+        <div class="top">
+            <p style="overflow: auto;"><img src="/img/bank/<%= bankCard.bank %>.png" class="regbank_img" style="float:left"/><span style="float: left;padding-top: 0.75rem;"><%= _bank[bankCard.bank].desc %></span></p>
+
+            <p class="p1"> <%= bankCard.cardId ? bankCard.cardId.replace(/^(\d{4})(.+)(\w{4})$/, "$1************$3") : "" %></p>
+            <p class="p2">持卡人:<%= bankCard.accountName %></p>
+            <p style="    margin: 0.6rem 0 0 1.1rem;">*您成功绑定银行卡，如需帮助请联系铂恒客服</p>
+        </div>
+
+        <p class="p3">可提现额度<span class="s1"  name="amount"><%= account.balance %>元</span></p>
+        <div class="tipsYz"></div>
+        <div class="tixian">
+            <span>提现金额</span>
+            <input type="text" placeholder="100元起提"  name="amount"  _check="withdraw_amount" id="withdraw_input">
+            <span class="s2" onclick="$('#withdraw_input').val(<%= account.balance %>);">全提</span>
+        </div>
+        <div class="tixian password">
+            <span>交易密码</span>
+            <input type="password" placeholder="请输入交易密码"  name="payPassword">
+        </div>
+        <a href="/account/setPayPassword"><p class="p4">忘记交易密码</p></a>
+        <p style="text-align: center;margin-bottom: 0.2rem;color: #999;">若充值金额未投资申请提现，将收取千分之五额外提现费用。</p>
+        <input type="button" value="确认" class="sure" onclick="ZC_api.withdraw()">
+
+    </form>
+
+</div>
+
+
+<% include ../parent/slide_nav.ejs %>
+<div class="zhao_t"></div>
+<div class="tishi_t">
+    <p class="title">提现</p>
+    <div class="tishi_main">
+        <h2 class="msg">是否确定提现？</h2>
+        <ul>
+            <li><a style="background-color: #fe8749;float: left" class="cancel">取消</a></li>
+            <li><a style="background-color: #999999;float: right" class="submit">确定</a></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>添加银行卡</title>
+</head>
+<body>
+<div class="header" ><a class="iconfont" href="/account"><img src="/img/fh1.png" class="fh_img"></a>添加银行卡</div>
+
+<div class="bank_main">
+    <p class="p1">*银行卡支付成功后默认为快捷卡，投资提现更高效</p>
+    <div class="bank_div1">
+        <p><%= (user.realName ) %></p>
+        <p><%= user.idCard ? user.idCard.replace(/^(\d{3})(.+)(\w{4})$/, "$1****$3") : "" %></p>
+    </div>
+
+    <form class="form-horizontal">
+        <div class="tipsYz"></div>
+    <ul class="bank_list">
+        <li>
+            银行卡号<input  id="focus" type="text" name="cardId" value="<%= bankCard.cardId || '' %>" _check="cardno" placeholder="请输入银行卡号">
+        </li>
+        <li>
+            所属银行
+            <select class="bankname" name="bank">
+                <% for(var key in _bank){ %>
+                <option <%= bankCard.bank == key ? 'selected="selected"' : '' %>
+                        value="<%= key %>"><%= _bank[key].desc %></option>
+                <% } %>
+            </select>
+
+        </li>
+        <li>
+            开户省市
+            <div style="float:right">
+                <select id="province" style="width:2.4rem;float:none" runat="server" name="province" _check="province"></select>
+                <select id="city" style="width:2.4rem;float:none; margin-left: 0.15rem" runat="server" name="city" _check="city"></select>
+            </div>
+
+        </li>
+        <li>
+            开户支行<input id="focus" type="text" name="branch" value="<%= bankCard.branch || ''  %>"  _check="branch" placeholder="请输入开户支行" />
+        </li>
+
+    </ul>
+    <ul class="bank_list">
+        <li>
+            预留手机号<input id="focus" type="text" name="mobile" value="<%= bankCard.mobile || '' %>" placeholder="请输入预留手机号" _check="mobile">
+        </li>
+    </ul>
+    <a href="javascript:" class="btn" onclick="ZC_api.saveBankCard()">确认</a>
+</form>
+
+
+</div>
+<% include ../parent/slide_nav.ejs %>
+<script type="text/javascript">
+    setup()
+</script>
+</body>
+</html>

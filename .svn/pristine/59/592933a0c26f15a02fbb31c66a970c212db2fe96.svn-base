@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= com.env.seo.title %>我的积分</title>
+    <% include ../parent/static.ejs %>
+    <link rel="stylesheet" type="text/css" href="/css/BH/account/public.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/BH/parent/account_left.css"/>
+</head>
+<body>
+<% include ../parent/top.ejs %>
+
+<% include ../parent/account_left.ejs %>
+<div class=" inv_main">
+    <div class="jifien_cen ">
+        <div class="jifen_data">
+            <div class="pull-left">
+                <p><%= user.score || 0 %><i>分</i></p>
+            </div>
+            <div class="pull-right">
+                <h2>积分规则</h2>
+
+                <p>  1、投资可获得积分；</p>
+                <p> 2、完成任务可获得积分，比如：完成实名、绑卡、设置交易密码等可获得相应积分；</p>
+                <p> 3、通过官网举行的活动获得积分，具体信息请等待官网公告。平台活动积分将按照活动规则说明执行赋予；</p>
+                <p> 4、积分均取整数赋予，如遇小数将履行四舍五入制赋予。</p>
+            </div>
+        </div>
+
+        <div class="table_list">
+            <div class="table_send">
+                <span class="tit">积分明细</span>
+
+            </div>
+
+            <table border="0" cellspacing="0" width="100%" class="table dates">
+                <thead>
+                <tr>
+                    <th style="width: 200px;">时间</th>
+                    <th>积分</th>
+                    <th>备注</th>
+                </tr>
+                </thead>
+                <script type="text/template" id="record_tmpl">
+                    <tr>
+                        <td>{time}</td>
+                        <td style="">{number}</td>
+                        <td>{action}</td>
+                    </tr>
+                </script>
+                <tbody id="record_list">
+
+                </tbody>
+
+            </table>
+
+            <div id="page" class="pagination_div">
+                <ol class="pagination_1">
+
+                </ol>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+<div class="inte_w" style="display:none">
+    <div class="inte_main">
+        <h2>积分规则</h2>
+       <p> 1、 自动购买成功后，排名移到队尾；</p>
+        <p>2、 理财产品成功发布开放购买后，您所开启的自动购买功能开始运作；</p>
+        <p> 3、 修改、关闭自动购买功能后再次开启，排名移到队尾；</p>
+        <p> 4、 账户可用余额小于产品起购金额时，系统会自动跳过您的自动购买功能，排名移到队尾；</p>
+        <p> 5、 自动投标开启后不能使用红包，使用红包前请关闭自动投标功能，红包使用要手动投标。</p>
+        <a href="javascript:" >返回</a>
+    </div>
+</div>
+
+<% include ../parent/bottom.ejs %>
+<script type="text/javascript">
+    ZC_api.loadIntegralRecord(1, 10);
+</script>
+</body>
+
+</html>

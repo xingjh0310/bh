@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>提现规则</title>
+    <link rel="stylesheet" href="/css/base/BH_base.css">
+    <link rel="stylesheet" href="/css/BH/rule.css">
+</head>
+<body>
+    <div class="rule-page">
+        <div class="rule-title">提现时间：</div>
+        <ul class="rule-list">
+            <li>1、工作日12:00之前申请的提现当日处理完成，12:00之后申请的提现下个工作日处理完成；</li>
+            <li>2、周五12:00之后的提现申请下个工作日（周一）处理完成；</>
+            <li>3、由于不同银行处理业务的时间不同，具体到账时间以银行处理时间为准；</li>
+            <li>4、节假日及周末，实际到账时间以银行处理时间为准；</li>
+            <li>5、(国家法定假日除外)如遇国家法定节假日以网站公告为准。</li>
+        </ul>
+        <div class="rule-title">提现规则：</div>
+        <ul class="rule-list">
+            <li>1、提现请先绑定银行卡，然后申请提现；</li>
+            <li>2、提现免费，100起提；</li>
+            <li>3、您所充值金额若未投资申请提现，将按千分之五收取额外提现费用；</li>
+            <li>4、如果提现金额在通过审核后48小时内未到账，请及时联系客服：400-1888-686。</li>
+        </ul>
+    </div>
+</body>
+</html>

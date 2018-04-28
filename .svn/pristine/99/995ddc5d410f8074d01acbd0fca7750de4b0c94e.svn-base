@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <link rel="stylesheet" type="text/css" href="/css/BH/user/login.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/BH/user/findpwd.css"/>
+    <title><%= com.env.seo.title %>找回密码</title>
+</head>
+<body>
+<div class="tmpwen" >
+    <div class="temtext" >
+        <img style="" src="/img/tishi.png"/>
+        您的浏览器版本过低，部分功能无法正常使用，
+        <a style="color: #ff6058; font-weight: bold;" href="http://www.microsoft.com/china/windows/IE/upgrade/index.aspx">去升级</a>
+    </div>
+</div>
+<div class="login_navw">
+    <div class="login_nav">
+        <a href="/"><img src="/img/logo.png"> </a>
+        <div class="logo_scroll">
+            <ul style="margin-top: 0px;">
+                <li><img src="/img/lo1.png"></li>
+                <li><img src="/img/lo2.png"></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="pass_warp">
+
+    <div class="f_pass">
+        <img src="/img/find1.png" style="margin:0 auto;display:table">
+        <form class="form-horizontal f_input formResetLoginPwd1">
+            <div class="tipsYz"></div>
+                <div class="tipsMob">验证码已发送，请注意查收</div>
+                <div class="form-group">
+                    <span class="u1"></span>
+                    <input type="text" class="form-control" name="mobile" _check="mobile" id="mobile"
+                           placeholder="手机号码">
+                </div>
+                <div class="form-group yanzh_inp">
+                    <input type="text" class="form-control  imgCode" id="imgCode" name="imgCode" placeholder="图片验证码"
+                           _check="validcode" style="margin-right: 10px;"/>
+                    <i class="imgcode"> <img onclick="reloadImgCode(this)" id="picCode"
+                                             style="width: 105px; height: 47px;cursor: pointer;" class="refresh"
+                                             src="/getImgCode"/></i>
+                </div>
+                <div class="form-group yanzh_inp">
+                    <span class="u3"></span>
+                    <input type="text" class="form-control" placeholder="手机验证码"
+                           style="text-indent: 61px;background: #fff"
+                           name="code" _check="validcode">
+                    <i class="hq"><input onclick="javascript:ZC_api.sendFindLoginPasswordCode($('#mobile').val());"
+                                         id="subFindPwdCode" value="获取" type="button"/></i>
+                </div>
+                <a href="javascript:" class="btn" onclick="ZC_api.findLoginPassword1()">下一步</a>
+
+        </form>
+
+
+
+    </div>
+
+
+</div>
+
+<% include ../parent/bottom.ejs %>
+</body>
+</html>

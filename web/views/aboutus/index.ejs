@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>关于我们</title>
+    <link rel="stylesheet" type="text/css" href="/css/BH/aboutus/about_nav.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/BH/aboutus/index.css"/>
+</head>
+<body>
+<style>
+    #gallery {margin:0 auto;height:600px;overflow:hidden; z-index:1;}
+    .container_image{margin:0 auto;position:relative;width:100%;font-size:.8125em;}
+    .roundabout-holder{width:900px;height:540px;margin:0 auto;}
+    .roundabout-moveable-item {width: 646px;height: 416px;cursor: pointer;border:3px solid #ccc;border:3px solid rgba(0, 0, 0, 0.08);border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;}
+    .roundabout-moveable-item img{width:100%;}
+
+
+    .swiper-container {
+        width: 100%;
+        height: 100%;
+    }
+    .swiper-slide {
+        text-align: center;
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+        height: 300px;
+        overflow: hidden;
+    }
+    .swiper-slide img{
+         width: 240px;
+        margin: 30px 30px 0 30px;
+    }
+</style>
+<% include ../parent/top.ejs  %>
+
+<div class="about_warp">
+
+    <div class="about_nav_w">
+        <ul class="about_nav">
+            <li class="active" style="margin-left:120px;">
+                <a href="/aboutus" >
+                <span class="iconabout">&#xe657;</span>
+                <p>公司介绍</p></a>
+            </li>
+            <li>
+                <a href="/aboutus/team" >
+                    <span class="iconabout" style="line-height: 43px">&#xe639;</span>
+                    <p>运营团队</p></a>
+            </li>
+            <li>
+                <a href="/aboutus/news_list" >
+                <span class="iconabout">&#xe687;</span>
+                <p>媒体资讯</p></a>
+            </li>
+            <li>
+                <a href="/aboutus/announce_list" >
+                <span class="iconabout"style="line-height: 43px">&#xe60d;</span>
+                <p>平台公告</p></a>
+            </li>
+            <li>
+                <a href="/aboutus/contact" >
+                <span class="iconabout">&#xe6ac;</span>
+                <p>联系我们</p></a>
+            </li>
+        </ul>
+    </div>
+    <div class="about_main">
+        <div class="main1" style="padding-top:48px;">
+            <div class="title">
+                <h2>铂恒金服</h2>
+                <span></span>
+                <p>COMPANY PROFILE</p>
+            </div>
+            <div class="main1_p">
+                <p>铂恒金服http://www.bohomm.com/是杭州博虹金融信息服务有限公司独立运营的一家专注于产业供应链消费金融信息服务的平台。</p>
+                <p> 我们提供安全、便捷、标准化的理财体验。通过金融产品创新与互联网体验技术创新，不断降低优质理财产品</p>
+                <p> 投资的资金门槛、资质门槛、知识门槛、流程门槛等，使广大用户及时获得合适的金融理财服务，</p>
+                <p>  践行“普惠金融”理念，服务</p>
+                <p> 企业利益大众。</p>
+            </div>
+
+        </div>
+        <div class="main2">
+            <div class="title">
+                <h2>平台优势</h2>
+                <span></span>
+                <p>COMPANY CULTURE</p>
+            </div>
+            <ul class="main2_ul" style="width: 700px">
+               <li style="margin-left:0;width: 50%">
+                   <img src="/img/mm2.png">
+                   <p>严格审核</p>
+                   <p>撮合交易</p>
+               </li>
+
+                <li style="margin-left:0;width: 50%">
+                    <img src="/img/jy.png">
+                    <p>10年线下资产</p>
+                    <p>  风控运营经验</p>
+                </li>
+            </ul>
+        </div>
+        <a name="fimaName" ></a>
+        <div class="main3" >
+            <div class="title">
+                <h2>资质荣誉</h2>
+                <span></span>
+                <p>COMPANY PROFILE / HONOR</p>
+            </div>
+
+            <div class="main3_ul">
+            <div class="swiper-container">
+                <div class="swiper-wrapper main">
+                    <ul class="swiper-slide gallery">
+
+                        <li><a href="/img/mm7.jpg" ><img src="/img/mm7.jpg"  style="margin-top:20px;"/></a></li>
+                       <li> <a href="/img/mm8.jpg" ><img src="/img/mm8.jpg"  style="margin-top:20px;"/></a></li>
+                       <li> <a href="/img/mm9.jpg" ><img src="/img/mm9.jpg" style="margin-top:20px;" /></a></li>
+                    </ul>
+                    <ul class="swiper-slide gallery" >
+                        <li><a href="/img/mm10.jpg"><img src="/img/mm10.jpg" style="margin-top:20px;" /></a></li>
+                        <li><a href="/img/mm6.jpg"><img src="/img/mm6.jpg"  style="margin-top:-30px;"/></a></li>
+                        <li><a href="/img/mm71.jpg"><img src="/img/mm71.jpg"  style="margin-top:-30px;"/></a></li>
+                    </ul>
+
+                </div>
+
+                <div class="swiper-button-next" style="background:transparent"><img src="/img/next11.png" width="40"> </div>
+                <div class="swiper-button-prev"  style="background:transparent"><img src="/img/pre111.png" width="40"></div>
+            </div>
+
+
+       </div>
+        </div>
+
+        <!--<div class="main4">
+            <div class="title">
+                <h2>发展历程</h2>
+                <span></span>
+                <p>COMPANY HISTORE</p>
+            </div>
+            <div class="main4_ul">
+
+                   <div style="bottom:100px;left:170px;">
+                       <span class="s1">2015年3月</span><br>
+                       <span class="s2" style="margin: 15px 0 0 -70px;">杭州博虹金融信息服务有限公司成立</span>
+                   </div>
+
+                    <div style="top:20px;left:400px;">
+                        <span class="s1">2015年4月</span><br>
+                        <span class="s2" style="margin: 15px 0 0 -5px;">平台运营上线</span>
+                    </div>
+
+                <div style="bottom:120px;right:250px;">
+                    <span class="s1">2016年11月</span><br>
+                    <span class="s2"  style="margin: 15px 0 0 -40px;">荣获浙江省金融行业十大领先品牌<br>荣获中国互联网金融行业十佳诚信品牌<br>荣获全国质量服务AAA级企业</span>
+                </div>
+
+            </div>
+        </div>-->
+
+
+
+        <div class="main5">
+            <div class="title">
+                <h2>办公环境</h2>
+                <span></span>
+                <p>OFFICE ENVIRONMENT</p>
+            </div>
+            <ul class=" about_pic2">
+                <li><img src="/img/2-1.jpg" /></li>
+                <li><img src="/img/2-2.jpg" /></li>
+                <li><img src="/img/2-3.jpg" /></li>
+                <li><img src="/img/2-4.jpg" /></li>
+                <li><img src="/img/2-5.jpg" /></li>
+                <li><img src="/img/2-6.jpg" /></li>
+                <li><img src="/img/2-7.jpg" /></li>
+                <li><img src="/img/2-8.jpg" /></li>
+                <li><img src="/img/2-9.jpg" /></li>
+                <li><img src="/img/2-10.jpg" /></li>
+
+            </ul>
+        </div>
+
+        <div class="main6">
+            <div>
+                <a href="/register" class="btn">立即注册铂恒金服</a>
+                <p>暂时不，回<a href="/">首页</a>逛逛</p>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!--发展历程弹出框-->
+<!--<div class="dialog-overlay" style="display:none">-->
+
+    <!--<div class="chronicle_cnt">-->
+        <!--<a class="layer-close" href="javascript:"></a>-->
+        <!--<div class="memorabilia_body">-->
+            <!--<div  class="year">2015</div>-->
+            <!--<div class="memorabilia_box" style="top:80px;">-->
+                <!--<i class="dian"></i><i class="arr"></i>-->
+                <!--<p>2015年3月杭州博虹金融信息服务有限公司成立</p>-->
+            <!--</div>-->
+            <!--<div class="memorabilia_box right_memorabilia" style="top:200px;"> <i class="dian"></i><i class="arr"></i>-->
+                <!--<p>2015年4月平台运营上线</p>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+<!--<div class="dialog-over" style="display:none">-->
+
+    <!--<div class="chronicle_cnt">-->
+        <!--<a class="layer-close" href="javascript:"></a>-->
+        <!--<div class="memorabilia_body">-->
+            <!--<div  class="year">2016</div>-->
+
+            <!--<div class="memorabilia_box" style="top:80px;">-->
+                <!--<i class="dian"></i><i class="arr"></i>-->
+                <!--<p>2016年9月国资战略协议</p>-->
+            <!--</div>-->
+
+            <!--<div class="memorabilia_box right_memorabilia" style="top:200px;"> <i class="dian"></i><i class="arr"></i>-->
+                <!--<p>2016年10月荣获浙江省年度创新金融企业-->
+                    <!--股东企业易赛资产挂牌前海股权交易中心</p>-->
+            <!--</div>-->
+            <!--<div class="memorabilia_box" style="top:310px;">-->
+                <!--<i class="dian"></i><i class="arr"></i>-->
+                <!--<p>2016年11月荣获浙江省金融行业十大领先品牌</p>-->
+            <!--</div>-->
+            <!--<div class="memorabilia_box right_memorabilia" style="top:420px;"> <i class="dian"></i><i class="arr"></i>-->
+                <!--<p>2016年11月荣获中国互联网金融行业十佳诚信品牌</p>-->
+            <!--</div>-->
+            <!--<div class="memorabilia_box" style="top:530px;">-->
+                <!--<i class="dian"></i><i class="arr"></i>-->
+                <!--<p>2016年11月荣获全国质量服务AAA级企业</p>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+<% include ../parent/bottom.ejs  %>
+    <script type="text/javascript" src="/js/jquery-1.4.2.min.js"></script><!--中间广告图片1-->
+
+    <script type="text/javascript" src="/js/roundabout.js" ></script><!--中间广告图片2-->
+    <script type="text/javascript" src="/js/roundabout_shapes.js" ></script><!--中间广告图片3-->
+    <script type="text/javascript" src="/js/gallery_init.js" ></script><!--中间广告图片4-->
+
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        spaceBetween: 30
+    });
+
+</script>
+</body>
+
+</html>

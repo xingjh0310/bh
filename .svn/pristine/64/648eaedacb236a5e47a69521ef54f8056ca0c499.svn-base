@@ -1,0 +1,733 @@
+/**
+ * Created by pwx on 2016/9/26.
+ */
+var appSessionFilter = require('../filters/app-sessionid-filter');
+exports.before = [appSessionFilter.verifySignature,appSessionFilter.auth];
+var biz_account = require('../../biz/account');
+var biz_user = require('../../biz/user');
+var biz_bonus = require('../../biz/bonus');
+var biz_coupon = require('../../biz/coupon');
+var biz_invite = require('../../biz/invite');
+var biz_debt = require('../../biz/debt');
+var biz_recharge = require('../../biz/recharge');
+var biz_common = require('../../biz/common');
+var async = require('async');
+var biz_integral = require('../../biz/integral');
+var biz_cache = require('../../biz/cache');
+var biz_binklimit = require('../../biz/banklimit');
+
+exports.v1_get_user = function (req, res) {
+    var user = res.locals.user;
+    var account = res.locals.account;
+    if (user && account) {
+        biz_invite.getInviteAwardByAccountId(account.id,function (err,sum) {
+            if(account!=null &&account.id>0){
+                biz_account.getWaitBonusAndCoupon(account.id,function (err,body) {
+                    if(!err){
+                        res.json({
+                            code: 1,
+                            message: '',
+                            data: {
+                                accountId:account.id,//投资ID
+                                userId:user.id,//用户Id
+                                realName: user.realName, //真实姓名
+                                idCard: user.idCard,   //身份证
+                                mobile: user.mobile,  //手机号
+                                email: user.email,   //邮箱
+                                validEmail: user.validEmail,  // 邮箱是否认证
+                                realName: user.realName ? user.realName.substring(0, 1) + '**' : '',
+                                score: user.score, //积分
+                                inviteCode: user.inviteCode, //邀请码
+                                inviteUrl: com.env.base + '/recommend/' + user.inviteCode,
+                                balance: account.balance, //账户余额
+                                freeze: account.freeze, //冻结金额
+                                isNew: account.isNew, //是否为新手
+                                collectCorpus: account.collectCorpus,//待收本金
+                                collectInterest: account.collectInterest,  //待收利息
+                                bindCard: account.bindCard, //是否绑卡
+                                totalInvestAmount: account.totalInvestAmount, //累计成功投资
+                                totalReceivedCorpus: account.totalReceivedCorpus, //已收本金
+                                totalReceivedInterest: account.totalReceivedInterest, //已收利息
+                                totalRewardAmount: account.totalRewardAmount + sum || 0, //  奖励金额
+                                payPassword: user.payPassword ? true : false,
+                                headImg: user.headImg ? com.env.base + user.headImg : '',
+                                level: user.levelName || '普通',
+                                WaitUse:body.WaitUse,
+                                BillDebt:body.BillDebt,
+                                InviteAwardSum:sum||0
+                            }
+                        });
+                    }else{
+                        return res.json({code:-1,message:err||null});
+                    }
+                })
+            }else{
+
+            }
+        })
+
+    } else
+        return res.json({message: '请您登录', code: -2});
+}
+
+/**
+ * 我的紅包記錄
+ * @param req
+ * @param res
+ */
+exports.v1_get_bonus = function (req, res) {
+    var pn = req.param('pn') || 1;
+    var ps = req.param('size') || 10;
+    var account = res.locals.account;
+    var debtId = req.param('debtId') || '';
+    var bonusType = debtId ? com.biz.fields.bonusType.Deductible.v : '';
+    var state = req.param('state') || '';
+    var isExpiry = req.param('isExpiry') || false;
+    async.waterfall([function (cb) {
+        if (debtId) {
+            biz_debt.get(debtId, function (err, body) {
+                cb(null, body);
+            })
+        } else cb(null, null);
+    }, function (debt) {
+        biz_bonus.getBonusRecordList('', '', account.id, (debt || isExpiry ? true : false), (debt ? debt.productType : ''), (debt ? debt.periodUnit : ''), (debt ? debt.period : ''), '', (debt ? com.biz.fields.state.Wait.v : state), pn, ps, bonusType,
+            function (err, body) {
+            for (var i = 0; i < body.list.length; i++) {
+                body.list[i].state = body.list[i].end_time < new Date().getTime() ? com.biz.fields.state.Expiry.v : body.list[i].state;
+                body.list[i].stateN = com.biz.fields.getDesc(com.biz.fields.state, body.list[i].state);
+                body.list[i].buyAmountN = body.list[i].buy_amount > 0 ? '单次购买' + body.list[i].buy_amount + '元可使用' : '单次购买金额无限制';
+                body.list[i].periodN = (body.list[i].period > 0 ? '大于等于' + body.list[i].period : '') + (body.list[i].period_unit > 0 ? com.biz.fields.getDesc(com.biz.fields.periodUnit, body.list[i].period_unit) + '标使用' : '天（月）标使用');
+                body.list[i].productTypeN = body.list[i].product_type > 0 ? com.biz.fields.getDesc(com.biz.fields.productType, body.list[i].product_type) + '使用' : '项目类型无限制';
+            }
+            res.json(body);
+        })
+    }]);
+}
+
+/**
+ * 我的加息券
+ * @param req
+ * @param res
+ */
+exports.v1_get_coupons = function (req, res) {
+    var pn = req.param('pn') || 1;
+    var ps = req.param('size') || 10;
+    var account = res.locals.account;
+    var debtId = req.param('debtId') || '';
+    var state = req.param('state') || '';
+    var isExpiry = req.param('isExpiry') || false;
+    async.waterfall([function (cb) {
+        if (debtId) {
+            biz_debt.get(debtId, function (err, body) {
+                cb(null, body);
+            })
+        } else cb(null, null);
+    }, function (debt) {
+        biz_coupon.getCouponRecordList('', '', account.id, isExpiry, (debt ? debt.productType : ''), (debt ? debt.periodUnit : ''), (debt ? debt.period : ''), '', (debt ? com.biz.fields.state.Wait.v : state), pn, ps, function (err, body) {
+            for (var i = 0; i < body.list.length; i++) {
+                body.list[i].state = body.list[i].end_time < new Date().getTime() ? com.biz.fields.state.Expiry.v : body.list[i].state;
+                body.list[i].stateN = com.biz.fields.getDesc(com.biz.fields.state, body.list[i].state);
+                body.list[i].buyAmountN = body.list[i].buy_amount > 0 ? '单次购买' + body.list[i].buy_amount + '元可使用' : '单次购买金额无限制';
+                body.list[i].periodN = (body.list[i].period > 0 ? '大于等于' + body.list[i].period : '') + (body.list[i].period_unit > 0 ? com.biz.fields.getDesc(com.biz.fields.periodUnit, body.list[i].period_unit) + '标使用' : '天（月）标使用');
+                body.list[i].productTypeN = body.list[i].product_type > 0 ? com.biz.fields.getDesc(com.biz.fields.productType, body.list[i].product_type) + '使用' : '项目类型无限制';
+            }
+            return res.json(body);
+        })
+    }]);
+}
+
+exports.v1_get_inviteUser = function (req, res) {
+    var pn = req.param('pn') || 1;
+    var ps = req.param('size') || 10;
+    var user = res.locals.user;
+    biz_invite.getInviteUser(pn, ps, '', '', '', user.id, function (err, body) {
+        res.json(body);
+    })
+}
+
+exports.v1_get_inviteAward = function (req, res) {
+    var pn = req.param('pn') || 1;
+    var ps = req.param('size') || 10;
+    var user = res.locals.user;
+    biz_invite.getAllInviteAward(pn, ps, '', '', '', user.id, function (err, body) {
+        res.json(body);
+    })
+}
+
+exports.v1_get_inviteAwardSum = function (req, res) {
+    var user = res.locals.user;
+    biz_invite.getAllInviteAwardSum('', '', user.id, function (err, body) {
+        res.json({message: '', code: 1, data: {totalAmount: body || 0}});
+    })
+}
+
+exports.v1_get_invests = function (req, res) {
+    var pn = req.param('pn') || 1;
+    var ps = req.param('size') || 10;
+    var account = res.locals.account;
+    var beginTime = req.param('beginTime') || '';
+    var endTime = req.param('endTime') || '';
+    var debtId=req.param('debtId')||'';
+    biz_debt.getInvests(pn, ps, debtId, account.id, beginTime, endTime,0, '','', function (err, body) {
+        for (var i = 0; i < body.list.length; i++) {
+            var p = body.list[i].protocol;
+            body.list[i].stateN = body.list[i].state == com.biz.fields.state.Complete.v ? '成功' : '失败';
+            body.list[i].awardTypeN = com.biz.fields.getDesc(com.biz.fields.awardType, body.list[i].awardType);
+            body.list[i].protocol = p ? com.env.base + '/api/protocol/' + p : '';
+            body.list[i].openProtocol = p ? com.env.base + '/api/openProtocol/' + p : '';
+            if( body.list[i].paymentTime=='' || body.list[i].paymentInterest == null ){
+                body.list[i].billDebt = 2;
+            }else if(body.list[i].state==com.biz.fields.state.Cancel.v && body.list[i].paymentTime=='' || body.list[i].paymentInterest == null){
+                body.list[i].billDebt = -1;
+            }else  if(body.list[i].state==com.biz.fields.state.Wait.v ){
+                body.list[i].billDebt = 0;
+            }else if(body.list[i].state==com.biz.fields.state.Complete.v){
+                body.list[i].billDebt = 1;
+                if(body.list[i].debtPeriodUnit==1){
+                    body.list[i].realPaymentInterest =  body.list[i].realPaymentInterest * body.list[i].debtPeriod;
+                    body.list[i].realPaymentCorpus = body.list[i].amount ;
+                }
+            }
+            if(body.list[i].debtPeriodUnit==1){
+                body.list[i].paymentInterestN =(((body.list[i].amount) * ((body.list[i].debtRate)+(body.list[i].couponRate)))/12)*body.list[i].debtPeriod;
+            }else if(body.list[i].debtPeriodUnit==2){
+                body.list[i].paymentInterestN =(((body.list[i].amount) * ((body.list[i].debtRate)+(body.list[i].couponRate)))/365)*body.list[i].debtPeriodDay;
+            }
+
+        }
+        res.json(body);
+    })
+}
+
+exports.v1_get_payments = function (req, res) {
+    var pn = req.param('pn') || 1;
+    var ps = req.param('size') || 10;
+    var account = res.locals.account;
+    var beginTime = req.param('beginTime') || '';
+    var endTime = req.param('endTime') || '';
+    var state = req.param('state') || '';
+    var investId = req.param('investId') || '';
+    biz_account.getPaymentList(account.id, beginTime, endTime, pn, ps, state, investId, function (err, body) {
+        for (var i = 0; i < body.list.length; i++) {
+            body.list[i].stateN = body.list[i].state == com.biz.fields.state.Complete.v ? '已回款' : '未回款';
+            if(body.list[i].payment_type==1){
+                body.list[ body.list.length-1].paymentN = body.list[i].payment_interest + (body.list[i].payment_coupon_interest*body.list[i].max_periods);
+            }
+        }
+        res.json(body);
+    })
+}
+
+exports.v1_get_cashFlow = function (req, res) {
+    var pn = req.param('pn') || 1;
+    var ps = req.param('size') || 10;
+    var type = req.param('type') || 0;
+    var account = res.locals.account;
+    var beginTime = req.param('beginTime') || '';
+    var endTime = req.param('endTime') || '';
+    biz_account.getCashFlowList(account.id, beginTime, endTime, '', type, pn, ps, function (err, body) {
+        for (var i = 0; i < body.list.length; i++) {
+            body.list[i].typeN = com.biz.fields.getDesc(com.biz.fields.fundType, body.list[i].type);
+        }
+        res.json(body);
+    })
+}
+
+exports.v1_get_fundType = function (req, res) {
+    var result = [];
+    for (var key in com.biz.fields.fundType) {
+        result.push(com.biz.fields.fundType[key]);
+    }
+    res.json({message: '', code: 1, total: result.length, pagesize: 100, list: result, pageno: 1});
+}
+
+exports.v1_get_withdraws = function (req, res) {
+    var pn = req.param('pn') || 1;
+    var ps = req.param('size') || 10;
+    var account = res.locals.account;
+    var beginTime = req.param('beginTime') || '';
+    var endTime = req.param('endTime') || '';
+    biz_account.getWithdrawList(account.id, beginTime, endTime, '', '', '', 0,pn, ps,'','', function (err, body) {
+        for (var i = 0; i < body.list.length; i++) {
+            if (com.biz.fields.state.Cancel.v == body.list[i].audit_state || com.biz.fields.state.Cancel.v == body.list[i].pay_state)
+                body.list[i].stateN = '未通过';
+            else if (com.biz.fields.state.Wait.v == body.list[i].pay_state)
+                body.list[i].stateN = '待审核';
+            else if (com.biz.fields.state.Complete.v == body.list[i].pay_state)
+                body.list[i].stateN = '已通过';
+        }
+        res.json(body);
+    })
+}
+
+exports.v1_get_share = function (req, res) {
+    var user = res.locals.user;
+    res.json({
+        title: '这是个温暖到烫手的礼包，668元红包等你拿！',
+        content: '初冬，送你一个礼包，给你一份温暖。让你在凛冽中也能绽放笑靥，如向阳花一般···',
+        url: com.env.base + '/invitereg/' + user.inviteCode,
+        img: com.env.base + '/img/share.png'
+    });
+}
+
+exports.v1_get_recharges = function (req, res) {
+    var pn = req.param('pn') || 1;
+    var ps = req.param('size') || 10;
+    var account = res.locals.account;
+    var beginTime = req.param('beginTime') || '';
+    var endTime = req.param('endTime') || '';
+    biz_account.getRechargeList(account.id, beginTime, endTime, '', '', '', 0, 0, pn, ps,0, '',function (err, body) {
+        for (var i = 0; i < body.list.length; i++) {
+            body.list[i].stateN = body.list[i].is_completed ? '已完成' : '未完成';
+        }
+        res.json(body);
+    })
+}
+
+exports.v1_get_integrals = function (req, res) {
+    var pageNo = req.param('pn') || 1;
+    var pageSize = req.param('size') || 10;
+    var bTime = req.param('beginTime') || '';
+    var eTime = req.param('endTime') || '';
+    var action = req.param('action') || '';
+    var user = res.locals.user;
+    biz_integral.getRecordList(pageNo, pageSize, '', bTime, eTime, user.id, action, function (err, body) {
+        for (var i = 0; i < body.list.length; i++) {
+            body.list[i].actionN = com.biz.fields.getDesc(com.biz.fields.actions, body.list[i].action);
+        }
+        res.json(body);
+    })
+}
+
+exports.v1_reset_payPassword = [function (req, res) {
+    var user = res.locals.user;
+    var password = req.param('pwd') || '';
+    var code = req.param('code') || '';
+    biz_common.checkCode(user.mobile, com.biz.fields.smsCodeType.PayPassword.v, code, function (err) {
+        if (err) {
+            res.json({message: err, code: -1});
+        }
+        else {
+            biz_user.savePayPassword(user.id, password, function (err, body) {
+                if (!err)
+                    return res.json({message: '', code: 1});
+                else
+                    return res.json({message: err || '设置失败', code: -1});
+            })
+        }
+    })
+}]
+
+exports.v1_save_payPassowrd = [function (req, res) {
+    var user = res.locals.user;
+    var password = req.param('pwd') || '';
+    var code = req.param('code') || '';
+    biz_common.checkCode(user.mobile, com.biz.fields.smsCodeType.PayPassword.v, code, function (err) {
+        if (err) {
+            return res.json({message: err, code: -1});
+        } else{
+            biz_user.savePayPassword(user.id, password, function (err, body) {
+                if (!err)
+                    return res.json({message: '', code: 1});
+                else
+                    return res.json({message: err || '设置失败', code: -1});
+            })
+        }
+    })
+
+}]
+
+exports.v1_reset_loginPassword = function (req, res) {
+    var user = res.locals.user;
+    var code = req.param('code') || '';
+    var password = req.param('pwd') || '';
+    biz_common.checkCode(user.mobile, com.biz.fields.smsCodeType.Password.v, code, function (err) {
+        if (err) {
+            return res.json({message: err, code: -1});
+        }
+        else {
+            biz_user.saveLoginPassword(user.id, password, function (err, body) {
+                if (!err)
+                    return res.json({message: '', code: 1});
+                else
+                    return res.json({message: err || '设置失败', code: -1});
+            })
+        }
+    })
+}
+
+exports.v1_save_email = function (req, res) {
+    var user = res.locals.user;
+    var email = req.param('email') || '';
+    biz_user.validEmail(user.id, email, function (err, body) {
+        if (!err)
+            return res.json({message: '', code: 1});
+        else
+            return res.json({message: err || '设置失败', code: -1});
+    })
+}
+
+exports.v1_save_headImg = [function (req, res) {
+    var user = res.locals.user;
+    var img = req.param('img') || '';
+    biz_user.saveHeadImg(user, img, function (err, body) {
+        if (!err)
+            return res.json({message: '', code: 1});
+        else
+            return res.json({message: err || '设置失败', code: -1});
+    })
+}]
+
+exports.v1_reset_email = [function (req, res) {
+    var user = res.locals.user;
+    var email = req.param('email') || '';
+    if (!email) {
+        res.json({err: '请输入正确的邮箱'});
+    } else {
+        var code = req.param('code') || '';
+        biz_common.checkCode(user.mobile, com.biz.fields.smsCodeType.Email.v, code, function (err) {
+            if (err) {
+                res.json({message: err, code: -1});
+            }
+            else {
+                biz_user.validEmail(user.id, email, function (err, body) {
+                    if (!err)
+                        return res.json({message: '', code: 1});
+                    else
+                        return res.json({message: err || '设置失败', code: -1});
+                })
+            }
+        })
+    }
+}]
+
+exports.v1_save_realName = [function (req, res) {
+    var user = res.locals.user;
+    var realName = decodeURIComponent(req.param('realName') || '');
+    var idCard = req.param('idCard') || '';
+    if (!realName || !idCard) {
+        res.json({err: '请输入正确的身份信息'});
+    } else {
+        biz_user.saveRealName(user.id, realName, idCard, function (err, body) {
+            if (!err)
+                return res.json({message: '', code: 1});
+            else
+                return res.json({message: err || '设置失败', code: -1});
+        })
+    }
+}]
+
+exports.v1_buy = [appSessionFilter.checkReal, function (req, res) {
+    var user = res.locals.user;
+    var account = res.locals.account;
+    var amount = req.param('amount') || '0';
+    var debtId = req.param('debtId') || '0';
+    var bonusIds = req.param('bonusIds') || '';
+    var couponIds = req.param('couponIds') || '';
+    var accountId = res.locals.user.accountId;
+    var debtPwd= req.param('debtPwd')||'';
+    if (user == null) {
+        return res.json({message: '请您登录', code: -2});
+    } else {
+        biz_debt.buy(debtId, amount, accountId, bonusIds, couponIds,1,debtPwd, function (err) {
+            if (err) {
+                return res.json({message: err || '投资失败', code: -1});
+            } else {
+                biz_debt.isOrNoMibilefeeRecord(debtId,user.mobile,function(err,body){
+                    if(err){
+                        return res.json({message: '', code: 1});
+                    }else{
+                        return res.json({message:'',code: 1,mobileFee:body.mobileFee});
+                    }
+                })
+            }
+        })
+    }
+}]
+
+exports.v1_recharge = function (req, res) {
+    var account = res.locals.account;
+    var amount = req.param('amount') || 0;
+    biz_recharge.createAuthPay(account.id, amount, res.locals.route, function (err, body) {
+        if (!err)
+            res.render('post', {items: body});
+        else {
+            req.flash("alert", err);
+            res.redirect("/account/recharge");
+        }
+    })
+}
+
+exports.v1_save_autoInvest = function (req, res) {
+    var account = res.locals.account;
+    var autoInvest = {
+        accountId: account.id,
+        productType: req.param('productType') || '',
+        minBuy: req.param('minBuy') || '',
+        maxBuy: req.param('maxBuy') || '',
+        minBalance: req.param('minBalance') || '',
+        minRate: req.param('minRate') || '',
+        maxRate: req.param('maxRate') || '',
+        minPeriodDay: req.param('minPeriodDay') || '',
+        maxPeriodDay: req.param('maxPeriodDay') || ''
+    };
+    biz_account.saveAutoInvest(JSON.stringify(autoInvest), function (err, body) {
+        if (err) {
+            return res.json({message: err || '设置失败', code: -1});
+        } else {
+            return res.json({message: '', code: 1});
+        }
+    })
+}
+
+exports.v1_change_autoInvest = function (req, res) {
+    var account = res.locals.account;
+    var state = req.param('state') || com.biz.fields.state.Wait.v;
+    biz_account.changeAutoInvest(account.id, state, function (err, body) {
+        if (err) {
+            return res.json({message: err || '设置失败', code: -1});
+        } else {
+            return res.json({message: '', code: 1});
+        }
+    })
+}
+
+exports.v1_get_autoInvest = function (req, res) {
+    var account = res.locals.account;
+    biz_account.getAutoInvest(account.id, function (err, body) {
+        if (err) {
+            return res.json({message: err, code: -1});
+        } else {
+            return res.json({message: '', code: 1, data: body});
+        }
+    })
+}
+
+exports.v1_bindcard = function (req, res) {
+    var account = res.locals.account;
+    biz_account.bindCard(account.id, function (err, body) {
+        if (err) {
+            return res.json({message: err || '绑卡失败', code: -1});
+        } else {
+            return res.json({message: '', code: 1});
+        }
+    })
+}
+
+exports.v1_save_bankcard = function (req, res) {
+    var account = res.locals.account;
+    var user = res.locals.user;
+    var type=req.param('type');
+    var code=req.param('code');
+    var phone=req.param("mobile");
+    var bankCard = {
+        accountId: account.id,
+        accountName: user.realName,
+        bank: req.param('bank') || '',
+        mobile: req.param('mobile') || '',
+        branch: req.param('branch') || '',
+        cardId: req.param('cardId') || '',
+        province: req.param('province') || '',
+        city: req.param('city') || ''
+    };
+    biz_common.checkCode(phone,com.biz.fields.smsCodeType.Bindcard.v,code,function (err) {
+        if(err){
+            return res.json({message: err, code: -1});
+        }else{
+            biz_account.saveBankCardByAccount(JSON.stringify(bankCard), function (err, body) {
+                if (err) {
+                    return res.json({message: err || '设置失败', code: -1});
+                } else {
+                    return res.json({message: '', code: 1});
+                }
+            })
+        }
+    })
+}
+
+exports.v1_get_bankcard = function (req, res) {
+    var accountId = res.locals.user.accountId;
+    biz_account.getAccountBankCard(accountId, function (err, body) {
+        if (err) {
+            return res.json({message: err, code: -1});
+        } else {
+            if (body) {
+                body.bankN = com.biz.bank[body.bank].desc;
+                body.accountName = body.accountName ? body.accountName.substring(0, 1) + '**' : '';
+                return res.json({message: '', code: 1, data: body});
+            }
+            else
+                return res.json({message: '', code: -3});
+        }
+    })
+}
+
+exports.v1_withdraw = function (req, res) {
+    var account = res.locals.account;
+    var user = res.locals.user;
+    var amount = req.param('amount') || 0;
+    var payPassword = req.param('payPassword') || '';
+    biz_account.withdraw(user.id, account.id, amount, payPassword,res.locals.route, function (err, body) {
+        if (err) {
+            return res.json({message: err || '提现失败', code: -1});
+        } else {
+            return res.json({message: '', code: 1});
+        }
+    })
+}
+
+exports.v1_get_banks = function (req, res) {
+    var list = [];
+    var banks = com.biz.bank;
+
+    for (var key in banks) {
+        list.push({code: key, desc: banks[key].desc});
+    }
+    res.json({message: '', code: 1, data: list});
+}
+
+
+//获取全部银行信息
+exports.vl_get_bankLimit = function( req,res){
+    biz_binklimit.getBankLimitAll(function (err,body) {
+        if(!err){
+            return res.json({code:1, message:'',data:body});
+        }else{
+            return res.json({code:-1,message:err||'获取失败'});
+        }
+    })
+}
+//根据ID获取银行数据
+exports.vl_get_banklimit_byId = function(req,res){
+     var id = req.param("id");
+     biz_binklimit.getBankLimitById(id,function (err,body) {
+         if(!err){
+             return res.json({message:'',code:1, data:body});
+         }else{
+             return res.json({message:err||'获取失败',code:-1});
+         }
+     });
+}
+//用户所绑定银行
+exports.vl_get_userBankLimit = function (req,res) {
+   var account = res.locals.account;
+    biz_account.getAccountBankCard(account.id,function (err,bank) {
+        if(err){
+            return res.json({code:-1,message:"没有此用户信息"});
+        }else{
+            biz_binklimit.getBankByCode(bank.bank, function (err,body) {
+                if(!err){
+                    body.cardId = bank.cardId;
+                    return res.json({message:'',code:1,data:body});
+                }else{
+                    return res.json({message:"该银行不存在",code:-2});
+                }
+            })
+        }
+    })
+}
+//判断手机验证码是否正确
+exports.vl_check_mobile = function (req,res) {
+    var mobile =  req.param("mobile")||"";
+    var code  =req.param("code");
+    if (!(/^1[3|4|5|7|8][0-9]\d{8}$/).test(mobile)) {
+        return res.json({message:"手机号输入错误",code:-2});
+    }
+    biz_common.checkCode(mobile,com.biz.fields.smsCodeType.Register.v,code,function (err,body) {
+        if(!err){
+            return res.json({message:"",code:1})
+        } else{
+            return res.json({message:"验证码过期",code:-1});
+        }
+    });
+}
+
+//判断推荐人是否存在并登录
+exports.vl_check_login = function (req,res) {
+    var mobile =   req.param("mobile")||"";
+    var password = req.param("pwd") || "";
+    var invite =req.param("invite") ||"";
+    var  user = {
+        mobile:mobile,
+        password:password,
+        invite:invite,
+        type:com.biz.fields.accountType.Investor.v
+    };
+    biz_user.save(user,function (err,body) {
+        if(!err){
+            biz_user.login(mobile,password,function(err,body){
+                if(!err){
+                    biz_cache.createAppSession(body.id,function (err,session) {
+                        return res.json({message:'',code:1,sessionId:session});
+                    })
+                }else {
+                    return res.json({message:err ||null,code:-1});
+                }
+            })
+        }else{
+            return res.json({message :err||"邀请人不存在",code:-1});
+        }
+    })
+}
+//获取推荐人所推荐的用户
+exports.get_invite_byuser = function (req,res) {
+    var user = res.locals.user;
+     var  page= req.param('pn')||1;
+     var pagesize = req.param('size')||10;
+    biz_account.getInviteByUser(page,pagesize,user.id,function (err,body) {
+        if(!err){
+            for(var i = 0 ;i<body.list.length;i++){
+                body.list[i].typeN = '注册';
+            }
+            return res.json({message:'',code:1,
+                total:body.total,
+                pages:body.pages,
+                pageNum:body.pageNum,
+                pageSize:body.pageSize,
+                data:body.list});
+        }else{
+            return res.json({message:"该用户还没有邀请客户注册",code:-1})
+        }
+    })
+}
+
+/**
+ * 获取用户所有的现金红包
+ * @param req
+ * @param res
+ */
+exports.v1_find_userBonus = function(req, res){
+    var pageNo =  req.param('pageNo') || '';
+    var pageSize = req.param('pageSize') || '';
+    var accountId = res.locals.user.accountId;
+    if (accountId ) {
+        biz_account.v1_find_userBonus(accountId,pageNo,pageSize, function(err, body){
+            var a = 1;
+            if(!err){
+                for (var i = 0; i < body.list.length; i++) {
+                    body.list[i].state = body.list[i].state == com.biz.fields.state.Complete.v ? '已使用' : '未使用';
+                    body.list[i].action = com.biz.fields.getDesc(com.biz.fields.actions, body.list[i].action)
+                }
+                return res.json(body);
+                }else {
+                return res.json({code:-1,message:err||null})}})
+    }else {
+        return res.json({message: '会话已失效', code: -2});
+        }
+}
+
+
+exports.v1_checkbank_belong=function (req,res) {
+    var bankcard=req.param("bankcard");
+    biz_binklimit.checkBankBelong(bankcard,function (err,body) {
+        return res.json(body);
+    })
+
+}
+
+
+
+
+
+
+

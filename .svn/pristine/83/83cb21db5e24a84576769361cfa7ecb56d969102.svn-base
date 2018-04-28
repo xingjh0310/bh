@@ -1,0 +1,28 @@
+/*公告详情*/
+html,body{width: 100%;height: 100%;background: #fff;}
+.inform-page{
+    padding:0.2rem 0.3rem;
+}
+.inform-title{
+    padding:0.1rem 0;
+    font-size: 0.3rem;
+    color: #333;
+}
+.inform-time1{
+    margin-bottom: 0.2rem;
+    font-size: 0.24rem;
+    color: #AEAEAE;
+}
+.inform-content,.inform-author,.inform-time2{
+    font-size: 0.28rem;
+    color: #333;
+}
+.inform-author{
+    margin-top:0.5rem;
+    margin-bottom: 0.1rem;
+    line-height: 0.3rem;
+}
+.inform-time2{
+    line-height: 0.4rem;
+}
+.inform-author,.inform-time2{text-align: right;}

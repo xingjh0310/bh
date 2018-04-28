@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 借款标管理 <span
+            class="c-gray en">&gt;</span> 已回款 <a class="btn btn-success radius r mr-20"
+                                                   style="line-height:1.6em;margin-top:3px"
+                                                   href="javascript:location.replace(location.href);" title="刷新"><i
+                class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+    <div class="">
+        日期范围：
+        <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'eTime\')||\'%y-%M-%d\'}'})" id="bTime"
+               class="input-text Wdate"
+               value=""
+               style="width:120px;" name="bTime" readonly="true">
+        -
+        <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'bTime\')}'})" id="eTime"
+               class="input-text Wdate" style="width:120px;" value="" name="eTime"
+               readonly="true">
+        <input type="text" id="param" placeholder="标ID，标题，借款人手机号码，借款人姓名" style="width:350px" class="input-text">
+        <button name="" id="" class="btn btn-success" type="button" onclick="ZC_api.loadPaymentEndDebtList(1,20,false)"><i class="Hui-iconfont">
+                &#xe665;</i> 搜索
+        </button>
+        <button name="" id="" class="btn btn-success" type="button"
+                onclick="ZC_api.loadPaymentEndDebtList(1,$('#pageTotal').val(),true);"><i
+                    class="Hui-iconfont">
+                &#xe644;</i> 导出
+        </button>
+    </div>
+    <div class="mt-20">
+        <table class="table table-border table-bordered table-bg table-hover table-sort">
+            <thead>
+            <tr class="text-c">
+                <th width="25"><input type="checkbox" name="" value=""></th>
+                <th width="40">标ID</th>
+                <th width="100">还款时间</th>
+                <th width="180">标题</th>
+                <th width="80">项目类型</th>
+                <th width="80">借款人</th>
+                <th width="70">借款人姓名</th>
+                <th width="60">借款金额</th>
+                <th width="60">借款期限</th>
+                <th width="60">预期年化</th>
+                <th width="120">还款方式</th>
+                <th width="60">应还本金</th>
+                <th width="60">应还利息</th>
+                <th width="100">实际还款时间</th>
+                <th width="80">实际还款本金</th>
+                <th width="80">实际还款利息</th>
+                <th width="80">逾期罚息</th>
+                <th width="80">本期/总期</th>
+            </tr>
+            </thead>
+            <script type="text/template" id="debt_tmpl">
+                <tr class="text-c">
+                    <td><input type="checkbox" value="" name=""></td>
+                    <td>{id}</td>
+                    <td>{time}</td>
+                    <td>{debtTitle}</td>
+                    <td>{productType}</td>
+                    <td>{mobile}</td>
+                    <td>{realName}</td>
+                    <td>{amount}</td>
+                    <td>{period}</td>
+                    <td>{rate}</td>
+                    <td>{paymentType}</td>
+                    <td>{paymentCorpus}</td>
+                    <td>{paymentInterest}</td>
+                    <td>{realPaymentTime}</td>
+                    <td>{realPaymentCorpus}</td>
+                    <td>{realPaymentInterest}</td>
+                    <td>{overdueFine}</td>
+                    <td>{periods}/{maxPeriods}</td>
+                </tr>
+            </script>
+            <tbody id="debt_list">
+
+            </tbody>
+        </table>
+        <div id="page"></div>
+        <input type="hidden" id="pageTotal"/>
+    </div>
+</div>
+</body>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+ZC_api.loadPaymentEndDebtList(1,20,false);
+
+
+</script>
+</html>

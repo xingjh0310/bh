@@ -1,0 +1,157 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+
+<% if(borrower.id == null){%>
+<ul class="borrow_ul">
+    <li class="active">企业</li>
+    <li>个人</li>
+</ul>
+<% } %>
+<div class="borrow_tab">
+    <div class="pd-20" style="padding:20px 0 0 20px;display: block">
+        <form class="form form-horizontal" id="form">
+            <input type="hidden" name="id" value="<%= borrower.id || '' %>"/>
+            <input type="hidden" name="userNature" value="1"/>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3" style="width: 130px;text-align: left"><span class="c-red">*</span>借款方：</label>
+                <div class="formControls col-xs-8 col-sm-5" >
+                    <input type="text" style="width:230px;" class="input-text" id="Title" placeholder="机构名称" datatype="s1-20" nullmsg="请输入机构名称" errormsg="大于1位小于20位" name="realName" value="<%= borrower.realName || '' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3" style="width: 130px;text-align: left"><span class="c-red">*</span>社会信用代码号：</label>
+                <div class="formControls col-xs-8 col-sm-5" >
+                    <input type="text" style="width: 230px;" class="input-text" placeholder="请输入社会信用代码号" datatype="s18-18" nullmsg="请输入社会信用代码号" errormsg="请输入正确的社会信用代码号" name="idCard" value="<%= borrower.idCard || '' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3" style="width: 130px;text-align: left"><span class="c-red">*</span>法人姓名：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" style="width: 230px" class="input-text" id="Title" placeholder="法人姓名" datatype="s1-20" nullmsg="请输入法人姓名" errormsg="大于1位小于20位" name="legalName" value="<%= borrower.legalName || '' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3" style="width: 130px;text-align: left"><span class="c-red">*</span>法人身份证号：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" style="width: 230px" class="input-text" placeholder="请输入法人身份证号" datatype="s18-18" nullmsg="请输入法人身份证号" errormsg="请输入正确的法人身份证号" name="legalIdNo" value="<%= borrower.legalIdNo || '' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3" style="width: 130px;text-align: left"><span class="c-red">*</span>法人手机号：</label>
+                <div class="formControls col-xs-8 col-sm-5" >
+                    <input type="text" style="width: 230px;" class="input-text" id="Mobile" placeholder="请输入法人手机号" datatype="m" nullmsg="请输入法人手机号" errormsg="请输入正确法人手机号" name="mobile" value="<%= borrower.mobile || '' %>"/>
+                </div>
+            </div>
+            <div class="row cl" style="margin-top: 50px;">
+                <div class="col-10 col-offset-3">
+                    <button id="sub" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+                    <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!--个人-->
+    <div class="pd-20" style="padding:20px 0 0 20px;">
+        <form class="form form-horizontal" id="form1">
+            <input type="hidden" name="id" value="<%= borrower.id || '' %>"/>
+            <input type="hidden" name="userNature" value="0"/>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3" style="width: 130px;text-align: left"><span class="c-red">*</span>借款人姓名：</label>
+                <div class="formControls col-xs-8 col-sm-5" >
+                    <input type="text" style="width:230px;" class="input-text" id="Title" placeholder="借款人姓名" datatype="s1-20" nullmsg="请输入借款人姓名" errormsg="大于1位小于20位" name="realName" value="<%= borrower.realName || '' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3" style="width: 130px;text-align: left"><span class="c-red">*</span>身份证号：</label>
+                <div class="formControls col-xs-8 col-sm-5" >
+                    <input type="text" style="width: 230px;" class="input-text" placeholder="请输入身份证号" datatype="s18-18" nullmsg="请输入身份证号" errormsg="请输入正确的身份证号" name="idCard" value="<%= borrower.idCard || '' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3" style="width: 130px;text-align: left"><span class="c-red">*</span>手机号：</label>
+                <div class="formControls col-xs-8 col-sm-5" >
+                    <input type="text" style="width: 230px;" class="input-text" id="Mobile" placeholder="请输入手机号" datatype="m" nullmsg="请输入手机号" errormsg="请输入正确手机号" name="mobile" value="<%= borrower.mobile || '' %>"/>
+                </div>
+            </div>
+            <div class="row cl" style="margin-top: 50px;">
+                <div class="col-10 col-offset-3">
+                    <button id="sub1" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+                    <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+    $("#form").Validform({
+        btnSubmit: '#sub',
+        postonce: true,
+        tiptype: 4,
+        showAllError: true,
+        ajaxPost: true,
+        beforeSubmit: function (curform) {
+            $.ajax({
+                url: '/account/saveBorrower',
+                type: 'post',
+                data: {borrower: JSON.stringify($('#form').serializeJson())},
+                success: function (msg) {
+                    if (!msg.err) {
+                        Huimodal_alert('保存成功', 1000, function () {
+                            parent.load();
+                            layer_close();
+                        });
+                    }
+                    else {
+                        Huimodal_alert(msg.err, 1000, function () {
+                        });
+                    }
+                }
+            })
+            return false;
+        }
+    });
+
+    $("#form1").Validform({
+        btnSubmit: '#sub1',
+        postonce: true,
+        tiptype: 4,
+        showAllError: true,
+        ajaxPost: true,
+        beforeSubmit: function (curform) {
+            $.ajax({
+                url: '/account/saveBorrower',
+                type: 'post',
+                data: {borrower: JSON.stringify($('#form1').serializeJson())},
+                success: function (msg) {
+                    if (!msg.err) {
+                        Huimodal_alert('保存成功', 1000, function () {
+                            parent.load();
+                            layer_close();
+                        });
+                    }
+                    else {
+                        Huimodal_alert(msg.err, 1000, function () {
+                        });
+                    }
+                }
+            })
+            return false;
+        }
+    });
+
+    $('.borrow_ul>li').click(function(){
+
+        $(this).addClass("active").siblings().removeClass("active");
+        $('.borrow_tab>div').eq($(this).index()).show().siblings().hide().attr("disabled",true);
+    })
+
+    if( "<%= borrower.id %>"== null || "<%= borrower.userNature %>" == 0){
+        $('.borrow_tab>div').eq(1).show().siblings().hide();
+    }
+
+</script>
+</html>

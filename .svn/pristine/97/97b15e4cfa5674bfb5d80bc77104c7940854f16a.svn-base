@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新客指引</title>
+    <script src="/js/common.js"></script>
+    <script src="/js/jquery-2.1.1.js"></script>
+    <link rel="stylesheet" href="/css/common.css">
+</head>
+<body>
+    <div class="guid_warp">
+        <div class="guid_tit">
+            <img src="/img/g1.png">
+        </div>
+        <ul class="guid_main">
+            <li  style="height:3.4rem;background-image: url(/img/gu1.jpg) ; ">
+                <div class="pull-right" style="margin-top:0.8rem">
+                    <P>输入正确的手机号
+                        码作为网金客的注册账
+                        号，填写短信验证码，
+                        设置交易密码，若有邀
+                        请码填写邀请码。</P>
+                </div>
+
+            </li>
+            <li style="height:3.37rem;background-image: url(/img/gu2.jpg) ; " >
+                <div class="pull-left" style="margin-top:1.2rem">
+                <P>实名信息一旦认证完毕，
+                    将不可以修改。</P>
+                </div>
+            </li>
+            <li  style="height:3.59rem;background-image: url(/img/gu3.jpg) ; ">
+                <div class="pull-right" style="margin-top:1.4rem">
+                <P>“我的”-“密码管理”-“交易密码”页面设置交易密码
+                </P>
+                </div>
+            </li>
+            <li  style="height:3.57rem;background-image: url(/img/gu4.jpg) ; ">
+                <div class="pull-left" style="margin-top:1.4rem">
+                <P>“我的”-“银行卡管理”页面输入正确的银行卡信息完成绑定
+                </P>
+                </div>
+            </li>
+            <li  style="height:3.67rem;background-image: url(/img/gu5.jpg) ; ">
+                <div class="pull-right" style="margin-top:1.3rem">
+                <P>“我的”-“充值”页面输入充值金额进行充值，充值成功后可查看充值记录
+                </P>
+                </div>
+            </li>
+            <li  style="height:3.25rem;background-image: url(/img/gu6.jpg) ; ">
+                <div class="pull-left" style="margin-top:1.3rem">
+                <P>根据项目类型、项目周
+                    期、年化利率选择标的
+                    投资。</P>
+                </div>
+            </li>
+            <li  style="height:3.51rem;background-image: url(/img/gu7.jpg) ; ">
+                <div class="pull-right" style="margin-top:1.1rem">
+                <P>投资到期后，本金和利息将会回款到您的可用余额，在“回款计划”中可查看到标的回款记录
+                </P>
+                </div>
+            </li>
+        </ul>
+        <div style="background-image: url(/img/gu8.jpg) ;background-size: 100%">
+
+
+        <div class="guid_tit" style="padding:1.2rem 0 0.6rem 0">
+            <img src="/img/g3.png">
+        </div>
+        <div class="guid_main1 ">
+            <ul>
+                <li><span></span>新用户注册享受红包抵扣</li>
+                <li><span></span>参与邀请获得积分奖励</li>
+            </ul>
+        </div>
+    </div>
+
+    </div>
+
+
+</body>
+</html>

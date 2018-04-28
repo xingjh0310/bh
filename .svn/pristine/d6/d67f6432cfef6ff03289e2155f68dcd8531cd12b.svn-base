@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= com.env.seo.title %>投资记录</title>
+    <% include ../parent/static.ejs %>
+    <link rel="stylesheet" type="text/css" href="/css/BH/account/public.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/BH/parent/account_left.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/BH/account/invests.css"/>
+</head>
+<body>
+<% include ../parent/top.ejs %>
+
+
+<% include ../parent/account_left.ejs %>
+
+<div class="personal_cen inv_main" style="background: #fff;padding:36px 25px;">
+    <ul class="inv_ul">
+        <li class="fir">
+            <p>累计投资总额 <span><%=account.totalInvestAmount%></span>元</p>
+        </li>
+        <li class="sed">
+            <p>已收本金<span><%=account.totalReceivedCorpus%></span>元</p>
+            <p>待收本金<span><%= account.collectCorpus %></span>元</p>
+        </li>
+        <li class="sed">
+            <p>已收利息<span><%=account.totalReceivedInterest%></span>元</p>
+            <p>待收利息<span><%= account.collectInterest %></span>元</p>
+        </li>
+    </ul>
+
+    <div class="sx_div">
+        <input type="text" data-beatpicker="true"  id="start"><i class="sp2">至</i><input type="text" id="end"  data-beatpicker="true" >
+        <a href="javascript:" class="btn"  onclick="ZC_api.loadAccountInvests(1, 10)">查询</a>
+    </div>
+
+
+    <div class="table_list">
+        <table  border="0" cellspacing="0" width="100%" class="table dates">
+
+            <thead>
+            <tr>
+                <th >日期</th>
+                <th>项目名称</th>
+                <th>年化利率</th>
+                <th>期限</th>
+                <th>投资金额(元)</th>
+                <th>抵扣红包(元)</th>
+                <th>加息券</th>
+                <th>状态</th>
+                <th>投资方式</th>
+                <th>协议</th>
+            </tr>
+            </thead>
+            <script type="text/template" id="invest_tmpl">
+                <tr>
+                    <td>{time}</td>
+                    <td>{title}</td>
+                    <td>{debtRate}</td>
+                    <td>{period}</td>
+                    <td>{amount}</td>
+                    <td>{bonusAmount}</td>
+                    <td>{couponRate}</td>
+                    <td>{state}</td>
+                    <td>{isAutomaticInvest}</td>
+                    <td>{down}</td>
+                </tr>
+            </script>
+            <tbody id="invest_list">
+
+            </tbody>
+
+        </table>
+
+
+        <div id="page" class="pagination_div">
+            <ol class="pagination_1">
+
+            </ol>
+        </div>
+
+    </div>
+
+</div>
+
+
+<% include ../parent/bottom.ejs %>
+<script type="text/javascript">
+    ZC_api.loadAccountInvests(1,10);
+    function Cancle() {
+        alert("【此标已撤销，无有效合同可查看】");
+    }
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= com.env.seo.title %>账户中心</title>
+    <% include ../parent/static.ejs %>
+    <link rel="stylesheet" type="text/css" href="/css/BH/account/public.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/BH/parent/account_left.css"/>
+</head>
+<body>
+<% include ../parent/top.ejs %>
+
+<% include ../parent/account_left.ejs %>
+
+<div class="personal_cen inv_main">
+
+    <div class="investment_tab setTabMain">
+        <div class="investment_tab_main setTabMain">
+            <div class="hb_div">
+                <div class="inver_name">操作类型</div>
+                <div class="filtTag_A">
+                    <ul>
+                        <li><a href="Javascript: void(0)" class="hb_active1" onclick="$('#type').val('');ZC_api.loadFreeze(1, 10);">全部</a></li>
+                        <li><a href="Javascript: void(0)" onclick="$('#type').val(<%= _global.fundType.Withdraw.v %>);ZC_api.loadFreeze(1, 10);">提现</a>
+                        </li>
+                        <li><a href="Javascript: void(0)" onclick="$('#type').val(<%= _global.fundType.Buy.v %>);ZC_api.loadFreeze(1, 10);">投资</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="table_list">
+        <div class="table_send">
+            <div>
+                <a href="javascript:"><i class="iconfont">&#xe600;</i>导出报表</a>
+                <a href="javascript:"><i class="iconfont">&#xe61d;</i>发送至邮箱</a>
+            </div>
+        </div>
+        <input type="hidden" id="type" value=""/>
+        <table border="0" cellspacing="0" width="100%" class="table dates">
+            <thead>
+            <tr>
+                <th>时间</th>
+                <th>类型</th>
+                <th>冻结金额(元)</th>
+                <th>备注</th>
+            </tr>
+            </thead>
+            <script type="text/template" id="freeze_tmpl">
+                <tr>
+                    <td>{time}</td>
+                    <td>{type}</td>
+                    <td>{amount}</td>
+                    <td>{state}
+                    </td>
+                </tr>
+            </script>
+            <tbody id="freeze_list">
+
+            </tbody>
+
+
+        </table>
+        <div id="page" class="pagination_div">
+            <ol class="pagination_1">
+
+            </ol>
+        </div>
+    </div>
+
+
+</div>
+
+<% include ../parent/bottom.ejs %>
+<script type="text/javascript">
+    ZC_api.loadFreeze(1, 10);
+</script>
+
+</body>
+
+</html>

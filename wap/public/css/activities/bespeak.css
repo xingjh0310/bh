@@ -1,0 +1,68 @@
+html,body{margin:0 auto;padding-bottom:1.3rem;width:100%;max-width:768px;height:auto;background: #ff715f;}
+.top-box li{width: 100%;}
+img{display:block;margin:0 auto;width: 100%;}
+.top-title-wrap{position:relative;height: 4.05rem;background: url("/img/activities/bespeak/top_img1.png") center no-repeat;background-size: 100% 100%;}
+.activity-time{position: absolute;bottom: 0;left: 0;width:100%;text-align: center;color: #fff;font-size: 0.22rem;letter-spacing: 0.04rem;}
+.main-box{margin:0 auto;width:7.06rem;}
+.main1,.main2,.main3{width: 100%;}
+.main2,.main3{margin-top:0.28rem;}
+.fixed-btn-box{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1rem;
+    background: #FFAA30;
+}
+.fixed-btn{
+    margin:0 auto;
+    width: 100%;
+    max-width: 768px;
+    height: 1rem;
+    background: #ffa92b url("/img/activities/bespeak/fixed_btn.png") center no-repeat;
+    background-size: 100% 100%;
+}
+@media (device-width: 375px) and (device-height: 812px){
+    html,body{padding-bottom:1.8rem;}
+    .fixed-btn-box{height: 1.5rem;}
+}
+.popUp-box{
+    display: none;
+    position: fixed;
+    top:0;
+    left:0;
+    z-index: 99;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+}
+.popUp{
+    position: fixed;
+    top:50%;
+    left: 50%;
+    margin-top: -1.8rem;
+    margin-left: -2.75rem;
+    width:5.5rem;
+    height: 3.6rem;
+    background: url("/img/activities/bespeak/popUp.png") center no-repeat;
+    background-size: 100% 100%;
+}
+.popUp-btn{
+    position: absolute;
+    bottom: 0.48rem;
+    left: 0.38rem;
+    width: 4.72rem;
+}
+.popUp-left,.popUp-right{
+    display: block;
+    width: 2.2rem;
+    height: 0.8rem;
+}
+.popUp-left{
+    background: url("/img/activities/bespeak/popUp_left.png") center no-repeat;
+    background-size: 100% 100%;
+}
+.popUp-right{
+    background: url("/img/activities/bespeak/popUp_right.png") center no-repeat;
+    background-size: 100% 100%;
+}

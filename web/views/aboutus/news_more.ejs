@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>媒体资讯</title>
+</head>
+<body>
+
+<% include ../parent/top.ejs  %>
+
+<div class="about_warp">
+    <div class="about_nav_w">
+        <ul class="about_nav">
+            <li style="margin-left:120px;">
+                <a href="/aboutus" >
+                    <span class="iconabout">&#xe657;</span>
+                    <p>公司介绍</p></a>
+            </li>
+            <li>
+                <a href="/aboutus/team" >
+                    <span class="iconabout" style="line-height: 43px">&#xe639;</span>
+                    <p>运营团队</p></a>
+            </li>
+            <li class="active">
+                <a href="/aboutus/news_list" >
+                    <span class="iconabout">&#xe687;</span>
+                    <p>媒体资讯</p></a>
+            </li>
+            <li>
+                <a href="/aboutus/announce_list" >
+                    <span class="iconabout"style="line-height: 43px">&#xe60d;</span>
+                    <p>平台公告</p></a>
+            </li>
+            <li>
+                <a href="/aboutus/contact" >
+                    <span class="iconabout">&#xe6ac;</span>
+                    <p>联系我们</p></a>
+            </li>
+        </ul>
+    </div>
+    <div class="about_banner"></div>
+
+    <div class="about_main" style="padding:57px 0;">
+
+        <ul class="news_more">
+            <script type="text/template" id="news_tmpl">
+                <li>
+                    <div class="pull-l">
+                       <span><i class="icon_i"></i><a href="/aboutus/news/{id}">{title}</a></span>
+                        <span style="float:right;font-size: 16px">{time}</span>
+                    </div>
+                    <div class="pull-r">
+                        <a href="/aboutus/news/{id}"><div class="cont" >{content}</div></a>
+                    </div>
+                </li>
+
+            </script>
+            <div id="news_list"></div>
+
+        </ul>
+
+        <div id="page" class="pagination_div">
+            <ol class="pagination_1">
+
+            </ol>
+        </div>
+
+    </div>
+</div>
+
+<% include ../parent/bottom.ejs  %>
+
+<script type="text/javascript">
+    ZC_api.loadNewsMore(1,10);
+</script>
+
+
+</body>
+
+</html>

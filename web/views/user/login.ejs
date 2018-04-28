@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <link rel="stylesheet" type="text/css" href="/css/BH/user/login.css"/>
+    <title><%= com.env.seo.title %>登录</title>
+</head>
+<body>
+<div class="tmpwen" >
+    <div class="temtext" >
+        <img style="" src="/img/tishi.png"/>
+        您的浏览器版本过低，部分功能无法正常使用，
+        <a style="color: #ff6058; font-weight: bold;" href="http://www.microsoft.com/china/windows/IE/upgrade/index.aspx">去升级</a>
+    </div>
+</div>
+<div class="login_navw">
+    <div class="login_nav">
+        <a href="/"><img src="/img/logo.png"> </a>
+        <div class="logo_scroll">
+            <ul style="margin-top: 0px;">
+                <li><img src="/img/lo1.png"></li>
+                <li><img src="/img/lo2.png"></li>
+            </ul>
+        </div>
+    </div>
+    <a href="/" class="nav_a">返回首页</a>
+</div>
+<div class="login_warp">
+    <div class="login_div">
+
+        <div class="login-form">
+            <h2>用户登录</h2>
+            <form class="form-horizontal">
+                <div class="tipsYz"></div>
+                <div class="form-group">
+                    <span class="u1"></span>
+                    <input type="text" class="form-control" name="mobile" _check="mobile" placeholder="输入手机号码">
+
+                </div>
+                <div class="form-group">
+                    <span class="u2"></span>
+                    <input type="password" class="form-control" name="password" _check="password" placeholder="输入登录密码">
+
+                </div>
+                <!--<div class="form-group yanzh_inp">-->
+                    <!--<input type="text" class="form-control" id="imgCode" name="imgCode" placeholder="验证码"-->
+                           <!--_check="validcode"/>-->
+                    <!--<i class="imgcode"> <img onclick="reloadImgCode(this)" id="picCode"-->
+                                             <!--style="width: 105px; height: 47px;cursor: pointer;" class="refresh"-->
+                                             <!--src="/getImgCode"/></i>-->
+                <!--</div>-->
+                <p class="p_f"><a href="/findpwd">忘记登录密码?</a></p>
+                <a href="javascript:" class="btn btn-logoin" onclick="ZC_api.login()">立即登录</a>
+                <div class="login_a">
+                    <span>还没有账号？</span>
+                    <a href="/register">免费注册》</a>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+
+</div>
+
+
+<div class="login_footer">
+    <p class="p3"><a href="/aboutus">信息披露</a><span>|</span><a href="/help/#helpname3">新手指引</a><span>|</span><a href="/help">帮助中心</a><span>|</span><a href="/aboutus/news_list">媒体报道</a><span>|</span><a href="/security">安全保障</a><span>|</span><a href="/aboutus/contact" style="margin-right:0">联系我们</a></p>
+    <p class="p1"><img src="/img/llt.png">客服热线：0571-85268131 （工作时间 9:00-17:30 <!--值班时间：19:00-21:00--> ）</p>
+    <p class="p2"> Copyright © 2015 杭州博虹金融信息服务有限公司 版权所有　|　浙ICP备16013205号</p>
+    <p>铂恒金服提醒您：理财非存款，投资需谨慎 <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260137498'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/stat.php%3Fid%3D1260137498%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script></p>
+</div>
+<div id="alert-warp" class="modal-alert" style="display:none">
+    <div class="modal-dialog-alert">
+        <div class="modal-conten-alert">
+            <img src="/img/alertdiv.png" id="modal_img">
+            <p class="p1" id="modal_content"></p>
+            <a href="javascript:void(0)" class="btn_zd" onclick="$('#alert-warp').hide()">我知道了</a>
+        </div>
+
+    </div>
+</div>
+
+<script src="/js/jquery-2.1.1.js"></script>
+<script src="/js/jquery-1.7.2.js"></script>
+<script src="/js/BeatPicker.min.js"></script>
+<script src="/js/unslider.min.js"></script>
+<script src="/js/util.js"></script>
+
+<script src="/js/common.js"></script>
+<script src="/js/public.js"></script>
+<script src="/js/wow.min.js"></script>
+<script src="/js/jquery.rotate.min.js"></script>
+<script src="/js/echarts-all.js"></script>
+<script src="/js/calendar.js"></script>
+<script src="/js/zoom.min.js"></script>
+<script src="/js/cropbox.js"></script>
+<script src="/js/jQuery.textSlider.js"></script>
+<script src="/js/swiper.min.js"></script>
+
+<script type="text/javascript">
+    if ('<%= (alert || '') %>') alert('<%- alert %>', true);
+</script>
+
+</body>
+</html>

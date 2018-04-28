@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+
+<div class="pd-20">
+    <form class="form form-horizontal" id="form">
+        <div class="row cl">
+            <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>处理意见：</label>
+
+            <div class="formControls col-xs-8 col-sm-5" style="width:70%;">
+                <input type="hidden" id="id" value="<%= id %>"/>
+                    <textarea id="memo" onkeyup="textarealength(this,200)" nullmsg="备注不能为空！" dragonfly="true"
+                              datatype="" placeholder="说点什么...最少输入10个字符" class="textarea" rows="" cols=""
+                              style="width: 100%;"></textarea>
+            </div>
+
+        </div>
+        <div class="row cl">
+            <div class="col-10 col-offset-3">
+                <button id="sub" class="btn btn-primary radius" onclick="subAuit(<%= _global.state.Complete.v %>)"
+                        type="button"><i class="Hui-iconfont">&#xe632;</i> 通过
+                </button>
+                <button class="btn btn-default radius" onclick="subAuit(<%= _global.state.Cancel.v %>)" type="button">&nbsp;&nbsp;不通过&nbsp;&nbsp;</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+    function subAuit(result) {
+        $.ajax({
+            url: '/apply/auditBorrowApply',
+            type: 'post',
+            data: {id: $('#id').val(), memo: $('#memo').val(), state: result},
+            success: function (msg) {
+                if (!msg.err) {
+                    Huimodal_alert('处理成功', 1000, function () {
+                        parent.location.reload();
+                        layer_close();
+                    });
+                }
+                else {
+                    Huimodal_alert(msg.err, 1000, function () {
+                    });
+                }
+            }
+        })
+    }
+</script>
+</html>

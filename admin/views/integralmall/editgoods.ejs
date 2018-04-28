@@ -1,0 +1,225 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 积分商城 <span
+            class="c-gray en">&gt;</span> 商品 <a class="btn btn-success radius r mr-20"
+                                                    style="line-height:1.6em;margin-top:3px"
+                                                    href="javascript:location.replace(location.href);" title="刷新"><i
+                class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+    <div class="codeView docs-example">
+        <legend>基本信息</legend>
+        <form class="form form-horizontal" id="form">
+            <input type="hidden" name="id" value="<%= goods.id || '' %>"/>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>标题：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" id="Title" placeholder="请输入标题" datatype="*4-100"
+                           nullmsg="请输入标题" errormsg="大于4位小于100位" name="name" value="<%= goods.name || '' %>"/>
+                </div>
+            </div>
+
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>商品分类：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <select class="select-box" name="type" id="type" >
+                        <% for(var i = 0;i < GoodsType.list.length;i++){ %>
+                        <option <%= goods.type == GoodsType.list[i].id ? 'selected=selected' : '' %>
+                                value="<%= GoodsType.list[i].id %>"><%= GoodsType.list[i].name %></option>
+                        <% } %>
+                    </select>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>市场价：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" id="Price" placeholder="请输入金额" datatype="*1-10"
+                           nullmsg="请输入金额" errormsg="大于1位小于10位" name="price" value="<%= goods.price || 0 %>"/>
+                </div>
+            </div>
+
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>所需积分：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" id="Title" placeholder="请输入积分" datatype="*1-10"
+                           nullmsg="请输入积分" errormsg="大于1位小于10位" name="integral" value="<%= goods.integral || '' %>"/>
+                </div>
+            </div>
+
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>库存：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" id="stock" placeholder="请输入库存" datatype="*1-10"
+                           nullmsg="请输入积分" errormsg="大于1位小于10位" name="stock" value="<%= goods.stock || '' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>开始时间：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text Wdate" placeholder="请输入开始时间" nullmsg="请输入开始时间" datatype="*"
+                           errormsg="请输入正确时间" id="datemax" name="beginTime"
+                           value="<%= new Date(goods.beginTime || new Date()).Format('yyyy-MM-dd hh:mm:ss') %>"
+                           onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" >
+                </div>
+            </div>
+            <div class="row cl">
+
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>自动下架时间：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text Wdate" placeholder="请输入下架时间" nullmsg="请输入下架时间" datatype="*"
+                           errormsg="请输入正确时间" id="datemax" name="offTime"
+                           value="<%= new Date(goods.offTime || new Date()).Format('yyyy-MM-dd hh:mm:ss') %>"
+                           onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" >
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>分类图片：</label>
+                <div class="formControls col-xs-8 col-sm-5" id="imgDiv">
+                    <input type="hidden" value="<%= goods.image|| '' %>" name="image" id="image"/>
+                    <div class="uploader-list fileList"></div>
+                    <div class="filePicker" style="margin-top:10px;">选择图片</div>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>限购类型：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <select class="select-box" name="limitType" onchange="hide()" id="limitType">
+                        <option value="0" <%= goods.limitType == 0 ? 'selected=selected' : '' %>>不限购</option>
+                        <option value="1" <%= goods.limitType == 1 ? 'selected=selected' : '' %>>天</option>
+                        <option value="2" <%= goods.limitType == 2 ? 'selected=selected' : '' %>>永久</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row cl" id="limitNum">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>限购数量：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" id="limitNum" placeholder="请输入限购数量" datatype="*1-10"
+                           errormsg="大于1位小于10位" name="limitNum" value="<%= goods.limitNum || 0 %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>上架：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <select class="select-box" name="state" >
+                        <option value="0" <%= goods.state == 0 ? 'selected=selected' : '' %>>否</option>
+                        <option value="1" <%= goods.state == 1 ? 'selected=selected' : '' %>>是</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>商品类型：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <select class="select-box" name="virtualType" id="virtualType">
+                        <% for(var key in _global.goodsType){ %>
+                        <option <%= goods.virtualType == _global.goodsType[key].v ? 'selected=selected' : '' %>
+                                value="<%= _global.goodsType[key].v %>"><%= _global.goodsType[key].desc %></option>
+                        <% } %>
+                    </select>
+                </div>
+
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>虚拟产品Id：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" id="virtualId" placeholder="实物话费类型填0，虚拟类型填写正常Id" datatype="*1-10"
+                            errormsg="大于1位小于10位" name="virtualId" value="<%= goods.virtualId || 0 %>"/>
+                </div>
+            </div>
+
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>基本信息：</label>
+
+                <div class="formControls col-10" style="width:75%;">
+                    <script id="content" name="desc" type="text/plain" style="width:80%;height:400px;">
+                        <%- goods.desc || "" %>
+                    </script>
+               </div>
+             </div>
+            <div class="row cl">
+                <div class="col-10 col-offset-3">
+                    <button id="sub" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i>
+                        保存或更新
+                    </button>
+                    <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+</body>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+    var ue_content = UE.getEditor('content');
+    $(".form").Validform({
+        btnSubmit: '#sub',
+        postonce: true,
+        tiptype: 4,
+        showAllError: true,
+        ajaxPost: true,
+        beforeSubmit: function (curform) {
+            var view = JSON.stringify($('#form').serializeJson());
+            view.content = ue_content.getContent();
+            $.ajax({
+                url: '/integralmall/editGoods',
+                type: 'post',
+                data: {goods: JSON.stringify($('#form').serializeJson())},
+                success: function (msg) {
+                    if (!msg.err) {
+                        Huimodal_alert('保存成功', 1000, function () {
+                            if (!msg.err) {
+                                parent.location.reload();
+                                layer_close();
+                            } else {
+                                parent.location.reload();
+                            }
+                        });
+                    }
+                    else {
+                        Huimodal_alert(msg.err, 1000, function () {
+                        });
+                    }
+                }
+            })
+            //return false;
+        }
+    });
+
+    $('#imgDiv').createUpload();
+
+    var val = $('#limitType option:selected').val();
+    if (val == 0) {
+        /*$("#limitNum").hide();*/
+        $("#limitNum").html('<input type="hidden" class="input-text" value="<%= goods.limitNum || 0 %>"/>');
+    } else {
+        /*$("#limitNum").show();*/
+        $("#limitNum").html('<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>限购数量：</label>'+
+            '<div class="formControls col-xs-8 col-sm-5">'+
+            '<input type="text" class="input-text" id="limitNum" placeholder="请输入限购数量" datatype="*1-10" rrormsg="大于1位小于10位" name="limitNum" value="<%= goods.limitNum || 0 %>"/>'+
+            '</div>');
+    }
+    function hide() {
+        var val = $('#limitType option:selected').val();
+        if (val == 0) {
+            $("#limitNum").html('<input type="hidden" class="input-text" value="<%= goods.limitNum || 0 %>"/>');
+        } else {
+            $("#limitNum").html('<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>限购数量：</label>'+
+                '<div class="formControls col-xs-8 col-sm-5">'+
+                '<input type="text" class="input-text" id="limitNum" placeholder="请输入限购数量" datatype="*1-10" rrormsg="大于1位小于10位" name="limitNum" value="<%= goods.limitNum || 0 %>"/>'+
+                '</div>');
+        }
+    }
+</script>
+</html>

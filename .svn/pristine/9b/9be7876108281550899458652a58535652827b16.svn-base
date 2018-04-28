@@ -1,0 +1,162 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 内容管理 <span
+            class="c-gray en">&gt;</span>编辑广告 <a class="btn btn-success radius r mr-20"
+                                                 style="line-height:1.6em;margin-top:3px"
+                                                 href="javascript:location.replace(location.href);" title="刷新"><i
+                class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+    <div class="codeView docs-example">
+        <form class="form form-horizontal" id="form">
+            <input type="hidden" name="id" value="<%= ads.id || '0' %>"/>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>名称：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" style="width: 70%;" class="input-text" id="Name" placeholder="请输入名称"
+                           datatype="s1-10" nullmsg="请输入名称" errormsg="大于1位小于10位" name="name" value="<%= ads.name || '' %>"/>
+                </div>
+            </div>
+
+            <!--<div style="display: block;">
+                <label class="form-label col-xs-4 col-sm-3">地址：</label>
+                <div >
+                    <input  istyle="width: 70%;"   name="url" value="<%= ads.url || '' %>"/>
+                </div>
+            </div>-->
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>地址：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" style="width: 70%;" id="address"
+                           name="url" value="<%= ads.url || '' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>选择标：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <select class="select-box" name="debtId" id="debtId">
+                        <option value="0">请选择标</option>
+                        <% for(var keys in debt){ %>
+                        <option  <%=ads.debtId == debt[keys].id?'selected=selected' : '' %> value="<%=debt[keys].id%>"><%=debt[keys].title %></option>
+                        <% } %>
+                    </select>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>排序：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" style="width: 70%;" class="input-text" id="Title" placeholder="请输入排序"
+                           datatype="n1-3"
+                           nullmsg="请输入排序" errormsg="小于999" name="order" value="<%= ads.order || '0' %>"/>
+                </div>
+            </div>
+
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>图片：</label>
+
+                <div class="formControls col-xs-8 col-sm-5" id="imgDiv">
+                    <input type="hidden" value="<%= ads.img || '' %>" name="img" id="img"/>
+                    <div class="uploader-list fileList"></div>
+                    <div class="filePicker" style="margin-top:10px;">选择图片</div>
+                </div>
+
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>展示方式：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <select class="select-box" name="showType">
+                        <% for(var key in _global.showType){ %>
+                        <option <%= ads.showType == _global.showType[key].v ? 'selected=selected' : '' %>
+                                value="<%= _global.showType[key].v %>"><%= _global.showType[key].desc %></option>
+                        <% } %>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>(banner图展示标)启用：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <select class="select-box" name="state">
+                        <option value="0" <%= ads.state == 0 ? 'selected=selected' : '' %>>禁用</option>
+                        <option value="1" <%= ads.state == 1 ? 'selected=selected' : '' %>>启用</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>（标详情顶部显示的图片  只有一张）是否推荐：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <select class="select-box" name="isRecommend">
+                        <option value="0" <%= ads.isRecommend == 0 ? 'selected=selected' : '' %>>否</option>
+                        <option value="1" <%= ads.isRecommend == 1 ? 'selected=selected' : '' %>>是</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row cl">
+                <div class="col-10 col-offset-3">
+                    <button id="sub"  class="btn btn-primary radius" type="button"><i
+                                class="Hui-iconfont">&#xe632;</i> 保存
+                    </button>
+                    <button onClick="layer_close();" class="btn btn-default radius" type="button">
+                        &nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+</body>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+
+    $(".form").Validform({
+        btnSubmit: '#sub',
+        postonce: true,
+        tiptype: 4,
+        showAllError: true,
+        ajaxPost: true,
+        beforeSubmit: function (curform) {
+            //if ($('#AccountId').val()) {
+            var address = $("#address").val();
+            var debtId = $("#debtId").val();
+
+            console.log(address,debtId);
+            if(((address=="" || address == null) && debtId == 0)){
+                Huimodal_alert("请输入地址或标信息", 1000, function () {
+                    return false;
+                });
+            } else {
+                $.ajax({
+                    url: '/content/saveAds',
+                    type: 'post',
+                    data: {ads: JSON.stringify($('#form').serializeJson())},
+                    success: function (msg) {
+                        if (!msg.err) {
+                            Huimodal_alert('保存成功', 1000, function () {
+                                parent.load();
+                                layer_close();
+                            });
+                        }
+                        else {
+                            Huimodal_alert(msg.err, 1000, function () {
+                            });
+                        }
+                    }
+                })
+            }
+           return false;
+            //}
+        }
+    });
+    $('#imgDiv').createUpload();
+
+</script>
+</html>

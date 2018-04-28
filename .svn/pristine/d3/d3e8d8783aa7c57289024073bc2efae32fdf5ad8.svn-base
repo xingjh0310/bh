@@ -1,0 +1,165 @@
+function fnRotate(angle,data) {
+    $('.luck-cont').stopRotate();
+    $('.luck-cont').rotate({
+        angle: 0,
+        duration: 5000,
+        animateTo: angle + 1440,
+        callback: function () {
+            $('.success2-wrap').text('抽中'+data);
+            $('.success3-txt').text(data.substring(0,3));
+            $('.success4-wrap').text('七天内有效');
+            $('.popUp-box').show();
+            $('.success-box').show();
+            fnNonRolling();
+        }
+    });
+}
+
+$('#luck-btn').click(function () {
+    /*判断userId*/
+    var userId = parseInt($("#userId").val());
+    var isWrap = $('#isWrap').val() == 0 ? false: true;
+    var systemType = phoneType();
+    if(userId == 0){
+        if(isWrap ){
+            window.location.href="/login";
+            return false;
+        }
+        if(systemType==2){
+            goAppPage(1);
+            return false;
+        }
+        else {
+            goAppPage(1);
+            return false;
+        }
+    }
+    $.ajax({
+        url: '/activity/doLuckDraw',
+        type: 'post',
+        data: {lotteryActivityId: 1},
+        success: function (res) {
+            if(res.type && res.type==1 ){
+                if(isWrap || systemType==2){
+                    window.location.href="/login";
+                }else {
+                    goAppPage(1);
+                }
+                return false;
+            }
+            if(res.err){
+                $('.fail2-txt').text(res.err);
+                $('.popUp-box').show();
+                $('.fail-box').show();
+                fnNonRolling();
+            }else {
+                var indexId = res.index;
+                fnRotate(-(indexId * 60), res.name);
+            }
+        }
+    })
+
+})
+
+/*我的奖品*/
+$('.my-luck-btn').click(function(){
+    /*判断userId*/
+    var userId = parseInt($("#userId").val());
+    var isWrap = $('#isWrap').val() == 0 ? false: true;
+    var systemType = phoneType();
+    if(userId == 0 ){
+        if(isWrap || systemType==2){
+            window.location.href="/login";
+            return false;
+        }else {
+            goAppPage(1);
+            return false;
+        }
+    }
+    $.ajax({
+        url: '/activity/getMyRecordList',
+        type: 'post',
+        success: function (res) {
+            console.log(res)
+
+            if(res.length > 0){
+                var myRecordList = '';
+                for(var i=0; i<res.length; i++){
+                    var nowIdx = i;
+                    myRecordList += '<li class="my-item">' +
+                                        '<div class="my-item-prize">'+res[nowIdx].lotteryPrizeName+'</div>' +
+                                        '<div class="item-prize-time">' +
+                                        '<div class="item-data">'+moment(res[nowIdx].createTime).format('YYYY.MM.DD')+'</div>' +
+                                        '<div class="item-time">'+moment(res[nowIdx].createTime).format('hh:mm:ss')+'</div>' +
+                                        '</div>\n' +
+                                        '<div class="item-prize-state">'+(res[nowIdx].state == 1 ? '已发放' : '未发放')+'</div>' +
+                                    '</li>'
+                }
+                $('.my-cont-ul').html(myRecordList)
+
+            }else{
+                var myRecordList = '<div class="empty" style="margin:0 auto;width: 3rem;height: 100%;">' +
+                                    '<img src="/img/base/empty.png" alt="暂无数据">' +
+                                '</div>'
+                $('.my-cont-ul').html(myRecordList)
+            }
+
+        }
+    })
+    $('.popUp-box').show();
+    $('.my-list').show();
+    fnNonRolling();
+})
+
+recordList();
+/*中奖记录*/
+function recordList() {
+    $.ajax({
+        url: "/activity/lotteryRecordList",
+        type: "post",
+        data: {lotteryActivityId: 1},
+        success: function (res) {
+            if (res.list.length > 0) {
+                var domStr = '';
+                for (var i = 0; i < res.list.length; i++) {
+                    var nowIdx = i;
+                    domStr += '<li class="item">' +
+                            '<div class="pull-left">恭喜'+res.list[nowIdx].mobile+'</div>' +
+                            '<div class="pull-left">获得</div>' +
+                            '<div class="pull-right">'+res.list[nowIdx].lotteryPrizeName+'</div>' +
+                        '</li>'
+
+                }
+                $('.record-list').html(domStr)
+            }else{
+                /*暂无数据图*/
+                var domStr = '<li class="empty" style="margin:0 auto;width: 3rem;height: 100%;">' +
+                    '<img src="/img/base/empty.png" alt="暂无数据">' +
+                    '</li>';
+                $('.record-list').html(domStr)
+            }
+        }
+    })
+}
+
+$(function(){
+
+    $(".list-wrap").myScroll({
+        speed: 100, //数值越大，速度越慢
+        rowHeight: $(".record-list li").height() //li的高度
+    });
+})
+
+/*close*/
+function closePop(domClass) {
+    $('.popUp-box').hide();
+    $(domClass).hide();
+    fnRolling();
+}
+function closeAll() {
+    $('.popUp-box').hide();
+    $('.success-box').hide();
+    $('.fail-box').hide();
+    $('.my-list').hide();
+    fnRolling();
+}

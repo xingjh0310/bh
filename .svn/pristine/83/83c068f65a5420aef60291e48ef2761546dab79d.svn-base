@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>首页</title>
+</head>
+<body style="padding-bottom:1.2rem">
+<div class="header show_head" ><a class="iconfont" href="/debt/<%= debt.id %>"><img src="/img/fh2.png" class="fh_img"></a><%= debt.title %></div>
+<div class="item_tab details_main">
+    <form method="post" action="/debt/buy">
+        <ul class="ul1">
+            <li>年化利率：<i class="pull-right"> <%if(debt.increaseRate && parseFloat(debt.increaseRate)>0 && parseFloat(debt.increaseRate)<debt.rate){%>
+                    <%= parseFloat(((debt.rate-debt.increaseRate) * 100).toFixed(2)) %>+<%=parseFloat((debt.increaseRate * 100).toFixed(2))%>
+                    <%}else{%>
+                    <%= parseFloat((debt.rate * 100).toFixed(2)) %>
+                    <%}%>%</i></li>
+            <li>理财期限：<i class="pull-right"><%= debt.period %><%= debt.periodUnit == _global.periodUnit.Month.v ? '个月' : '天' %></i></li>
+            <li>剩余可投：<i class="pull-right"><%= (debt.amount - debt.investedAmount).toFixed(2) %> </i></li>
+        </ul>
+
+        <div class="tipsYz"></div>
+
+        <ul class="ul2">
+            <li>可用余额：
+                <% if(user && account){ %><span><%= account.balance %> 元 </span>
+                <a href="/account/recharge" class="a1">充值</a>
+                <% }else{ %>
+                <a href="/login" class="a1">登录</a>
+                <% } %>
+            </li>
+
+            <li>投资金额：<input type="number" class="form-control" id="amount_input"
+                            placeholder="<%= debt.minInvestAmount %>元起投"
+                            name="amount" _check="amount" style="margin:0px 0 10px 0"
+                            onkeyup="ZC_api.getExpect($('#debtId').val(),$('#amount_input').val(),$('#expect'));" >
+                <span class="sp1" id="quantou" _buyMax="<%=((debt && debt.maxInvestAmount>0)?debt.maxInvestAmount:0)%>"  _amount="<%=((debt && debt.amount>0)?debt.amount:0)%>"  _hadAmount="<%=((debt && debt.investedAmount>0)?debt.investedAmount:0)%>"   _balance="<%=((user && account && account.balance>0)?account.balance:0)%>" _buyMin="<%=((debt && debt.minInvestAmount>0)?debt.minInvestAmount:0)%>">全投</span>
+            </li>
+        </ul>
+        <ul class="ul3">
+            <li>使用红包<select id="bonusIds" class="invite_input bonusIds" name="bonusIds">
+                    <option value=""><span style="color:#fe8749">请选择</span></option>
+                </select></li>
+        </ul>
+        <ul class="ul3">
+            <li>使用加息券<select id="couponIds" class="invite_input couponIds" name="couponIds">
+                    <option value=""><span style="color:#fe8749">请选择</span></option>
+                </select></li>
+        </ul>
+        <%if(debt && debt.debtPwd){%>
+        <ul class="ul2">
+            <li>约标密码：<input type="password" class="form-control" placeholder="请输入约标密码" name="debtPwd"style="margin:0px 0 10px 0"></li>
+        </ul>
+        <%}%>
+        <ul class="ul3">
+            <li>到期收益：￥<span id="expect">0</span></li>
+        </ul>
+        <p class="p1">*温馨提示：认真阅读项目资料，市场有风险，投资需谨慎</p>
+        <input id="debtId" name="debtId" type="hidden" value="<%= debt.id %>"/>
+        <div class="fix_btn">
+            <% if(user && account){ %>
+            <input type="button" class="btn btn_input btn_tz " style="background:#ff8200;"
+                   onclick="ZC_api.buy()" value="提交">
+            <input type="hidden" _autoIncrement="<%= debt.minInvestAmount %>" _minInvest="<%= debt.minInvestAmount %>" id="plueinput" _maxInvest="<%= debt.maxInvestAmount %>" _amountJoin = "<%= (debt.amount - debt.investedAmount).toFixed(2) %>"/>
+            <%}else{%>
+            <input type="button" class="btn btn_input btn_tz " style="background:#ff8200;"
+                   onclick="window.location.href='/login?r=/debt/<%= debt.id %>'" value="登录后购买">
+            <%}%>
+
+        </div>
+    </form>
+</div>
+<% include ../parent/slide_nav.ejs %>
+<% if(user && account){ %>
+<script>
+    $("#amount_input").blur(function() {
+        var amount = $.trim($("#amount_input").val());
+        /*var memberAmount = $('#plueaccount').attr("_balance");//账户余额*/
+        var amountJoin = $('#plueinput').attr("_amountJoin");//还需金额
+        var smallAmount = $('#plueinput').attr("_minInvest"); //最小金额
+        var bigAmount =  $('#plueinput').attr("_maxInvest");  //最大金额
+        /*var smallAmount = $("#plueinput").attr("_autoIncrement");*/
+        if(amount==""||isNaN(amount)){
+            alert("请输入投标金额！");
+        }
+        var rel = /^(?:0\.\d{1,2}|(?!0)\d+(?:\.\d{1,2})?)$/;
+        if(rel.test(amount)==false){
+            alert("请输入投标金额！");
+        }
+
+
+
+        if(parseFloat(bigAmount) < parseFloat(amount)){
+            alert('最大投标金额为'+bigAmount+'元');
+            $("#amount_input").val( parseInt(bigAmount));
+            $("#amount_input").keyup();
+
+        }
+        if(parseFloat(amount) < parseFloat(smallAmount)){
+            alert(smallAmount+"元起投，且以"+smallAmount+"整数倍递增!");
+            $("#amount_input").val(smallAmount);
+            $("#amount_input").keyup();
+
+        }
+        else if(amount%smallAmount!='0'){
+            //showMsg('投资金额只能为'+smallAmount+'的整倍数');
+            alert(smallAmount+"元起投，且以"+smallAmount+"整数倍递增!");
+
+
+            // 将投资金额设置为1000的整数倍
+            $("#amount_input").val( parseInt(amount/smallAmount) * smallAmount);
+            $("#amount_input").keyup();
+        }
+        console.log(parseFloat(amountJoin))
+        console.log(parseFloat(amount))
+        if(parseFloat(amountJoin) < parseFloat(amount)){//所需金额 < 投资金额，投资金额框显示所需金额
+            alert("剩余可投"+amountJoin);
+            $("#amount_input").val(parseFloat(amountJoin));//投资金额框显示所需金额
+            $("#amount_input").keyup();
+        }
+        $("#amount_input").keyup();
+    });
+</script>
+<% }else{ %>
+<% } %>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#amount_input').keyup(function () {
+            if ($('#amount_input').val()== '') {
+                $('#expect').html('0')
+            }
+
+        })
+        $("#quantou").click(function(){
+            var amount=parseInt($(this).attr('_amount')||0);
+            var buyMax=parseInt($(this).attr('_buyMax')||0);
+            var hadAmount=parseInt($(this).attr('_hadAmount')||0);
+            var balance=parseInt($(this).attr('_balance')||0);
+            var buyMin=parseInt($(this).attr('_buyMin')||0);
+            var buyAmount=0;
+            if(buyMin>balance){
+                if(amount-hadAmount>balance){
+                    buyAmount=balance;
+                }else{
+                    buyAmount=(amount-hadAmount>0)?(amount-hadAmount):0;
+                }
+            }else{
+                if(buyMax>balance){
+                    if(amount-hadAmount>balance){
+                        buyAmount=balance;
+                    }else{
+                        buyAmount=(amount-hadAmount>0)?(amount-hadAmount):0;
+                    }
+                }else{
+                    if(amount-hadAmount>balance){
+                        buyAmount=buyMax;
+                    }else{
+                        if(amount-hadAmount>buyMax){
+                            buyAmount=buyMax;
+                        }else{
+                            buyAmount=(amount-hadAmount>0)?(amount-hadAmount):0;
+                        }
+                    }
+                }
+            }
+            $('#amount_input').val(buyAmount);
+            ZC_api.getExpect($('#debtId').val(),buyAmount,$('#expect'));
+            $("#amount_input").change();
+        })
+        $("#amount_input").change(function(){
+            $("#bonusIds").html("");
+            $("#bonusIds").append(' <option value=""><span style="color:#fe8749">请选择</span></option>');
+            var amount=$("#amount_input").val();
+            var debtId=$("#debtId").val();
+            $("#couponIds").html("");
+            $("#couponIds").append(' <option value="">---选择加息券---</option>');
+            if(amount && parseInt(amount)>0){
+                $.post('/debt/getBonusRecordList',{amount:amount,debtId:debtId},function(dta){
+                    if(dta && dta.list && dta.list.length>0){
+                        $.each(dta.list, function (i, o) {
+                            $("#bonusIds").append(" </option><option value='" + o.id + "' _amount='"+o.amount+"'> " + o.name+ "购买:"+ o.buy_amount+"元可使用"+ "</option>");
+                        });
+                    }
+                })
+                $.post('/debt/getCouponRecordList',{amount:amount,debtId:debtId},function(dta){
+                    if(dta && dta.list && dta.list.length>0){
+                        $.each(dta.list, function (i, o) {
+                            $("#couponIds").append(" </option><option value='" + o.id + "'> "+((o.rate && parseFloat(o.rate)>0 &&  parseFloat(o.rate)<1)?(parseFloat((parseFloat(o.rate)*100).toFixed(2))):'0')+'%' + o.name+ "购买:"+ o.buy_amount+"元可使用"+ "</option>");
+                        });
+                    }
+                })
+            }
+        })
+        $("#amount_input").change();
+    })
+</script>
+</body>
+</html>

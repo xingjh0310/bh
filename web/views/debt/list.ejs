@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <link rel="stylesheet" type="text/css" href="/css/BH/debt/list.css"/>
+    <title><%= com.env.seo.title %>我要投资</title>
+</head>
+<body>
+
+<% include ../parent/top.ejs %>
+
+<div class="investment_main">
+    <div class="investment_nav">
+
+        <div class="investment_tab">
+            <div class="tab_list">
+                <div class="li">铂恒理财项目</div>
+            </div>
+            <div class="investment_tab_main setTabMain">
+
+                <div>
+                    <div class="hb_div">
+                       <!-- <div class="inver_name">项目类型：</div>-->
+                        <div class="filtTag_A">
+                            <ul class="clearfix">
+                                <li class="li2_type hb_active1"><a onclick="ZC_api.loadDebt(1,10,'5')" class="" href="Javascript: void(0)">铂信宝</a><img src="/img/list_img1.png"></li>
+                                <li class="li2_type"><a onclick="ZC_api.loadDebt(1,10,'2')" href="Javascript: void(0)">铂金宝</a></li>
+                                <li class="li2_type"><a onclick="ZC_api.loadDebt(1,10,'4')" href="Javascript: void(0)">恒盈宝</a></li>
+                                <li class="li2_type"><a onclick="ZC_api.loadDebt(1,10,'6')" href="Javascript: void(0)">新客专享</a></li>
+                                <li class="li2_type"><a onclick="ZC_api.loadDebt(1,10,'8')" href="Javascript: void(0)">限时秒杀</a></li>
+                                <li class="li2_type"><a onclick="ZC_api.loadDebt(1,10,'7')" href="Javascript: void(0)">VIP尊享</a></li>
+                                <li><a href="Javascript: void(0)" onclick="ZC_api.loadDebt(1,10,'')">全部</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="investment_xiang">
+                 <div style="display: block">
+                     <p>本项目是属于贷款垫资产品。银行向借款人贷款授信至下款期间，合作机构先行垫付借款，待银行贷款审批发放后归还垫资金款项。借款方为合作机构推荐具有房产、车辆、稳定收入、信用良好的优质个人。所有借款都根据客户的收入情况、过往履约情况以及资产状况进行评估授信，经过银行风控体系进行风控，并纳入中国人民银行征信中心的数据库。合作机构与多家银行在信用贷款方面有深度合作，为该借款产品提供了全面的风控保障。 </p>
+                 </div>
+                <div>
+                    <p>本项目为车位抵押贷款产品，借款方属于洲本资产推荐，具有稳定收入、信用良好，同时具有车位的优质企业或个人。所有借款都根据客户的收入情况、过往履约情况以及资产状况进行评估授信，同时经过银行风控体系进行风控，并纳入中国人民银行征信中心的数据库。洲本资产与多家银行在贷款方面有深度合作，为该借款方提供了担保保障。</p>
+                </div>
+                <div>
+                    <p>本项目为汽车消费金融产品，借款方由合作机构推荐、铂恒金服筛选、具有稳定收入、信用良好的优质汽车消费者。该产品服务通过汽车以租代购的方式实现：借款方在租赁期间仅拥有车辆的使用权，所有权归合作机构；在租赁期满并交齐租金后，由合作机构将汽车过户给借款方。租赁期间由安邦保险为租赁汽车进行承保。合作机构在汽车金融行业有着二十年成功运作经验，为该借款产品提供了全面的风控保障。</p>
+                </div>
+                <div>
+                    <p>新客专享是铂恒金服为首次在平台投资的新客准备的专属投资礼遇，投资人首次投资可以享受高达15%预期年化与668元投资大礼包，新人首次投资最高限额为10000元。</p>
+                </div>
+                <div>
+                    <p>限时秒杀是铂恒金服每月不定期发布整点限时抢购的加息标，当确定要发布整点限时抢购的加息标时，会在前一天在17：00上线加息标，抢购时间为当天的12：00，加息力度在1.2%~1.5%之间，限时1小时。</p>
+                </div>
+                <div>
+                    <p>VIP尊享是铂恒金服为投资人提供的尊享VIP级别理财方式，投资人可根据自己的需求在投资时间、投资周期以及投资金额上进行个性化订制，然后由平台为投资人寻找匹配对应项目，最后由投资人在约定时间内投标，完成整个约标流程。</p>
+                </div>
+                <div style="padding: 1px"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="item_main">
+        <div class=" item_swep ">
+            <!-- 优选项目 -->
+            <div class="you_item">
+                <ul class="item_list">
+                    <script type="text/template" id="debt_tmpl">
+                        <li class="{stateClass} clearfix" style="position: relative">
+                            {productType}
+                            <p class="p1">{title}{is_new}{award}{increaseRate}{full_award}</p>
+                            <div style="text-align: left;width: 120px;">
+                                <p class="p1" style="color:#fa6e28">{rate}<span>%</span></p>
+                                <p class="p2">预期年化</p>
+                            </div>
+                            <div>
+                                <p class="p1">{period}<span>{periodUnit}</span></p>
+                                <p class="p2">理财期限</p>
+                            </div>
+                            <div>
+                                <p class="p1 col999">{amount}<span>元</span></p>
+                                <p class="p2">项目总额</p>
+                            </div>
+                            <div class="pre_img" style="overflow:hidden;margin-left: 30px;">
+                                <div style="position: relative">
+                                    <div class="progress">
+                                        <div class="progress-bar bar wow" w="{schedule}"></div>
+                                    </div>
+                                    <img src="/img/pre.png " class="wow  slideInLeft" w="{schedule}"
+                                         style="left:{schedule}%">
+                                </div>
+
+                                <p class="p3"><i class="col999">剩余金额：</i>{surplus}元<span>{schedule}%</span></p>
+                            </div>
+                            <div>
+                                {state}
+                            </div>
+                            <span class="hover-line"></span>
+                        </li>
+                    </script>
+                    <!--新客-->
+                    <div id="debt_list2"></div>
+                   <!-- 优选立即投资-->
+                    <div id="debt_list3"></div>
+                    <!--限时秒杀-->
+                    <div id="debt_list4"></div>
+                    <!--VIP-->
+                    <div id="debt_list5"></div>
+                    <!--已满标-->
+                    <div id="debt_list"></div>
+                </ul>
+                <div id="page" class="  pagination_div" style="background: none">
+                    <ol class="pagination_1">
+
+                    </ol>
+                </div>
+
+
+            </div>
+            <!--转让专区-->
+
+
+        </div>
+
+
+    </div>
+</div>
+
+<% include ../parent/bottom.ejs %>
+<script type="text/javascript">
+    ZC_api.loadDebt(1, 10, '5');
+
+    $(".filtTag_A ul li").click(function () {
+        $(".investment_xiang div").hide().eq($(this).index()).slideDown();
+    });
+
+</script>
+
+</body>
+
+</html>

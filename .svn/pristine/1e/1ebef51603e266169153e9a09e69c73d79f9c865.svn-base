@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>重置登录密码</title>
+</head>
+<body>
+<div class="header header_reg" ><a class="iconfont" href="/account/personal"><img src="/img/fh1.png" class="fh_img"></a>重置登录密码</div>
+
+<div class="login_warp" style="margin-top: 0.2rem">
+    <form class="form-horizontal formResetLoginPwd">
+        <div class="tipsYz"></div>
+        <div class="tipsMob">验证码已发送，请注意查收</div>
+        <div class="form-group">
+            <span class="u1">验证码</span>
+            <input type="text" class="form-control" name="code" _check="validcode" placeholder="请输入手机验证码" maxlength="6">
+                <input class="hq_btn" type="button"
+                       onclick="javascript:ZC_api.sendResetLoginPasswordCode();"
+                       id="sendResetLoginPasswordCode" value="获取验证码" type="button">
+        </div>
+        <div class="form-group">
+            <span class="u1">新密码</span>
+            <input type="password" class="form-control" name="pwd" _check="password" placeholder="请输入6-20位数字与字母组合" id="password" maxlength="20">
+            <span class="hq_btn show_ps" id="togglePassword"></span>
+        </div>
+
+        <a href="javascript:" class="btn-logoin"  onclick="ZC_api.resetLoginPassword()"  style="margin-top:0.9rem">确定</a>
+
+    </form>
+</div>
+<% include ../parent/slide_nav.ejs %>
+</body>
+</html>

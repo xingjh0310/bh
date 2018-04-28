@@ -1,0 +1,217 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>平台介绍</title>
+    <link rel="stylesheet" href="/css/swiper.min.css">
+</head>
+<style>
+    .introduce_container{
+        width: 100%;
+        height:auto;
+    }
+    .introduce_banner{
+        width: 100%;
+        height:10.53866667rem/* 494px */;
+        background: url("/img/production_introduce/intruduce_banner.png");
+        background-size:100%;
+        background-repeat: no-repeat;
+    }
+    .company_intriduce{
+        width:100%;
+        height:auto;
+    }
+    .introduce_container>div{
+        overflow: hidden;
+    }
+    .introduce_container>div>h4{
+        font-size: .768rem/* 36px */;
+        font-weight: bolder;
+        letter-spacing: 0.2rem;
+        text-align: center;
+        margin-top: 0.6rem;
+        color: #287dff;
+    }
+    .introduce_container>div>p{
+        padding:.64rem/* 30px */;
+        box-sizing: border-box;
+        font-size: .512rem/* 24px */;
+        text-indent: 1rem;
+        line-height: 1rem;
+        margin-top: 0.4rem;
+        color: #398efd;
+    }
+    .honer{
+        width: 100%;
+        height:auto;
+    }
+    .box2{
+        /*box-shadow: 0 0 0.5rem #e5f4fe;*/
+    }
+    .type{
+        width:100%;
+        height:auto;
+        margin-bottom: 1rem;
+    }
+    .type>div{
+        width:96%;
+        height:50%;
+        /*background: url("/img/production_introduce/intruduce_banner.png");*/
+        /*background-size:100%;*/
+        background-position:center !important;
+        margin:0 auto;
+        overflow: hidden;
+        margin-top: 1.06666667rem/* 50px */
+    }
+    .type>div>h4{
+        margin-top: 0.5rem
+    }
+    .type>div>p{
+        color: #fff;
+        padding:.72rem;
+        box-sizing: border-box;
+        text-indent: 1rem;
+        line-height: 0.85rem;
+        font-size: .512rem;
+    }
+    .Button img{
+        margin:0 auto;
+        margin-top: 0.4rem;
+    }
+    .swiper-container{
+        width: 100%;
+        height:100%;
+        top:0;
+        left: 0;
+        z-index: 999;
+        position: fixed;
+        background: #000;
+        background: rgba(0,0,0,0.6);
+        /*display: none;*/
+    }
+</style>
+<body>
+    <div class="introduce_container">
+        <div class="introduce_banner"></div>
+        <div class="company_intriduce">
+            <h4>公司介绍</h4>
+            <p>
+                铂恒金服是杭州博虹金融信息服务有限公司独立运营的一家
+                专注于产业供应链消费金融信息服务的平台。我们提供安全
+                、便捷、标准化的理财体验。通过金融产品创新与互联网体
+                验技术创新，不断降低优质理财产品投资的资金门槛、资质
+                门槛、知识门槛、流程门槛等，使广大用户及时获得合适的
+                金融理财服务，践行“普惠金融”理念，服务企业利益大众。
+            </p>
+        </div>
+        <div class="honer">
+            <h4>资质荣誉</h4>
+            <div class="flipster" id="flipster">
+                <ul style="padding: 1rem;box-sizing: border-box">
+                    <li>
+                        <a  class="Button Block box2" >
+                            <img class="img" src="/img/production_introduce/mm8.jpg" style="width: 60%;margin-top: 20%" >
+                        </a>
+                    </li>
+                    <li>
+                        <a  class="Button Block box2">
+                            <img class="img" src="/img/production_introduce/mm9.jpg" style="width: 60%;margin-top: 20%" >
+                        </a>
+                    </li>
+                    <li>
+                        <a  class="Button Block box2">
+                            <img class="img" src="/img/production_introduce/mm10.jpg" style="width: 60%;margin-top:20%" >
+                        </a>
+                    </li>
+                    <li>
+                        <a  class="Button Block box2">
+                            <img class="img" src="/img/production_introduce/mm71.jpg" style="width: 50%;">
+                        </a>
+                    </li>
+                    <li>
+                        <a class="Button Block box2">
+                            <img class="img" src="/img/production_introduce/mm6.jpg" style="width: 50%;" >
+                        </a>
+                    </li>
+                    <li>
+                        <a  class="Button Block box2" >
+                            <img class="img" src="/img/production_introduce/mm7.jpg" style="width: 60%;margin-top: 20%" >
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="type" >
+            <h4>产品类型</h4>
+            <div style="background: url('/img/production_introduce/bojinbao.png') no-repeat;background-size: 96%">
+                <h4 style="text-align: center;color: #fff;font-size:.768rem/* 36px */ ">铂金宝</h4>
+                <p>      
+                   本项目为车位抵押贷款产品，借款方属于洲本资产推荐，
+                    具有稳定收入、信用良好，同时具有车位的优质企业或
+                    个人。所有借款都根据客户的收入情况、过往履约情况
+                    以及资产状况进行评估授信，同时经过银行风控体系进
+                    行风控，并纳入中国人民银行征信中心的数据库。洲本
+                    资产与多家银行在贷款方面有深度合作，为该借款方提
+                    供了担保保障。
+                </p>
+            </div>
+            <div style="background: url('/img/production_introduce/hengyinbao.png') no-repeat;background-size: 96%">
+                <h4 style="text-align: center;color: #fff;font-size:.768rem;/* 36px */">恒盈宝</h4>
+                <p>
+                    本项目是属于贷款垫资产品。银行向借款人贷款授信至下款
+                    期间，洲本资产先行垫付借款，待银行贷款审批发放后归还
+                    垫资金款项。借款方为合作机构推荐具有房产、车辆、稳定
+                    收入、信用良好的优质个人。所有借款都根据客户的收入情
+                    况、过往履约情况以及资产状况进行评估授信，经过银行风
+                    控体系进行风控，并纳入中国人民银行征信中心的数据库。
+                    合作机构与多家银行在信用贷款方面有深度合作，为该借款
+                    产品提供了全面的风控保障。
+                </p>
+            </div>
+            <div style="background: url('/img/production_introduce/hengxinbao.png') no-repeat;background-size: 96%">
+                <h4 style="text-align: center;color: #fff;font-size:.768rem;/* 36px */">铂信宝</h4>
+                <p>
+                    本项目为汽车消费金融产品，借款方属于汽车经销商和国鸿
+                    租赁推荐、铂恒金服筛选、具有稳定收入、信用良好的优质
+                    汽车消费者。该产品服务通过汽车以租代购的方式实现：借
+                    款方在租赁期间仅拥有车辆的使用权，所有权归国鸿租赁；
+                    在租赁期满并交齐租金后，由国鸿租赁将汽车过户给借款方。
+                    租赁期间由安邦保险为租赁汽车进行承保。国鸿租赁在汽车
+                    金融行业有着二十年成功运作经验，为该借款产品提供了全
+                    面的风控保障。
+                </p>
+            </div>
+        </div>
+
+    </div>
+    <div class="swiper-container" >
+        <div class="swiper-wrapper" style="width: 100%;height: 100%;">
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="/js/swiper.min.js"></script>
+<script type="text/javascript">
+    var html = ''
+    for(var i = 0;i<$('.img').length;i++){
+//        console.log($('.img')[i].src)
+//        console.log($('.img')[i].width)
+        html += '<div class="swiper-slide" >' +
+                     '<img width="100%" src="'+$('.img')[i].src+'">' +
+                '</div>'
+    }
+    $('.swiper-wrapper').html(html)
+    var mySwiper = new Swiper('.swiper-container', {
+        autoplay: 5000,//可选选项，自动滑动
+        loop:true
+    })
+    $('.swiper-container').hide();
+    $('.box2').on('click',function () {
+        $('.swiper-container').show();
+    })
+    $('.swiper-slide ').on('click',function () {
+        $('.swiper-container').hide();
+    })
+</script>
+
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>产品介绍和安全保障</title>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/jquery.flipster.css">
+    <script type="text/javascript" src="/js/rem.js"></script>
+</head>
+<style>
+    .container{
+        width: 100%;
+        height:auto;
+        overflow: hidden;
+    }
+    .container>.top_slid{
+        width: 100%;
+        height:2.13333333rem/* 100px */;
+        line-height: 2.13333333rem;
+        display: flex;
+        display: -webkit-flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+    }
+    .container>.top_slid span{
+        display: inline-block;
+        flex: 1;
+        height:100%;
+        text-align: center;
+        color: #fff;
+        background: #374d66;
+        font-size: .64rem/* 30px */;
+        letter-spacing: 0.05rem;
+        font-weight: bolder;
+    }
+    .active{
+        color: #1974ff !important;
+        background: #fff !important;
+    }
+    .content{
+        width: 100%;
+        height: auto;
+        margin-top: 2.13333333rem;
+    }
+</style>
+<script type="text/javascript" src="/js/jquery-2.1.1.js"></script>
+<body>
+    <div class="container">
+        <div class="top_slid">
+            <span class="active">平台介绍</span>
+            <span>安全保障</span>
+        </div>
+        <div class="content">
+            <div class="safety"  id="introduction" >
+                <%include ./part/introduction.ejs%>
+
+            </div>
+            <div class="introduction" id="safety" style="display: none;">
+                <%include ./part/safety.ejs %>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="/js/jquery.flipster.js"></script>
+<script type="text/javascript">
+   var func = {
+       switch_bar:function () {
+          $('.top_slid>span').on('click',function(){
+                var indexes = $(this).index();
+                $('.content>div').eq(indexes).show().siblings().hide();
+                $('li').click()
+          })
+       },
+       change:function () {
+           function getQueryString(name) {
+               var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+               var r = window.location.search.substr(1).match(reg);
+               if (r != null) return unescape(r[2]);
+               return null;
+           }
+           var change =  getQueryString('change');
+           if(change && change == 1){
+               $('.top_slid>span:nth-of-type(2)').click()
+           }else{
+               $('.top_slid>span:nth-of-type(1)').click()
+           }
+       }
+   }
+   func.switch_bar();
+   func.change();
+</script>
+
+</html>

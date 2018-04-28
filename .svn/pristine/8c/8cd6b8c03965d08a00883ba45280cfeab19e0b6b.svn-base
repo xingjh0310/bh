@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title></title>
+    <link rel="stylesheet" href="/css/base/BH_base.css">
+    <link rel="stylesheet" href="/css/BH/rule.css">
+</head>
+<body>
+<div class="rule-page">
+    <div class="rule-title">加息券使用规则</div>
+    <ul class="rule-list">
+        <li> 1、一次只能使用一张加息券，不可拆分使用，不可叠加使用；  </li>
+        <li> 2、使用加息券需满足该券的使用条件，具体使用条件见券上标注；  </li>
+        <li> 3、加息券不可用于新客专享、VIP尊享、整点抢购和重大节日加息活动；</li>
+        <li> 4、自动投标时，无法使用加息券；  </li>
+        <li> 5、如有疑问，请联系在线客服！</li>
+    </ul>
+</div>
+</body>
+</html>
+

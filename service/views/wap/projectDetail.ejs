@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>项目详情</title>
+    <link rel="stylesheet" href="/css/base/BH_base.css">
+    <link rel="stylesheet" href="/css/BH/projectDetail.css">
+</head>
+<body>
+<div class="project-detail">
+    <ul class="nav-box">
+        <li class="nav-item nav-item-active" data-idx="0">项目详情</li>
+        <li class="nav-item" data-idx="1">照片资料</li>
+        <li class="nav-item" data-idx="2">投资记录</li>
+    </ul>
+    <div class="main-box">
+        <div class="section">
+            <div class="li-top"></div>
+            <% if(introduce.safeguard){ %>
+            <%- introduce.safeguard %>
+            <% } %>
+        </div>
+        <div class="section hide">
+            <div class="li-top"></div>
+            <ul class="img-list">
+                <%
+                if(introduce.imgFiles){var arr = introduce.imgFiles.split('|');
+                for(var i = 0;i < arr.length;i++){
+                %>
+                <!--<li class="img-item pull-left" style="background: url(<%= arr[i] %>) center no-repeat;background-size: cover;"></li>-->
+                <!--<li class="img-item pull-left"><a href="<%= arr[i] %>"> <img src="<%= arr[i] %>"/></a></li>-->
+                <% }} %>
+                <!--<li class="img-item pull-left"></li>-->
+                <!--<li class="img-item pull-left"></li>-->
+                <!--<li class="img-item pull-left"></li>-->
+                <li class="img-item pull-left"></li>
+            </ul>
+        </div>
+        <div class="section hide">
+            <div class="sub-title">
+                <span class="sub-title-l pull-left">投资详情</span>
+                <span class="sub-title-r pull-right">投资金额</span>
+            </div>
+            <input id="debtId" name="debtId" type="hidden" value="<%= introduce.id %>"/>
+            <ul class="list-cont">
+                <li class="invest-item">
+                    <div class="item-l">
+                        <div class="user-phone">{mobile}</div>
+                        <div class="time">{time}</div>
+                    </div>
+                    <div class="item-r">￥{amount}</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+<script src="/js/jquery-2.1.1.js"></script>
+<script src="/js/util.js"></script>
+<script>
+    $('.nav-item').click(function(){
+        if($(this).hasClass('nav-item-active')){
+            return false;
+        }
+        var activeIdx = $(this).data('idx');
+        if(activeIdx==2){
+            $('body').css({"background":"#f7f7f7"});
+        }else{
+            $('body').css({"background":"#ffffff"});
+        }
+        $(this).addClass('nav-item-active').siblings().removeClass('nav-item-active');
+        $('.section').eq(activeIdx).removeClass('hide').siblings().addClass('hide');
+    })
+    ZC_api.v1_get_debtInvests(1,1, true);
+</script>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+<div class="pd-20">
+    <form class="form form-horizontal" id="form" style="padding-left: 50px;">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>超出提现笔数扣除：<%= (withdraw && withdraw.fee)?withdraw.fee: 0 %>元</label>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>未投资扣除费用：<%= (withdraw && withdraw.noInvestedFee)?withdraw.noInvestedFee: 0 %>元</label>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>其他扣除费用：<%= (withdraw && withdraw.otherFee)?withdraw.otherFee: 0 %>元</label>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>审批意见：</label>
+            <div class="formControls col-xs-8 col-sm-5">
+                   <textarea id="memo" style="width: 320px;" onkeyup="textarealength(this,200)" nullmsg="备注不能为空！" dragonfly="true" datatype="*2-100" placeholder="最少输入2个字符" class="textarea" rows="" cols="" name=""></textarea>
+            </div>
+        </div>
+        <div>提现金额：<%=(withdraw && withdraw.amount)?withdraw.amount:0%>元，扣款金额：<%=(withdraw && withdraw.arriveAmount)?parseFloat((withdraw.amount-withdraw.arriveAmount).toFixed(2)):0%>元，到账金额：<%=(withdraw && withdraw.arriveAmount)?withdraw.arriveAmount:0%>元</div>
+        <div class="row cl">
+            <div class="col-10 col-offset-3">
+                <input type="hidden" id="id" value="<%= req.param('id') || 0 %>"/>
+                <button id="sub" class="btn btn-primary radius" onclick="subAuit(<%= _global.state.Complete.v %>)" type="button"><i class="Hui-iconfont">&#xe632;</i> 通过
+                </button>
+                <button class="btn btn-default radius" onclick="subAuit(<%= _global.state.Cancel.v %>)" type="button">&nbsp;&nbsp;不通过&nbsp;&nbsp;</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+
+    var form = $(".form").Validform({
+        postonce: true,
+        tiptype: 4,
+        showAllError: true
+    });
+
+    function subAuit(state) {
+        if (form.check()) {
+            $.ajax({
+                url: '/account/payWithdraw',
+                type: 'post',
+                data: {
+                    id: $('#id').val(),
+                    state: state,
+                    memo: $('#memo').val()
+                },
+                success: function (msg) {
+                    if (!msg.err) {
+                        Huimodal_alert(' 审批成功', 1000, function () {
+                            parent.load();
+                            layer_close();
+                        });
+                    }
+                    else {
+                        Huimodal_alert(msg.err, 1000, function () {
+                            layer_close()
+                        });
+                    }
+                }
+            })
+        }
+    }
+
+</script>
+</html>

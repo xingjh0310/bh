@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>忘记密码</title>
+</head>
+<body>
+
+<div class="header show_head header_reg" ><a class="iconfont" href="/"><img src="/img/fh2.png" class="fh_img"></a>忘记密码</div>
+
+<div class="login_warp">
+    <p class="p1"></p>
+    <form class="form-horizontal formResetLoginPwd">
+        <div class="tipsYz"></div>
+        <div class="tipsMob">短信验证码已发送</div>
+        <div class="form-group">
+            <span class="u1">验证码</span>
+            <input type="text" class="form-control" name="code" _check="validcode" placeholder="请输入验证码" maxlength="6">
+            <input type="button" onclick="javascript:ZC_api.sendFindLoginPasswordCode($('#mobile').val());" id="subFindPwdCode" value="获取验证码" class="hq_btn" >
+        </div>
+        <div class="form-group" style="margin-top: 0.2rem">
+            <span class="u1">登入密码</span>
+            <input type="text" class="form-control" name="pwd" _check="password" placeholder="请输入登入密码" id="password" maxlength="20">
+            <span class="hq_btn show_ps" id="togglePassword"></span>
+        </div>
+        <p class="p1">6~20位的字符，可包含数字、英文字母、符号</p>
+
+        <a href="javascript:" class="btn-logoin" onclick="ZC_api.findLoginPassword()" style="margin-top:0.9rem">确定</a>
+
+    </form>
+
+</div>
+
+
+
+<% include ../parent/slide_nav.ejs %>
+
+
+
+
+</body>
+</html>

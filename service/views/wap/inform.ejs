@@ -1,0 +1,19 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>公告详情</title>
+    <link rel="stylesheet" href="/css/base/BH_base.css">
+    <link rel="stylesheet" href="/css/BH/inform.css">
+</head>
+<body>
+    <div class="inform-page">
+        <div class="inform-title" ><%= inform.title %></div>
+        <div class="inform-time1"><%= new Date(inform.time).Format('yyyy-MM-dd hh:mm') %></div>
+        <div class="inform-content"><%- inform.content %></div>
+        <div class="inform-author"><%= inform.author %></div>
+        <div class="inform-time2"><%= new Date(inform.time).Format('yyyy-MM-dd') %></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= com.env.seo.title %>邀请有礼</title>
+    <% include ../parent/static.ejs %>
+    <link rel="stylesheet" type="text/css" href="/css/BH/account/public.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/BH/parent/account_left.css"/>
+</head>
+<body>
+<% include ../parent/top.ejs %>
+
+
+<% include ../parent/account_left.ejs %>
+
+<div class="personal_cen inv_main">
+    <div class="yq_top">
+        <div class="pull pull_t">
+            <h3><img src="/img/invs.png"> 推荐链接</h3>
+            <p class="p2">将您的推荐人专属链接发给您的好友</p>
+            <input type="text" value="<%= com.env.base + '/register/' + user.inviteCode || '' %>" readOnly="true">
+            <span class="copyUrl">复制邀请链接</span>
+        </div>
+        <div class="pull pull_r">
+            <h3><img src="/img/invs.png"> 推荐码</h3>
+            <p><i class="col999">推荐好友注册时，将您的推荐码发送给您的好友</i>
+                <input type="text" value="<%= user.inviteCode || '' %>" readOnly="true">
+            <span class="copyUrl">复制邀请码</span></p>
+        </div>
+
+    </div>
+
+    <ul class="yq_ul2">
+        <li class="active">推广记录</li>
+        <li>奖励记录</li>
+    </ul>
+    <div class="yq_table setTabMain">
+        <!--推广记录-->
+        <div>
+            <table border="0" cellspacing="0" width="100%" class="table dates">
+                <thead>
+                <tr>
+                    <th width="200px;">注册时间</th>
+                    <th>用户名</th>
+                    <th>是否认证</th>
+                </tr>
+                </thead>
+                <script type="text/template" id="invite_tmpl">
+                    <tr>
+                        <td width="200px;">{time}</td>
+                        <td >{mobile}</td>
+                        <td >{real}</td>
+                    </tr>
+                </script>
+                <tbody id="invite_list">
+
+                </tbody>
+
+            </table>
+
+            <div id="pageInvite" class="pagination_div">
+                <ol class="pagination_1">
+
+                </ol>
+            </div>
+
+        </div>
+        <!--奖励记录-->
+        <div>
+
+            <table border="0" cellspacing="0" width="100%" class="table dates">
+                <thead>
+                <tr>
+                    <th>时间</th>
+                    <th style="">用户名</th>
+                    <th style="">投资金额</th>
+                    <th style="">投资周期</th>
+                    <th style="">奖励系数</th>
+                    <th style="">奖励金额</th>
+                </tr>
+                </thead>
+                <script type="text/template" id="inviteAward_tmpl">
+                    <tr>
+                        <td>{time}</td>
+                        <td>{inviteMobile}</td>
+                        <td>￥{buy_amount}</td>
+                        <td>{period}{period_unit}</td>
+                        <td>{rate}</td>
+                        <td>{amount}</td>
+                    </tr>
+                </script>
+                <tbody id="inviteAward_list">
+
+                </tbody>
+            </table>
+
+            <div id="pageInviteAward" class="pagination_div">
+                <ol class="pagination_1">
+
+                </ol>
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+<% include ../parent/bottom.ejs %>
+
+</body>
+<script type="text/javascript">
+    load();
+    function load() {
+        ZC_api.loadInviteAward(1, 10);
+        ZC_api.loadInviteUser(1, 10);
+    }
+
+</script>
+</html>

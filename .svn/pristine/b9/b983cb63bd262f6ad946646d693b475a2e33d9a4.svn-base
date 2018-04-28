@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 财务管理 <span class="c-gray en">&gt;</span> 资金记录 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+    <div class="">
+        <div style="width:360px;float: left;">
+            日期范围&nbsp;:&nbsp;
+            <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'eTime\')||\'%y-%M-%d\'}'})" id="bTime" class="input-text Wdate" value="" style="width:120px;" name="bTime" readonly="true">
+            &nbsp;-&nbsp;
+            <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'bTime\')}',maxDate:'%y-%M-%d'})" id="eTime" class="input-text Wdate" style="width:120px;" value="" name="eTime" readonly="true">
+        </div>
+        <div style="width:260px;float: left;">&nbsp;&nbsp;资金类型&nbsp;:&nbsp;
+            <span class="select-box" style="width:160px;">
+				<select class="select" id="type">
+                    <option value="0">全部</option>
+                    <% for(var key in _global.fundType){ %>
+                    <option value="<%= _global.fundType[key].v %>"><%= _global.fundType[key].desc %></option>
+                    <% } %>
+                </select>
+			</span>
+        </div>
+        <input type="text" id="param" placeholder="手机号,姓名" style="width:250px;float: left;" class="input-text">
+        <button name="" id="" class="btn btn-success" type="button" onclick="ZC_api.loadCashFlowList(1,20,false)"><i class="Hui-iconfont">&#xe665;</i> 搜索
+        </button>
+        <button name="" id="" class="btn btn-success" type="button" onclick="ZC_api.loadCashFlowList(1, $('#pageTotal').val(),true);"><i class="Hui-iconfont">&#xe644;</i> 导出</button>
+    </div>
+    <div class="mt-20">
+        <table class="table table-border table-bordered table-bg table-hover table-sort">
+            <thead>
+            <tr class="text-c">
+                <th width="25"><input type="checkbox" name="" value=""></th>
+                <th width="120">时间</th>
+                <th width="80">手机号码</th>
+                <th width="80">真实姓名</th>
+                <th width="80">身份证号</th>
+                <th width="75">类型</th>
+                <th width="60">收入</th>
+                <th width="60">支出</th>
+                <th width="60">余额</th>
+                <th width="120">备注</th>
+            </tr>
+            </thead>
+            <script type="text/template" id="cashflow_tmpl">
+                <tr class="text-c">
+                    <td><input type="checkbox" value="" name=""></td>
+                    <td>{time}</td>
+                    <td>{mobile}</td>
+                    <td>{realName}</td>
+                    <td>{idCard}</td>
+                    <td>{type}</td>
+                    <td>{amountIn}</td>
+                    <td>{amountOut}</td>
+                    <td>{balance}</td>
+                    <td>{memo}</td>
+                </tr>
+            </script>
+            <tbody id="cashflow_list">
+
+            </tbody>
+        </table>
+        <div id="page"></div>
+        <input type="hidden" id="pageTotal"/>
+    </div>
+</div>
+</body>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+    ZC_api.loadCashFlowList(1, 20, false);
+</script>
+
+</html>

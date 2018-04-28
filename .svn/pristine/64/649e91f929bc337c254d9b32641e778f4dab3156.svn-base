@@ -1,0 +1,76 @@
+/*与原生交互方法*/
+
+//判断手机类型
+function phoneType() {
+    var u = navigator.userAgent;
+    if(u.indexOf('Android') > -1 || u.indexOf('Linux') > -1){
+        return 1;
+    }
+    if(!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)){
+        return 2;
+    }
+}
+
+//goLogin ---登录
+//goInvest---去理财页面
+//goBonus ---去红包页面
+//goShare ---去分享
+//call ---拨打电话
+function goAppPage(pageNum) {
+    // var thisPhone = phoneType();
+    var thisPageNum = pageNum;
+    // if(thisPhone == 1){
+        switch(thisPageNum)
+        {
+            case 1:
+                window.android.goLogin();
+                break;
+            case 2:
+                window.android.goInvest();
+                break;
+            case 3:
+                window.android.goBonus();
+                break;
+            case 4:
+                window.android.goShare();
+                break;
+            case 5:
+                window.android.goCallPhone();
+                break;
+            default:
+                alert('开发中')
+        }
+    // }
+    // if(thisPhone == 2){
+    //     switch(thisPageNum)
+    //     {
+    //         case 1:
+    //             window.webkit.messageHandlers.goLogin.postMessage({});
+    //             break;
+    //         case 2:
+    //             window.webkit.messageHandlers.goInvest.postMessage({});
+    //             break;
+    //         case 3:
+    //             window.webkit.messageHandlers.goBonus.postMessage({});
+    //             break;
+    //         case 4:
+    //             window.webkit.messageHandlers.goShare.postMessage({});
+    //             break;
+    //         case 5:
+    //             window.webkit.messageHandlers.goCallPhone.postMessage({});
+    //             break;
+    //         default:
+    //             alert('开发中')
+    //     }
+    // }
+}
+
+
+/*弹窗body不滚动*/
+function fnNonRolling() {
+    $("body").css({'overflow':'hidden','position':'fixed'})
+}
+/*弹窗消失，body恢复*/
+function fnRolling() {
+    $('body').css({'overflow':'auto','position':'relative'})
+}

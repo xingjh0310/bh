@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= com.env.seo.title %>红包管理</title>
+    <% include ../parent/static.ejs %>
+    <link rel="stylesheet" type="text/css" href="/css/BH/account/public.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/BH/parent/account_left.css"/>
+</head>
+
+<body>
+<% include ../parent/top.ejs %>
+
+<% include ../parent/account_left.ejs %>
+
+        <div class="personalpaper inv_main" >
+            <div class="percom clear ">
+                <input type="hidden" id="state" value="<%= _global.state.Wait.v %>"/>
+                <ul class="yq_ul paper">
+                    <li class="active" style="width:50%;"><a href="javascript:;" _val="<%= _global.state.Wait.v %>"onclick="load(<%= _global.state.Wait.v %>);">未使用(<span id="total<%= _global.state.Wait.v %>"></span>个)</a></li>
+                    <li style="width:50%;"><a href="javascript:;" _val="<%= _global.state.Complete.v %>"
+                           onclick="load(<%= _global.state.Complete.v %>);">已使用(<span id="total<%= _global.state.Complete.v %>"></span>个)</a></li>
+                </ul>
+                <div class="yq_table setTabMain bonus_ul">
+                    <!--可使用-->
+                     <div class="reg_zf">
+                         <script type="text/template" id="bonus<%= _global.state.Wait.v %>_tmpl">
+                             <li class="{state}">
+                                 <div class="pull-left">
+                                     ¥<span class="sp1">{amount}</span>
+                                 </div>
+                                 <div class="pull-right">
+                                     <h2>{name}</h2>
+                                     <p class="sp2">{buy_amount}</p>
+                                     <p class="sp3">{period}{period_unit}</p>
+                                     <p class="sp3">{product_type}</p>
+                                     <p class="sp4">{begin_time}至{end_time}有效</p>
+                                 </div>
+                             </li>
+
+                         </script>
+                         <ul class="w_paper {state}"  id="bonus<%= _global.state.Wait.v %>_list">
+
+                         </ul>
+                         <div id="page<%= _global.state.Wait.v %>" class="pagination_div">
+                             <ol class="pagination_1">
+
+                             </ol>
+                         </div>
+
+                     </div>
+                    <!--已使用-->
+                    <div class="reg_zf">
+                        <script type="text/template" id="bonus<%= _global.state.Complete.v %>_tmpl">
+                            <li style="background: url(/img/w2_13.png);color:#999">
+                                <div class="pull-left" style="color:#999">
+                                    ¥<span class="sp1" >{amount}</span>
+                                </div>
+                                <div class="pull-right">
+                                    <h2>{name}</h2>
+                                    <p class="sp2">{buy_amount}</p>
+                                    <p class="sp3">{period}{period_unit}</p>
+                                    <p class="sp3">{product_type}</p>
+                                    <p class="sp4">{begin_time}至{end_time}有效</p>
+                                </div>
+                            </li>
+
+                        </script>
+                        <ul class="w_paper" id="bonus<%= _global.state.Complete.v %>_list">
+
+                        </ul>
+                        <div id="page<%= _global.state.Complete.v %>" class="pagination_div">
+                            <ol class="pagination_1">
+
+                            </ol>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="paperrule" style="margin-top: 40px;border-top:2px solid #f5f5f5">
+                    <h2 style="font-size: 18px;padding: 40px 0 0 40px;">红包使用规则</h2>
+                    <p style="font-size: 14px;padding: 20px 0 0 40px;line-height: 30px;">
+                        1、 红包分为抵扣红包和现金红包；<br>
+                        2、 抵扣红包使用条件详见红包标注，您在购买时可直接抵扣金额，如购买1000元使用8元抵扣红包，则实际只需支付992元；<br>
+                        3、 自动投标开启后不能使用抵扣红包，使用抵扣红包前请关闭自动投标功能，抵扣红包使用要手动投标！<br>
+                        4、现金红包是直接变现的，加入可用余额中！如有疑问，请联系在线客服！<br>
+
+
+                    </p>
+                </div>
+    </div>
+</div>
+
+
+</body>
+<% include ../parent/bottom.ejs %>
+<script type="text/javascript">
+    load(<%= _global.state.Complete.v %>);
+    load(<%= _global.state.Wait.v %>);
+    function load(state) {
+        ZC_api.loadBonusRecord(1, 6, state);
+    }
+</script>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> App上传 <span
+            class="c-gray en">&gt;</span>编辑App <a class="btn btn-success radius r mr-20"
+                                                  style="line-height:1.6em;margin-top:3px"
+                                                  href="javascript:location.replace(location.href);" title="刷新"><i
+                class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+    <div class="codeView docs-example">
+        <form class="form form-horizontal" id="form">
+
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>手机类型：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <select class="select-box" name="type" style="width:66%;">
+                        <option value="0" >安卓</option>
+                        <option value="1" >IOS</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>版本ID：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" id="verSion" placeholder="请输入版本id" datatype="*1-100"
+                           nullmsg="请输入版本id" errormsg="大于1位小于100位" name="verSion" />
+                </div>
+            </div>
+
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>版本号：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" id="versionName" placeholder="版本号"
+                           datatype="*2-100"
+                           nullmsg="请输入版本号" errormsg="小于999" name="versionName"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>内容：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" id="Content" placeholder="请输入更新内容"
+                           datatype="*2-100"
+                           nullmsg="请输入更新内容" errormsg="小于999" name="Content" />
+                </div>
+            </div>
+
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>下载地址：</label>
+                <div class="formControls col-xs-8 col-sm-5" id="urlDiv">
+                    <input type="text" class="input-text" id="downloadUrl" placeholder="请输入下载地址"
+                           datatype="*2-100"
+                           nullmsg="请输入下载地址" errormsg="2~100" name="downloadUrl" value="http://qiniu.bohomm.com/app.apk"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>强制更新：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <select class="select-box" name="isforce" style="width:66%;">
+                        <option value="0" >禁用</option>
+                        <option value="1" >启用</option>
+                    </select>
+                </div>
+            </div>
+           <!-- <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>下载链接：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" id="downloadUrl" placeholder="请输入下载链接"
+                           datatype="*2-100"
+                           nullmsg="请输入下载链接" errormsg="小于999" name="downloadUrl"/>
+                </div>
+            </div>-->
+
+
+
+            <div class="row cl">
+                <div class="col-10 col-offset-3">
+                    <button id="sub" class="btn btn-primary radius" type="button"><i
+                                class="Hui-iconfont">&#xe632;</i> 保存
+                    </button>
+                    <button onClick="layer_close();" class="btn btn-default radius" type="button">
+                        &nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+</body>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+    $(".form").Validform({
+        btnSubmit: '#sub',
+        postonce: true,
+        tiptype: 4,
+        showAllError: true,
+        ajaxPost: true,
+        beforeSubmit: function (curform) {
+            //if ($('#AccountId').val()) {
+            $.ajax({
+                url: '/appManager/appupload',
+                type: 'post',
+                data: {appUpload: JSON.stringify($('#form').serializeJson())},
+                success: function (msg) {
+                    if (!msg.err) {
+                        Huimodal_alert('保存成功', 1000, function () {
+                            parent.load();
+                            layer_close();
+                        });
+                    }
+                    else {
+                        Huimodal_alert(msg.err, 1000, function () {
+                        });
+                    }
+                }
+            })
+            return false;
+            //}
+        }
+    });
+    $('#urlDiv').createUpload({type: 'uploadapk', mime: '.apk'});
+</script>
+</html>

@@ -1,0 +1,409 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>铂恒限时秒杀</title>
+    <link rel="stylesheet" type="text/css" href="/css/common.css?t=<%= new Date().getTime() %>">
+    <style>
+        .div1 {
+            width: 100%;
+            height: 729px;
+            background: url("/img/double1.jpg") no-repeat center;
+        }
+
+        .div2 {
+            width: 100%;
+            height: 465px;
+            background: url("/img/double2.jpg") no-repeat center;
+        }
+
+        .div3 {
+            width: 100%;
+            height: 586px;
+            background: url("/img/double4.jpg") no-repeat center;
+        }
+
+        .div4 {
+            width: 100%;
+            height: 403px;
+            background: url("/img/double5.jpg") no-repeat center;
+        }
+
+        .div5 {
+            width: 100%;
+            height: 725px;
+            background: url("/img/double3.jpg") no-repeat center;
+        }
+
+        .div-main {
+            width: 1200px;
+            height: 725px;
+            margin: auto;
+        }
+
+
+        .div-main .main-left {
+            width: 679px;
+        }
+
+        .div-main .main-left .left-pan {
+            width: 679px;
+            height: 706px;
+            background: url("/img/double6.png") no-repeat center;
+            margin: auto;
+        }
+
+        .div-main .main-left .left-pan img {
+            margin: auto;
+            padding-top: 182px;
+            display: block;
+            cursor: pointer;
+        }
+
+
+        .main-right {
+            width: 450px;
+        }
+
+        .main-right .right-list {
+            width: 450px;
+            height: 549px;
+            background: url("/img/double9.png") no-repeat center;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .right-list .list-main {
+            position: absolute;
+            top: 90px;
+            left: 50%;
+            margin-left: -180px;
+            height: 427px;
+            overflow: hidden;
+            width: 360px;
+        }
+
+        .main-right .right-list ul li {
+            font-size: 18px;
+            color: #666;
+            text-align: center;
+            line-height: 60px;
+            border-bottom: 1px solid #ffd7cc;;
+        }
+
+        .main-right p {
+            font-size: 16px;
+            color: #717171;
+            text-align: left;
+            padding-top: 30px;
+            line-height: 25px;
+        }
+        .main-right .jiang_btn{
+            margin: auto;
+            margin-top: 25px;
+            display: block;
+        }
+
+        .modal-alert {
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            display: none;
+        }
+
+        .modal-prize {
+            width: 800px;
+            height: 500px;
+           background: url("/img/double13.png") no-repeat center;
+            text-align: center;
+            top:50%;
+            left:50%;
+            margin-top: -250px;
+            margin-left: -400px;
+            position: fixed;
+        }
+
+        .modal-prize h3 {
+            font-size: 24px;
+            color: #808080;
+            padding-top: 117px;
+        }
+
+        .modal-prize img {
+            margin-top: 15px;
+        }
+
+        .modal-prize a{
+            width: 300px;
+            height: 56px;
+            margin: auto;
+            display: block;
+            background: url("/img/double14.png") no-repeat center;
+            margin-top: 50px;
+        }
+
+        .modal-prize p {
+            font-size: 16px;
+            color: #1b1b1b;
+            padding-top: 10px;
+        }
+
+        .j-list {
+            width: 760px;
+            top: 70px;
+            position: absolute;
+            height: 410px;
+            overflow-y: scroll;
+            left:20px;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+        }
+
+        .j-list ul li.li-top span{
+            line-height: 50px;
+            background: #ffddd4;
+            height: 50px;
+            border-bottom: none;
+        }
+
+        .j-list ul li span {
+            width: 220px;
+            color: #666;
+            display: block;
+            float: left;
+            border-right:1px solid #fdbdab;
+            border-bottom: 1px solid #fdbdab;
+            font-size: 20px;
+            text-align: center;
+            height: 179px;
+        }
+
+        .j-list ul li span p{
+            color: #666;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        #j-list img {
+            margin: auto;
+            position: absolute;
+            bottom: 45px;
+            left: 50%;
+            margin-left: -135px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="div1"></div>
+<div class="div5">
+    <% if(user){ %>
+    <input type="hidden" value="<%= user.id %>" id="userId">
+    <% }else { %>
+    <input type="hidden" value="<%= 0 %>" id="userId">
+    <% } %>
+    <div class="div-main clearfix">
+        <div class="main-left pull-left">
+            <div class="left-pan">
+                <% if(new Date('2017/10/31').getTime() < new Date().getTime() && new Date().getTime() < new Date('2018/11/16').getTime()){ %>
+                <img src="/img/double7.png" id="lotteryBtn">
+                <% }else{ %>
+                <img src="/img/double8.png" id="not_z"
+                     onclick="$('.modal-alert').show();$('#isEnd').show();">
+                <% } %>
+                <img>
+            </div>
+        </div>
+        <div class="main-right pull-right recordList">
+            <div class="right-list">
+                <div class="list-main">
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+           <a href="javascript:void (0);" onclick="showRecord()"> <img src="/img/double10.png" class="jiang_btn"/></a>
+        </div>
+    </div>
+</div>
+<div class="div2"></div>
+<div class="div3"></div>
+<div class="div4"></div>
+<input type="hidden" value="<%= lotteryId %>" id="lotteryActivityId">
+<input type="hidden" value="<%= lottery %>" id="lottery">
+
+<!--弹窗-->
+<div class="modal-alert" id="modal-alert">
+    <!--获奖提示-->
+    <div class="modal-prize" id="jiang" style="display: none">
+        <img src="/img/double12.png" style="cursor:pointer;margin-top: 20px;margin-right: 40px;float:right;" onclick="$('.modal-alert').hide();$('#jiang').hide();location.reload();">
+        <h3>恭喜您获得一张<em id="prizeName"></em>，请小主尽快投资使用哦！</h3>
+        <img src="" style="width: 305px;height: 150px;margin-top: 35px" id="prizeImg">
+       <a href="/debts"></a>
+    </div>
+    <!--登录-->
+    <div class="modal-prize" id="loginError" style="display: none;background: url(/img/double17.png) no-repeat center">
+        <img src="/img/double12.png" style="cursor:pointer;margin-top: 20px;margin-right: 40px;float:right;" onclick="$('.modal-alert').hide();$('#loginError').hide()">
+        <h3>您好，需要先登录才可参加幸运转盘抽奖哦！</h3>
+        <img src="/img/double15.png"/>
+        <a href="/login?r=double" style="background: url(/img/double16.png) no-repeat center;height: 61px;margin-top: 40px"></a>
+    </div>
+    <!--您还有未使用的幸运加息券-->
+    <div class="modal-prize" id="cakeError" style="display: none;background: url(/img/double17.png) no-repeat center">
+        <img src="/img/double12.png" style="cursor:pointer;margin-top: 20px;margin-right: 40px;float:right;" onclick="$('.modal-alert').hide();$('#cakeError').hide()">
+        <h3>您还有未使用的幸运加息券，使用后才可获得新的<br/>幸运转盘资格哦！</h3>
+        <img src="/img/double15.png" style="width: 147px"/>
+        <a href="/debts" style="margin-top: 20px"></a>
+    </div>
+    <!--error-->
+    <div class="modal-prize" id="error" style="display: none;background: url(/img/double17.png) no-repeat center">
+        <img src="/img/double12.png" style="cursor:pointer;margin-top: 20px;margin-right: 40px;float:right;" onclick="$('.modal-alert').hide();$('#error').hide()">
+        <h3>23423423423</h3>
+        <img src="/img/double15.png" style="width: 147px"/>
+        <img src="/img/double14.png" onclick="$('.modal-alert').hide();$('#error').hide()"style="margin-top: 20px">
+    </div>
+    <!--我的奖品-->
+    <div class="modal-prize" id="myPrizeRecord"
+         style="background: url(/img/double18.png) no-repeat center;display: none">
+        <img src="/img/double12.png" style="cursor:pointer;margin-top: 20px;margin-right: 40px;float:right;"
+             onclick="$('.modal-alert').hide();$('#myPrizeRecord').hide()">
+        <div class="j-list">
+            <ul>
+                <li class="li-top">
+                    <span style="width: 299px;">中奖物品</span>
+                    <span>中奖时间</span>
+                    <span>奖品发放状态</span>
+                </li>
+                <% if(lotteryRecord.length > 0){ %>
+                <% for (var i = 0;i < lotteryRecord.length;i++){ %>
+                <li>
+                    <span style="width: 299px">
+                        <p><%= lotteryRecord[i].lotteryPrizeName %></p>
+                        <img src="<%= lotteryRecord[i].prizeImg %>" style="width:170px;height: 90px;"/>
+                    </span>
+                    <span><p style="line-height: 140px"><%= new Date(lotteryRecord[i].createTime).Format("yyyy/MM/dd hh:mm") %></p></span>
+                    <span><p style="line-height: 140px"><%= lotteryRecord[i].state == 1 ? '已发放' : '未发放' %></p></span>
+                </li>
+                <% } %>
+                <% }else { %>
+                <h3 style="padding-top: 90px">啊哦，您目前还没有获得任何奖品哦！</h3>
+                <img src="/img/double15.png"/>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+</div>
+<script src="/js/jquery-1.7.2.js"></script>
+<script src="/js/common.js?t=<%= new Date().getTime() %>"></script>
+<script type="text/javascript" src="/js/jQueryRotate.2.2.js"></script>
+<script type="text/javascript" src="/js/scroll.js"></script>
+<script>
+
+    $("div.list-main").myScroll({
+        speed: 100, //数值越大，速度越慢
+        rowHeight: 60 //li的高度
+    });
+
+
+    var timeOut = function () {  //超时函数
+        $("#lotteryBtn").rotate({
+            angle: 0,
+            duration: 10000,
+            animateTo: 2160, //这里是设置请求超时后返回的角度，所以应该还是回到最原始的位置，2160是因为我要让它转6圈，就是360*6得来的
+            callback: function () {
+                alert('网络超时')
+            }
+        });
+    };
+    var rotateFunc = function (awards, angle, data) {  //awards:奖项，angle:奖项对应的角度
+        $('#lotteryBtn').stopRotate();
+        $("#lotteryBtn").rotate({
+            angle: 0,
+            duration: 10000,
+            animateTo: angle + 1440, //angle是图片上各奖项对应的角度，1440是我要让指针旋转4圈。所以最后的结束的角度就是这样子^^
+            callback: function () {
+                $("#jiang  img").eq(1).attr("src", data.img);
+                $("#prizeName").html(data.name);
+                $("#modal-alert").show();
+                $("#jiang").show();
+                $("#myPrizeRecord").hide();
+                Dobind();
+            }
+        });
+    };
+    Dobind();
+    function Dobind() {
+        $("#lotteryBtn").bind("click", function () {
+            var userId = parseInt($("#userId").val());
+            if (userId == 0) {
+                $("#modal-alert").css("display", "block");
+                $("#loginError").show();
+                return false;
+            }
+            var lottery = parseFloat($("#lottery").val());
+            if (lottery == 0) {
+                $("#modal-alert").css("display", "block");
+                $("#cakeError").show();
+                return false;
+            }
+            $("#lotteryBtn").unbind();
+            var indexId;
+            $.ajax({
+                url: '/activity/doLuckDraw',
+                type: 'post',
+                data: {lotteryActivityId: $("#lotteryActivityId").val()},
+                success: function (data) {
+                    if (data.err) {
+                        $("#error h3").html(data.err);
+                        $("#modal-alert").css("display", "block");
+                        $("#error").show();
+                        /*alert(data.err);*/
+                        return false;
+                    } else {
+                        indexId = data.index;
+                        rotateFunc(indexId + 1, indexId * 60, data)
+                    }
+                }
+            })
+        });
+    }
+    loadRcord();
+    function loadRcord() {
+        $.ajax({
+            url: "/activity/lotteryRecordList",
+            type: "post",
+            data: {lotteryActivityId: $("#lotteryActivityId").val()},
+            success: function (body) {
+                /*中奖名单滚动*/
+                /*$(".recordList ul").TopScroll(1.8, (Math.ceil(body.noteNum / 3)) - 1, "list-main");*/
+                if (body) {
+                    for (var i = 0; i < body.list.length; i++) {
+                        var fs = '<li>恭喜 ' + body.list[i].mobile + ' 获得 ' + body.list[i].lotteryPrizeName + '</li>';
+                        $(".list-main ul").append(fs);
+                    }
+                }else{
+                    $(".list-main").html('<img src="/img/double11.png" style="margin: auto;display: block;margin-top: 70px"/>');
+                }
+            }
+        })
+    }
+
+
+    function showRecord() {
+        var userId = parseInt($("#userId").val());
+        if (userId == 0) {
+            $("#modal-alert").css("display", "block");
+            $("#loginError").show();
+            return false;
+        }
+        $("#modal-alert").show();
+        $("#myPrizeRecord").show();
+
+    }
+</script>
+</body>
+</html>
+

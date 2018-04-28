@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <% include ../../parent/static.ejs %>
+    <title><%= com.env.seo.title %>新手专享</title>
+</head>
+<body>
+<style>
+    .container{
+        width: 100%;
+        height:auto;
+        background: #f3983e;
+        padding-bottom: 160px;
+    }
+    .banner{
+        width: 1024px;
+        height:680px;
+        background: url("/img/activity/ordinaryActivities/banner.png") center no-repeat;
+        background-size:100%;
+        margin:0 auto;
+    }
+    .box1{
+        width: 100%;
+        height: 2886px;
+        background: url("/img/activity/ordinaryActivities/part_one.png") center no-repeat;
+        background-size: 1920px 2886px;
+    }
+    .box2{
+        width: 100%;
+        height: 554px;
+        background: url("/img/activity/ordinaryActivities/part_two.png") center no-repeat;
+        background-size: 1920px 554px;
+    }
+    .box3{
+        width: 100%;
+        height: 554px;
+        background: url("/img/activity/ordinaryActivities/part_three.png") center no-repeat;
+        background-size: 1920px 902px;
+    }
+    button{
+        width: 904px;
+        height:148px;
+        margin: 0 auto;
+        background: #fe5032;
+        border-radius: 100px;
+        border:none;
+        font-size: 34px;
+        letter-spacing: 4px;
+        color: #fff;
+        display: block;
+        outline: none;
+        cursor: pointer;
+    }
+    .invest{
+        width: 102px;
+        height:200px;
+        background: url("/img/activity/ordinaryActivities/investbt2n.png");
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        position: fixed;
+        right:100px;
+        top: 300px;
+        z-index: 99;
+        cursor: pointer;
+    }
+</style>
+<% include ../../parent/top.ejs %>
+<div class="invest" onclick="window.location.href='/debts'"></div>
+<div class="container">
+    <div class="box1">
+        <div class="banner"></div>
+    </div>
+    <div class="box2"></div>
+    <div class="box3"></div>
+    <!--<button onclick="window.location.href='/debts'">立即投资</button>-->
+</div>
+<% include ../../parent/bottom.ejs %>
+</body>
+</html>

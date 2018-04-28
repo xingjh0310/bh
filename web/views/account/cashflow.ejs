@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= com.env.seo.title %>收支明细</title>
+    <% include ../parent/static.ejs %>
+    <link rel="stylesheet" type="text/css" href="/css/BH/account/public.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/BH/parent/account_left.css"/>
+</head>
+<body>
+<% include ../parent/top.ejs %>
+
+<% include ../parent/account_left.ejs %>
+
+<div class="personal_cen inv_main">
+
+    <div class="sx_div" style="margin:0 0 12px 0">
+        产品状态
+        <select  id="type" >
+            <option value="0">全部</option>
+            <% for(var key in _global.fundType){ %>
+            <option value="<%= _global.fundType[key].v %>"><%= _global.fundType[key].desc %></option>
+            <% } %>
+        </select>
+        <input type="text" data-beatpicker="true"  id="start"><i class="sp2">至</i><input type="text" data-beatpicker="true"  id="end">
+        <a href="javascript:" class="btn"  onclick="ZC_api.loadCashFlow(1, 10)">查询</a>
+    </div>
+
+
+    <div class="table_list">
+
+        <table border="0" cellspacing="0" width="100%" class="table dates">
+            <thead>
+            <tr>
+                <th>时间</th>
+                <th>类型</th>
+                <th>收支记录(元)</th>
+                <th>可用余额(元)</th>
+                <th>备注</th>
+            </tr>
+            </thead>
+            <script type="text/template" id="cashflow_tmpl">
+                <tr>
+                    <td>{time}</td>
+                    <td>{type}</td>
+                    <td>{amount}</td>
+                    <td>{balance}</td>
+                    <td>{memo}
+                        <div class="w beizhu">
+                            <div class="x">
+                                <p class="p1">资金流水账号</p>
+                                <p>{id}</p></i>
+                        </div>
+                    </td>
+                </tr>
+            </script>
+            <tbody id="cashflow_list">
+
+            </tbody>
+
+        </table>
+        <div id="page" class="pagination_div">
+            <ol class="pagination_1">
+
+            </ol>
+        </div>
+    </div>
+
+
+</div>
+
+<% include ../parent/bottom.ejs %>
+<script type="text/javascript">
+    ZC_api.loadCashFlow(1, 10);
+</script>
+
+</body>
+
+</html>

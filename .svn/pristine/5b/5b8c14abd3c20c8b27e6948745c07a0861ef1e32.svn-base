@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>首页</title>
+</head>
+<body style="padding-bottom:1.2rem">
+<div class="header" ><a class="iconfont" href="/debts"><img src="/img/fh1.png" class="fh_img"></a>投资成功</div>
+
+<div class="data_sucWarp">
+    <img src="/img/das.png" class="img1">
+    <p class="p1">恭喜您投标成功!</p>
+    <p class="p2">您离壕又近了一步，坐等收钱吧O(∩_∩)O~</p>
+
+    <a href="/debts"  class="pull-left a1">继续投标</a>
+    <a href="/account/invests"  class="pull-right">查看我的投资</a>
+</div>
+
+</body>
+</html>

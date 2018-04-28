@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>新手专享</title>
+    <link rel="stylesheet" href="/css/base/BH_base.css">
+    <link rel="stylesheet" href="/css/activities/newUser.css">
+</head>
+<body>
+    <% if(fromWrap){ %>
+        <input type="hidden" value="<%= fromWrap %>" id="isWrap">
+    <% }else { %>
+        <input type="hidden" value="<%= 0 %>" id="isWrap">
+    <% } %>
+    <div class="new-user-active">
+        <ul class="top-box">
+            <li class="top-title"></li>
+            <li class="top-btn">
+               <div class="btn">活动时间：2018.4.24起</div>
+            </li>
+        </ul>
+        <div class="main-box">
+            <div class="main1">
+                <img src="/img/activities/newUser/main_title1.png" alt="一重礼" class="title">
+                <img src="/img/activities/newUser/main1_img1.png">
+                <img src="/img/activities/newUser/main1_img2.png">
+                <img src="/img/activities/newUser/main1_img3.png">
+                <img src="/img/activities/newUser/main1_img4.png">
+            </div>
+            <div class="main2">
+                <img src="/img/activities/newUser/main_title2.png" alt="二重礼" class="title">
+                <img src="/img/activities/newUser/main2_img1.png">
+            </div>
+        </div>
+        <div class="rule-box">
+            <img src="/img/activities/newUser/rule_title.png" alt="活动说明" class="title">
+            <img src="/img/activities/newUser/rule.png">
+        </div>
+    </div>
+    <div class="fixed-btn-box" style="display: none;">
+        <div class="fixed-btn" onclick="fnGoNext()"></div>
+    </div>
+</body>
+<script type="text/javascript" src="/js/plugins/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="/js/BH/public.js"></script>
+<script>
+    $(function(){
+        var isWrap = $('#isWrap').val() == 0 ? false: true;
+        var systemType = phoneType();
+        if(systemType == 1 || isWrap){
+            $('.fixed-btn-box').show();
+        }
+    })
+    function fnGoNext() {
+        var isWrap = $('#isWrap').val() == 0 ? false: true;
+        if(isWrap){
+            window.location.href="/debts";
+        }else {
+            goAppPage(2);
+        }
+    }
+
+</script>
+</html>

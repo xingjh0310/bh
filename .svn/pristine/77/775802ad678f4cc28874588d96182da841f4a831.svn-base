@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title><%= com.env.seo.title %>账户信息</title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <link href="/css/cropper.min.css" rel="stylesheet">
+    <link href="/css/sitelogo.css" rel="stylesheet">
+</head>
+<body>
+    <div class="header" style="position: relative"><a class="iconfont" href="/account"><img src="/img/fh1.png" class="fh_img"></a>账户信息</div>
+    <ul class="help_list personal_us" >
+        <li style="margin-top:0.2rem">
+            <label for="upload-file" class="file">
+                头像
+                <span class="pull-right" >
+                    <img src="<%= user.headImg ? user.headImg : '/img/us.png' %>" class="touxiang img1"
+                         id="image">
+                </span>
+            </label>
+
+        </li>
+    </ul>
+    <ul class="help_list personal_list">
+        <li>
+            <% if(user.realName && user.idCard){ %>
+                <a href="javascript:">
+                    实名认证
+                    <span class="pull-right" ><span ><%= (user.realName ? user.realName.substring(0, 1) + "**" : '') %> (身份已认证<%= user.idCard ? user.idCard.replace(/^(\d{3})(.+)(\w{4})$/, "$1****$3") : "" %>)</span> <i class="iconfont">&#xe644;</i></span>
+                </a>
+            <%}else{%>
+                <a href="/account/realname">
+                    实名认证
+                    <span class="pull-right"><span class="wei">未认证</span><i class="iconfont">&#xe644;</i></span>
+                </a>
+            <%}%>
+        </li>
+        <li>
+            <% if(user.email){ %>
+                <a href="/account/updateEmail">
+                    邮箱管理
+                    <span class="pull-right"><%= user.email ? user.email.replace(/^(\d{3})(.+)(\w{4})$/, "$1****$3") : "" %><span style="margin-left:0.15rem;">(<%= user.validEmail?'已认证':'未认证' %>)</span><i class="iconfont">&#xe644;</i></span>
+                    </a>
+                <%}else{%>
+                <a href="/account/vaildEmail">
+                    邮箱管理
+                    <span class="pull-right"  ><span class="wei">未绑定</span><i class="iconfont">&#xe644;</i></span>
+                </a>
+                <%}%>
+
+            </a>
+        </li>
+        <li>
+            <a href="/account/bankcards">
+                <% if(bankCard){ %>
+                银行卡管理
+                <span class="pull-right">已添加<i class="iconfont">&#xe644;</i></span>
+                <%}else{%>
+                银行卡管理
+                <span class="pull-right" ><span class="wei">未添加</span><i class="iconfont">&#xe644;</i></span>
+                <%}%>
+
+            </a>
+        </li>
+    </ul>
+    <ul class="help_list personal_list">
+        <li>
+            <a href="/account/setLoginPassword">
+                登录密码
+                <span class="pull-right">重置<i class="iconfont">&#xe644;</i></span>
+            </a>
+        </li>
+        <li>
+            <a href="/account/setPayPassword">
+                交易密码
+                <% if(user.payPassword){ %>
+                <span class="pull-right">重置<i class="iconfont">&#xe644;</i></span>
+                <%}else{%>
+                <span class="pull-right">设置<i class="iconfont">&#xe644;</i></span>
+                <%}%>
+
+            </a>
+        </li>
+    </ul>
+    <a href="/logout" class="btn-logoin logout_btn">退出登录</a>
+
+<!--上传头像-->
+    <div class="modal fade" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1" style="display: none">
+                    <div class="modal-content">
+                        <form class="avatar-form" action="/user/saveHeadImg" enctype="multipart/form-data" method="post">
+                    <div class="modal-header">
+                        <button class="close" data-dismiss="modal" type="button" onclick="$('.modal').hide()"><img src="/img/del.png"> </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="avatar-body">
+                            <div class="avatar-upload">
+                                <input class="avatar-src" name="avatar_src" type="hidden">
+                                <input class="avatar-data" name="avatar_data" type="hidden">
+                                <a href="javascript:;" class="a-upload">
+                                    <input class="avatar-input" id="avatarInput" name="avatar_file" type="file">选择文件
+                                </a>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="avatar-wrapper"></div>
+                                </div>
+
+                            </div>
+                            <div class="row avatar-btns">
+
+                                <div class="col-md-3">
+                                    <button class="btn btn-success btn-block avatar-save" type="button"><i class="fa fa-save"></i> 保存修改</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+    </div>
+
+
+    <% include ../parent/slide_nav.ejs %>
+    <script src="/js/plugins/cropper.min.js"></script>
+    <script src="/js/sitelogo.js"></script>
+    <script src="/js/plugins/bootstrap.min.js"></script>
+    <script>
+        $('.file').click(function(){
+            $('.modal').show()
+        })
+
+
+        $('.btn-success').click(function(){
+            $('.modal ').hide();
+
+        });
+
+    </script>
+</body>
+</html>

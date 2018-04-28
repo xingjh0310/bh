@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>平台数据</title>
+</head>
+
+<body>
+<style>
+    .section1, .section2, .section3 {
+        background: url(/img/pt.jpg);
+        padding-top: 0.5rem
+    }
+
+
+</style>
+<div class="header"><a class="iconfont" href="/"><img src="/img/fh1.png" class="fh_img"></a>平台数据</div>
+
+
+<div id="dowebok">
+    <div class="section section1">
+        <img src="/img/pt1.png" class="img1">
+        <P class="p1">累计注册人数</P>
+        <P class="p2"><%= total.totalRegister %></P>
+        <P class="p1">年化利率区间</P>
+        <P class="p2" style="margin-bottom:0">
+            <%= (parseFloat(total.startRate) * 100).toFixed(2) %>%~<%= (parseFloat(total.endRate) * 100).toFixed(2) %>
+            %</P>
+    </div>
+    <div class="section section2">
+        <img src="/img/pt2.png" style="width: 1.35rem">
+        <P class="p1">累计成交额(元）</P>
+        <P class="p2"><%= parseFloat(total.totalInvest).toFixed(2) %></P>
+
+        <img src="/img/pt3.png" style="width: 1.27rem">
+        <P class="p1">今日成交额(元）</P>
+        <P class="p2"><%= parseFloat(total.todayInvest).toFixed(2) %></P>
+
+        <img src="/img/pt4.png" style="width: 1.19rem;marign-bottom:0">
+        <P class="p1">累计为用户赚取收益(元）</P>
+        <P class="p2"><%= parseFloat(total.totalInterest).toFixed(2) %></P>
+
+    </div>
+    <div class="section section3">
+        <div class="d1">
+            <P class="p1">借款金额</P>
+            <P><%= parseFloat(total.totalDebtAmount).toFixed(2) %></P>
+        </div>
+        <div class="d1" style="marign-bottom:0">
+            <P class="p1">累计待还金额(元)</P>
+            <P><%= parseFloat(total.totalWaitPaymentAmount).toFixed(2) %></P>
+        </div>
+    </div>
+
+</div>
+
+<% include ../parent/slide_nav.ejs %>
+<script>
+    $(function () {
+        $('#dowebok').fullpage({
+            verticalCentered: true
+        })
+    });
+</script>
+
+</body>
+</html>

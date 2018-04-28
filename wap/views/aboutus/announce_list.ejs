@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>平台公告</title>
+</head>
+<body>
+<div class="header "><a class="iconfont" href="/aboutus/about"><img src="/img/fh1.png" class="fh_img"></a>平台公告</div>
+<div class="announce_main">
+    <script type="text/template" id="annunce_tmpl">
+        <a href="/aboutus/announcement/{id}" class="list">
+            <div class="pull-left">
+                <span></span>
+                <i></i>
+            </div>
+            <div class="pull-right">
+                <h2>{title}</h2>
+                <p class="time">{time}</p>
+                <p class="p1">{content}</p>
+            </div>
+        </a>
+
+    </script>
+
+    <div id="annunce_list"></div>
+</div>
+<input type="hidden" value="1" id="pageNo"/>
+<% include ../parent/slide_nav.ejs %>
+<script type="text/javascript">
+    ZC_api.loadAnnounceList(1, 10, '');
+    $('#pageNo').val(1);
+    $(window).scroll(function () {
+        var scrollTop = $(this).scrollTop();
+        var scrollHeight = $(document).height();
+        var windowHeight = $(this).height();
+        if (scrollTop + windowHeight == scrollHeight) {
+            var pageNo = parseInt($('#pageNo').val()) + 1;
+            ZC_api.loadAnnounceList(pageNo, 10, '');
+        }
+    });
+</script>
+</body>
+</html>

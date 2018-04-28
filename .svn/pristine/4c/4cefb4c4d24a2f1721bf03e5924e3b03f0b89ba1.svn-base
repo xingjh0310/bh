@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>媒体资讯</title>
+</head>
+<body>
+<div class="header"  style="border-bottom:1px solid #e5e5e5"><a class="iconfont" href="/aboutus/news_list"><img src="/img/fh1.png" class="fh_img"></a>资讯详情</div>
+<div class=" about_gg_xq">
+    <h3><%=news.title%></h3>
+    <p class="p2"><%= new Date(news.time).Format('yyyy-MM-dd') %><span><%= news.author %></span></p>
+    <div class="p3"><%- news.content %></div>
+
+</div>
+
+
+
+
+<input type="hidden" value="1" id="pageNo"/>
+<% include ../parent/slide_nav.ejs %>
+
+</body>
+</html>

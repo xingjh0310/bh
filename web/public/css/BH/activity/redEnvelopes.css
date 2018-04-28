@@ -1,0 +1,134 @@
+.redEnvelopes-page{
+    width: 100%;height: auto;background: #1e1140;
+}
+.top-box,.top-item,.main-txt-wrap,.main-btn-wrap,.rule-title,.rule-main{width: 100%;}
+.top-item:nth-child(1){
+    height: 282px;
+    background: #f86240 url("/img/activity/redEnvelopes/top_bg1.png") center no-repeat;
+    background-size: 100% 100%;
+}
+.top-item:nth-child(2){
+    height: 184px;
+    background: #f86240 url("/img/activity/redEnvelopes/top_bg2.png") center no-repeat;
+    background-size: 100% 100%;
+}
+.top-item:nth-child(3){
+    height: 392px;
+    background: #f86240 url("/img/activity/redEnvelopes/top_bg3.png") center no-repeat;
+    background-size: 100% 100%;
+}
+.top-img{display: block;margin: 0 auto;width: 100%;max-width: 1068px;}
+
+/**/
+.main-box,.main-title,.main-cont-item{width: 100%;}
+.main-title{
+    height: 136px;
+    background: url("/img/activity/redEnvelopes/main_title_bg.png") center no-repeat;
+    background-size: 100% 100%;
+}
+.main-cont-item:nth-child(1){
+    height: 482px;
+    background: url("/img/activity/redEnvelopes/main_cont_bg1.png") center no-repeat;
+    background-size: 100% 100%;
+}
+.main-cont-item:nth-child(2){
+    height: 440px;
+    background: url("/img/activity/redEnvelopes/main_cont_bg2.png") center no-repeat;
+    background-size: 100% 100%;
+}
+.main-cont-img{
+    margin:0 auto;
+    width: 100%;
+    max-width: 936px;
+    overflow: hidden;
+}
+.main-cont-img img{margin:0 51px;float: left;}
+
+.main-txt-wrap{
+    height: 201px;
+    background: url("/img/activity/redEnvelopes/main_txt_bg.png") center no-repeat;
+    background-size: 100% 100%;
+}
+.main-title img,.main-txt-wrap img,.rule-title img,.rule-main img{display: block;margin:0 auto;}
+.main-btn-wrap{
+    height: 275px;
+    background: url("/img/activity/redEnvelopes/main_btn_bg.png") center no-repeat;
+    background-size: 100% 100%;
+}
+.main-btn{
+    position: relative;
+    margin:0 auto;
+    width: 1068px;
+    height: 100%;
+}
+.main-btn .buttont{
+    margin:0 auto;
+    width: 843px;
+    height: 144px;
+    line-height: 144px;
+    text-align: center;
+    font-size: 48px;
+    color: #f15555;
+    font-weight: bold;
+    letter-spacing: 3px;
+    background: url("/img/activity/redEnvelopes/main_btn.png") center no-repeat;
+    background-size: 100% 100%;
+}
+.icon{
+    position: absolute;
+    bottom:44px;
+    right: 0;
+    width: 125px;
+    height: 110px;
+    background: url("/img/activity/redEnvelopes/main_icon.png") center no-repeat;
+    background-size: 100% 100%;
+}
+.rule-title{
+    height: 136px;
+    background: url("/img/activity/redEnvelopes/rule_title_bg.png") center no-repeat;
+    background-size: 100% 100%;
+}
+.rule-main{
+    height: 797px;
+    background: url("/img/activity/redEnvelopes/rule_main_bg.png") center no-repeat;
+    background-size: 100% 100%;
+}
+
+.popUp-main1,.popUp-main2{
+    display: none;
+    position: absolute;
+    top:50%;
+    left:50%;
+    margin-top:-180px;
+    margin-left:-224px;
+    width: 448px;
+    height: 361px;
+}
+.popUp-main1{
+    background: url("/img/activity/redEnvelopes/popUp_bg1.png") center no-repeat;
+    background-size: 100% 100%;
+}
+.popUp-btn{
+    position: absolute;
+    bottom: 40px;
+    left:50%;
+    margin-left:-191px;
+    width: 382px;
+    height: 98px;
+    background: url("/img/activity/redEnvelopes/popUp_btn.png") center no-repeat;
+    background-size: 100% 100%;
+}
+.popUp-main2{
+    background: url("/img/activity/redEnvelopes/popUp_bg.png") center no-repeat;
+    background-size: 100% 100%;
+}
+.popUp-msg{
+    margin-top:152px;
+    padding:0 40px;
+    height: 56px;
+    line-height: 56px;
+    font-size: 28px;
+    text-align: center;
+    color:#ffffff;
+    overflow: hidden;
+}

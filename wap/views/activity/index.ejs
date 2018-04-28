@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>活动中心</title>
+</head>
+<body>
+<div class="header "><a class="iconfont" href="/aboutus"><img src="/img/fh1.png" class="fh_img"></a>活动中心</div>
+
+<div class="active_main">
+    <ul class="active_ul">
+        <script type="text/template" id="active_tmpl">
+            <li>
+                {stateClass}
+                <img src="{img}" class="img1">
+                <p class="p1">{title}</p>
+                <p class="p2">{beginTime}~{endTime}</p>
+                {state}
+                </a>
+            </li>
+        </script>
+        <div id="active_list"></div>
+    </ul>
+
+</div>
+
+<input type="hidden" value="1" id="pageNo"/>
+<% include ../parent/slide_nav.ejs %>
+
+<script type="text/javascript">
+    ZC_api.loadActive(1, 10, '');
+    $('#pageNo').val(1);
+    $(window).scroll(function () {
+        var scrollTop = $(this).scrollTop();
+        var scrollHeight = $(document).height();
+        var windowHeight = $(this).height();
+        if (scrollTop + windowHeight == scrollHeight) {
+            var pageNo = parseInt($('#pageNo').val()) + 1;
+            ZC_api.loadActive(pageNo, 10, '');
+        }
+    });
+
+</script>
+</body>
+</html>

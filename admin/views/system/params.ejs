@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+<nav class="breadcrumb">
+    <i class="Hui-iconfont">&#xe67f;</i> 首页
+    <span class="c-gray en">&gt;</span> 系统设置 <span class="c-gray en">&gt;</span> 参数设置
+    <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
+</nav>
+<div class="pd-20">
+    <div class="codeView docs-example">
+        <legend></legend>
+        <table class="table table-border table-bordered">
+            <tr class="text-c">
+                <th width="200px;">参数名</th>
+                <th>参数值</th>
+                <th width="200px;">启用</th>
+                <th width="200px;">操作</th>
+            </tr>
+            <% for(var i = 0;i < sets.length;i++){ %>
+            <tr class="text-c">
+                <form id="form_<%= sets[i].id %>">
+                    <td><%= sets[i].desc %></td>
+                    <td><input name="id" value="<%= sets[i].id %>" type="hidden"/>
+                        <input name="value" type="text" value="<%= sets[i].value %>" class="input-text" style="width: 100%;"/></td>
+                    <td><select name="state" style="width: 100%;" class="select">
+                            <option <%= sets[i].state==1?'selected="selected"':'' %> value="1">是</option>
+                            <option <%= sets[i].state==0?'selected="selected"':'' %> value="0">否</option>
+                        </select></td>
+                    <td><a href="javascript:void(0)" onclick="edit(<%= sets[i].id %>)">更新</a></td>
+                </form>
+            </tr>
+            <% } %>
+        </table>
+    </div>
+</div>
+
+
+</body>
+
+<% include ../main/bottom.ejs %>
+
+<script type="text/javascript">
+
+    function edit(id) {
+        $.ajax({
+            url: '/system/saveSet',
+            type: 'post',
+            data: {set: JSON.stringify($('#form_' + id).serializeJson())},
+            success: function (msg) {
+                if (!msg.err) {
+                    Huimodal_alert('更新成功', 1000, function () {
+                    });
+                }
+                else {
+                    Huimodal_alert(msg.err, 1000, function () {
+                    });
+                }
+            }
+        })
+    }
+
+</script>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>推广奖励</title>
+</head>
+<body>
+    <div class="header" ><a class="iconfont" href="/account"><img src="/img/fh1.png" class="fh_img"></a>推广奖励</div>
+    <div class="inv_ban"><img src="/img/inb.png"> </div>
+    <div class="help_list invite_list">
+        <li>
+            <a href="javascript:">赚取奖励<span class="pull-right" style="margin-right:0.4rem;color:#ff8624"> <%= award ? award : '0' %>元</span> </a>
+        </li>
+        <li>
+            <a href="/account/invitelist">邀请记录<span class="pull-right"><i class="iconfont">&#xe644;</i></span> </a>
+        </li>
+    </div>
+    <div class="inv_ewm">
+        <img src="/img/qrcode.png">
+        <P>邀请码：<%= user.inviteCode || '' %></P>
+    </div>
+
+    <div class="inv_btnyq">
+        <a href="javascript:" class="btn">立即邀请</a>
+    </div>
+    <div class="fx_div">
+        <img src="/img/fxx.png">
+    </div>
+
+    <% include ../parent/slide_nav.ejs %>
+<script>
+$('.inv_btnyq').click(function () {
+    $('.fx_div').show();
+})
+
+$(document).ready(function () {
+    ZC_api.invite('这是个温暖到烫手的礼包，668元红包等你拿！', '初冬，送你一个礼包，给你一份温暖。让你在凛冽中也能绽放笑靥，如向阳花一般···', '<%= com.env.base %>/user/invitereg/<%= user.inviteCode %>', '<%= com.env.static_url %>/img/share.png', location.href.split('#')[0], '<%= com.env.wx.appID %>');
+});
+
+</script>
+</body>
+</html>

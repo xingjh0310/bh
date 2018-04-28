@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> app管理 <span
+            class="c-gray en">&gt;</span> 上传管理 <a class="btn btn-success radius r mr-20"
+                                                  style="line-height:1.6em;margin-top:3px"
+                                                  href="javascript:location.replace(location.href);" title="刷新"><i
+                class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+    <div class="">
+        日期范围：
+        <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'eTime\')||\'%y-%M-%d\'}'})" id="bTime"
+               class="input-text Wdate"
+               value=""
+               style="width:120px;" name="bTime" readonly="true">
+        -
+        <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'bTime\')}',maxDate:'%y-%M-%d'})" id="eTime"
+               class="input-text Wdate" style="width:120px;" value="" name="eTime"
+               readonly="true">
+        <!--<input type="text" id="param" placeholder="手机号码，姓名" style="width:350px" class="input-text">-->
+        <button name="" id="" class="btn btn-success" type="button" onclick="ZC_api.loadAppPushMessageList(1,20)"><i
+                    class="Hui-iconfont">
+                &#xe665;</i> 搜索
+        </button>
+        <button name="" id="" class="btn btn-success" type="button" onclick="edit()"><i class="Hui-iconfont">
+                &#xe600;</i> 新增
+        </button>
+    </div>
+    <div class="mt-20">
+        <table class="table table-border table-bordered table-bg table-hover table-sort">
+            <thead>
+            <tr class="text-c">
+                <th width="120">序号</th>
+                <th width="150">版本Id</th>
+                <th width="220">版本号</th>
+                <th width="80">手机系统</th>
+                <th width="80">版本内容</th>
+                <th width="80">是否强制更新</th>
+                <th width="80">添加时间</th>
+                <th width="75">下载链接</th>
+            </tr>
+            </thead>
+            <script type="text/template" id="appUpload_tmpl">
+                <tr class="text-c">
+                    <td>{id}</td>
+                    <td>{verSion}</td>
+                    <td >{versionName}</td>
+                    <td>{type}</td>
+                    <td >{content}</td>
+                    <td>{isForce}</td>
+                    <td>{time}</td>
+                    <td>{downloadUrl}</td>
+                </tr>
+            </script>
+            <tbody id="appUpload_list">
+
+            </tbody>
+        </table>
+        <div id="page"></div>
+    </div>
+</div>
+
+
+
+</body>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+    load();
+    function load() {
+        ZC_api.loadAppUploadList(1, 20);
+    }
+    function edit() {
+        window.location.href="/appManager/appUpload";
+    }
+
+</script>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>登录</title>
+</head>
+<body>
+
+<div class="header header_reg" ><a class="iconfont" href="/inputmobile"><img src="/img/fh1.png" class="fh_img"></a>登录</div>
+
+
+<div class="login_warp">
+    <p class="p1"></p>
+    <form class="form-horizontal ">
+        <div class="tipsYz"></div>
+        <p></p>
+        <div class="form-group">
+            <span class="u1">登入密码</span>
+            <input type="password" class="form-control" name="password" _check="password" placeholder="请输入登入密码" id="password" maxlength="20">
+            <span class="hq_btn show_ps" id="togglePassword" > </span>
+        </div>
+        <a href="javascript:" class="btn-logoin" onclick="ZC_api.login()" style="margin-top:0.9rem">登录</a>
+        <a href="/findpwd" class="a1">忘记登入密码</a>
+    </form>
+
+</div>
+
+<% include ../parent/slide_nav.ejs %>
+
+
+</body>
+</html>

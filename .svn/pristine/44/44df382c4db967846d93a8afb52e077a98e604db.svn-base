@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>帮助中心</title>
+</head>
+<body>
+<div class="header" ><a class="iconfont" href="/help"><img src="/img/fh1.png" class="fh_img"></a>注册登入</div>
+
+<div class="help_lists">
+    <ul class="help_main">
+        <li>
+            <div class="list1">
+                <img src="/img/l_03.jpg" alt="" class="img1">
+                <span>如何成为铂恒金服大家庭的一员？</span>
+                <img src="/img/12.png" alt="" class="img2">
+            </div>
+            <div class="list2"  style="display: none">
+                <img src="/img/m_10.jpg" alt="" class="img1">
+                <div class="list2_one">
+                    <p>①进入铂恒金服（http://www.bohomm.com/）首页，点击
+                        【注册】按钮</p>
+                    <p>②根据提示信息，填写您的手机号码、验证码、密码等</p>
+                    <p>③用户名一经注册，不可修改</p>
+                </div>
+            </div>
+
+        </li>
+        <li>
+            <div class="list1">
+                <img src="/img/l_03.jpg"  class="img1">
+                <span>有推荐人时如何注册？</span>
+                <img src="/img/12.png"  class="img2">
+            </div>
+            <div class="list2"  style="display: none">
+                <img src="/img/m_10.jpg" alt="" class="img1">
+                <div class="list2_one">
+                    <p>①直接点击推荐链接进入注册页</p>
+                    <p> ②或者在注册时填写推荐人的邀请码</p>
+
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="list1">
+                <img src="/img/l_03.jpg" alt="" class="img1">
+                <span>注册时获取短信验证码失败怎么办？</span>
+                <img src="/img/12.png" alt="" class="img2">
+            </div>
+            <div class="list2" style="display: none">
+                <img src="/img/m_10.jpg" alt="" class="img1">
+                <div class="list2_one">
+                    <p>①请确保手机信号良好，并检查短信是否被安全软件拦截，请进行相关设置。</p>
+                    <p>  ②运营商信息平台不稳定，请稍后再次尝试。</p>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="list1">
+                <img src="/img/l_03.jpg" alt="" class="img1">
+                <span>忘记登录密码怎么办？如何找回？</span>
+                <img src="/img/12.png" alt="" class="img2">
+            </div>
+            <div class="list2" style="display: none">
+                <img src="/img/m_10.jpg" alt="" class="img1">
+                <div class="list2_one">
+                    <p>如果你忘记了登录密码，请在登录的页面点击【忘记密码】找回。</p>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="list1">
+                <img src="/img/l_03.jpg" alt="" class="img1">
+                <span>如何修改登录密码？</span>
+                <img src="/img/12.png" alt="" class="img2">
+            </div>
+            <div class="list2" style="display: none">
+                <img src="/img/m_10.jpg" alt="" class="img1">
+                <div class="list2_one">
+                    <p>如果您要修改登录密码，登录【我的账户】—“安全设置”中进行修改。</p>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="list1">
+                <img src="/img/l_03.jpg" alt="" class="img1">
+                <span>什么是实名认证？</span>
+                <img src="/img/12.png" alt="" class="img2">
+            </div>
+            <div class="list2" style="display: none">
+                <img src="/img/m_10.jpg" alt="" class="img1">
+                <div class="list2_one">
+                    <p>实名认证是指注册用户进行真实身份验证，平台数据直接对接公安系统，未实名认证用户无法进行充值， 也无法进行投资。</p>
+                </div>
+            </div>
+        </li>
+
+    </ul>
+</div>
+<% include ../parent/slide_nav.ejs %>
+</body>
+</html>

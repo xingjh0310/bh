@@ -1,0 +1,463 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <% include ../../parent/static.ejs %>
+    <title><%= com.env.seo.title %>幸运加息</title>
+    <link rel="stylesheet" type="text/css" href="/css/common.css?t=<%= new Date().getTime() %>">
+    <link rel="stylesheet" type="text/css" href="/css/base/BH_base.css?t=<%= new Date().getTime() %>">
+    <link rel="stylesheet" type="text/css" href="/css/base/MH_reset.css?t=<%= new Date().getTime() %>">
+
+    <style>
+        .container{
+            width: 100%;
+            height: auto;
+            background: url("/img/activity/ordinaryActivities/luckDraw/luckBackground.png") no-repeat center;
+            background-size: 1920px 2714px;
+            padding-bottom: 100px;
+        }
+        .div1 {
+            width: 100%;
+            height: 900px;
+            background: url("/img/activity/ordinaryActivities/luckDraw/luckBanner.png") no-repeat center;
+            background-size: 1024px 70%
+        }
+
+        .div2 {
+            width: 100%;
+            height: 886px;
+            background: url("/img/activity/ordinaryActivities/luckDraw/rule.png") no-repeat center;
+            margin-top: 50px;
+        }
+
+        .div5 {
+            width: 100%;
+            height: 725px;
+        }
+
+        .div-main {
+            width: 1080px;
+            height: 725px;
+            margin: auto;
+        }
+
+
+        .div-main .main-left {
+            width: 544px;
+            height: 666px;
+            background: url("/img/activity/ordinaryActivities/luckDraw/zhuanpan.png") no-repeat center;
+        }
+
+        .div-main .main-left .left-pan {
+            width: 440px;
+            height: 440px;
+            background: url("/img/activity/ordinaryActivities/luckDraw/awards.png") no-repeat center;
+            background-size: 100%;
+            margin:0 auto;
+            margin-top: 56px;
+        }
+
+        .div-main .main-left  img {
+            margin: auto;
+            top:172px;
+            display: block;
+            cursor: pointer;
+            position: absolute;
+            left: 200px;
+        }
+        .main-right {
+            width: 450px;
+            display: inline-block;
+        }
+
+        .main-right .right-list {
+            width:100%;
+            height: 570px;
+            background: url("/img/activity/ordinaryActivities/luckDraw/record_bg.png") no-repeat center;
+            margin-top: 80px;
+            background-size: 100% 100%;
+            position: relative;
+        }
+
+        .right-list .list-main {
+            position: absolute;
+            top: 100px;
+            left: 50%;
+            margin-left: -180px;
+            height: 427px;
+            overflow: hidden;
+            width: 360px;
+        }
+
+        .main-right .right-list ul li {
+            font-size: 18px;
+            color: #666;
+            text-align: center;
+            line-height: 60px;
+            border-bottom: 1px solid #ffd7cc;;
+        }
+
+        .main-right p {
+            font-size: 16px;
+            color: #717171;
+            text-align: left;
+            padding-top: 30px;
+            line-height: 25px;
+        }
+        .main-right .jiang_btn{
+            margin: auto;
+            margin-top: 25px;
+            display: block;
+        }
+
+        .modal-alert {
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            display: none;
+        }
+
+        .modal-prize {
+            position: fixed;
+        }
+
+        .modal-prize h3 {
+            font-size: 28px;
+            padding-top: 117px;
+            text-align: center;
+            color: #fff;
+            letter-spacing: 2px;
+        }
+
+        .modal-prize img {
+            margin-top: 15px;
+        }
+
+        .modal-prize a{
+            width: 260px;
+            height: 64px;
+            margin: auto;
+            display: block;
+            position: relative;
+            top: 350px;
+        }
+
+        .modal-prize p {
+            font-size: 16px;
+            color: #1b1b1b;
+            padding-top: 10px;
+        }
+
+        .j-list {
+            width: 494px;
+            height: 267px;
+            margin:0 auto;
+            margin-top: 110px;
+        }
+        .j-list ul{
+            width: 100%;
+            height:100%;
+
+        }
+
+        .j-list ul li.li-top span{
+            line-height: 52px;
+            height: 52px;
+            border-bottom: none;
+            font-weight: bold;
+            letter-spacing: 2px;
+            font-size: 16px;
+        }
+
+        .j-list ul li span {
+            width: 160px;
+            color: #333333;
+            height: 52px;
+            line-height: 52px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .j-list ul li span p{
+            color: #666;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        #j-list img {
+            margin: auto;
+            position: absolute;
+            bottom: 45px;
+            left: 50%;
+            margin-left: -135px;
+            cursor: pointer;
+        }
+        .seeMyAward{
+            display: inline-block;
+            position: relative;
+            bottom:115px;
+
+        }
+        .award_bg{
+            width: 554px;
+            height: 495px;
+            background: url(/img/activity/ordinaryActivities/luckDraw/award_bg.png) no-repeat;
+            background-size: 100%;
+            top:20%;
+            left: 32%;
+        }
+        .cakeError{
+            width: 404px;
+            height: 412px;
+            background: url(/img/activity/ordinaryActivities/luckDraw/tips.png) no-repeat top;
+            background-size: 100%;
+            top:32%;
+            left: 35%;
+        }
+        .more{
+            position: relative;
+            bottom:-126px;
+            margin: 0 auto;
+        }
+        .win{
+            width:404px;
+            height:456px;
+            background: url(/img/activity/ordinaryActivities/luckDraw/win.png) no-repeat top;
+            top:32%;
+            left: 35%;
+            z-index: 9;
+        }
+        #prizeName2{
+            font-size: 30px;
+            position: relative;
+            margin: 0 auto;
+            display: block;
+            text-align: center;
+            top: 66px;
+            color: #c0494d;
+        }
+        .fixBtn{
+            margin-top:-102px;
+            width:110px;
+            height: 204px;
+            background: url("/img/activity/ordinaryActivities/luckDraw/touzianniu.png");
+            background-size: 100%;
+            background-repeat: no-repeat;
+            position: fixed;
+            cursor: pointer;
+            right:100px;
+            top: 50%;
+            z-index: 99;
+        }
+    </style>
+</head>
+<body>
+<% include ../../parent/top.ejs %>
+<div class="container">
+    <div class="fixBtn" onclick="window.location='/debts'"></div>
+    <div class="div1"></div>
+    <div class="div5">
+        <% if(user){ %>
+        <input type="hidden" value="<%= user.id %>" id="userId">
+        <% }else { %>
+        <input type="hidden" value="<%= 0 %>" id="userId">
+        <% } %>
+        <div class="div-main clearfix">
+            <div class="main-left pull-left" style="position: relative">
+                <div class="left-pan" id="left-pan">
+
+                    <!--<div class="clickbtn" id="lotteryBtn" style="cursor:pointer;width: 150px;height: 150px;position: relative;top: -360px;left: 190px;"></div>-->
+                </div>
+                <img src="/img/activity/ordinaryActivities/luckDraw/anniu.png"  id="lotteryBtn">
+                <a class="seeMyAward" href="javascript:void (0);" onclick="showRecord()"> <img src="/img/activity/ordinaryActivities/luckDraw/see_my_award.png" class="jiang_btn"/></a>
+            </div>
+            <div class="main-right pull-right recordList">
+                <div class="right-list">
+                    <div class="list-main">
+                        <ul>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="div2"></div>
+
+    <input type="hidden" value="<%= lotteryId %>" id="lotteryActivityId">
+    <input type="hidden" value="<%= lottery %>" id="lottery">
+    <!--弹窗-->
+    <div class="modal-alert" id="modal-alert">
+        <!--获奖提示-->
+        <div class="modal-prize win" id="jiang" style="display: none">
+            <img src="/img/double12.png" style="cursor:pointer;margin-top: 20px;margin-right: 14px;float:right;" onclick="$('.modal-alert').hide();$('#jiang').hide();location.reload();">
+            <h3>抽中<em id="prizeName"></em>加息券</h3>
+            <h5 style="color: #c0494d;font-size: 16px;position: relative;margin: 0 auto;top: 162px;text-align: center">有效期至7天内有效</h5>
+            <em id="prizeName2" style='font-size: 30px;'></em>
+            <a href="/debts" style="margin-top: 20px;background: url('/img/activity/ordinaryActivities/luckDraw/use.png') no-repeat;top: 180px;"></a>
+        </div>
+        <!--登录-->
+        <!--<div class="modal-prize" id="loginError" style="display: none;background: url(/img/double17.png) no-repeat center">-->
+            <!--<img src="/img/double12.png" style="cursor:pointer;margin-top: 20px;margin-right: 40px;float:right;" onclick="$('.modal-alert').hide();$('#loginError').hide()">-->
+            <!--<h3>您好，需要先登录才可参加幸运转盘抽奖哦！</h3>-->
+            <!--<img src="/img/double15.png"/>-->
+            <!--<a href="/login?r=double" style="background: url(/img/double16.png) no-repeat center;height: 61px;margin-top: 40px"></a>-->
+        <!--</div>-->
+        <!--您还有未使用的幸运加息券-->
+        <div class="modal-prize cakeError" id="cakeError" style="display: none;">
+            <img src="/img/double12.png" style="cursor:pointer;margin-top: 20px;margin-right: 20px;float:right;" onclick="$('.modal-alert').hide();$('#cakeError').hide()">
+            <a href="/debts" style="margin-top: 20px;background: url('/img/activity/ordinaryActivities/luckDraw/use.png') no-repeat;"></a>
+        </div>
+        <!--error-->
+        <!--<div class="modal-prize" id="error" style="display: none;background: url(/img/double17.png) no-repeat center">-->
+            <!--<img src="/img/double12.png" style="cursor:pointer;margin-top: 20px;margin-right: 40px;float:right;" onclick="$('.modal-alert').hide();$('#error').hide()">-->
+            <!--<h3>23423423423</h3>-->
+            <!--<img src="/img/double15.png" style="width: 147px"/>-->
+            <!--<img src="/img/double14.png" onclick="$('.modal-alert').hide();$('#error').hide()"style="margin-top: 20px">-->
+        <!--</div>-->
+        <!--我的奖品-->
+        <div class=" modal-prize award_bg" id="myPrizeRecord" style="display: none">
+            <img src="/img/double12.png" style="cursor:pointer;margin-top: 20px;margin-right: 40px;float:right;"
+                 onclick="$('.modal-alert').hide();$('#myPrizeRecord').hide()">
+            <div class="j-list">
+                <ul>
+                    <li class="li-top">
+                        <span>中奖物品</span>
+                        <span>中奖时间</span>
+                        <span>奖品状态</span>
+                    </li>
+                    <% if(lotteryRecord.length > 0){ %>
+                        <% for (var i = 0;i < (lotteryRecord.length>3?3:lotteryRecord.length); i++){ %>
+                            <li>
+                                <span><%= lotteryRecord[i].lotteryPrizeName %></span>
+                                <span><%= new Date(lotteryRecord[i].createTime).Format("yyyy/MM/dd hh:mm") %></span>
+                                <span><%= lotteryRecord[i].state == 1 ? '已发放' : '未发放' %></span>
+                            </li>
+                        <% } %>
+                            <div onclick="window.location.href='/account/coupon'" class="more" style="width: 250px;height: 62px;background: url('/img/activity/ordinaryActivities/luckDraw/see_more.png')"></div>
+                    <% }else { %>
+                            <div style="width: 100%;height: 100%;background: url('/img/activity/ordinaryActivities/luckDraw/no-data.png') center no-repeat;background-size: 26%"></div>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/jquery-1.7.2.js"></script>
+<script src="/js/common.js?t=<%= new Date().getTime() %>"></script>
+<script type="text/javascript" src="/js/jQueryRotate.2.2.js"></script>
+<script type="text/javascript" src="/js/scroll.js"></script>
+<script>
+
+    $("div.list-main").myScroll({
+        speed: 60, //数值越大，速度越慢
+        rowHeight: 60 //li的高度
+    });
+
+
+//    var timeOut = function () {  //超时函数
+//        $("#left-pan").rotate({
+//            angle: 0,
+//            duration: 10000,
+//            animateTo: 2160, //这里是设置请求超时后返回的角度，所以应该还是回到最原始的位置，2160是因为我要让它转6圈，就是360*6得来的
+//            callback: function () {
+//                alert('网络超时')
+//            }
+//        });
+//    };
+    var rotateFunc = function ( angle, data) {
+        //awards:奖项，angle:奖项对应的角度
+        $('#left-pan').stopRotate();
+        $("#left-pan").rotate({
+            angle: 0,
+            duration: 10000,
+            animateTo: angle + 1440, //angle是图片上各奖项对应的角度，1440是我要让指针旋转4圈。所以最后的结束的角度就是这样子^^
+            callback: function () {
+//                $("#jiang  img").eq(1).attr("src", data.img);
+                $("#prizeName").html(data.name);
+                $("#prizeName2").html(data.name);
+                $("#modal-alert").show();
+                $("#jiang").show();
+                $("#myPrizeRecord").hide();
+                Dobind();
+            }
+        });
+    };
+    Dobind();
+    function Dobind() {
+        $("#lotteryBtn").bind("click", function () {
+            var userId = parseInt($("#userId").val());
+            if (userId == 0) {
+                window.location.href='/login'
+                return false;
+            }
+            var lottery = parseFloat($("#lottery").val());
+            if (lottery == 0) {
+                $("#modal-alert").css("display", "block");
+                $("#cakeError").show();
+                return false;
+            }
+            $("#lotteryBtn").unbind();
+            $.ajax({
+                url: '/activity/doLuckDraw',
+                type: 'post',
+                data: {lotteryActivityId: $("#lotteryActivityId").val()},
+                success: function (data) {
+                    if (data.err) {
+//                        $("#error h3").html(data.err);
+//                        $("#modal-alert").css("display", "block");
+//                        $("#error").show();
+                        alert(data.err)
+                    } else {
+                        var indexId = data.index;
+                        rotateFunc(-(indexId * 60), data)
+                    }
+                }
+            })
+        });
+    }
+    loadRcord();
+    function loadRcord() {
+        $.ajax({
+            url: "/activity/lotteryRecordList",
+            type: "post",
+            data: {lotteryActivityId: $("#lotteryActivityId").val()},
+            success: function (body) {
+                console.log(body.list.length > 0)
+                /*中奖名单滚动*/
+                /*$(".recordList ul").TopScroll(1.8, (Math.ceil(body.noteNum / 3)) - 1, "list-main");*/
+                if (body.list.length > 0) {
+                    for (var i = 0; i < body.list.length; i++) {
+                        var fs = '<li>恭喜 ' + body.list[i].mobile + ' 获得 ' + body.list[i].lotteryPrizeName + '</li>';
+                        $(".list-main ul").append(fs);
+                    }
+                }else{
+                    $(".list-main").html('<img src="/img/activity/ordinaryActivities/luckDraw/no-data.png" style="margin: auto;display: block;margin-top: 70px"/>');
+                }
+            }
+        })
+    }
+
+
+    function showRecord() {
+        var userId = parseInt($("#userId").val());
+        if (userId == 0) {
+            window.location.href='/login'
+//            $("#modal-alert").css("display", "block");
+//            $("#loginError").show();
+            return false;
+        }
+        $("#modal-alert").show();
+        $("#myPrizeRecord").show();
+
+    }
+</script>
+
+</body>
+<% include ../../parent/bottom.ejs %>
+</html>
+

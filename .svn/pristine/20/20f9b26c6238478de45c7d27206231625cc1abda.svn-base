@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>自动投标规则</title>
+    <link rel="stylesheet" href="/css/base/BH_base.css">
+    <link rel="stylesheet" href="/css/BH/rule.css">
+</head>
+<body>
+    <div class="rule-page">
+        <div class="rule-title">自动投标规则：</div>
+        <ul class="rule-list">
+            <li>1、自动购买成功后，排名移到队尾；</li>
+            <li>2、理财产品成功发布开放购买后，您所开启的自动购买功能开始运作；</li>
+            <li>3、修改、关闭自动购买功能后再次开启，排名移到队尾；</li>
+            <li>4、账户可用余额小于产品起购金额时，系统会自动跳过您的自动购买功能，排名移到队尾；</li>
+            <li>5、自动投标开启后不能使用红包，使用红包前请关闭自动投标功能，红包使用要手动投标。</li>
+        </ul>
+    </div>
+</body>
+</html>

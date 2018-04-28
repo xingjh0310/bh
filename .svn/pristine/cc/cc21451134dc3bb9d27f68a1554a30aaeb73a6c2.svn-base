@@ -1,0 +1,9 @@
+<style type="text/css">
+    p {
+        word-break: break-all;
+    }
+</style>
+
+<% if(introduce){ %>
+<%- introduce %>
+<% } %>

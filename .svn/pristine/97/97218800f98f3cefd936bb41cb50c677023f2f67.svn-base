@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 财务管理 <span class="c-gray en">&gt;</span> 线下扣款 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+    <div class="codeView docs-example">
+        <form class="form form-horizontal" id="form">
+            <div class="tabBar cl"><span>单个扣款</span><!--span>批量扣款</span--></div>
+            <div class="tabCon">
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>扣款对象：</label>
+                    <div class="formControls col-xs-8 col-sm-5">
+                        <input type="text" class="input-text" id="mobile" placeholder="请输扣款对象" datatype="m" nullmsg="请输入正确手机号" errormsg="请输入正确手机号" name="mobile" value=""/>
+                    </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>扣款金额：</label>
+                    <div class="formControls col-xs-8 col-sm-5">
+                        <input type="text" class="input-text" id="amount" placeholder="请输入扣款金额" datatype="/^-?[1-9]+(\.\d+)?$|^-?0(\.\d+)?$|^-?[1-9]+[0-9]*(\.\d+)?$/" nullmsg="请输入扣款金额" errormsg="大于4位小于20位" name="name" value=""/>
+                    </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>备注：</label>
+                    <div class="formControls col-xs-8 col-sm-5">
+                       <textarea id="memo" onkeyup="textarealength(this,200)" nullmsg="备注不能为空！" dragonfly="true" datatype="*4-200" placeholder="说点什么...最少输入10个字符" class="textarea" rows="" cols="" name="memo"></textarea>
+                    </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>姓名：</label>
+                    <div class="formControls col-xs-8 col-sm-5">
+                        <label id="realName"></label>
+                    </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>身份证号：</label>
+                    <div class="formControls col-xs-8 col-sm-5">
+                        <label id="idCard"></label>
+                    </div>
+                </div>
+                <div class="row cl">
+                    <div class="col-10 col-offset-3">
+                        <button id="sub" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+                        <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+    $(".form").Validform({
+        btnSubmit: '#sub',
+        postonce: true,
+        tiptype: 4,
+        showAllError: true,
+        ajaxPost: true,
+        beforeSubmit: function (curform) {
+            $.ajax({
+                url: '/account/saveLineDebit',
+                type: 'post',
+                data: {mobile: $('#mobile').val(), amount: $('#amount').val(), memo: $('#memo').val()},
+                success: function (msg) {
+                    if (!msg.err) {
+                        Huimodal_alert('扣款成功', 1000, function () {
+                            window.location.reload(true);
+                        });
+                    }
+                    else {
+                        Huimodal_alert(msg.err, 1000, function () {
+                        });
+                    }
+                }
+            })
+            return false;
+        }
+    });
+    $.Huitab(".tabBar span", ".tabCon", "current", "click", "0");
+    $(function () {
+        $('#mobile').change(function () {
+            if ($(this).val().length == 11) {
+                $.post('/user/getUserByMobile', {mobile: $(this).val()}, function (msg) {
+                    if (msg) {
+                        $('#realName').text(msg.realName);
+                        $('#idCard').text(msg.idCard);
+                    }
+                })
+            }
+        });
+    });
+
+</script>
+</html>

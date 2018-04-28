@@ -1,0 +1,9 @@
+<form action="<%= items.url %>" id="sub" method="post">
+    <% for(var key in items){ %>
+    <% if(key != 'url') { %>
+    <input type="hidden" name="<%= key %>" value="<%- items[key] %>"/>
+    <% }} %>
+</form>
+<script type="text/javascript">
+    document.getElementById('sub').submit();
+</script>

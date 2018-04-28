@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>首页</title>
+</head>
+<body style="padding-bottom:1.2rem">
+    <div class="swiper-container home_swoiper" style="height: 3.75rem">
+        <div class="swiper-wrapper">
+            <% for(var i = 0;i < ads.length;i++){ %>
+            <a href="<%= ads[i].url %>?wrap=wrap" class="swiper-slide" style="background: url('<%= ads[i].img %>');background-size: 100%;"><div  >
+                </div></a>
+            <% } %>
+
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination swiper-pagination-white"></div>
+
+    </div>
+    <div class="message-mar">
+        <div class="message-container">
+            <i class="iconfont">&#xe625; </i><span>平台公告</span>
+            <div class="bulletin">
+                <ul>
+                    <% for(var i = 0;i < notice.length;i++){ %>
+                    <li><a href="/aboutus/announcement/<%= notice[i].id %>"><%= notice[i].title %> </a></li>
+
+                    <% } %>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <ul class="home_linav">
+        <li>
+            <a href="/security">
+                <img src="/img/l2.png">
+                <p>安全保障</p>
+            </a>
+        </li>
+        <li>
+            <a href="/aboutus/platform">
+                <img src="/img/l3.png">
+                <p>平台数据</p>
+            </a>
+        </li>
+        <li>
+            <a href="/activity">
+                <img src="/img/l1.png">
+                <p>活动中心</p>
+            </a>
+        </li>
+       <li>
+            <a href="/account/invite">
+                <img src="/img/l4.png">
+                <p>推荐有礼</p>
+            </a>
+        </li>
+
+    </ul>
+
+    <% if(novice){ %>
+    <div class="home_newdiv">
+        <h3>新客专享</h3>
+        <ul>
+            <% for(i=0;i<novice.length;i++){%>
+            <% if (novice[i].state != _global.debtState.InPayment.v || novice[i].state != _global.debtState.Overdue.v || novice[i].state != _global.debtState.EndPayment.v){%>
+            <a href="/debt/<%= novice[i].id %>"><li>
+                <% if(novice[i].productType ==5){%>
+                   <img src="/img/mindex_xin.png"/>
+                <%}%>
+                <h2>
+                    <%= novice[i].title %>
+                    <% if((novice[i].schedule * 100).toFixed(0) >= 80 && (novice[i].schedule * 100).toFixed(0) <100 &&   !novice[i].isCut){ %>
+                    <span class="awardspan" style="margin-left:0.1rem;background-color: #ff471c;color: #fff">满奖¥10</span>
+                    <%}%>
+                    <% if(novice[i].increaseRate){ %>
+                    <span class="awardspan" style="margin-left:0.1rem;background-color: #ff4a57;color: #fff">加息</span>
+                    <%}%>
+                </h2>
+                <div class="clearfix">
+                    <div class="pull-left index_xin1">
+                        <p><%if(novice[i].increaseRate && parseFloat(novice[i].increaseRate)>0 && parseFloat(novice[i].increaseRate)<novice[i].rate){%>
+                        <%= ((novice[i].rate-novice[i].increaseRate) * 100).toFixed(2) %><em>+<%=(novice[i].increaseRate * 100).toFixed(2)%> </em>
+                        <%}else{%>
+                        <%= (novice[i].rate * 100).toFixed(2) %>
+                        <%}%></p>
+                        <span>预期年化(%)</span>
+                    </div>
+                    <div class="pull-left index_xin2">
+                        <p><%= novice[i].period %><em><%= novice[i].periodUnit == _global.periodUnit.Month.v ? '个月' : '天' %></em></p>
+                        <span>理财期限</span>
+                    </div>
+                    <% if(novice[i].beginTime > (new Date().getTime())){ %>
+                    <a href="/debt/<%= novice[i].id %>" target="_black" class="pull-right" _attr="<% novice[i].beginTime %>" id="hot_buy2" style="font-size: 14px;"><div class="countdown" systime="<%= ((novice[i].beginTime)-(new Date().getTime()))/1000 %>" sysstr=""></div></a>
+                    <% }else if (novice[i].state == _global.debtState.ApprovalPass.v){ %>
+                    <a class="pull-right" href="/debt/<%= novice[i].id %>" target="_black">立即投资</a>
+                    <% }else if (novice[i].state == _global.debtState.InPayment.v || novice[i].state == _global.debtState.Overdue.v){ %>
+                    <a class="pull-right" href="/debt/<%= novice[i].id %>" target="_black">还款中</a>
+                    <% }else if (novice[i].state == _global.debtState.EndPayment.v){ %>
+                    <a class="pull-right" href="/debt/<%= novice[i].id %>" target="_black">已还款</a>
+                    <% }else{ %>
+                    <a href="/debt/<%= novice[i].id %>" target="_black" class="pull-right ">立即抢购</a>
+                    <%}%>
+                </div>
+            </li></a>
+            <%}}%>
+        </ul>
+    </div>
+    <% }%>
+
+<img src="/img/index_miao.png" style="margin-top: 0.2rem;width: 100%"/>
+
+    <div class="home_newdiv">
+        <h3>优选理财</h3>
+        <ul>
+            <% for(i=0;i<debts.length;i++){%>
+            <a href="/debt/<%= debts[i].id %>"><li>
+                    <% if(debts[i].productType ==5){%>
+                    <img src="/img/mindex_xin.png"/>
+                    <%}%>
+                    <h2>
+                        <%= debts[i].title %>
+                        <% if((debts[i].schedule * 100).toFixed(0) >= 80 && (debts[i].schedule * 100).toFixed(0) <100 &&   !debts[i].isCut){ %>
+                        <span class="awardspan" style="margin-left:0.1rem;background-color: #ff471c;color: #fff">满奖¥10</span>
+                        <%}%>
+                        <% if(debts[i].increaseRate){ %>
+                        <span class="awardspan" style="margin-left:0.1rem;background-color: #ff4a57;color: #fff">加息</span>
+                        <%}%>
+                        <% if(debts[i].beginTime > (new Date().getTime())){ %>
+                        <div class="awardspan countdown" style="margin-left:0.1rem;background-color: #ff4a57;color: #fff" systime="<%= ((debts[i].beginTime)-(new Date().getTime()))/1000 %>" sysstr=""></div>
+                        <% }%>
+                    </h2>
+                    <div class="clearfix">
+                        <div class="pull-left index_xin1" style="width: 50%;border-right:1px solid #e6e6e6">
+                            <p><%if(debts[i].increaseRate && parseFloat(debts[i].increaseRate)>0 && parseFloat(debts[i].increaseRate)<debts[i].rate){%>
+                                <%= ((debts[i].rate-debts[i].increaseRate) * 100).toFixed(2) %><em>+<%=(debts[i].increaseRate * 100).toFixed(2)%> </em>
+                                <%}else{%>
+                                <%= (debts[i].rate * 100).toFixed(2) %>
+                                <%}%></p>
+                            <span style="margin-left: 0.2rem">预期年化(%)</span>
+                        </div>
+                        <div class="pull-left index_xin3">
+                            <p>理财期限：<em><%= debts[i].period %><%= debts[i].periodUnit == _global.periodUnit.Month.v ? '个月' : '天' %></em></p>
+                            <p style="margin-top: 0.3rem">剩余金额：<em><%= parseFloat((debts[i].amount - debts[i].investedAmount).toFixed(2)) %>元</em></p>
+                        </div>
+                    </div>
+                </li></a>
+            <%}%>
+        </ul>
+        <a href="/debts"><p class="list_more">查看更多 ></p></a>
+    </div>
+
+
+
+    <% include ../parent/slide_nav.ejs %>
+    <script>
+        $(function() {
+            $('.circle').each(function(index, el) {
+                var num = $(this).find('span').text() * 3.6;
+                if (num<=180) {
+                    $(this).find('.right').css('transform', "rotate(" + num + "deg)");
+                } else {
+                    $(this).find('.right').css('transform', "rotate(180deg)");
+                    $(this).find('.left').css('transform', "rotate(" + (num - 180) + "deg)");
+                };
+            });
+
+        });
+    </script>
+<% include ../parent/bottom.ejs %>
+    <script>
+        $(".home_newdiv ul li").each(function () {
+            $(this).find(".countdown").wenCount();
+        })
+        var swiper = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            autoplay: 3000,
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <link rel="stylesheet" type="text/css" href="/css/BH/activity/index.css"/>
+    <title><%= com.env.seo.title %>活动中心</title>
+</head>
+<body>
+
+<% include ../parent/top.ejs %>
+
+<div class="active_bg"></div>
+
+<div class="active_main">
+    <ul class="active_ul">
+        <script type="text/template" id="active_tmpl">
+            <li class="{stateClass}">
+                <div>
+                    <img src="{img}">
+                    <p class="p1">{title}</p>
+                    <p class="p2">{beginTime}~{endTime}</p>
+                   {state}
+                </div>
+            </li>
+        </script>
+        <div id="active_list"></div>
+    </ul>
+
+</div>
+
+
+
+
+<% include ../parent/bottom.ejs %>
+
+
+<script src="/js/snowfall.jquery.js"></script>
+<script>
+$(document).snowfall('clear');
+$(document).snowfall({
+image: "/img/acc112.png",
+flakeCount:10,
+minSize: 5,
+maxSize: 30
+});
+</script>
+
+<script type="text/javascript">
+    ZC_api.loadActive(1, 10, '');
+
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>媒体资讯</title>
+</head>
+<body>
+<div class="news_main">
+    <script type="text/template" id="news_tmpl">
+        <a href="/aboutus/news/{id}" class="list">
+            <img src="{img}">
+            <p class="p1">{title}</p>
+            <p class="p2">{time}</p>
+        </a>
+
+    </script>
+    <div id="news_list"></div>
+</div>
+
+
+<input type="hidden" value="1" id="pageNo"/>
+<% include ../parent/slide_nav.ejs %>
+<script type="text/javascript">
+    ZC_api.loadNewsList(1, 10, '');
+    $('#pageNo').val(1);
+    $(window).scroll(function () {
+        var scrollTop = $(this).scrollTop();
+        var scrollHeight = $(document).height();
+        var windowHeight = $(this).height();
+        if (scrollTop + windowHeight == scrollHeight) {
+            var pageNo = parseInt($('#pageNo').val()) + 1;
+            ZC_api.loadNewsList(pageNo, 10, '');
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+[2018-03-22 16:26:28.562] [ERROR] error - { [Error: ETIMEDOUT] code: 'ETIMEDOUT' }
+Error: ETIMEDOUT
+    at null._onTimeout (E:\develper\bh\node_modules\request\request.js:713:15)
+    at Timer.listOnTimeout (timers.js:92:15)
+[2018-03-22 16:26:28.565] [ERROR] error - { [Error: ETIMEDOUT] code: 'ETIMEDOUT' }
+Error: ETIMEDOUT
+    at null._onTimeout (E:\develper\bh\node_modules\request\request.js:713:15)
+    at Timer.listOnTimeout (timers.js:92:15)
+[2018-03-22 16:26:28.565] [ERROR] error - { [Error: ETIMEDOUT] code: 'ETIMEDOUT' }
+Error: ETIMEDOUT
+    at null._onTimeout (E:\develper\bh\node_modules\request\request.js:713:15)
+    at Timer.listOnTimeout (timers.js:92:15)
+[2018-03-22 16:26:31.151] [ERROR] error - { [Error: ETIMEDOUT] code: 'ETIMEDOUT' }
+Error: ETIMEDOUT
+    at null._onTimeout (E:\develper\bh\node_modules\request\request.js:713:15)
+    at Timer.listOnTimeout (timers.js:92:15)
+[2018-03-22 16:26:31.153] [ERROR] error - { [Error: ETIMEDOUT] code: 'ETIMEDOUT' }
+Error: ETIMEDOUT
+    at null._onTimeout (E:\develper\bh\node_modules\request\request.js:713:15)
+    at Timer.listOnTimeout (timers.js:92:15)
+[2018-03-22 16:26:31.154] [ERROR] error - { [Error: ETIMEDOUT] code: 'ETIMEDOUT' }
+Error: ETIMEDOUT
+    at null._onTimeout (E:\develper\bh\node_modules\request\request.js:713:15)
+    at Timer.listOnTimeout (timers.js:92:15)
+[2018-03-22 16:26:44.563] [ERROR] error - { [Error: Redis connection to 121.196.224.90:12688 failed - connect ETIMEDOUT 121.196.224.90:12688]
+  code: 'ETIMEDOUT',
+  errno: 'ETIMEDOUT',
+  syscall: 'connect',
+  address: '121.196.224.90',
+  port: 12688 }
+Error: Redis connection to 121.196.224.90:12688 failed - connect ETIMEDOUT 121.196.224.90:12688
+    at Object.exports._errnoException (util.js:870:11)
+    at exports._exceptionWithHostPort (util.js:893:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1061:14)
+[2018-03-22 16:26:47.252] [ERROR] error - { [Error: Redis connection to 121.196.224.90:12688 failed - connect ETIMEDOUT 121.196.224.90:12688]
+  code: 'ETIMEDOUT',
+  errno: 'ETIMEDOUT',
+  syscall: 'connect',
+  address: '121.196.224.90',
+  port: 12688 }
+Error: Redis connection to 121.196.224.90:12688 failed - connect ETIMEDOUT 121.196.224.90:12688
+    at Object.exports._errnoException (util.js:870:11)
+    at exports._exceptionWithHostPort (util.js:893:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1061:14)
+[2018-03-22 16:27:05.762] [ERROR] error - { [Error: Redis connection to 121.196.224.90:12688 failed - connect ETIMEDOUT 121.196.224.90:12688]
+  code: 'ETIMEDOUT',
+  errno: 'ETIMEDOUT',
+  syscall: 'connect',
+  address: '121.196.224.90',
+  port: 12688 }
+Error: Redis connection to 121.196.224.90:12688 failed - connect ETIMEDOUT 121.196.224.90:12688
+    at Object.exports._errnoException (util.js:870:11)
+    at exports._exceptionWithHostPort (util.js:893:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1061:14)
+[2018-03-22 16:27:08.452] [ERROR] error - { [Error: Redis connection to 121.196.224.90:12688 failed - connect ETIMEDOUT 121.196.224.90:12688]
+  code: 'ETIMEDOUT',
+  errno: 'ETIMEDOUT',
+  syscall: 'connect',
+  address: '121.196.224.90',
+  port: 12688 }
+Error: Redis connection to 121.196.224.90:12688 failed - connect ETIMEDOUT 121.196.224.90:12688
+    at Object.exports._errnoException (util.js:870:11)
+    at exports._exceptionWithHostPort (util.js:893:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1061:14)

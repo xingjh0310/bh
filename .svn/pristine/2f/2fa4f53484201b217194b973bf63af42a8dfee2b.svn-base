@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1" >
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>平台公告</title>
+</head>
+<body>
+
+<div class="header" ><a class="iconfont" href="/aboutus/announce_list"><img src="/img/fh1.png" class="fh_img"></a>平台公告</div>
+<div class="news_con">
+    <p class="p1"><%=news.title%></p>
+    <div class="p2"><%- news.content %></div>
+    <p class="p3"><%= news.author %></p>
+    <p class="p3"><%= new Date(news.time).Format('yyyy-MM-dd') %></p>
+</div>
+
+
+
+
+
+
+
+<% include ../parent/slide_nav.ejs %>
+</body>
+</html>

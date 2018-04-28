@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>产品列表</title>
+</head>
+<body>
+<div style="height: 90%;overflow: auto">
+    <div class="header show_head" style="background-color: #fe8c14;color: #fff;border: none">
+        <a class="iconfont" href="/"><img src="/img/fh2.png" class="fh_img"></a>优选产品
+        <a href="/ranklist"><img src="/img/phb.png" style="float: right;width: 0.39rem;top: 0.25rem;right: 0.3rem;position: absolute;"/></a>
+    </div>
+
+    <ul class="debt_list" style="padding-top: 0.88rem">
+        <script type="text/template" id="debt_tmpl">
+
+            <li class="{stateClass}" style="position: relative">
+                {productType}
+                {name_href}
+                <h2>{title}{full_award}{increaseRate}{sate1}</h2>
+                <div class="debe_date">
+                    <div class="pull-left">
+                        <p class="p1">{rate}<span>%</span></p>
+                        <p class="p2">预期年化</p>
+                    </div>
+                    <div class="pull-right">
+                        <div>
+                            <p class="p3"><span>{period}</span>{periodUnit}</p>
+                            <p class="p2">理财期限</p>
+                        </div>
+                    </div>
+                </div>
+                {state}
+                </a>
+
+            </li>
+        </script>
+        <input type="hidden" value="1" id="pageNo"/>
+        <!--新客-->
+        <div id="debt_list2"></div>
+        <!--VIP-->
+        <div id="debt_list5" style="background-color: #fff"></div>
+        <!--限时秒杀-->
+        <div id="debt_list4" style="background-color: #fff"></div>
+        <!-- 优选立即投资-->
+        <div id="debt_list3"></div>
+        <!--已满标-->
+        <div id="debt_list"></div>
+    </ul>
+</div>
+
+<% include ../parent/bottom.ejs %>
+<% include ../parent/slide_nav.ejs %>
+<script src="/js/percircle.js"></script>
+
+<script type="text/javascript">
+    ZC_api.loadDebt(1, 20, '');
+    $('#pageNo').val(1);
+    $(window).scroll(function () {
+        var scrollTop = $(this).scrollTop();
+        var scrollHeight = $(document).height();
+        var windowHeight = $(this).height();
+        if (scrollTop + windowHeight == scrollHeight) {
+            $.ShowLoadIng();
+            var pageNo = parseInt($('#pageNo').val()) + 1;
+            ZC_api.loadDebt(pageNo, 20, '');
+        }
+    });
+    //    $('.myStat').circliful();
+</script>
+
+
+</body>
+</html>

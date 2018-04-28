@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <link rel="stylesheet" type="text/css" href="/css/BH/help/index.css"/>
+    <title><%= com.env.seo.title %>平台公告</title>
+</head>
+<body>
+
+<% include ../parent/top.ejs %>
+
+<div class="help_bn"><img src="/img/helpbg.jpg"></div>
+
+<div class="help_warp">
+    <div class="help_main">
+        <a name="helpname1"></a>
+        <h1 class="h1">自助服务</h1>
+        <ul class="help_ul">
+            <li>
+                <a href="/register">
+                    <span class="iconhelp">&#xe657;</span>
+                    <p>注册</p>
+                </a>
+
+            </li>
+            <li>
+                <a href="/account/recharge">
+                    <span class="iconhelp">&#xe66d;</span>
+                    <p>充值</p>
+                </a>
+            </li>
+            <li>
+                <a href="/account/invite">
+                    <span class="iconhelp">&#xe629;</span>
+                    <p>推荐好友</p>
+                </a>
+            </li>
+            <li>
+                <a href="/account/bonus">
+                    <span class="iconhelp">&#xe653;</span>
+                    <p>我的奖励</p>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:" class="help_app">
+                    <span class="iconhelp">&#xe900;</span>
+                    <p>APP下载</p>
+                </a>
+            </li>
+            <li>
+                <a href="/findpwd">
+                    <span class="iconhelp">&#xe692;</span>
+                    <p>找回登录密码</p>
+                </a>
+            </li>
+            <li>
+                <a href="/account/security">
+                    <span class="iconhelp">&#xe61a;</span>
+                    <p>更改登录密码</p>
+                </a>
+            </li>
+            <li>
+                <a href="/account/security">
+                    <span class="iconhelp">&#xe624;</span>
+                    <p>更改邮箱</p>
+                </a>
+            </li>
+            <li>
+                <a href="/account/withdraw">
+                    <span class="iconhelp">&#xf00b2;</span>
+                    <p>提现</p>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:">
+                    <span class="iconhelp">&#xe70d;</span>
+                    <p>客服</p>
+                </a>
+            </li>
+        </ul>
+
+        <a name="helpname3"></a>
+        <h1 class="h1">新手流程指引</h1>
+
+        <div>
+            <ul class="zhiyin_list">
+                <li class="active">注册</li>
+                <li>实名</li>
+                <li>绑卡</li>
+                <li>充值</li>
+                <li>投资</li>
+                <li>回款</li>
+            </ul>
+            <div class="zhiyin_main TabMain">
+                <!--注册-->
+                <div class="zhiyin_setab active" style="display:block">
+                    <span>输入正确的手机号码作为铂恒金服的注册账号，填写短信验证码，设置交易密码，若有邀请码填写邀请码。</span>
+                    <img src="/img/h_03.jpg" alt="" style="width: 908px; height: 354px;">
+
+                </div>
+
+                <!--实名-->
+                <div class="zhiyin_setab">
+                    <span>实名信息一旦认证完毕，将不可以修改。</span>
+                    <img src="/img/h1_03.jpg" alt="">
+
+                </div>
+                <!--绑卡-->
+                <div class="zhiyin_setab">
+                    <span>“我的账户”-“安全中心”-“我的银行卡”页面输入正确的信息进行绑卡。</span>
+                    <img src="/img/bk_03.png" alt="">
+
+                </div>
+                <!--充值-->
+                <div class="zhiyin_setab">
+                    <span>①进入“我的账户”，点击“充值”；②输入充值金额；③可以选择快捷充值或者网银充值；④付款后，显示成功付款并跳转到铂恒金服页面，显示充值成功。</span>
+                    <img src="/img/cz_03.png" alt="">
+
+                </div>
+                <!--投资-->
+                <div class="zhiyin_setab">
+                    <span>根据项目类型、项目周期、年化利率选择标的投资。</span>
+                    <img src="/img/tz_03.png" alt="">
+
+                </div>
+                <!--回款-->
+                <div class="zhiyin_setab">
+                    <span>投资到期后，本金和利息将回款到您的账户中心，届时也有回款短信通知，您可以选择继续投资。</span>
+                    <img src="/img/hk_03.png" alt="">
+
+            </div>
+
+        </div>
+
+        <a name="helpname2"></a>
+        <h1 class="h1">常规服务</h1>
+
+        <div>
+            <ul class="fuwu_list">
+                <li class="active">注册登入</li>
+                <li>充值投资</li>
+                <li>回款提现</li>
+                <li>铂恒与安全保障</li>
+                <li>其他问题</li>
+                <li>流程指引</li>
+            </ul>
+            <div class="fuwu_main setTabMain">
+                <div class="fuwu_setab" style="display:block">
+                    <ul>
+                        <li class="active"><span class="iconhelp">&#xe60b;</span>如何成为铂恒金服大家庭的一员？</li>
+                        <li><span class="iconhelp">&#xe60b;</span>有推荐人时如何注册？</li>
+                        <li><span class="iconhelp">&#xe60b;</span>注册时获取短信验证码失败怎么办？</li>
+                        <li><span class="iconhelp">&#xe60b;</span>忘记登录密码怎么办？如何找回？</li>
+                        <li><span class="iconhelp">&#xe60b;</span>如何修改登录密码？</li>
+                        <li><span class="iconhelp">&#xe60b;</span>什么是实名认证？</li>
+                    </ul>
+                    <div class="fuwutab">
+                        <div style="display:block">
+                            <p>①进入铂恒金服（http://www.bohomm.com/）首页，点击【注册】按钮</p>
+                            <p>②根据提示信息，填写您的手机号码、验证码、密码等</p>
+                            <p>③用户名一经注册，不可修改</p>
+                        </div>
+                        <div>
+                            <p>①直接点击推荐链接进入注册页</p>
+                            <p>②或者在注册时填写推荐人的邀请码</p>
+                        </div>
+                        <div>
+                            <p>①请确保手机信号良好，并检查短信是否被安全软件拦截，请进行相关设置。</p>
+                            <p> ②运营商信息平台不稳定，请稍后再次尝试。</p>
+                        </div>
+                        <div>
+                            <p>如果你忘记了登录密码，请在登录的页面点击【忘记密码】找回。</p>
+                        </div>
+                        <div>
+                            <p>如果您要修改登录密码，登录【我的账户】—“安全设置”中进行修改。</p>
+                        </div>
+                        <div>
+                            <p>实名认证是指注册用户进行真实身份验证，平台数据直接对接公安系统，未实名认证用户无法进行充值，
+                                也无法进行投资。</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!--充值投资-->
+                <div class="fuwu_setab">
+                    <ul>
+                        <li class="active"><span class="iconhelp">&#xe60b;</span>我们如何充值？</li>
+                        <li><span class="iconhelp">&#xe60b;</span>充值支持哪些银行？</li>
+                        <li><span class="iconhelp">&#xe60b;</span>铂恒金服支持哪些网银？</li>
+                        <li><span class="iconhelp">&#xe60b;</span>充值时会扣手续费吗？</li>
+                        <li><span class="iconhelp">&#xe60b;</span>是否可以用信用卡充值？</li>
+                        <li><span class="iconhelp">&#xe60b;</span>投资如何进行投资？</li>
+                        <li><span class="iconhelp">&#xe60b;</span>银行支付限额</li>
+                    </ul>
+                    <div class="fuwutab">
+                        <div style="display:block">
+                            <p>四个步骤就可以充值成功：</p>
+                            <p>①登录账户，进入【我的账户】，点击“充值”；</p>
+                            <p>②输入充值金额；</p>
+                            <p>③可以选择快捷充值或者网银充值；</p>
+                            <p>④付款后，显示成功付款并跳转到铂恒金服页面，显示充值成功。</p>
+                        </div>
+                        <div>
+                            <p>充值页面会提示您支持充值的银行。点击选择不同银行可查看对应银行的充值限额。</p>
+                        </div>
+                        <div>
+                            <p>为铂恒金服提供第三方支付上海富友，支持网银包括：工、农、中、建，各家股份制银行、地方商业银行在内的多家银行进行合作。具体信息请登录后，在【我的账户】页面中点击“充值” 查看。</p>
+                        </div>
+                        <div>
+                            <p>充值对投资人是免费的，充值手续费由铂恒金服平台承担</p>
+                        </div>
+                        <div>
+                            <p>暂时不支持信用卡进行充值。</p>
+                        </div>
+                        <div>
+                            <p>根据项目类型、项目周期、年化利率选择标的投资。</p>
+                        </div>
+                        <div>
+                            <p><img src="/img/yhx_3.png"> </p>
+                        </div>
+                    </div>
+                    <div>
+                    </div>
+                </div>
+                <!--回款提现-->
+                <div class="fuwu_setab">
+                    <ul>
+                        <li class="active"><span class="iconhelp">&#xe60b;</span>如何提现？</li>
+                        <li><span class="iconhelp">&#xe60b;</span>提现银行卡可以有几张？</li>
+                        <li><span class="iconhelp">&#xe60b;</span>如何绑定银行卡，绑定的银行卡有什么要求？</li>
+                        <li><span class="iconhelp">&#xe60b;</span>更换银行卡条件，换卡材料如下：</li>
+                        <li><span class="iconhelp">&#xe60b;</span>投资人提现，需要支付哪些费用？</li>
+                        <li><span class="iconhelp">&#xe60b;</span>提现是否会冻结资金？</li>
+                        <li><span class="iconhelp">&#xe60b;</span>什么是交易密码？忘记交易密码怎么办？如何找回？</li>
+
+                        <li><span class="iconhelp">&#xe60b;</span>原手机停机了，要提现怎么办？</li>
+                    </ul>
+                    <div class="fuwutab">
+                        <div style="display:block">
+                            <p>三个步骤就可以提现成功，在电脑上： </p>
+                            <p>①登录账户，进入【我的账户】，点击“提现”；</p>
+                            <p>②输入可提现金额；</p>
+                            <p>③显示提现成功，预计1-2个工作日到账。</p>
+                        </div>
+                        <div>
+                            <p>目前只能绑定一张银行卡</p>
+                        </div>
+                        <div>
+                            <p>①点击进入【我的账户】--【安全中心】--【我的银行卡】，点击【添加银行卡】，根据提示信息完成操作；</p>
+                            <p>②绑定的银行卡户名必须是与该账号实名认证的姓名一致；</p>
+                            <p>③该银行卡只用于提现，无需开通网银；</p>
+                        </div>
+                        <div>
+                            <p>①提供身份证正反面、新银行卡照片；</p>
+                            <p>②提供本人与身份证、新银行卡的合照；</p>
+                            <p>③若是因原银行卡丢失换卡，需提供原银行卡的挂失证明和新卡的开户证明；
+                            </p>
+                            <p>④商户需要审核本人与身份证上的照片是否一致，原银行卡和新银行卡是否和持卡人提供的资料一致。</p>
+                        </div>
+                        <div>
+                            <p>每月超过3次提现，从第4笔起每笔需支付2元提现手续费。</p>
+                        </div>
+
+                        <div>
+                            <p>提现后资金处于“提现在途”状态，可用余额会相应减少。提现在途的资金不能投资，如有需要请联系在线客服取消提现申请。
+                            </p>
+                        </div>
+                        <div>
+                            <p>①交易密码是不同于登录密码的资金安全保护机制，是特别用来保护您的资金安全的支付密码。即使您账户密码的处于异常状态，有交易密码就可以确保您的账户资金不被他人挪用。</p>
+                            <p>②如果你忘记了交易密码，登录“账户中心”—“安全设置”中进行修改。</p>
+                        </div>
+
+                        <div>
+                            <p>您需要提供您的用户名、新手机号、手持身份证照片（身份证上号码要清晰可见）等实名资料给客服，客服收到所有实名资料确保是您本人之后会帮您处理好。</p>
+                        </div>
+                    </div>
+                </div>
+                <!--安全保障-->
+                <div class="fuwu_setab">
+                    <ul>
+                        <li class="active"><span class="iconhelp">&#xe60b;</span>什么是P2P？</li>
+                        <li><span class="iconhelp">&#xe60b;</span>风险准备金使用用途？</li>
+
+                        <li><span class="iconhelp">&#xe60b;</span>电子合同有效吗？</li>
+                        <li><span class="iconhelp">&#xe60b;</span>逾期、坏账怎么处理？</li>
+
+                    </ul>
+                    <div class="fuwutab">
+                        <div style="display:block">
+                            <p>P2P的来源于一个专业名词“peer to peer”，借贷双方在互联网上直接对接，双方直接签订借贷合同。
+                                P2P网贷平台的职责，是提供信息发布、信用评定、贷中服务及部分贷后管理等第三方服务，收取相应的
+                                服务费。平台进行借贷撮合，自身并不参与交易，借款人的利息全部给到平台上的投资人，只收取服务费用。</p>
+                        </div>
+                        <div>
+                            <p>在项目发生逾期后，平台会启用风险垫付金先行垫付给投资人。</p>
+                        </div>
+
+                        <div>
+                            <p>有效。我国新合同法第十一条规定: 书面形式合同是指合同书、信件和数据电文（包括电报、电传、传真、
+                                电子数据交换和电子邮件）等可以有形地表现所载内容的形式。因此电子合同属于书面形式的 合同一种，
+                                是受到法律保护的。本平台中的合同文本都由经济法律师起草，确保通过本平台的所有交易都具备法律效力。</p>
+                        </div>
+                        <div>
+                            <p>发生逾期时先由第三方保付机构进行垫付或者债权回购，如果第三方未及时垫付回购时，平台将启用风险垫付准备金先行垫付投资人。
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+                <!--其他问题-->
+                <div class="fuwu_setab">
+                    <ul>
+                        <li class="active"><span class="iconhelp">&#xe60b;</span>如何邀请好友？</li>
+                        <li><span class="iconhelp">&#xe60b;</span>积分怎么获得？怎么使用积分？</li>
+                        <li><span class="iconhelp">&#xe60b;</span>铂恒金服支持哪些浏览器？</li>
+                        <li><span class="iconhelp">&#xe60b;</span>如何保护个人资料和隐私？</li>
+                        <li><span class="iconhelp">&#xe60b;</span>注册账号后可以注销吗？</li>
+
+                    </ul>
+                    <div class="fuwutab">
+                        <div style="display:block">
+                            <p>PC端：官网登录铂恒金服，【我的账户】-【奖励管理】-【邀请有礼】，发送您的邀请码或者邀请链接邀 请好友注册。</p>
+                        </div>
+                        <div>
+                            <p>您可以完善账户中心的资料获得更多的积分，投标也可以获得更多的积分，后期app开发后，可在上面使 用积分兑换商品。 </p>
+                        </div>
+                        <div>
+                            <p>铂恒的网站操作支持大部分常见浏览器，包括IE8及以上的版本，谷歌浏览器Chrome，360浏览器，搜狗浏览器等。</p>
+                        </div>
+                        <div>
+                            <p>为保护您的账号安全和隐私：</p>
+                            <p>①请不要随便通过陌生人的好友申请；</p>
+                            <p>②请保护好您的所有密码，不要在交流过程中将您的密码告诉任何人；</p>
+                            <p>③请不要在网站公共区域发布的信息中包含您的身份证号码、真实姓名、联系方式、家庭住址、工作单位、收入状况等；</p>
+                            <p>④请不要相信冒充系统管理员的身份给你发的消息。</p>
+                        </div>
+                        <div>
+                            <p>账号注册后不能申请注销</p>
+                        </div>
+
+
+                    </div>
+                </div>
+                <!--流程指引-->
+                <div class="fuwu_setab">
+                    <ul>
+                        <li class="active"><span class="iconhelp">&#xe60b;</span>注册？</li>
+                        <li><span class="iconhelp">&#xe60b;</span>实名？</li>
+                        <li><span class="iconhelp">&#xe60b;</span>绑卡？</li>
+                        <li><span class="iconhelp">&#xe60b;</span>充值？</li>
+                        <li><span class="iconhelp">&#xe60b;</span>投资？</li>
+                        <li><span class="iconhelp">&#xe60b;</span>回款？</li>
+                        <li><span class="iconhelp">&#xe60b;</span>提现？</li>
+
+                    </ul>
+                    <div class="fuwutab">
+                        <div style="display:block">
+                            <p>输入正确的手机号码作为铂恒金服的注册账号 </p>
+                            <p>填写短信验证码</p>
+                            <p>设置交易密码</p>
+                            <p>若有邀请码填写邀请码。</p>
+                        </div>
+                        <div>
+                            <p>实名信息一旦认证完毕，将不可以修改。 </p>
+                        </div>
+                        <div>
+                            <p>“我的账户”-“安全中心”-“我的银行卡”页面输入正确的信息进行绑卡。</p>
+                        </div>
+                        <div>
+                            <p>4个步骤就可以充值成功。</p>
+                            <p> ①进入“我的账户”，点击“充值”；</p>
+                            <p> ②输入充值金额；</p>
+                            <p> ③可以选择快捷充值或者网银充值；</p>
+                            <p> ④付款后，显示成功付款并跳转到铂恒金服页面，显示充值成功。</p>
+                        </div>
+                        <div>
+                            <p>根据项目类型、项目周期、年化利率选择标的投资。</p>
+                        </div>
+                        <div>
+                            <p>投资到期后，本金和利息将回款到您的账户中心，届时也有回款短信通知，您可以选择继续投资。</p>
+                        </div>
+                        <div>
+                            <p>在电脑上：①登录账户，进入“我的账户”，点击“提现”；</p>
+                            <p>②输入可提现金额；</p>
+                            <p>③显示提现成功，预计1-2个工作日到账。</p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <% include ../parent/bottom.ejs %>
+
+    <script type="text/javascript">
+        ZC_api.loadAnnounceList(1, 20);
+    </script>
+</body>
+
+</html>

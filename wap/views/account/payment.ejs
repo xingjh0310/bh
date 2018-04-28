@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>回款计划</title>
+</head>
+<body>
+<div class="header show_head"><a class="iconfont" href="/account"><img src="/img/fh2.png" class="fh_img"></a>回款计划</div>
+
+<div class="pay_main">
+    <div class="pay_tit ">
+        <div style="display: block">
+            <div class="pull-left">
+                <p class="p1"><%= account.collectCorpus %></p>
+                <p>待收本金总额(元)</p>
+            </div>
+            <div class="pull-right">
+                <p class="p1"><%= account.collectInterest %></p>
+                <p>待收利息总额(元)</p>
+            </div>
+        </div>
+        <div>
+            <div class="pull-left">
+                <p class="p1"><%= account.totalReceivedCorpus %></p>
+                <p>已回款本金(元)</p>
+            </div>
+            <div class="pull-right">
+                <p class="p1"><%= account.totalReceivedInterest %></p>
+                <p>已回款利息(元)</p>
+            </div>
+        </div>
+    </div>
+
+    <ul class="list1">
+        <li class="pull-left active" onclick="$('#state').val(<%= com.biz.fields.state.Wait.v %>)"><span>待回款</span></li>
+        <li class="pull-left" onclick="$('#state').val(<%= com.biz.fields.state.Complete.v %>)"><span>已回款</span></li>
+    </ul>
+
+    <div class="setTabMain">
+        <!--待回款-->
+        <div style="display: block">
+            <script type="text/template" id="payment<%= com.biz.fields.state.Wait.v %>_tmpl">
+                <li>
+                    <div class="div1">
+                        <span class="tit">{title}</span>
+                        <a href="" class="pull-right">{periods}/{max_periods}期</a>
+                    </div>
+                    <div>
+                        <span class="pull-left">待收本金：<i class="re">{payment_corpus}元</i></span>
+                        <span class="pull-right">待收利息：<i class="or">{payment_interest}元</i></span>
+
+                    </div>
+                    <div>
+                        <span class="pull-left"></span>
+                        <span class="pull-right">应收日期：{payment_time}</span>
+                    </div>
+                </li>
+            </script>
+            <ul class="inv_list" id="payment<%= com.biz.fields.state.Wait.v %>_list">
+
+            </ul>
+            <input type="hidden" value="1" id="pageNo<%= com.biz.fields.state.Wait.v %>"/>
+
+        </div>
+        <!--已回款-->
+        <div>
+
+            <script type="text/template" id="payment<%= com.biz.fields.state.Complete.v %>_tmpl">
+                <li>
+                    <div class="div1">
+                        <span class="tit">{title}</span>
+                        <a href="" class="pull-right">{periods}/{max_periods}期</a>
+                    </div>
+                    <div>
+                        <span class="pull-left">已回本金：<i class="re">{real_payment_corpus}元</i></span>
+                        <span class="pull-right">已回利息：<i class="or">{real_payment_interest}元</i></span>
+
+                    </div>
+                    <div>
+                        <span class="pull-left">应收日期：{payment_time}</span>
+                        <span class="pull-right">回款日期：{real_payment_time}</span>
+                    </div>
+                </li>
+            </script>
+            <ul class="inv_list" id="payment<%= com.biz.fields.state.Complete.v %>_list">
+
+            </ul>
+            <input type="hidden" value="1" id="pageNo<%= com.biz.fields.state.Complete.v %>"/>
+
+        </div>
+    </div>
+
+
+    <input type="hidden" value="<%= com.biz.fields.state.Wait.v %>" id="state"/>
+</div>
+
+<% include ../parent/slide_nav.ejs %>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        load(<%= com.biz.fields.state.Wait.v %>);
+        load(<%= com.biz.fields.state.Complete.v %>);
+
+        function load(state) {
+            ZC_api.loadPayments(1, 10, state);
+        }
+
+    })
+
+
+    $(window).scroll(function () {
+        var scrollTop = $(this).scrollTop();
+        var scrollHeight = $(document).height();
+        var windowHeight = $(this).height();
+        if (scrollTop + windowHeight == scrollHeight) {
+            $.ShowLoadIng();
+            var pageNo = parseInt($('#pageNo' + $('#state').val()).val()) + 1;
+            ZC_api.loadPayments(pageNo, 10, $('#state').val());
+        }
+    });
+
+</script>
+</body>
+</html>

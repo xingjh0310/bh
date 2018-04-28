@@ -1,0 +1,37 @@
+/*注册*/
+.register_warp{background: url(/img/rbg.jpg) center center;height:597px; }
+.yaoqm_rot{
+    transform:rotate(180deg);
+    -ms-transform:rotate(180deg); 	/* IE 9 */
+    -moz-transform:rotate(180deg); 	/* Firefox */
+    -webkit-transform:rotate(180deg); /* Safari 和 Chrome */
+    -o-transform:rotate(180deg); 	/* Opera */
+}
+.register_div{width:1160px;overflow:hidden;margin:0 auto}
+.register{width: 330px;float:right;text-align: center;padding: 18px 68px;background: rgba(255,255,255,0.5);margin-top:37px;
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#5fffffff,endColorstr=#5fffffff);}
+.register h2{font-size: 24px;margin-bottom: 15px;}
+.register .yanzh_inp input{background: #fff;text-indent: 60px;margin-bottom:10px;}
+.register .yanzh_inp .regis_code{    display: inline-block;background: #ff8a10;
+    float: right;
+    width: 95px;
+    height: 45px;font-size:16px;
+    line-height: 45px;    text-indent: 0;
+    cursor: pointer;
+    color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;}
+.register .yanzh_inp .btn_cf{background:rgb(238, 238, 238);}
+.register .yanzh_inp .yanzh_input{text-indent: 15px;}
+.register  .form-control{margin-bottom:10px;}
+
+.register .p1{text-align: left;margin-bottom: 8px;    cursor: pointer;}
+.register .p2{text-align: left;}
+.register .p2 .pull-right a{color:#ff8624;}
+.yqm_div span{line-height:45px;}
+.yqm_div >input{width:330px;text-indent: 62px;}
+
+.regin_invite{    width: 70px;
+    display: inline-block;
+    float: left;}

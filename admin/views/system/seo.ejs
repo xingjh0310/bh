@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+<nav class="breadcrumb">
+    <i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 系统设置
+    <span class="c-gray en">&gt;</span> Seo设置
+    <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="Hui-iconfont">&#xe68f;</i>
+    </a>
+</nav>
+<div class="pd-20">
+    <div class="codeView docs-example">
+        <form class="form form-horizontal" id="form">
+            <input type="hidden" name="id" value="<%= seo.id || '' %>"/>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>标题：</label>
+                <div class="formControls col-xs-8 col-sm-5" style="width: 60%;">
+                    <textarea id="title" name="title" style="width: 620px;" onkeyup="textarealength(this,200)" nullmsg="标题不能为空！" dragonfly="true" value="<%= seo.title || '' %>"  placeholder="title" class="textarea" rows="" cols=""><%= seo.title || '' %></textarea>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>关键字：</label>
+                <div class="formControls col-xs-8 col-sm-5" style="width: 60%;">
+                   <textarea id="keywords" style="width: 620px;" onkeyup="textarealength(this,200)" nullmsg="关键字不能为空！" dragonfly="true" value="<%= seo.keywords || '' %>" placeholder="keywords" class="textarea" rows="" cols="" name="keywords"><%= seo.keywords || '' %></textarea>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>描述：</label>
+                <div class="formControls col-xs-8 col-sm-5" style="width: 60%;">
+                    <textarea id="description" style="width: 620px;" onkeyup="textarealength(this,200)" nullmsg="描述不能为空！" dragonfly="true" value="<%= seo.description || '' %>" placeholder="description" class="textarea" rows="" cols="" name="description"><%= seo.description || '' %></textarea>
+                </div>
+            </div>
+
+            <div class="row cl">
+                <div class="col-10 col-offset-3">
+                    <button id="sub" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+
+<% include ../main/bottom.ejs %>
+
+<script type="text/javascript">
+    $(".form").Validform({
+        btnSubmit: '#sub',
+        postonce: true,
+        tiptype: 4,
+        showAllError: true,
+        ajaxPost: true,
+        beforeSubmit: function (curform) {
+            $.ajax({
+                url: '/system/saveSeo',
+                type: 'post',
+                data: {seo: JSON.stringify($('#form').serializeJson())},
+                success: function (msg) {
+                    if (!msg.err) {
+                        Huimodal_alert('保存成功', 1000, function () {
+                        });
+                    }
+                    else {
+                        Huimodal_alert(msg.err, 1000, function () {
+                        });
+                    }
+                }
+            })
+            return false;
+        }
+    });
+</script>
+
+</html>

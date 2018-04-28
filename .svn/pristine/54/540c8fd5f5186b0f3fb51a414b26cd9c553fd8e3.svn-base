@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>交易密码</title>
+</head>
+<body>
+    <div class="header header_reg"><a class="iconfont" href="/account/personal"><img src="/img/fh1.png" class="fh_img"></a>
+        <% if(user.payPassword){ %>
+            重置交易密码
+        <%}else{%>
+            设置交易密码
+        <%}%></div>
+    <div class="login_warp">
+
+        <form class="form-horizontal resetPayPassword" style="margin-top:0.22rem">
+            <div class="tipsYz"></div>
+            <div class="tipsMob">验证码已发送，请注意查收</div>
+            <div class="form-group">
+                <span class="u1">验证码</span>
+                <input type="text" class="form-control" name="code" _check="validcode" placeholder="请输入手机验证码" maxlength="6">
+                <input class="hq_btn" type="button" onclick="javascript:ZC_api.sendSavePayPasswordCode();"
+                       id="sendSavePayPasswordCode"
+                       value="获取验证码">
+            </div>
+            <div class="form-group">
+                <span class="u1">交易密码</span>
+                <input type="password" class="form-control" name="tradePwd" _check="tradepwd" placeholder="请输入交易密码" id="password" maxlength="20">
+                <span class="hq_btn show_ps" id="togglePassword"></span>
+            </div>
+            <a href="javascript:" class="btn-logoin"  onclick="ZC_api.resetPayPassword()"  style="margin-top:0.9rem">确认修改</a>
+
+        </form>
+    </div>
+    <% include ../parent/slide_nav.ejs %>
+
+</body>
+</html>

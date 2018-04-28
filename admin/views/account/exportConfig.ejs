@@ -1,0 +1,176 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 智能导出 <span class="c-gray en">&gt;</span>智能配置 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+    <div class="codeView docs-example">
+        <form class="form form-horizontal" id="form">
+            <input type="hidden" id="id" name="id" value="<%= model.id || '0' %>"/>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>配置名称：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" id="name" placeholder="请输入名称" datatype="*" nullmsg="请输入正确名称" errormsg="请输入正确名称" name="name" value="<%= model.name || '' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>查询语句：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <textarea id="sql"  nullmsg="请输sql" dragonfly="true" datatype="*2-1000" placeholder="最少输入2个字符" class="textarea" rows="" cols="" name="sql" style="width:400px;height: 200px;"><%= model.sql || '' %></textarea>
+                </div>
+            </div>
+            <fieldset style="margin-top: 10px;">
+                <div class="row cl params">
+                    <%if(model.params && model.params instanceof Array && model.params.length>0){%>
+                    <%for(var i=0;i<model.params.length;i++){%>
+                    <div class="JRegion">
+                        <div class="row cl">
+                            <label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>参数标题：</label>
+                            <div class="formControls col-xs-8 col-sm-5">
+                                <input type="text" class="input-text" id="param_title" placeholder="请输参数标题" name="param_title" value="<%=model.params[i].param_title?model.params[i].param_title:''%>"/>
+                            </div>
+                        </div>
+                        <div class="row cl">
+                            <label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>参数名称：</label>
+                            <div class="formControls col-xs-8 col-sm-5">
+                                <input type="text" class="input-text" id="param_name" placeholder="请输参数名称" name="param_name" value="<%=model.params[i].param_name?model.params[i].param_name:''%>"/>
+                            </div>
+                        </div>
+                        <div class="row cl">
+                            <label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>参数类型：</label>
+                            <div class="formControls col-xs-8 col-sm-5">
+                                <select  id="param_type" placeholder="请输入参数类型" name="param_type" style=" width: 208px;  height: 26px;">
+                                    <option value="1" <%=(model.params[i].param_type==1?'selected="selected"':'')%> > 文本</option>
+                                    <option value="2" <%=(model.params[i].param_type==2?'selected="selected"':'')%>>时间</option>
+                                </select>
+                            </div>
+                        </div>
+                        <a href="javascript:void(0);" onclick="add()">添加</a>
+                        <%if(i>0){%>
+                        <a href="javascript:void(0);" onclick="del(this)" class="del">删除</a>
+                        <%}%>
+                    </div>
+                    <%}%>
+                    <%}else{%>
+                    <div class="JRegion">
+                        <div class="row cl">
+                            <label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>参数标题：</label>
+                            <div class="formControls col-xs-8 col-sm-5">
+                                <input type="text" class="input-text" id="param_title" placeholder="请输参数标题" name="param_title" value=""/>
+                            </div>
+                        </div>
+                        <div class="row cl">
+                            <label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>参数名称：</label>
+                            <div class="formControls col-xs-8 col-sm-5">
+                                <input type="text" class="input-text" id="param_name" placeholder="请输参数名称" name="param_name" value=""/>
+                            </div>
+                        </div>
+                        <div class="row cl">
+                            <label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>参数类型：</label>
+                            <div class="formControls col-xs-8 col-sm-5">
+                                <select  id="param_type" placeholder="请输入参数类型" name="param_type"  style=" width: 208px;  height: 26px;">
+                                    <option value="1">文本</option>
+                                    <option value="2">时间</option>
+                                </select>
+                            </div>
+                        </div><a href="javascript:void(0);" onclick="add()">添加</a>
+                    </div>
+                    <%}%>
+                </div>
+            </fieldset>
+            <div class="row cl">
+                <div class="col-10 col-offset-3">
+                    <button id="sub" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存
+                    </button>
+                    <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+    function add(){
+        var $demo=$(".params .JRegion :first");
+        var $new = $demo.clone();
+        $new.find('a.del').remove();
+        $new.append('<a href="javascript:void(0);" onclick="del(this)" class="del">删除</a>');
+        $(".params").append($new);
+    }
+
+    function del(that){
+        var $that=$(that);
+        $(that).parent('.JRegion').remove();
+    }
+
+    $(".form").Validform({
+        btnSubmit: '#sub',
+        postonce: true,
+        tiptype: 4,
+        showAllError: true,
+        ajaxPost: true,
+        beforeSubmit: function (curform) {
+            var name=$('#name').val();
+            var sql=$("#sql").val();
+            var params=[];
+            $.each($(".form").find("div.JRegion"),function(i,o){
+                var $li = $(o);
+                var _res=$(o).checkForm();
+                params.push(_res);
+            })
+            $.ajax({
+                url: '/util/saveExport',
+                type: 'post',
+                data: {id:$("#id").val(),name:name,sql:sql,params:JSON.stringify(params)},
+                success: function (msg) {
+                    if (!msg.err) {
+                        Huimodal_alert('保存成功', 1000, function () {
+                            parent.load();
+                            layer_close();
+                        });
+                    }
+                    else {
+                        Huimodal_alert(msg.err, 1000, function () {
+                        });
+                    }
+                }
+            })
+            return false;
+        }
+    });
+
+    function checkForm(that){
+        var res = {}, name;
+        $.each(that.find("input,select"), function (i, o) {
+            name = $(o).attr("name");
+            if (name) {
+                switch (o.type) {
+                    case "text":
+                    case "hidden":
+                    case "select":
+                    case "number":
+                    case "password":
+                        res[name] = $.trim(o.value);
+                        break;
+                    case "checkbox":
+                        if (o.checked) {
+                            res[name] = res[name] || [];
+                            res[name].push(o.value);
+                        }
+                        break;
+                    case "radio":
+                        if (o.checked) {
+                            res[name] = o.value;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        })
+        return res;
+    }
+
+</script>
+</html>

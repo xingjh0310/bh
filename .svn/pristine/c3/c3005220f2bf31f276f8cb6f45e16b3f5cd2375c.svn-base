@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>幸运加息</title>
+    <link rel="stylesheet" href="/css/base/BH_base.css">
+    <link rel="stylesheet" href="/css/activities/luckDraw.css">
+    <style>
+        .luck-draw-page{width: 100%;overflow-x: hidden;}
+        .ios-tip{margin-top:0.2rem;line-height:0.5rem;font-size:0.22rem;text-align: center;color: #fff;}
+    </style>
+</head>
+<body>
+    <% if(fromWrap){ %>
+        <input type="hidden" value="<%= fromWrap %>" id="isWrap">
+    <% }else { %>
+        <input type="hidden" value="<%= 0 %>" id="isWrap">
+    <% } %>
+
+    <% if(user.id){ %>
+        <input type="hidden" value="<%= user.id %>" id="userId">
+    <% }else { %>
+        <input type="hidden" value="<%= 0 %>" id="userId">
+    <% } %>
+
+    <div class="luck-draw-page">
+        <div class="top-box">
+            <img src="/img/activities/luckDraw/top_title1.png" alt="">
+            <img src="/img/activities/luckDraw/top_title2.png" alt="">
+            <img src="/img/activities/luckDraw/top_title3.png" alt="">
+        </div>
+        <div class="main-box">
+            <div class="luck-cont"></div>
+            <div id="luck-btn"></div>
+            <div class="luck-bt">
+                <div class="my-luck-btn"></div>
+            </div>
+        </div>
+        <div class="ios-tip">本次活动与Apple Inc.无关</div>
+        <div class="record-box">
+            <div class="record-title">
+                <img src="/img/activities/luckDraw/record_title.png" alt="">
+            </div>
+            <div class="record-cont">
+                <div class="record-cont-top">
+                    <img src="/img/activities/luckDraw/record_cont_bg.png" alt="">
+                </div>
+                <div class="list-box">
+                    <div class="list-wrap">
+                        <ul class="record-list">
+                            <li class="item">
+                                <div class="pull-left">恭喜158****3130</div>
+                                <div class="pull-left">获得</div>
+                                <div class="pull-right">0.8%加息券</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="rule-box">
+            <div class="record-title rule-title">
+                <img src="/img/activities/luckDraw/rule_title.png" alt="">
+            </div>
+            <ul class="rule-list">
+                <li class="item">1.注册用户每日可通过幸运大转盘获得不同加息额度的幸运加息券；</li>
+                <li class="item">2.在使用完本次幸运加息券后，才可获得下一次幸运转盘的资格，当日的幸运转盘不限次数；</li>
+                <li class="item">3.幸运大转盘所得加息券不可用于新客专享、VIP 尊享、整点抢购和重大节日加息活动;</li>
+                <li class="item">4.使用加息券需投资金额≥1000 元以上;</li>
+                <li class="item">5.加息券每次使用仅限 1 张，可与账户中的投资红包同时使用;</li>
+                <li class="item">6.加息券有效期为 7 天，过期作废。</li>
+                <li class="item">7.本活动即日起生效，活动结束时间以官方公告为准，如果活动出现漏洞与错误，铂恒金服有权对活动进行修改和完善，最终解释权归铂恒金服所有。</li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="fixed-btn-box" style="display: none;">
+        <div class="fixed-btn" onclick="fnGoNext()">立即投资</div>
+    </div>
+
+    <!--弹窗-->
+    <div class="popUp-box" onclick="closeAll()">
+        <!--恭喜您-->
+        <div class="success-box">
+            <div class="success-close-btn-wrap">
+                <div class="success-close-btn" onclick="closePop('.success-box')"></div>
+            </div>
+            <ul class="success-cont">
+                <li class="success1-wrap">
+                    <img src="/img/activities/luckDraw/success1.png" alt="">
+                </li>
+                <li class="success2-wrap"></li>
+                <li class="success3-wrap">
+                    <div class="success3-txt"></div>
+                </li>
+                <li class="success4-wrap"></li>
+            </ul>
+            <div class="success-btn" onclick="fnGoNext()"></div>
+        </div>
+        <!--err信息-->
+        <div class="fail-box">
+            <div class="success-close-btn-wrap">
+                <div class="fail-close-btn" onclick="closePop('.fail-box')"></div>
+            </div>
+            <ul class="fail-cont">
+                <li class="fail1-wrap">
+                    <img src="/img/activities/luckDraw/fail1.png" alt="">
+                </li>
+                <li class="fial2-wrap">
+                    <div class="fail2-txt"></div>
+                </li>
+                <li class="fial3-wrap"></li>
+            </ul>
+            <div class="fail-btn" onclick="fnGoNext()"></div>
+        </div>
+        <!--我的奖品列表-->
+        <div class="my-list">
+            <div class="success-close-btn-wrap">
+                <div class="my-close-btn" onclick="closePop('.my-list')"></div>
+            </div>
+            <div class="my-cont">
+                <ul class="my-cont-ul">
+
+                </ul>
+            </div>
+            <div class="my-btn" onclick="fnGoBouns()"></div>
+        </div>
+    </div>
+</body>
+    <script type="text/javascript" src="/js/plugins/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="/js/plugins/jQueryRotate.2.2.js"></script>
+    <script type="text/javascript" src="/js/plugins/scroll.js"></script>
+    <script type="text/javascript" src="/js/plugins/moment.min.js"></script>
+    <script type="text/javascript" src="/js/BH/public.js"></script>
+    <script type="text/javascript" src="/js/BH/activities/luckDraw.js?t=<%=new Date().getTime()%>"></script>
+    <script>
+        $(function(){
+            var systemType = phoneType();
+            var isWrap = $('#isWrap').val() == 0 ? false: true;
+            if(systemType == 1 || isWrap){
+                $('.fixed-btn-box').show();
+            }
+        })
+        /*原生交互、wrap端连接*/
+        var isWrap = $('#isWrap').val() == 0 ? false: true;
+        function fnGoNext() {
+            event.stopPropagation();
+            if(isWrap){
+                window.location.href="/debts";
+            }else {
+                goAppPage(2);
+            }
+        }
+
+        function fnGoBouns() {
+            event.stopPropagation();
+            if(isWrap){
+                window.location.href="/account/bonus";
+            }else {
+                goAppPage(3);
+            }
+        }
+    </script>
+</html>

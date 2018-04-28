@@ -1,0 +1,41 @@
+/*---tmpwen---*/
+.tmpwen{padding:10px 0;background: #ffebcc;color:#666;display:none;}
+.temtext{width: 380px; margin-top: 0px; margin-right: auto; margin-bottom: 0px; margin-left: auto;}
+.temtext img{width: 18px; height: 18px; float: left; display: block;margin-right:10px;}
+/*---header---*/
+/*top-warp*/
+/*body{font-size: 14px;}*/
+.top-warp{height: 36px;line-height: 36px;background: #f5f5f5;border-bottom: 1px solid #ededed}
+.top{width: 1103px;margin: 0 auto}
+.top-warp .pull-right span{padding: 0 15px;border-left: 1px solid #ededed;    display: inline-block;height: 36px;position: relative}
+.top-warp .pull-right span:first-child{border:none;}
+.navhead{width: 1103px;margin: 0 auto;height: 82px;}
+.logo{height: 46px;width: 355px;margin-top: 15px;overflow:hidden}
+.nav-bar ul li .active{color: #ff8a10}
+.logo_scroll{float:right;}
+.logo_scroll li{height:46px;line-height:60px;}
+/* 导航*/
+.nav-bar{margin-top: 22px;font-size: 16px;}
+.nav-bar ul{display: block;width: 100%;margin: 0;position: relative;}
+.nav-bar ul li{font-size: 16px;list-style-type: none;float: left; height: 25px; width: 90px;line-height: 25px; text-align: center; color: #333333;padding: 8px 15px;position: relative;}
+.nav-bar ul li ul {padding-top: 9px;background:url(/img/11.png) #fff;background-repeat: no-repeat;z-index:9;display: list-item; margin: 0;position: absolute;left: 0px;font-size: 14px;display: none;top: 41px;}
+.nav-bar>ul>li ul li{border:1px solid #ebebeb;border-width: 0 1px 1px 1px;width: 88px;}
+.nav-bar>ul>li ul li:first-child{border-width: 0px 0px 1px 0;width: 90px;}
+.nav-bar ul li a{text-decoration: none; color: #333333; }
+.nav-bar ul li:hover {color: #000; cursor: pointer; }
+.nav-bar ul li:hover ul { display: block;}
+.nav-bar ul li:hover ul li:hover{    color: #ff5588;cursor: pointer;}
+.nav-bar ul li .up{-webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;vertical-align: middle;margin-left: 5px;}
+.nav-bar ul li:hover .up{transform:rotate(180deg);-webkit-transition:rotate(180deg);
+    -moz-transition: rotate(180deg);
+    -o-transition: rotate(180deg);}
+.nav-bar ul li:hover >a{color: #ff8a10}
+.nav-bar>ul>li ul li:hover{background: #eee}
+.nav-bar ul li.no_nav a{display:inline-block;height:37px;width:80px;}
+.nav-bar ul li.no_nav {height:36px;width:160px;padding:0;border:1px solid #ff8a10;line-height: 37px;border-radius: 5px;
+    margin-top:2px;}
+.nav-bar ul li.no_nav .no_nav_dl{background:  #ff8a10;color:#fff;border-radius: 5px 0  0 5px}
+.nav-bar ul li.no_nav .no_nav_zc{color:#333}

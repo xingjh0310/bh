@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= com.env.seo.title %>充值提现
+        <link rel="stylesheet" type="text/css" href="/css/BH/account/public.css"/>
+        <link rel="stylesheet" type="text/css" href="/css/BH/parent/account_left.css"/>
+</head>
+<body>
+<% include ../parent/top.ejs %>
+
+<% include ../parent/account_left.ejs %>
+<div class="inv_main ">
+    <div class="personal_cen hr">
+
+        <table border="0" cellspacing="0" class="table table_css" width="100%">
+            <thead>
+            <tr>
+                <th style="width:200px;">账户余额（元）</th>
+                <th style="width:186px;">累计充值（元）</th>
+                <th>累计提现（元）</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="colf82"><%= account.balance + account.freeze + account.collectCorpus + account.collectInterest %></td>
+                <td><%= account.totalRechargeAmount %></td>
+                <td><%= account.totalWithdrawAmount %></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="btn_group">
+            <a href="/account/recharge" class="btn btn_t">充值</a>
+            <a href="/account/withdraw" class="btn btn_t" style="margin-right:0">提现</a>
+
+        </div>
+    </div>
+
+    <div class="personal_cen">
+
+        <div class="table_list">
+            <div class="table_send">
+                <div>
+                    <a href="javascript:"><i class="iconfont">&#xe600;</i>导出报表</a>
+                    <a href="javascript:"><i class="iconfont">&#xe61d;</i>发送至邮箱</a>
+                </div>
+            </div>
+
+            <table border="0" cellspacing="0" width="100%" class="table dates">
+
+                <thead>
+                <tr>
+                    <th>时间</th>
+                    <th>类型</th>
+                    <th>收支记录(元)</th>
+                    <th>账户余额(元)</th>
+                    <th>状态</th>
+                    <th>备注</th>
+
+                </tr>
+                </thead>
+
+                <script type="text/template" id="recharge_tmpl">
+                    <tr>
+                        <td>{time}</td>
+                        <td>充值</td>
+                        <td>{amount}</td>
+                        <td>{balance}</td>
+                        <td>{isCompleted}</td>
+                        <td>{gatWay}
+                            <div class="w beizhu" style="min-width:224px;">
+                                <div class="x">
+                                    <p class="p1">资金流水号</p>
+                                    <p>{order_no}</p></i>
+                                    <span class="z">◆</span> <span class="y">◆</span></div>
+                            </div>
+                        </td>
+
+                    </tr>
+                </script>
+                <tbody id="recharge_list">
+
+                </tbody>
+            </table>
+
+            <div id="page" class="pagination_div">
+                <ol class="pagination_1">
+
+                </ol>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+</body>
+<% include ../parent/bottom.ejs %>
+<script type="text/javascript">
+    ZC_api.loadRecharges(1, 10);
+</script>
+</html>

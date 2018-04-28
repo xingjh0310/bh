@@ -1,0 +1,115 @@
+/*侧边导航*/
+.side_nav{display:block;width: 50px;position: fixed;right: 40px;top: 300px;}
+.side_nav>div{-webkit-transition: all 0.2s;position: relative;cursor: pointer;height: 50px;width:50px;background: url(/img/font_6.png);margin-bottom: 5px;border-radius: 3px;
+    -moz-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    transition: all 0.2s;}
+.side_nav .div6{height:106px;width:140px;background: transparent;position: absolute;right:-43px;top:-102px}
+.side_nav .div6{
+    animation: adbox 2s linear infinite;
+    -webkit-animation: adbox 2s linear infinite;
+    -moz-animation: adbox 2s linear infinite;
+    -ms-animation: adbox 2s linear infinite;
+    -o-animation: adbox 2s linear infinite;
+    transition: all .2s linear;
+    -webkit-transition: all .2s linear;
+    -moz-transition: all .2s linear;
+    -ms-transition: all .2s linear;
+    -o-transition: all .2s linear;
+
+}
+
+@keyframes adbox {
+    0%,100% {
+        top:-140px
+    }
+    50% {
+        top:-150px
+    }
+}
+@-webkit-keyframes adbox {
+    0%,100% {
+        top:-140px
+    }
+    50% {
+        top:-150px
+    }
+}
+@-moz-keyframes adbox {
+    0%,100% {
+        top:-140px
+    }
+    50% {
+        top:-150px
+    }
+}
+@-ms-keyframes adbox {
+    0%,100% {
+        top:-140px
+    }
+    50% {
+        top:-150px
+    }
+}
+@-o-keyframes adbox {
+    0%,100% {
+        top:-140px
+    }
+    50% {
+        top:-150px
+    }
+}
+.side_nav img{vertical-align: middle;margin-right: 5px;}
+.side_nav .div2{background-position:0 -57px}
+.side_nav .div5{background-position:0 -290px}
+.side_nav .div3{background-position:0 -114px}
+.side_nav .div4{background-position:0 -229px}
+.side_nav .return_top{background-position:0 -170px}
+.side_nav .div1:hover{background-position: -50px -0;}
+.side_nav .div2:hover{background-position: -50px -57px;}
+.side_nav .div5:hover{background-position: -50px -290px;}
+.side_nav .div3:hover{background-position: -50px -114px;}
+.side_nav .div4:hover{background-position: -50px -229px;}
+.side_nav .return_top:hover{background-position: -50px -170px;}
+.side_nav>div>div{ transform-origin: right 50%;
+    -webkit-transform-origin: right 50%;
+    -moz-transform-origin: right 50%;
+    -o-transform-origin: right 50%;
+    -ms-transform-origin: right 50%;
+    transform: scale(0);
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -o-transform: scale(0);
+    -ms-transform: scale(0);
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;display:none\0;
+    transition: all 0.3s;opacity:0;position: absolute;background:url(/img/font_6.png);right: 50px; height: 136px;}
+.side_nav>div:hover div{display: block;\0;}
+.side_nav>div .one{
+    width:173px;background-position: -117px 0}
+.side_nav>div .two{width:142px;background-position: -296px 0}
+.side_nav>div .two img{height: 95px;width: 95px;margin: 10px 0 2px 15px;}
+.side_nav>div .p1{color: #fe8749}
+.side_nav>div .two p{margin-left: 13px;}
+.side_nav>div .the{width:141px;background-position: -440px 0}
+.side_nav>div .the img{margin: 5px 0 5px 25px;}
+.side_nav>div .the p{margin-left: 20px;}
+.side_nav>div .one p{margin-left: 15px;margin-bottom: 5px}
+.side_nav>div .one .p2{margin-top: 10px;}
+.side_nav>div .one .p3{margin-top: 3px;}
+.side_nav>div .for{width:240px;height:150px;margin:13px 0 0 15px;}
+.side_nav>div .for li{margin-bottom:10px;color:#fff}
+
+.side_nav>div .for li img{width:15px;}
+.side_nav>div:hover div{top: 0px;
+    opacity: 1;transform: scale(1);
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -o-transform: scale(1);
+    -ms-transform: scale(1);-webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;}
+
+.side_nav>.div6>div{background:transparent;margin-top:10px;}

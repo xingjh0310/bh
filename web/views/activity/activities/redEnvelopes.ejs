@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= com.env.seo.title %>五一狂欢 红包畅快领</title>
+    <% include ../../parent/static.ejs %>
+    <link rel="stylesheet" href="/css/BH/activity/redEnvelopes.css">
+</head>
+<body>
+    <% if(user){ %>
+        <input type="hidden" value="<%= user.id %>" id="userId">
+    <% }else { %>
+        <input type="hidden" value="<%= 0 %>" id="userId">
+    <% } %>
+
+    <% if(activityID){ %>
+        <input type="hidden" value="<%= activityID %>" id="activityID">
+    <% }else { %>
+        <input type="hidden" value="<%= 0 %>" id="activityID">
+    <% } %>
+    <% include ../../parent/top.ejs %>
+    <div class="redEnvelopes-page">
+        <ul class="top-box">
+            <li class="top-item">
+                <img src="/img/activity/redEnvelopes/top_img1.png" alt="五一狂欢" class="top-img">
+            </li>
+            <li class="top-item">
+                <img src="/img/activity/redEnvelopes/top_img2.png" alt="红包畅快领" class="top-img">
+            </li>
+            <li class="top-item">
+                <img src="/img/activity/redEnvelopes/top_img3.png" alt="活动时间：2018年4月29日起" class="top-img">
+            </li>
+        </ul>
+        <div class="main-box">
+            <div class="main-title">
+                <img src="/img/activity/redEnvelopes/main_title.png">
+            </div>
+            <ul class="main-cont-ul">
+                <li class="main-cont-item">
+                    <div class="main-cont-img">
+                        <img src="/img/activity/redEnvelopes/main_img1.png">
+                        <img src="/img/activity/redEnvelopes/main_img2.png">
+                    </div>
+                </li>
+                <li class="main-cont-item">
+                    <div class="main-cont-img">
+                        <img src="/img/activity/redEnvelopes/main_img3.png">
+                        <img src="/img/activity/redEnvelopes/main_img4.png">
+                    </div>
+                </li>
+            </ul>
+            <div class="main-txt-wrap">
+                <img src="/img/activity/redEnvelopes/main_txt.png">
+            </div>
+            <div class="main-btn-wrap">
+                <div class="main-btn">
+                    <% if(!isReceived){ %>
+                        <div class="buttont" onclick="showModal()">立即领取</div>
+                    <% }else { %>
+                        <div class="buttont" onclick="goToDebts()">立即使用</div>
+                    <% } %>
+                    <span class="icon"></span>
+                </div>
+
+            </div>
+        </div>
+        <div class="rule-box">
+            <div class="rule-title">
+                <img src="/img/activity/redEnvelopes/rule_title.png" alt="">
+            </div>
+            <div class="rule-main">
+                <img src="/img/activity/redEnvelopes/rule_main.png" alt="">
+            </div>
+        </div>
+    </div>
+    <% include ../../parent/bottom.ejs %>
+    <!--弹窗-->
+    <div class="modal-alert" id="modal-alert" style="display: none;">
+        <div class="popUp-main1">
+            <div class="popUp-btn" onclick="goToDebts()"></div>
+        </div>
+        <div class="popUp-main2">
+            <div class="popUp-msg"></div>
+        </div>
+    </div>
+</body>
+    <script src="/js/jquery-1.7.2.js"></script>
+    <script>
+        function showModal() {
+            var userId = $('#userId').val();
+            var activityId = $('#activityID').val();
+            if(userId == 0){
+                window.location.href = "/login";
+                return false;
+            }
+            $.ajax({
+                url: '/activity/mayDayReceiveBonus',
+                type: 'post',
+                data: {activityId: activityId},
+                success: function (res) {
+                    if(res.code && res.code == -1){
+                        window.location.href = "/login";
+                        return false;
+                    }
+                    if(res.code && res.code == 1){
+                        $('.popUp-main1').show();
+                        $('#modal-alert').show();
+                        return false;
+                    }
+                    if(res.code && res.code == -2){
+                        $('.popUp-msg').text(res.message);
+                        $('.popUp-main2').show();
+                        $('#modal-alert').show();
+                        setTimeout(function () {
+                            $('.popUp-msg').text('');
+                            $('.popUp-main2').hide();
+                            $('#modal-alert').hide();
+                        },1500);
+                        return false;
+                    }
+                }
+            })
+        }
+
+        function goToDebts() {
+            window.location.href = "/debts";
+        }
+
+    </script>
+</html>

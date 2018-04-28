@@ -1,0 +1,39 @@
+<!--弹出框-->
+
+<div id="alert-warp" class="modal-alert" style="display:none">
+    <div class="modal-dialog-alert">
+        <div class="modal-conten-alert">
+            <p id="modal_title"></p>
+            <img src="/img/default.png" id="modal_img">
+            <p class="p1" id="modal_content"></p>
+            <a href="javascript:void(0)" class="btn_zd" onclick="$('#alert-warp').hide()">我知道了</a>
+        </div>
+
+    </div>
+</div>
+<script src="/js/plugins/jquery-2.1.4.min.js"></script>
+<!--<script src="/js/jquery-1.7.2.min.js"></script>-->
+<script src="/js/plugins/swiper.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/public.js"></script>
+<!--<script src="/js/jquery.circliful.min.js"></script>-->
+<script src="/js/plugins/cropbox.js"></script>
+<script src="/js/plugins/wow.min.js"></script>
+
+<script src="/js/plugins/pinchzoom.min.js"></script>
+<script src="/js/plugins/jquery.toggle-password.min.js"></script>
+<script src="/js/plugins/jquery.fullPage.min.js"></script>
+<script src="/js/plugins/zoom.min.js"></script>
+<script src="/js/area.js"></script>
+<script src="/js/invite.js"></script>
+
+
+<script type="text/javascript" src="/js/plugins/fastclick.js" ></script>
+<script type="text/javascript" src="/js/plugins/layer/layui.js"></script>
+<script type="text/javascript" src="/js/mobilepublic.js"></script>
+
+<script type="text/javascript">
+    var _gbl =<%- JSON.stringify(_global) %>;
+    if ('<%= (alert || '') %>') alert('<%- alert %>');
+</script>

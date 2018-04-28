@@ -1,0 +1,173 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> app管理 <span
+            class="c-gray en">&gt;</span> 个推推送 <a class="btn btn-success radius r mr-20"
+                                                   style="line-height:1.6em;margin-top:3px"
+                                                   href="javascript:location.replace(location.href);" title="刷新"><i
+                class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+    <div class="codeView docs-example">
+    <form class="form form-horizontal" id="form">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>标题：</label>
+
+            <div class="formControls col-xs-8 col-sm-5">
+                <input type="text" class="input-text" id="title" placeholder="请输入标题" datatype="*4-100"
+                       nullmsg="请输入标题" errormsg="大于4位小于100位" name="title" />
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>内容：</label>
+            <div class="formControls col-xs-8 col-sm-5" style="width: 60%;">
+                <textarea id="content" name="content" style="width: 440px;" onkeyup="textarealength(this,200)" nullmsg="请输入内容！" dragonfly="true"  placeholder="请输入内容" class="textarea" rows="" cols=""></textarea>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>透传类型：</label>
+
+            <div class="formControls col-xs-8 col-sm-5"> <span class="select-box">
+                    <select class="select" name="transmissionType" id = "transmissionType">
+
+                    </select>
+                </span>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>透传链接：</label>
+
+            <div class="formControls col-xs-8 col-sm-5">
+                <input type="text" class="input-text" id="transmissionContent" placeholder="请输入透传链接" datatype="*4-100"
+                       nullmsg="透传链接" errormsg="大于4位小于100位" name="transmissionContent" />
+            </div>
+        </div>
+        <div class="row cl">
+        <label  class="form-label col-xs-4 col-sm-3" style="margin-left:250px;"><span class="c-red">*</span>以下条件为并联关系，请核对后选择！</label>
+            </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3" ><span class="c-red">*</span>是否注册：</label>
+
+            <div class="formControls col-xs-8 col-sm-5"> <span class="select-box">
+                    <select class="select" name="isReg">
+                        <option value="-1">请选择</option>
+                        <option value="-1">全部</option>
+                        <option value="2">否</option>
+                        <option value="1">是</option>
+                    </select>
+                </span>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>是否实名：</label>
+
+            <div class="formControls col-xs-8 col-sm-5"> <span class="select-box">
+                    <select class="select" name="isRealName">
+                        <option value="-1">请选择</option>
+                        <option value="-1">全部</option>
+                        <option value="2">否</option>
+                        <option value="1">是</option>
+                    </select>
+                </span>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>是否投资：</label>
+
+            <div class="formControls col-xs-8 col-sm-5"> <span class="select-box">
+                    <select class="select" name="isInvest">
+                        <option value="-1">请选择</option>
+                        <option value="-1">全部</option>
+                        <option value="2">否</option>
+                        <option value="1">是</option>
+                    </select>
+                </span>
+            </div>
+        </div>
+        <div class="row cl">
+
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>预定时间：</label>
+
+            <div class="formControls col-xs-8 col-sm-5">
+                <input type="text" class="input-text Wdate" placeholder="请输入预定时间"  id="timingTime" name="timingTime" value="" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>还款日期：</label>
+            <div class="formControls col-xs-8 col-sm-5">
+                <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'eTime\')}'})" id="bTime"
+                       class="input-text Wdate"
+                       value=""
+                       style="width:120px;" name="bTime" readonly="true"/>
+                -
+                <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'bTime\')}'})" id="eTime"
+                       class="input-text Wdate" style="width:120px;" value="" name="eTime"
+                       readonly="true"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>个人用户：</label>
+            <div class="formControls col-xs-8 col-sm-5" style="width: 60%;">
+
+                <textarea id="mobiles" name="mobiles" style="width: 440px;" onkeyup="textarealength(this,200)" nullmsg="请选择用户！" class="textarea" rows="" cols="" readonly="readonly"></textarea>
+                <button name="" id="" class="btn btn-success" type="button" onclick="selectUser()"><i class="Hui-iconfont">&#xe600;</i> 选择用户
+                </button>
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-10 col-offset-3">
+                <button id="sub" class="btn btn-primary radius" type="button" style="margin-top:25px;"><i
+                            class="Hui-iconfont">&#xe632;</i> 保存
+                </button>
+            </div>
+        </div>
+    </form>
+        </div>
+</div>
+
+
+</body>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+    //设置透传类型
+    var transmissionType = "<%=com.env.transmissionType%>";
+    var strs = new Array();
+    strs =transmissionType.split(",");
+    for (i=0;i<strs.length ;i++ ){
+        $("#transmissionType").append("<option value='"+strs[i]+"'>"+strs[i]+"</option>");
+    }
+
+    $(".form").Validform({
+        btnSubmit: '#sub',
+        postonce: true,
+        tiptype: 4,
+        showAllError: true,
+        ajaxPost: true,
+        beforeSubmit: function (curform) {
+            $.ajax({
+                url: '/appManager/saveAppPushMessage',
+                type: 'post',
+                data: {appPushMessage: JSON.stringify($('#form').serializeJson())},
+                success: function (msg) {
+                    if (!msg.err) {
+                        Huimodal_alert('操作成功', 1000, function () {
+                        });
+                    }
+                    else {
+                        Huimodal_alert(msg.err, 1000, function () {
+                        });
+                    }
+                }
+            })
+            return false;
+        }
+    });
+
+    function selectUser() {
+        var mobiles = $("#mobiles").val();
+//        alert(mobiles);
+        var url = '/appManager/selectUser?mobiles='+mobiles;
+        layer_show('选择用户', url, 700, 500);
+    }
+</script>
+</html>

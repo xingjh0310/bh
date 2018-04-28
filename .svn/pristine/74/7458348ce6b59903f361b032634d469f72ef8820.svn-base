@@ -1,0 +1,335 @@
+/**
+ * Created by pwx on 2016/8/4.
+ */
+var redis = require('redis');
+var md5 = require('MD5');
+var request = require('request');
+var midx = require('./midx');
+var async = require('async');
+var redisCli = redis.createClient(com.env.redis.port, com.env.redis.host);
+
+/**
+ * 设置手机验证码
+ * @param amount
+ */
+exports.setMobileCode = function (mobile, type, code, call) {
+    redisCli.set("code_" + type + '_' + mobile, code, function (err, res) {
+        redisCli.expire("code_" + type + '_' + mobile, 120);
+        call();
+    });
+}
+
+/**
+ * 获取手机验证码
+ * @param amount
+ */
+exports.getMobileCode = function (mobile, type, call) {
+    redisCli.get("code_" + type + '_' + mobile, function (err, code) {
+        if (err || !code)
+            call(err || 'no data');
+        else
+            call(null, code);
+    })
+}
+
+/**
+ * 设置图片验证码
+ * @param amount
+ */
+exports.setImgCode = function (sessionId, code, call) {
+    redisCli.set("img_" + sessionId, code, function (err, res) {
+        redisCli.expire("img_" + sessionId, 120);
+        call();
+    });
+}
+
+
+/**
+ * 获取图片验证码
+ * @param amount
+ */
+exports.getImgCode = function (sessionId, call) {
+    redisCli.get("img_" + sessionId, function (err, code) {
+        if (err || !code)
+            call(err || 'no data');
+        else
+            call(null, code);
+    })
+}
+
+/**
+ * 防止多次提交
+ * @param amount
+ */
+exports.limit = function (req, res, next) {
+    var key = req.sessionID + req.originalUrl;
+    redisCli.setnx(key, 'ok', function (err, res) {
+        if (res == 1) {
+            redisCli.pexpire(key, 2000);
+            next();
+        }
+        else
+            res.json({err: '请勿频繁请求，稍后再试'});
+    });
+}
+
+exports.checkFrequentAction = function(key,pexpire,cb){
+    if(typeof pexpire == 'function'){
+        cb = pexpire;
+        pexpire = null;
+    }
+    pexpire = pexpire || 1000;
+    key = 'Frequent-'+key;
+    redisCli.setnx(key, 'ok', function (err, res) {
+        if (res == 1) {
+            redisCli.pexpire(key, pexpire);
+            cb(null);
+        }
+        else
+            cb('请勿频繁请求，稍后再试');
+    });
+}
+
+/**
+ * 由app client sessionId获取user.id
+ * @param
+ * @param cb
+ */
+exports.getAppSession = function (sessionId, call) {
+    redisCli.get('app_session_' + sessionId, function (err, result) {
+        call(err, result);
+    })
+}
+
+/**
+ * 由app client sessionId设置user.id
+ * @param
+ * @param cb
+ */
+exports.createAppSession = function (userId, call) {
+    var sessionId = md5(com.env.guid() + com.env.key);
+    redisCli.set('app_session_' + sessionId, userId, function (err, result) {
+        redisCli.expire('app_session_' + sessionId, 60 * 60 * 24 * 30);
+        call(err, sessionId);
+    })
+}
+
+exports.deleteAppSession = function (sessionId, call) {
+    redisCli.del('app_session_' + sessionId);
+    call(null);
+}
+
+/**
+ * 获取微信access_token
+ * @callback  function(err,access_token){...}
+ */
+exports.getAccess_Token = _getAccess_Token;
+function _getAccess_Token(callback) {
+    redisCli.get("access_token", function (err, data) {
+        if (!data) {
+            var Token = com.env.wx.token,
+                AppID = com.env.wx.appID,
+                AppSecret = com.env.wx.AppSecret;
+            var url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + AppID + "&secret=" + AppSecret
+            request.post(url, function (err1, dta1) {
+                if (!err1 && dta1 && dta1.body) {
+                    var body = JSON.parse(dta1.body);
+                    redisCli.set("access_token", body.access_token, function (err, dta) {
+                        redisCli.expire('access_token', 60 * 60);
+                        callback(null, body.access_token);
+                    })
+                }
+                else {
+                    callback(null, null);
+                }
+            });
+        }
+        else
+            return callback(null, data);
+    });
+}
+
+/**
+ *获取微信 sdk api_ticket
+ * @param callback  function(err,api_ticket){...}
+ */
+exports.getApi_ticket = function (callback) {
+    redisCli.get("api_ticket", function (err1, data1) {
+        if (err1 || !data1) {
+            _getAccess_Token(function (err, dta) {
+                var url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=" + dta + "&type=jsapi";
+                request.post(url, function (err1, dta1) {
+                    if (!err1 && dta1 && dta1.body) {
+                        var body = JSON.parse(dta1.body);
+                        redisCli.set("api_ticket", body.ticket, function (err, dta) {
+                            redisCli.expire('api_ticket', 60 * 60);
+                            callback(null, body.ticket);
+                        })
+                    }
+                    else {
+                        callback(null, null);
+                    }
+                });
+            })
+        } else {
+            return callback(null, data1);
+        }
+    });
+
+}
+
+/**
+ * 根据编码查询渠道信息
+ * @param code
+ * @param callback
+ */
+exports.getChannelByCode = function (code, callback) {
+    if (code) {
+        redisCli.hget('channel_list', code, function (err, res) {
+            if (res) {
+                callback(null, JSON.parse(res));
+            } else {
+                midx('/channel/getCode', {
+                    code: code
+                }, function (err, body) {
+                    if (body) {
+                        redisCli.hmset('channel_list', code, JSON.stringify(body), function (err) {
+                            callback(null, body);
+                        })
+                    } else {
+                        callback(err || '无渠道信息', null);
+                    }
+                })
+            }
+        });
+    } else {
+        callback("编码格式不正确", null);
+    }
+}
+
+/**
+ * 删除缓存
+ * @param key
+ * @param call
+ */
+exports.deleteRedisByKey = function (key, call) {
+    redisCli.del(key, function (err, body) {
+        call(err, body);
+    });
+}
+
+exports.setRedisByKey = function (key, content, pexpire, callback) {
+    if (typeof pexpire == 'function') {
+        callback = pexpire;
+        pexpire = null;
+    }
+    pexpire = pexpire || 10;
+    if (content) {
+        redisCli.set(key, JSON.stringify(content), function (err, dta) {
+            redisCli.expire(key, pexpire);//单位毫秒
+            callback(null, null);
+        })
+    } else {
+        callback(null, null);
+    }
+}
+
+exports.getRedisByKey = function (key, callback) {
+    redisCli.get(key, function (err, dta) {
+        if (!err && dta) {
+            try {
+                dta = JSON.parse(dta);
+            } catch (e) {
+                dta = null;
+            }
+        }
+        callback(null, dta);
+    })
+}
+
+/**
+ * 渠道列表
+ * @param req
+ * @param res
+ */
+exports.getChannelList = function (callback) {
+    redisCli.get("channel_Alllist", function (error, data) {
+        if (error || !data) {
+            midx('/channel/getSpreadList', {
+                pageNo: 1,
+                pageSize: 1000,
+                bTime: '',
+                eTime: ''
+            }, function (err, body) {
+                if (!err && body && body.list && body.list.length > 0) {
+                    redisCli.set("channel_Alllist", JSON.stringify(body.list), function (err, dta) {
+                        redisCli.expire('channel_Alllist', 1000 * 60 * 60 * 24 * 30);
+                        callback(null, body.list);
+                    })
+                } else {
+                    call(err || null, []);
+                }
+            })
+        } else {
+            return callback(null, JSON.parse(data));
+        }
+    });
+}
+
+
+/**
+ *
+ * @param amount 修改是否使用过加息劵
+ * @param userId   1已使用抽奖的加息劵可抽奖    0未使用抽奖加息劵不可抽奖
+ * @param cb
+ */
+exports.saveUseCoupon = function (couponIds,accountId,variable,cb) {
+    var pexpire = 1000 * 24 * 60 * 60 * 1000;
+    var date= new Date(new Date().getTime()+7*24*60*60*1000).Format("yyyy-MM-dd 23:59:59");
+    var now=new  Date().Format("yyyy-MM-dd hh:mm:ss");
+    var key = "bohomm_couponIds_";
+    redisCli.hget(key,accountId,function(err,body) {
+        if (body) {
+            body = JSON.parse(body);
+        } else {
+            body = {CouponIds:couponIds,isUse:variable,expireTime:now};
+        }
+        body.CouponIds = couponIds||0 ;
+        body.isUse = variable||0 ;
+        body.expireTime = date||now ;
+        if(parseFloat(variable)==0){
+            console.log("accountId："+accountId+"领取加息劵："+body.CouponIds+"isUse："+body.isUse+"领取时间："+now);
+        }else if(parseFloat(variable)==1) {
+            console.log("accountId："+accountId+"加息劵："+body.CouponIds+"isUse："+body.isUse+"时间："+now);
+        }
+        redisCli.hset(key, accountId, JSON.stringify(body), function (err, res) {
+            redisCli.pexpire(key, pexpire);
+            cb(null);
+        });
+    })
+}
+
+exports.getUseCoupon = function (accountId,cb) {
+    var now=new  Date().Format("yyyy-MM-dd hh:mm:ss");
+    if(!accountId || isNaN(accountId)){
+        return cb('sessionid失效，请重新登录.',null);
+    }
+    var key = "bohomm_couponIds_";
+    redisCli.hget(key,accountId,function(err,body){
+        if(!err && body){
+            body=JSON.parse(body);
+            if(body.expireTime >=now){
+                body.CouponIds=body.CouponIds||0;
+                body.isUse=body.isUse||0;
+                body.expireTime=body.expireTime||now;
+                cb(null,body);
+            }else{
+                redisCli.hdel(key,accountId,function (err,data) {
+                    cb(null,data);
+                })
+            }
+        }else{
+            cb(null,{CouponIds:0,isUse:1,expireTime:now});
+        }
+    })
+}

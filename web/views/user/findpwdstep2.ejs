@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <link rel="stylesheet" type="text/css" href="/css/BH/user/login.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/BH/user/findpwd.css"/>
+    <title><%= com.env.seo.title %>找回密码</title>
+</head>
+<body>
+<div class="login_navw">
+    <div class="login_nav">
+        <a href="/"><img src="/img/logo.png"> </a>
+        <div class="logo_scroll">
+            <ul style="margin-top: 0px;">
+                <li><img src="/img/lo1.png"></li>
+                <li><img src="/img/lo2.png"></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="pass_warp">
+
+    <div class="f_pass">
+        <img src="/img/find2.png" style="margin:0 auto;display:table">
+        <form class="form-horizontal f_input formResetLoginPwd">
+            <div class="tipsYz"></div>
+                <div class="tipsMob">验证码已发送，请注意查收</div>
+
+                <div class="form-group">
+                    <span class="u2"></span>
+                    <input type="password" class="form-control" name="pwd" _check="password" placeholder="设置6~20位登录密码">
+                </div>
+                <div class="form-group">
+                    <span class="u2"></span>
+                    <input type="password" class="form-control" name="pwd1" _check="pwd2" placeholder="再次输入密码">
+                </div>
+                <a href="javascript:" class="btn" onclick="ZC_api.findLoginPassword()">确定</a>
+
+        </form>
+
+    </div>
+
+
+</div>
+
+<% include ../parent/bottom.ejs %>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #fff">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="format-detection" content="telphone=no, email=no"/>
+    <title><%= com.env.seo.title %>排行榜</title>
+    <link rel="stylesheet" type="text/css" href="/css/common.css?t=<%=new Date().getTime()%>"/>
+    <style type="text/css">
+          .rank-top{
+              padding-top: 0.88rem;
+              border-bottom: 1px solid #eee;
+          }
+          .rank-top ul li{
+              float: left;
+              height: 0.75rem;
+              line-height: 0.75rem;
+              text-align: center;
+              width: 33%;
+              font-size: 0.32rem;
+          }
+          .rank-top ul li.active{
+              border-bottom: 1px solid #f6303e;
+          }
+          .rank-p{
+              border-bottom: 1px solid #eee;
+          }
+        .rank-p ul li{
+            float: left;
+            height: 0.75rem;
+            line-height: 0.75rem;
+            text-align: center;
+            width: 33%;
+            color: #999;
+        }
+          .rank-bottom div li{
+              height: 1rem;
+              overflow: hidden;
+              border-bottom: 1px solid #eee;
+          }
+          .rank-bottom div  li i{
+              width: 33%;
+              float: left;
+              text-align: center;
+              line-height: 1rem;
+              font-size: 0.3rem;
+          }
+        .rank-bottom div  li i img{
+            width: 0.75rem;
+            margin: auto;
+            margin-top: 0.15rem;
+            margin-bottom: 0.1rem;
+        }
+          .rank-bottom div  li strong{
+              width: 33%;
+              float: left;
+              text-align: center;
+              line-height: 1rem;
+              font-weight: inherit;
+          }
+          .rank-bottom div li em{
+              width: 33%;
+              float: left;
+              text-align: center;
+              line-height: 1rem;
+          }
+    </style>
+</head>
+<body>
+<div class="header" style="border-bottom:1px solid #e5e5e5"><a class="iconfont" href="/debts"><img src="/img/fh1.png" class="fh_img"></a>投资排行榜</div>
+
+<div class="rank-main">
+      <div class="rank-top">
+          <ul class="clearfix">
+              <li class="active">今日</li>
+              <li>本月</li>
+              <li>总榜</li>
+          </ul>
+      </div>
+        <div class="rank-p">
+            <ul class="clearfix">
+                <li>排行</li>
+                <li>用户名</li>
+                <li>投资金额</li>
+            </ul>
+        </div>
+      <div class="rank-bottom">
+          <div id="dayInvest">
+              <ul class="clearfix"></ul>
+          </div>
+          <div id="monthInvest" style="display: none">
+              <ul class="clearfix"></ul>
+          </div>
+          <div id="totalInvest" style="display: none">
+              <ul class="clearfix"></ul>
+          </div>
+      </div>
+</div>
+<script src="/js/plugins/jquery-2.1.4.min.js"></script>
+<script src="/js/util.js"></script>
+<script>
+    ZC_api.loadSort();
+    $(".rank-top ul li").click(function(){
+        $(this).addClass("active").siblings().removeClass("active");
+        var index = $(this).index();
+        $(".rank-bottom div").eq(index).show().siblings().hide();
+    });
+</script>
+</body>
+</html>

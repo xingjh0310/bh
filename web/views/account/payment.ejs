@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= com.env.seo.title %>回款计划</title>
+    <% include ../parent/static.ejs %>
+    <link rel="stylesheet" type="text/css" href="/css/BH/account/public.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/BH/parent/account_left.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/BH/account/invests.css"/>
+</head>
+<body>
+<% include ../parent/top.ejs %>
+
+<% include ../parent/account_left.ejs %>
+
+<div class="personal_cen inv_main" style="background: #fff;padding:36px 25px;">
+    <ul class="inv_ul">
+        <li class="fir">
+            <p>累计投资总额 <span><%= account.totalInvestAmount %></span>元</p>
+        </li>
+        <li class="sed">
+            <p>已收本金<span><%= account.totalReceivedCorpus %></span>元</p>
+            <p>待收本金<span><%= account.collectCorpus %></span>元</p>
+        </li>
+        <li class="sed">
+            <p>已收利息<span><%= account.totalReceivedInterest %></span>元</p>
+            <p>待收利息<span><%= account.collectInterest %></span>元</p>
+        </li>
+    </ul>
+
+    <div class="sx_div">
+        产品状态
+
+        <select id="type">
+            <option value="">全部</option>
+            <option value="<%= _global.state.Wait.v %>">等待回款</option>
+            <option value="<%= _global.state.Complete.v %>">已回款</option>
+            <option value="<%= _global.state.Cancel.v %>">已撤标</option>
+        </select>
+        <input type="text" data-beatpicker="true" id="start"><i class="sp2">至</i><input type="text" id="end"
+                                                                                        data-beatpicker="true">
+        <a href="javascript:" class="btn" onclick="ZC_api.loadPayments(1, 10)">查询</a>
+    </div>
+
+
+    <div class="table_list">
+        <table border="0" cellspacing="0" width="100%" class="table dates">
+
+            <thead>
+            <tr>
+                <th>日期</th>
+                <th>项目名称</th>
+                <th>本期/总期</th>
+                <th>回款本金</th>
+                <th>回款利息(元)</th>
+                <th>加息利息(元)</th>
+                <th>状态</th>
+                <th>实回日期</th>
+                <th>实回总额</th>
+            </tr>
+            </thead>
+            <script type="text/template" id="payment_tmpl">
+                <tr>
+                    <td>{payment_time}</td>
+                    <td>{title}</td>
+                    <td>{periods}/{max_periods}</td>
+                    <td>{payment_corpus}</td>
+                    <td>{payment_interest}</td>
+                    <td>{payment_coupon_interest}</td>
+                    <td>{state}</td>
+                    <td>{real_payment_time}</td>
+                    <td>{total_payment}</td>
+                </tr>
+            </script>
+            <tbody id="payment_list">
+
+            </tbody>
+
+        </table>
+
+
+        <div id="page" class="pagination_div">
+            <ol class="pagination_1">
+
+            </ol>
+        </div>
+
+    </div>
+
+</div>
+
+<% include ../parent/bottom.ejs %>
+<script type="text/javascript">
+    ZC_api.loadPayments(1, 9);
+    function Cancles() {
+        alert("【此标已撤销，无法查看项目详情】");
+    }
+</script>
+
+</body>
+
+</html>

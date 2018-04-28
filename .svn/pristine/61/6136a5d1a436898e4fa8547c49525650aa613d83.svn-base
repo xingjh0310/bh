@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>帮助中心</title>
+</head>
+<body>
+<div class="header" ><a class="iconfont" href="/help"><img src="/img/fh1.png" class="fh_img"></a>其他问题</div>
+
+<div class="help_lists">
+    <ul class="help_main">
+        <li>
+            <div class="list1">
+                <img src="/img/l_03.jpg" alt="" class="img1">
+                <span>如何邀请好友？</span>
+                <img src="/img/12.png" alt="" class="img2">
+            </div>
+            <div class="list2"  style="display: none">
+                <img src="/img/m_10.jpg" alt="" class="img1">
+                <div class="list2_one">
+                    <p>PC端：官网登录铂恒金服，【我的账户】-【奖励管理】-【邀请有礼】，发送您的邀请码或者邀请链接邀 请好友注册。</p>
+
+                </div>
+            </div>
+
+        </li>
+        <li>
+            <div class="list1">
+                <img src="/img/l_03.jpg"  class="img1">
+                <span>积分怎么获得？怎么使用积分？</span>
+                <img src="/img/12.png"  class="img2">
+            </div>
+            <div class="list2"  style="display: none">
+                <img src="/img/m_10.jpg" alt="" class="img1">
+                <div class="list2_one">
+                    <p>您可以完善账户中心的资料获得更多的积分，投标也可以获得更多的积分，后期app开发后，可在上面使 用积分兑换商品。。</p>
+
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="list1">
+                <img src="/img/l_03.jpg" alt="" class="img1">
+                <span>铂恒金服支持哪些浏览器？</span>
+                <img src="/img/12.png" alt="" class="img2">
+            </div>
+            <div class="list2" style="display: none">
+                <img src="/img/m_10.jpg" alt="" class="img1">
+                <div class="list2_one">
+                    <p>铂恒的网站操作支持大部分常见浏览器，包括IE8及以上的版本，谷歌浏览器Chrome，360浏览器， 搜狗浏览器等。</p>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="list1">
+                <img src="/img/l_03.jpg" alt="" class="img1">
+                <span>如何保护个人资料和隐私？</span>
+                <img src="/img/12.png" alt="" class="img2">
+            </div>
+            <div class="list2" style="display: none">
+                <img src="/img/m_10.jpg" alt="" class="img1">
+                <div class="list2_one">
+                    <p>为保护您的账号安全和隐私：</p>
+                    <p> ①请不要随便通过陌生人的好友申请；</p>
+                    <p>  ②请保护好您的所有密码，不要在交流过程中将您的密码告诉任何人；</p>
+                    <p>   ③请不要在网站公共区域发布的信息中包含您的身份证号码、真实姓名、联系方式、家庭住址、工作单位、收入状况等；</p>
+                    <p>   ④请不要相信冒充系统管理员的身份给你发的消息。</p>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="list1">
+                <img src="/img/l_03.jpg" alt="" class="img1">
+                <span>注册账号后可以注销吗？</span>
+                <img src="/img/12.png" alt="" class="img2">
+            </div>
+            <div class="list2" style="display: none">
+                <img src="/img/m_10.jpg" alt="" class="img1">
+                <div class="list2_one">
+                    <p>账号注册后不能申请注销</p>
+                </div>
+            </div>
+        </li>
+       
+    </ul>
+</div>
+<% include ../parent/slide_nav.ejs %>
+</body>
+</html>

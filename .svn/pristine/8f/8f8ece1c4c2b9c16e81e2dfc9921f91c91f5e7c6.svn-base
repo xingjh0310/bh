@@ -1,0 +1,20 @@
+html,body{
+    width:100%;
+    height: 100%;
+    background: #fff;
+}
+.rule-page{
+    padding: 0 0.3rem;
+}
+.rule-title{
+    padding:0.3rem 0 0.2rem;
+    line-height: 0.4rem;
+    font-size: 0.3rem;
+    color: #333;
+}
+.rule-list li{
+    padding:0.1rem 0;
+    line-height: 0.36rem;
+    font-size: 0.28rem;
+    color: #999;
+}

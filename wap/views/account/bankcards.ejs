@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>添加银行卡</title>
+</head>
+<body>
+<div class="header" ><a class="iconfont" href="/account"><img src="/img/fh1.png" class="fh_img"></a>添加银行卡</div>
+
+        <ul class="bank">
+            <% if(bankCard){ %>
+            <li class="bankli">
+                <p style="overflow: auto;"><img src="/img/bank/<%= bankCard.bank %>.png" class="regbank_img" style="float:left"/><span style="float: left;padding-top: 0.05rem;"><%= _bank[bankCard.bank].desc %></span></p>
+
+                <p>
+                    <span style="color:#999;">储蓄卡</span> <%= bankCard.cardId ? bankCard.cardId.replace(/^(\d{4})(.+)(\w{4})$/, "$1************$3") : "" %>
+                </p>
+                <p><span style="color:#999;">持卡人</span> <%= bankCard.accountName %></p>
+            </li>
+            <p style="    margin: 0rem 0 0 0.6rem;">*您成功绑定银行卡，如需帮助请联系铂恒客服</p>
+
+            <img src="/img/yhx_2.png" style="width: 90%;margin:4rem 5% 0 5%;padding-bottom:0.2rem">
+            <% }else{ %>
+            <li class="addbank">
+                <a href="/account/editbankcard">
+                <div class="edit">
+                     <img src="/img/yy.png" alt="">
+                    <p>点击添加</p>
+                </div>
+                </a>
+            </li>
+            <%}%>
+
+        </ul>
+<% include ../parent/slide_nav.ejs %>
+</body>
+</html>

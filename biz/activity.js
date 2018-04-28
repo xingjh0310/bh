@@ -1,0 +1,309 @@
+var async = require('async');
+var cache = require('./cache');
+var fs = require('fs');
+var midx = require('./midx');
+var biz_bonus = require('./bonus');
+
+//五一活动配置
+var fool_conf = {
+    starttime: new Date('2018/04/28'),
+    endtime: new Date('2018/05/15 23:59:59')
+}
+
+var May_Day_conf = {
+    starttime: new Date('2017/04/29'),
+    endtime: new Date('2017/05/01 23:59:59')
+}
+
+var Dragon_Boat_Festival_conf = {
+    starttime: new Date('2017/05/26'),
+    endtime: new Date('2017/05/31 23:59:59')
+}
+
+/**
+ * 获取愚人节活动配置
+ */
+exports.getFoolActivityList = function (callback) {
+    cache.getGuessCode(function (err, list) {
+        callback(err, list);
+    })
+}
+
+/**
+ * 获取我的猜字
+ * @param accountId
+ * @param callback
+ */
+exports.getMyGuessCode = function (accountId, callback) {
+    cache.getMyGuessCode(accountId, function (err, list) {
+        callback(err, list);
+    })
+}
+
+/**
+ * 猜字
+ * @param accountId
+ * @param code
+ * @param callback
+ */
+exports.doGuess = function (accountId, code, callback) {
+    var currenttime = new Date();
+    if (currenttime < fool_conf.starttime) {
+        callback('此活动2017年3月30日全面开启', null);
+    } else if (currenttime > fool_conf.endtime) {
+        callback('此活动已于2017年4月1日结束', null);
+    } else {
+        if (!accountId) {
+            callback('您未登录，请先登录', null);
+        } else {
+            cache.checkFrequentAction('doGuess' + accountId, 2000, function (error) {
+                if (!error) {
+                    var Str = '时间:' + new Date().Format('yyyy-MM-dd hh:mm:ss') + ';\t' + 'accountId:' + accountId + '\t' + 'code:' + code + '\n';
+                    fs.appendFile(__dirname + '/guess.log', Str, function () {
+                        cache.doGuess(accountId, code, function (err, body) {
+                            callback(err, null);
+                        })
+                    });
+                } else {
+                    callback(error, null);
+                }
+            })
+        }
+    }
+}
+
+/**
+ * 愚人节获取排行榜
+ * @param callback
+ */
+exports.getFoolRankingList = function (callback) {
+    cache.getFoolRankingList(function (err, list) {
+        if (list && list instanceof Array && list.length > 0 && list.length % 2 == 0) {
+            var temp = [];
+            for (var i = 0; i < list.length; i++) {
+                if (i % 2 == 0 && list[i + 1] && list[i]) {
+                    temp.push({mobile: list[i].replace(/^(\d{3})(.+)(\d{4})$/, "$1****$3"), amount: list[i + 1]});
+                }
+            }
+            callback(err, temp);
+        } else {
+            callback(err, []);
+        }
+    })
+}
+
+/**
+ * 愚人节统计排行榜
+ * @param accountId
+ * @param amount
+ * @param mobile
+ * @param callback
+ */
+exports.rankFool = function (accountId, amount, mobile, callback) {
+    var currenttime = new Date();
+    if (currenttime < fool_conf.starttime) {
+        callback('活动未开始');
+
+    } else if (currenttime > fool_conf.endtime) {
+        callback('活动已结束');
+    } else {
+        if (!accountId) {
+            callback('您未登录，请先登录');
+        } else {
+            cache.updateFoolRanking(mobile, amount, function (err) {
+                cache.saveLuckdraw(accountId, parseInt(amount / 20000), function (error) {
+                    callback(null);
+                })
+            })
+        }
+    }
+}
+
+/**
+ * 获取51排行榜
+ * @param callback
+ */
+exports.getMayDayRankingList = function (callback) {
+    cache.getMayDayRankingList(function (err, list) {
+        if (list && list instanceof Array && list.length > 0 && list.length % 2 == 0) {
+            var temp = [];
+            for (var i = 0; i < list.length; i++) {
+                if (i % 2 == 0 && list[i + 1] && list[i]) {
+                    temp.push({mobile: list[i].replace(/^(\d{3})(.+)(\d{4})$/, "$1****$3"), amount: list[i + 1]});
+                }
+            }
+            callback(err, temp);
+        } else {
+            callback(err, []);
+        }
+    })
+}
+
+/**
+ * 51统计排行榜
+ * @param accountId
+ * @param amount
+ * @param mobile
+ * @param callback
+ */
+exports.rankMayDay = function (accountId, amount, mobile, callback) {
+    var currenttime = new Date();
+    if (currenttime < May_Day_conf.starttime) {
+        callback('活动未开始');
+
+    } else if (currenttime > May_Day_conf.endtime) {
+        callback('活动已结束');
+    } else {
+        if (!accountId) {
+            callback('您未登录，请先登录');
+        } else {
+            cache.updateMayDayRanking(mobile, amount, function (err) {
+                callback(null);
+            })
+        }
+    }
+}
+
+/**
+ * 端午节统计排行榜
+ * @param accountId
+ * @param amount
+ * @param mobile
+ * @param callback
+ */
+exports.rankDragonBoatFestival = function (accountId, amount, mobile, callback) {
+    var currenttime = new Date();
+    if (currenttime < Dragon_Boat_Festival_conf.starttime) {
+        callback('活动未开始');
+    } else if (currenttime > Dragon_Boat_Festival_conf.endtime) {
+        callback('活动已结束');
+    } else {
+        if (!accountId) {
+            callback('您未登录，请先登录');
+        } else {
+            cache.updateDragonBoatFestivalRanking(mobile, amount, function (err) {
+                callback(null);
+            })
+        }
+    }
+}
+
+/**
+ * 获取端午节排行榜
+ * @param callback
+ */
+exports.getDragonBoatFestivalRankingList = function (callback) {
+    cache.getDragonBoatFestivalRankingList(function (err, list) {
+        if (list && list instanceof Array && list.length > 0 && list.length % 2 == 0) {
+            var temp = [];
+            for (var i = 0; i < list.length; i++) {
+                if (i % 2 == 0 && list[i + 1] && list[i]) {
+                    temp.push({
+                        mobile: list[i].replace(/^(\d{3})(.+)(\d{4})$/, "$1****$3"),
+                        num: parseInt(list[i + 1])
+                    });
+                }
+            }
+            callback(err, temp);
+        } else {
+            callback(err, []);
+        }
+    })
+}
+
+exports.getMyRanking = function (mobile, callback) {
+    cache.getMyRanking(mobile, function (err, body) {
+        callback(err, body);
+    })
+}
+/**
+ *保存蛋糕数
+ * @param userId
+ * @param amount
+ * @param callback
+ */
+exports.saveCakeNumber = function (userId, amount, callback) {
+    cache.saveCakeNumber(userId, amount, function (err, body) {
+        callback(err, body);
+    })
+}
+
+/**
+ *保存蛋糕投资排行榜
+ * @param mobile
+ * @param amount
+ * @param callback
+ */
+exports.updateCakenNumList = function (mobile, amount, callback) {
+    cache.updateCakenNumList(mobile, amount, function (err, body) {
+        callback(err, body);
+    })
+}
+
+/**
+ *获取可抽奖次数  已抽奖次数
+ * @param userId
+ * @param callback
+ */
+exports.lotteryNumCount = function (userId, callback) {
+    var body = {};
+    cache.LotteryCount(userId, 0, function (err, num) {
+        cache.checklottery(userId, 0, function (err, count) {
+            body.num = num;//可抽奖次数
+            body.count = count;//已抽奖次数
+            callback(err, body);
+        })
+    })
+}
+
+
+//五一活动立即领取红包
+exports.receiveBonus = function (accountId, mobile, callback) {
+    var data = {
+        sendAction: com.biz.fields.actions.Lottery.v,
+        state: "",
+        isExpiry: true,
+        bTime: "",
+        eTime: ""
+    };
+    cache.getTheMayDayUserReceiveRecord(accountId,function (count) {
+        if(count == "1"){
+            callback("你已经领取过了");
+        }else {
+            midx('/bonus/selectBonus', data, function (err, body) {
+                if(body.list != null && body.list.length>0){
+                     body.list.forEach(function (BonusSet, index) {
+                        biz_bonus.sendBonus(mobile, BonusSet.id, function (err, body) {
+                            if (err) {
+                                callback("立即领取报错");
+                            }else{
+                                //保存领取红包次数
+                                midx('/activity/receiveRed', function (err, body) {
+                                    callback(err || null, body)
+                                })
+                                cache.setTheMayDayUserReceiveRecord(accountId, function (err, count) {
+                                    callback("缓存成功");
+                                })
+                            }
+                        })
+                    })
+                }else{
+                    callback("没有对应红包可以领取");
+                }
+            })
+        }
+    })
+}
+
+    /**
+     * 五一活动埋点
+     */
+  exports.getBuryingPoint = function (accountId,call) {
+      cache.getTheMayDayUserReceiveRecord(accountId, function (isReceived) {
+          midx('/activity/getBuryingPoint', {}, function (err, body) {
+              body.isReceived = isReceived || "0";
+              call(err || null, body);
+          })
+      })
+    }
+

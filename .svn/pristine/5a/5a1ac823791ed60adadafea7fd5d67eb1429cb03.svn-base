@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 财务管理 <span class="c-gray en">&gt;</span> 待审核提现 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+    <div class="">
+        日期范围：
+        <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'eTime\')||\'%y-%M-%d\'}'})" id="bTime" class="input-text Wdate" value="" style="width:120px;" name="bTime" readonly="true" placeholder="提现时间">
+        -
+        <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'bTime\')}',maxDate:'%y-%M-%d'})" id="eTime" class="input-text Wdate" style="width:120px;" value="" name="eTime" readonly="true"  placeholder="提现时间">
+        <div style="width:260px;float: left;">&nbsp;&nbsp;渠道&nbsp;:&nbsp;
+            <span class="select-box" style="width:160px;">
+				<select class="select" id="route">
+                    <option value="">全部</option>
+                    <% for(var key in _global.route){ %>
+                    <option value="<%= _global.route[key].v %>"><%= _global.route[key].desc %></option>
+                    <% } %>
+                </select>
+			</span>
+        </div>
+        <input type="text" id="param" placeholder="手机号码，姓名" style="width:350px" class="input-text"/>
+        <div style="width:180px;float: left;">
+            <span class="select-box" style="width:160px;">
+				<select class="select" id="state">
+                    <option value="">全部</option>
+                    <option value="<%= _global.state.Wait.v %>" selected="selected">未审核</option>
+                    <option value="<%= _global.state.Complete.v %>">已通过</option>
+                    <option value="<%= _global.state.Cancel.v %>">未通过</option>
+                </select>
+			</span>
+        </div>
+        <button name="" id="" class="btn btn-success" type="button" onclick="ZC_api.loadAuditWithdrawList(1,20)"><i class="Hui-iconfont">&#xe665;</i> 搜索 </button>
+    </div>
+    <div class="mt-20">
+        <table class="table table-border table-bordered table-bg table-hover table-sort">
+            <thead>
+            <tr class="text-c">
+                <th width="25"><input type="checkbox" name="" value=""></th>
+                <th width="80">提现时间</th>
+                <th width="60">手机号</th>
+                <th width="60">真实姓名</th>
+                <th width="80">身份证号</th>
+                <th width="80">提现渠道</th>
+                <th width="75">提现金额</th>
+                <th width="80">提现至银行卡</th>
+                <th width="120">审核意见</th>
+                <th width="75">状态</th>
+                <th width="75">操作</th>
+            </tr>
+            </thead>
+            <script type="text/template" id="withdraw_tmpl">
+                <tr class="text-c">
+                    <td><input type="checkbox" value="" name=""></td>
+                    <td>{time}</td>
+                    <td>{mobile}</td>
+                    <td>{realName}</td>
+                    <td>{idCard}</td>
+                    <td>{route}</td>
+                    <td>{amount}</td>
+                    <td>{cardId}</td>
+                    <td>{memo}</td>
+                    <td>{auditState}</td>
+                    <td>{audit}</td>
+                </tr>
+            </script>
+            <tbody id="withdraw_list">
+            </tbody>
+        </table>
+        <div id="page"></div>
+    </div>
+</div>
+</body>
+<% include ../main/bottom.ejs %>
+
+<script type="text/javascript">
+
+    load();
+
+    function showAudit(id) {
+        layer_show('审核提现', '/account/auditWithdraw?id=' + id, 600, 450);
+    }
+
+    function load() {
+        ZC_api.loadAuditWithdrawList(1, 20);
+    }
+
+</script>
+</html>

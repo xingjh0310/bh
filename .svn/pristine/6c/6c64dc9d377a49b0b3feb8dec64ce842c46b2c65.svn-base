@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <link rel="stylesheet" type="text/css" href="/css/BH/home/index.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/BH/parent/slide_nav.css"/>
+    <title><%= com.env.seo.title %>首页</title>
+</head>
+<body style="position: relative">
+
+<% include ../parent/top.ejs %>
+
+<!-- banner -->
+<div class="banner">
+    <div class="banner_main">
+        <ul class="banner_ul">
+            <% for(var i = 0;i < ads.length;i++){ %>
+            <li style="background: url('<%= ads[i].img %>') no-repeat center center;"><a target="_blank" href="<%= ads[i].url %>"></a>
+            </li>
+            <% } %>
+        </ul>
+    </div>
+    <div class="banner_span">
+        <p>
+            <% for(var i = 0;i < ads.length;i++){ %>
+            <span class="<%= i == 0 ? 'banner_active' : '' %>"></span>
+            <% } %>
+        </p>
+    </div>
+
+    </div>
+</div>
+<div class="message-mar">
+    <div class="message-container">
+        <i class="icon-message"><img src="/img/lllb.png"> </i>
+        <div class="bulletin">
+            <ul>
+                <% for(var i = 0;i < notice.length;i++){ %>
+                <li><a href="/aboutus/announcement/<%= notice[i].id %>"><%= notice[i].title %> </a></li>
+
+                <% } %>
+            </ul>
+
+        </div>
+        <a href="/aboutus/announce_list" target="_black" class="pull-right">更多》</a>
+    </div>
+</div>
+
+<div class="advantage-warp">
+    <div class="advantage_data clearfix">
+        <ul class="clearfix">
+            <li>
+                <span>稳定运营</span>
+                <em><%= parseInt(Math.abs(new Date() - new Date('2016/12/06')) / (24 * 60 * 60 * 1000)) %><i>天</i></em>
+            </li>
+            <li class="advantage_data_border"></li>
+            <li>
+                <span>今日投资</span>
+                <em><%= parseFloat(total.todayInvest || 0).toFixed(2) %><i>元</i></em>
+            </li>
+            <li class="advantage_data_border"></li>
+            <li>
+                <span>累计投资</span>
+                <em><%= parseFloat(total.totalInvest || 0).toFixed(2) %><i>元</i></em>
+            </li>
+        </ul>
+        <a href="/aboutus/platformData">更多数据》</a>
+    </div>
+    <div class="advantage">
+        <ol class="advantageul">
+            <li>
+                <img src="/img/finance_37.png"/>
+                <h3><a href="javascript:" class="ensure_div"> 银行存管(对接中)</a></h3>
+                <p><a href="javascript:" class="ensure_div">对接银行存管,资金流转透明 </a></p>
+            </li>
+            <li>
+                <img src="/img/finance_38.png"/>
+                <h3><a href="security#securName3" target="_black">十年风控经验</a></h3>
+                <p><a href="security#securName3" target="_black">10年线下项目经验，专业评估，严密风控</a></p>
+            </li>
+            <li>
+                <img src="/img/finance_39.png"/>
+                <h3><a href="/security#float02" target="_black">电子签章存证</a> </h3>
+                <p><a href="/security#float02" target="_black">交易真实透明，第三方电子数据实时保全</a></p>
+            </li>
+        </ol>
+    </div>
+</div>
+
+
+<div class="item_main">
+    <!--新客-->
+    <div class="index_title clearfix">
+        <h3 class="pull-left">新客专享<em>首投福利 超值礼遇 </em></h3>
+        <a href="/debts" class="pull-right">更多></a>
+    </div>
+    <div class="new_item">
+        <% if(novice){ %>
+        <% for(var i = 0;i < novice.length;i++){ %>
+            <div class="pull-right"
+                 <% if(i ==0){%>
+                    style="float: left"
+                 <% } %>
+            >
+            <% if(novice[i].productType ==5){%>
+            <img src="/img/index_xin.png" style="float: right;margin-right: -1px">
+            <% }%>
+            <div class="new_item_div">
+                <p class="p_tit clearfix"><a href="/debt/<%= novice[i].id %>" target="_black" class="pull-left"><%= novice[i].title %></a>
+                    <% if((novice[i].schedule * 100).toFixed(0) >= 80 && (novice[i].schedule * 100).toFixed(0) <100 &&  !novice[i].isCut){ %>
+                    <img src="/img/manbiao.png" class="tips"/>
+                    <%}%>
+                    <% if(novice[i].increaseRate){ %>
+                    <img src="/img/jiaxi.png" class="tips"/>
+                    <% }%>
+                </p>
+                <div class="new_item_main">
+                    <div class="div1">
+                        <span class="sp1">
+                            <em>
+                                <%if(novice[i].increaseRate && parseFloat(novice[i].increaseRate)>0 && parseFloat(novice[i].increaseRate)<novice[i].rate){%>
+                                <%= parseFloat(((novice[i].rate-novice[i].increaseRate) * 100).toFixed(2)) %><label style="font-size:24px">+</label><label style="font-size: 24px"><%=parseFloat((novice[i].increaseRate * 100).toFixed(2))%> </label>
+                                <%}else{%><%= (novice[i].rate * 100).toFixed(2) %><%}%></em></span>
+                        <p>预期年化(%)</p>
+                    </div>
+                    <div class="div1" style="width: 80px">
+                        <span class="sp2" style="font-size: 18px"><em><%= novice[i].period %></em><%= novice[i].periodUnit == _global.periodUnit.Month.v ? '个月' : '天' %></span>
+                        <p>理财期限</p>
+                    </div>
+                    <div class="div3">
+                        <% if(novice[i].beginTime > (new Date().getTime())){ %>
+                        <a href="/debt/<%= novice[i].id %>" target="_black" class="btn btn_new" _attr="<% novice[i].beginTime %>" id="hot_buy2" style="font-size: 14px;"><div class="countdown" systime="<%= ((novice[i].beginTime)-(new Date().getTime()))/1000 %>" sysstr=""></div></a>
+
+                        <% }else if (novice[i].state == _global.debtState.ApprovalPass.v){ %>
+                            <a class=" btn btn_new" href="/debt/<%= novice[i].id %>" target="_black">立即投资</a>
+                        <% }else if (novice[i].state == _global.debtState.InPayment.v || novice[i].state == _global.debtState.Overdue.v){ %>
+                            <a class="btn btn_end" href="/debt/<%= novice[i].id %>" target="_black">还款中</a>
+                        <% }else if (novice[i].state == _global.debtState.EndPayment.v){ %>
+                            <a class="btn btn_end" href="/debt/<%= novice[i].id %>" target="_black">已还款</a>
+                        <% }else{ %>
+                            <a href="/debt/<%= novice[i].id %>" target="_black" class="btn ">立即抢购</a>
+                        <%}%>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } } %>
+    </div>
+    <!-- 优选项目 -->
+    <div class="index_title clearfix">
+        <h3 class="pull-left">优选理财<em>灵活便捷 倾心之选 </em></h3>
+        <a href="/debts" class="pull-right">更多></a>
+    </div>
+    <div class="productcon">
+        <div class="productconr">
+            <div class="productconr_ul setTabMain">
+                <ul>
+                    <% for(var i = 0;i < debts.length;i++){ %>
+                          <li>
+                              <% if(debts[i].productType ==5){%>
+                              <img src="/img/index_xin2.png" style="float: left;margin-left: -5px;position: absolute;margin-top: -3px;">
+                              <% }%>
+                            <h3><a href="/debt/<%= debts[i].id %>" target="_black" ><%= debts[i].title %></a></h3>
+                            <h4>
+                                <p>
+                                    <span><%if(debts[i].increaseRate && parseFloat(debts[i].increaseRate)>0 && parseFloat(debts[i].increaseRate)<debts[i].rate){%>
+                                        <%= ((debts[i].rate-debts[i].increaseRate) * 100).toFixed(2) %><label style="font-size: 16px">+</label><label style="font-size: 20px"><%=parseFloat((debts[i].increaseRate * 100).toFixed(2))%> </label>
+                                        <%}else{%>
+                                        <%=(debts[i].rate * 100).toFixed(2) %>
+                                        <%}%></span>
+                                    <em>预期年化(%)</em>
+                                </p>
+                            </h4>
+                              <% if(debts[i].beginTime > (new Date().getTime())){ %>
+                              <a href="/debt/<%= debts[i].id %>" target="_black" class="investment" _attr="<% debts[i].beginTime %>" id="hot_buy2" style="font-size: 14px;"><div class="countdown" systime="<%= ((debts[i].beginTime)-(new Date().getTime()))/1000 %>" sysstr=""></div></a>
+
+                              <% }else if (debts[i].state == _global.debtState.ApprovalPass.v){ %>
+                            <a class="investment" href="/debt/<%= debts[i].id %>" target="_black">立即投资</a>
+                            <% }else if (debts[i].state == _global.debtState.InPayment.v || debts[i].state == _global.debtState.Overdue.v){ %>
+                            <a class="btn btn_end" href="/debt/<%= debts[i].id %>" target="_black">还款中</a>
+                            <% }else if (debts[i].state == _global.debtState.EndPayment.v){ %>
+                            <a class="btn btn_end" href="/debt/<%= debts[i].id %>" target="_black">已还款</a>
+                            <% }else{ %>
+                            <a class="investment" href="/debt/<%= debts[i].id %>" target="_black">立即投资</a>
+                            <%}%>
+                              <div class="progress">
+                                  <div class="progress-bar bar wow animate-positive animate-positive animate-positive animate-positive animate-positive animate-positive animate-positive" w="<%= (debts[i].schedule * 100).toFixed(2) %>" id="counter" style="width: 46%; visibility: visible;">
+                                      <% if(parseInt((debts[i].schedule * 100).toFixed(2)) <5){ %>
+                                          <i style="left: 0"><%= parseInt((debts[i].schedule * 100).toFixed(2)) %>%</i>
+                                      <% }else{%>
+                                          <i><%= parseInt((debts[i].schedule * 100).toFixed(2)) %>%</i>
+                                      <% }%>
+                                  </div>
+                              </div>
+                              <div class="pro_bottom">
+                                   <span><%= debts[i].period %><%= debts[i].periodUnit == _global.periodUnit.Month.v ? '个月' : '天' %></span>
+                                  <a href="/debt/<%= debts[i].id %>" target="_black" ><span style="border:none">查看详情</span></a>
+                              </div>
+                        </li>
+                    <%}%>
+                </ul>
+
+
+            </div>
+        </div>
+    </div>
+    <% if(seckill &&seckill.state>=5 ){%>
+    <!--  限时秒杀-->
+    <div class="index_title clearfix">
+        <h3 class="pull-left">限时秒杀<em>急速秒杀 疯狂心跳 </em></h3>
+        <a href="/debts" class="pull-right">更多></a>
+    </div>
+     <div class="miao_item">
+        <h3 class="clearfix"><a href="/debt/<%= seckill.id %>" target="_black"  class="pull-left"><%= seckill.title%> </a>
+            <% if((seckill.schedule * 100).toFixed(0) >= 80 && (seckill.schedule * 100).toFixed(0) <100 &&  !seckill.isCut){ %>
+            <img src="/img/manbiao.png" class="tips"/>
+            <%}%>
+            <% if(seckill.increaseRate && parseFloat(seckill.increaseRate)>0 && parseFloat(seckill.increaseRate)<seckill.rate){ %>
+            <img src="/img/jiaxi.png" class="tips"/>
+            <% }%>
+        </h3>
+        <div class="new_item_main">
+            <div class="div1">
+                <span class="sp1">
+                     <em><%if(seckill.increaseRate && parseFloat(seckill.increaseRate)>0 && parseFloat(seckill.increaseRate)<seckill.rate){%>
+                         <%= ((seckill.rate-seckill.increaseRate) * 100).toFixed(2) %><label style="font-size: 24px">+</label><label style="font-size: 24px"><%=parseFloat((seckill.increaseRate * 100).toFixed(2))%> </label>
+                         <%}else{%>
+                         <%=(seckill.rate * 100).toFixed(2) %>
+                         <%}%></em>
+                </span>
+                <p>预期年化(%)</p>
+            </div>
+            <div class="div1" style="width: 80px;margin-right: 100px">
+                <span class="sp2" style="font-size: 18px"><em><%= seckill.period %></em></em><%= seckill.periodUnit == _global.periodUnit.Month.v ? '个月' : '天' %></span>
+                <p>理财期限</p>
+            </div>
+            <div class="div1" style="width: 150px;margin-right: 80px">
+                <span class="sp2" style="font-size: 18px"><em><%= seckill.amount %></em>元</span>
+                <p style="margin-left: 20px">项目总额</p>
+            </div>
+            <div class="div2">
+                <div class="progress" style="width:178px;">
+                    <div class="progress-bar bar wow animate-positive animate-positive animate-positive animate-positive animate-positive animate-positive animate-positive" w="<%= (seckill.schedule * 100).toFixed(2) %>" id="counter" style="width: 46%; visibility: visible;"></div>
+                </div>
+                <span style="display: inline-block;margin-top: 21px;color: #ff8624"><%= parseInt((seckill.schedule * 100).toFixed(2)) %>%</span>
+                <div class="clear"></div>
+                <p style="margin-top: 12px">抢购进度</p>
+            </div>
+            <div class="div3" style="padding-left: 20px;">
+                <% if(seckill.beginTime > (new Date().getTime())){ %>
+                <a href="/debt/<%= seckill.id %>" target="_black" class="btn btn_new" _attr="<% seckill.beginTime %>" id="hot_buy2" style="font-size: 14px;"><div class="countdown" systime="<%= ((seckill.beginTime)-(new Date().getTime()))/1000 %>" sysstr=""></div></a>
+
+                <% }else if (seckill.state == _global.debtState.ApprovalPass.v){ %>
+                <a class="btn_new" href="/debt/<%= seckill.id %>" target="_black">立即投资</a>
+                <% }else if (seckill.state == _global.debtState.InPayment.v || seckill.state == _global.debtState.Overdue.v){ %>
+                <a class="btn btn_end" href="/debt/<%= seckill.id %>" target="_black">还款中</a>
+                <% }else if (seckill.state == _global.debtState.EndPayment.v){ %>
+                <a class="btn btn_end" href="/debt/<%= seckill.id %>" target="_black">已还款</a>
+                <% }else{ %>
+                <a class="btn btn_new" href="/debt/<%= seckill.id %>" target="_black">立即投资</a>
+                <%}%>
+            </div>
+        </div>
+    </div>
+    <%}%>
+
+    <!--VIP专享-->
+    <div class="index_title clearfix">
+        <h3 class="pull-left">VIP尊享<em>豪华特权  私人定制</em></h3>
+        <a href="/debts" class="pull-right">更多></a>
+    </div>
+    <div class="new_item">
+        <% if(marks.length>0){ %>
+        <% for(var i = 0;i < marks.length;i++){ %>
+        <div class="pull-right"
+                <% if(i ==0){%>
+             style="float: left"
+                <% } %>
+         >
+            <% if(marks[i].productType ==5){%>
+            <img src="/img/index_xin.png" style="float: right;margin-right: -1px">
+            <% }%>
+            <div class="new_item_div">
+                <p class="p_tit clearfix"><a href="/debt/<%= marks[i].id %>" target="_black" class="pull-left"><%= marks[i].title %></a>
+                    <% if((marks[i].schedule * 100).toFixed(0) >= 80 && (marks[i].schedule * 100).toFixed(0) <100 &&  !marks[i].isCut){ %>
+                    <img src="/img/manbiao.png" class="tips"/>
+                    <%}%>
+                    <% if(marks[i].increaseRate){ %>
+                    <img src="/img/jiaxi.png" class="tips"/>
+                    <% }%>
+                </p>
+                <div class="new_item_main">
+                    <div class="div1">
+                        <span class="sp1">
+                            <em>
+                                <%if(marks[i].increaseRate && parseFloat(marks[i].increaseRate)>0 && parseFloat(marks[i].increaseRate)<marks[i].rate){%>
+                                <%= parseFloat(((marks[i].rate-marks[i].increaseRate) * 100).toFixed(2)) %><label style="font-size:24px">+</label><label style="font-size: 24px"><%=parseFloat((marks[i].increaseRate * 100).toFixed(2))%> </label>
+                                <%}else{%><%= (marks[i].rate * 100).toFixed(2) %><%}%></em></span>
+                        <p>预期年化(%)</p>
+                    </div>
+                    <div class="div1" style="width: 80px">
+                        <span class="sp2" style="font-size: 18px"><em><%= marks[i].period %></em><%= marks[i].periodUnit == _global.periodUnit.Month.v ? '个月' : '天' %></span>
+                        <p>理财期限</p>
+                    </div>
+                    <div class="div3">
+                        <% if(marks[i].beginTime > (new Date().getTime())){ %>
+                        <a href="/debt/<%= marks[i].id %>" target="_black" class="btn btn_new" _attr="<% marks[i].beginTime %>" id="hot_buy2" style="font-size: 14px;"><div class="countdown" systime="<%= ((marks[i].beginTime)-(new Date().getTime()))/1000 %>" sysstr=""></div></a>
+
+                        <% }else if (marks[i].state == _global.debtState.ApprovalPass.v){ %>
+                        <a class=" btn btn_new" href="/debt/<%= marks[i].id %>" target="_black">立即投资</a>
+                        <% }else if (marks[i].state == _global.debtState.InPayment.v || marks[i].state == _global.debtState.Overdue.v){ %>
+                        <a class="btn btn_end" href="/debt/<%= marks[i].id %>" target="_black">还款中</a>
+                        <% }else if (marks[i].state == _global.debtState.EndPayment.v){ %>
+                        <a class="btn btn_end" href="/debt/<%= marks[i].id %>" target="_black">已还款</a>
+                        <% }else{ %>
+                        <a href="/debt/<%= marks[i].id %>" target="_black" class="btn btn_new">立即抢购</a>
+                        <%}%>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } } %>
+    </div>
+
+    <!-- 热门咨询 -->
+    <div class="hot_news">
+        <div class="pull-left">
+            <h2 class="tit">媒体报道<i><a href="/aboutus/news_list" target="_black">更多></a></i></h2>
+            <div class="thumbnail2">
+                <% if(inform.length > 0){ %>
+                <a href="/aboutus/news/<%= inform[0].id %>" target="_black">
+                    <img src="<%= inform[0].img %>">
+                    <span><%= inform[0].title %></span>
+                </a>
+                <% } %>
+            </div>
+            <% for(var i = 0;i < inform.length;i++){ %>
+            <% if(i != 0 && i < 3){ %>
+            <div class="thumbnail">
+                <div class="css3btn">
+                    <a href="/aboutus/news/<%= inform[i].id %>" target="_black">
+                        <img src="<%= inform[i].img %>">
+                    </a>
+                </div>
+                <div class="caption">
+                    <a href="/aboutus/news/<%= inform[i].id %>" target="_black"><p class="p1" style="font-size: 16px;"> <%= inform[i].title?(inform[i].title.length > 18 ? inform[i].title.substring(0, 18)+"..." : inform[i].title):'' %>
+                    </a></p>
+                    <div class="p2" style="font-size: 14px;line-height:20px;color: #999;text-align: left">
+                        <%# inform[i].content?(inform[i].content.ReplaceHtml().length > 27 ? inform[i].content.ReplaceHtml().substring(0, 27) : inform[i].content.ReplaceHtml()):'' %>
+                    </div>
+
+                </div>
+            </div>
+            <% }} %>
+        </div>
+
+        <div class="pull-right">
+            <div class="touzib">
+                <h2 class="tit">平台公告<i><a href="/aboutus/announce_list" target="_black" style="color:#999">更多></a></i></h2>
+                <ul>
+                    <% for(var i = 0;i < notice.length;i++){ %>
+                    <li><i></i></i><a href="/aboutus/announcement/<%= notice[i].id %>"  target="_black"><%= notice[i].title %></a>
+                        <span><%= new Date(notice[i].time).Format('yyyy-MM-dd') %></span></li>
+
+                    <% } %>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="item_main2">
+    <div style="background: url(/img/h_bn.jpg) center center;height:391px">
+        
+    </div>
+
+<div class="firm_warp">
+
+
+    <!-- 合作伙伴 -->
+
+    <div class="partner" style="padding-top: 30px;">
+        <div class="hon_tit">
+            <h2>合作伙伴</h2>
+            <span></span>
+        </div>
+        <div id="cooperationul" class="cooperationul">
+            <ul>
+                <% for(var i = 0;i < partner.length;i++){ %>
+                <li><span></span><a href="<%= partner[i].url %>" target="_black" target="_blank"><img
+                                src="<%= partner[i].img %>"></a></li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+    <div class="bgf5">
+        <% if(!user){ %>
+        <a href="/login" target="_black" class="btn">立即开启理财模式</a>
+        <% }else{%>
+        <a href="/debts" target="_black" class="btn">立即开启理财模式</a>
+        <%}%>
+
+    </div>
+</div>
+</div>
+
+
+<% include ../parent/slide_nav.ejs %>
+<% include ../parent/bottom.ejs %>
+<script type="text/javascript">
+    ZC_api.loadSort();
+    loadSchedule();
+    /*新客倒计时*/
+    $(".new_item .pull-right").each(function () {
+        $(this).find(".countdown").wenCount();
+    })
+    /*优选倒计时*/
+    $(".productconr_ul ul li").each(function () {
+        $(this).find(".countdown").wenCount();
+    })
+    /*VIP倒计时*/
+    $(".countdown").wenCount();
+    //合作伙伴
+    $('.cooperationul').Rolling();
+    $('.firm_ul li').hover(function () {
+        $(this).children('.div1').addClass('flipOutY');
+        $(this).children('.div2').addClass('flipInY');
+    },function () {
+        $(this).children('.div1').removeClass('flipOutY').addClass('flipInY');
+        $(this).children('.div2').removeClass('flipInY');
+    })
+
+
+
+</script>
+
+
+</body>
+
+</html>

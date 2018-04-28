@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 银行卡管理 <span
+            class="c-gray en">&gt;</span>编辑银行卡 <a class="btn btn-success radius r mr-20"
+                                                 style="line-height:1.6em;margin-top:3px"
+                                                 href="javascript:location.replace(location.href);" title="刷新"><i
+                class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+    <div class="codeView docs-example">
+        <form class="form form-horizontal" id="form">
+            <input type="hidden" name="id" value="<%= bankCard.id || '0' %>"/>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>银行卡号：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" id="cardId" placeholder="请输入银行卡号" datatype="n2-100"
+                           nullmsg="请输入银行卡号" errormsg="大于2位小于30位" name="cardId" value="<%= bankCard.cardId || '' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>预留手机号：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" id="cardId" placeholder="请输入预留手机号" datatype="m"
+                           nullmsg="请输入预留手机号" errormsg="请输入正确的手机号" name="mobile" value="<%= bankCard.mobile || '' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span> 所属银行：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                     <span class="select-box"><select  name="bank" class="select">
+                        <% for(var key in _bank){ %>
+                        <option <%= bankCard.bank == key ? 'selected="selected"' : '' %>
+                                value="<%= key %>"><%= _bank[key].desc %>
+                        </option>
+                        <% } %>
+                    </select></span>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span> 省：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                   <select id="province" class="select-box" runat="server" name="province" datatype="s2-100"></select>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span> 市：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <select id="city" class="select-box" runat="server" name="city" datatype="s2-100"></select>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>支行：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" id="branch" placeholder="请输支行信息" datatype="*2-100"
+                           nullmsg="请输支行信息" errormsg="大于2位小于30位" name="branch" value="<%= bankCard.branch || '' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <div class="col-10 col-offset-3">
+                    <button id="sub" class="btn btn-primary radius" type="button"><i
+                                class="Hui-iconfont">&#xe632;</i> 保存
+                    </button>
+                    <button onClick="layer_close();" class="btn btn-default radius" type="button">
+                        &nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+</body>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+    setup();
+    $('#province').val('<%=bankCard.province%>');
+    $('#province').change();
+    $('#city').val('<%=bankCard.city%>');
+    $(".form").Validform({
+        btnSubmit: '#sub',
+        postonce: true,
+        tiptype: 4,
+        showAllError: true,
+        ajaxPost: true,
+        beforeSubmit: function (curform) {
+            //if ($('#AccountId').val()) {
+            $.ajax({
+                url: '/account/saveBankCard',
+                type: 'post',
+                data: {bankCard: JSON.stringify($('#form').serializeJson())},
+                success: function (msg) {
+                    if (!msg.err) {
+                        Huimodal_alert('保存成功', 1000, function () {
+                            parent.load();
+                            layer_close();
+                        });
+                    }
+                    else {
+                        Huimodal_alert(msg.err, 1000, function () {
+                        });
+                    }
+                }
+            })
+            return false;
+            //}
+        }
+    });
+</script>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>续投有礼</title>
+    <link rel="stylesheet" href="/css/base/BH_base.css">
+    <link rel="stylesheet" href="/css/activities/invest.css">
+</head>
+<body>
+    <% if(fromWrap){ %>
+        <input type="hidden" value="<%= fromWrap %>" id="isWrap">
+    <% }else { %>
+        <input type="hidden" value="<%= 0 %>" id="isWrap">
+    <% } %>
+    <div class="invest-active">
+        <div class="top-box">
+            <img src="/img/activities/invest/top1.png" alt="复投返现礼 再拿好收益 回款续投享0.15%现金奖励">
+            <img src="/img/activities/invest/top2.png">
+        </div>
+        <div class="main-box">
+            <img src="/img/activities/invest/main_title.png" alt="续投内容" class="main-title">
+            <img src="/img/activities/invest/main_img.png" alt="续投内容" class="main">
+        </div>
+        <div class="rule-box">
+            <img src="/img/activities/invest/rule_title.png" alt="" class="rule-title">
+            <img src="/img/activities/invest/rule.png" alt="">
+        </div>
+    </div>
+    <div class="fixed-btn-box" style="display: none">
+        <div class="fixed-btn" onclick="fnGoNext()">立即投资</div>
+    </div>
+</body>
+    <script type="text/javascript" src="/js/plugins/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="/js/BH/public.js"></script>
+    <script>
+        $(function(){
+            var systemType = phoneType();
+            var isWrap = $('#isWrap').val() == 0 ? false: true;
+            if(systemType == 1 || isWrap){
+                $('.fixed-btn-box').show();
+            }
+        })
+        function fnGoNext() {
+            var isWrap = $('#isWrap').val() == 0 ? false: true;
+            if(isWrap){
+                window.location.href="/debts";
+            }else {
+                goAppPage(2);
+            }
+        }
+    </script>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 借款标管理 <span class="c-gray en">&gt;</span> 审核借款 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+    <div class="codeView docs-example">
+        <form class="form form-horizontal" id="form">
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>借款标题：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <label><%= debt.title || '' %></label>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>借款金额：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <label><%= debt.amount || '' %>元</label>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>预期年化：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <label><%= ((debt.rate || 0) * 100).toFixed(2) %>%</label>
+                </div>
+            </div>
+            <% if(debt.overdueRate > 0){ %>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>逾期罚息：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <label><%= ((debt.overdueRate || 0) * 100).toFixed(2) + '%' %></label>
+                </div>
+            </div>
+            <% } %>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>有效期(天)：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <label><%= debt.investPeriod || '' %><%= debt.investPeriodType == 1 ? '小时' : '天' %></label>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>新手标：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <label><%= debt.isNew ? '是' : '否' %></label>
+                </div>
+            </div>
+            <!--div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>体验标：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <label></label>
+                </div>
+            </div-->
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>周期类型：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <label>
+                        <%= _global.getDesc(_global.periodUnit, debt.periodUnit) %>
+                    </label>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>借款周期：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <label><%= debt.period || 0 %><%= _global.getDesc(_global.periodUnit, debt.periodUnit) %></label>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>开始时间：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <label><%= new Date(debt.beginTime).Format('yyyy-MM-dd hh:mm') || '' %></label>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>项目类型：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <label>
+                        <%= _global.getDesc(_global.productType, debt.productType) %>
+                    </label>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>还款方式：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <label>
+                        <%= _global.getDesc(_global.paymentType, debt.paymentType) %>
+                    </label>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>计息方式：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <label>
+                        <%= _global.getDesc(_global.interestType, debt.interestType) %>
+                    </label>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>起购金额：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <label><%= debt.minInvestAmount || '0' %>元</label>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>最高可投：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <label><%= debt.maxInvestAmount || '0' %>元</label>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>奖励类型：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <label>
+                        <%= _global.getDesc(_global.awardType, debt.awardType) || '无' %>
+                    </label>
+                </div>
+            </div>
+            <% if(debt.awardType > 0){ %>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>奖励数量：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <label><%= debt.awardType == _global.awardType.Scale.v ? ((debt.awardNumber || 0) * 100).toFixed(2) + '%' : debt.awardNumber %></label>
+                </div>
+            </div>
+            <% } %>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>购买类型：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <label><%= _global.getDesc(_global.investType, debt.investType) %></label>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>项目图片：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <%
+                    if(debt.imgFiles){
+                        var arr = debt.imgFiles.split('|');
+                    for(var i = 0;i < arr.length;i++){ %>
+                    <img style="width: 100px;height:100px;" src="<%= arr[i] %>"/>
+                    <% }} %>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>抵押：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <%=(debt && debt.collateral)?debt.collateral:'' %>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>基本信息：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <%- debt.safeguard %>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>审核意见：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="hidden" id="debtId" value="<%= debt.id %>"/>
+                    <textarea id="memo" onkeyup="textarealength(this,200)" nullmsg="备注不能为空！" dragonfly="true" datatype="*2-100" placeholder="最少输入2个字符" class="textarea" rows="" cols="" name=""></textarea>
+                </div>
+            </div>
+            <div class="row cl">
+                <div class="col-10 col-offset-3">
+                    <button id="sub" class="btn btn-primary radius" onclick="subAuit(1)" type="button"><i class="Hui-iconfont">&#xe632;</i> 通过</button>
+                    <button class="btn btn-default radius" onclick="subAuit(-1)" type="button">&nbsp;&nbsp;不通过&nbsp;&nbsp;</button>
+                    <button class="btn btn-default radius" onclick="edit()"  type="button">&nbsp;&nbsp;修改&nbsp;&nbsp;</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+
+    function edit() {
+        location.href = '/debt/edit?audit=1&id=' + $('#debtId').val();
+    }
+
+    var form = $(".form").Validform({
+        postonce: true,
+        tiptype: 4,
+        showAllError: true
+    });
+
+    function subAuit(type) {
+        if (form.check()) {
+            $.ajax({
+                url: '/debt/audit',
+                type: 'post',
+                data: {id: $('#debtId').val(), memo: $('#memo').val(), type: type},
+                success: function (msg) {
+                    if (!msg.err) {
+                        Huimodal_alert('审核成功', 1000, function () {
+                            parent.load();
+                            layer_close();
+                        });
+                    }
+                    else {
+                        Huimodal_alert(msg.err, 1000, function () {
+                        });
+                    }
+                }
+            })
+        }
+    }
+
+</script>
+</html>

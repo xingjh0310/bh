@@ -1,0 +1,287 @@
+.personal_rg .personal_top .pull-left{float: left;font-size: 14px;}
+.personal_rg .personal_top .pull-left img{padding:18px 8px 0 0;}
+
+.personal_cen .p1{margin: 40px 0 0 20px;}
+.personal_cen .sp1{font-size: 40px;color: #ff8200;margin-left: 20px;}
+.personal_cen .shuju li{color:#999;margin-top:30px;padding-bottom:5px;width: 390px;margin-left: 30px;float: left;border-bottom: 1px solid #ebebeb}
+.personal_cen .shuju li .pull-right{font-size: 22px;color: #666}
+.personal_cen .shuju li .colf82{color: #ff8200}
+.personal_cen .shuju{overflow: auto;}
+
+.personal_top{overflow: hidden;height: 48px;line-height: 48px;border-bottom: 2px solid #eee;padding: 0 20px;background: #fff}
+
+.personal_user_w{background:#fff; margin-bottom:15px;overflow:auto;    height: 180px;}
+.personal_user_w>.pull-right{padding-right:62px;}
+.personal_user_w> .pull-right a{display:block;width:115px;height:42px;line-height:42px;font-size:16px;color:#ff8a10;border:1px solid #ff8a10;text-align:center;border-radius:5px;float:left;margin:95px 0 0 38px;}
+.personal_user_w> .pull-right a:hover{background:#ff8a10;color:#fff;}
+.personal_user{position:relative;padding: 35px 0px 0 30px;width: 355px; float:left;}
+.personal_user .touxiang{height:99px;width:110px;cursor: pointer}
+.personal_user .progress{width: 100%;height: 6px;margin: 10px 0}
+.personal_user .progress-bar{background: #51a3f5}
+.personal_user .pull-right .p1{margin:0 0 5px 0; line-height: 2;font-size:16px;}
+.personal_user .pull-right{    width: 235px;}
+.personal_user .pull-right .btn{font-size:12px;border:1px solid #ff8624;color:#ff8624;padding:3px 5px ;border-radius: 10px;margin-top:22px;}
+.personal_user .personal_ul{overflow: auto;margin-top: 20px;height:65px;    float: left;}
+.personal_user .personal_ul div{height: 28px;width: 28px;text-align: center;float: left;margin-right: 10px;border-radius: 3px;background:url(/img/font_9.png) #d2d2d2; }
+.personal_user .personal_ul div{background-position: -8px -10px}
+.acc_tips{font-size:12px;position: absolute;background:url(/img/accrz.png);color:#fe8749;z-index:99;left:120px;top:138px;display:none;width:110px;height:33px;line-height:40px;}
+.acc_tips_w{position: absolute;background:url(/img/accwrz.png);color:#999;z-index:99;left:120px;top:138px;display:none;width:176px;height:33px;line-height:40px;}
+.acc_tips_w a{color:#999}
+.acc_tips_w a:hover{color:#fe8749;text-decoration: underline}
+.personal_user .personal_ul div.rz_bank{background-position: -54px -10px}
+.personal_user .personal_ul div.rz_shim{background-position: -103px -10px}
+.personal_user .personal_ul div.rz_email{background-position: -150px -10px}
+.personal_user .personal_ul  .curron{background-color: #ff8624}
+.personal_user .personal_ul div:hover .acc_tips,.personal_user .personal_ul div:hover .acc_tips_w{display:block}
+
+.personal_main{background:#fff;height:395px;}
+.personal_main .jine{position: relative}
+.personal_main .jine .jine_div{position: absolute;width:320px;height:190px;background: #f7f7f7;right:70px;top:56px;border-radius: 5px;}
+.personal_main .jine .jine_div span{display:inline-block;height:10px;width:10px;background: #ffd5b3;border-radius: 50%;margin-right:20px;}
+.personal_main .jine .jine_div ul{margin-left:48px;margin-top:40px;font-size:16px;color:#666}
+.personal_main .jine .jine_div ul li{margin-bottom:20px;}
+.personal_main .jine .jine_all{position:absolute;top:125px;left:150px;width:200px;  text-align: center;}
+.personal_main .jine .jine_all .p2{font-size:22px;margin-bottom:10px;}
+.personal_main .yue,.personal_play h3{height:45px;line-height: 45px;border-bottom:1px solid #EBEBEB;padding-right:15px;}
+.personal_main .yue .h3,.personal_play h3 span{font-size:18px;border-bottom:3px solid #ebebeb;  padding:0 24px;  height: 43px;
+    display: inline-block;}
+
+.personal_play>.pull-left{margin-left:28px;    margin-top: 30px;width:496px;overflow:hidden;position: relative}
+.personal_play>.pull-right{width: 295px;border: 1px solid #ebebeb;margin-right:27px;height:295px;margin-top:30px;}
+.personal_play>.pull-right ul{overflow:auto;height: 46px;line-height:46px;}
+.personal_play>.pull-right ul li{background: #fbede1;float:left;text-align:center;font-size:16px;cursor: pointer;font-weight: bold;width:100%;color:#ff8624}
+.personal_play .more_a{text-align:center;margin-top:70px;display: block}
+.personal_play>.pull-right>div{overflow: hidden;padding: 15px 0 16px 0;border-bottom: 1px solid #ebebeb;}
+.personal_play>.pull-right>div:last-child{border:none;}
+.personal_play .sp2{float:left;margin-right:20px;width: 60px;display: inline-block;height: 65px;background:#eee;text-align: center;border-radius: 5px;}
+.personal_play .sp2 .sp2_t{background:#51a3f5;color: #fff;padding: 5px 0;margin-bottom: 0;    border-radius: 5px 5px 0 0; }
+.personal_play .sp2 .sp2_b{    margin-top: 6px;;font-size: 18px;}
+.personal_play>.pull-right ol li{heigth:50px;line-height: 50px;text-indent:30px;border-bottom:1px dotted #ebebeb;color:#999 }
+.personal_play>.pull-right ol li em{color:#333;}
+
+.personal_play{overflow:auto;background: #fff;margin-top:15px;padding-bottom:60px;}
+.personal_play .f1{font-size: 22px;}
+.personal_play .p3{padding-left: 70px;color: #999}
+.personal_play .p3 .pull-left,.personal_play .p3 .pull-right{color: #333}
+.personal_play .p4{margin-top: 22px;margin-bottom: 5px;}
+.dateClass{background: #f8f8f8;border:1px solid #d5d5d5;float:left}
+.paly_date{float:right;background: #fbede1;width:204px;height:295px;position: absolute;right:3px;top:1px}
+.calendar-hd{position: absolute;right:0;width:204px;padding: 15px 0;}
+.calendar-arrow, .calendar-display{font-size:16px;font-weight: bold;color:#ff8624;}
+.calendar-display .m{font-size:16px;font-weight: bold;color:#ff8624;}
+.calendar-arrow{color:#333;}
+.calendar-arrow span{width:18px;text-align:center;position: absolute;top:20px;height:18px;}
+.calendar-arrow span.prev{left:35px;background: url("/img/playpre.png")}
+.calendar-arrow span.next{right:35px;background: url("/img/playnext.png")}
+.calendar-display{text-indent: 68px;}
+.date_span{font-size:136px;color:#FFF;margin:60px  auto 0;
+    display: table;border-bottom: 1px solid #fcd2b0}
+
+.upload_a {
+    background-color: rgba(0, 0, 0, 0.5);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#5f000000,endColorstr=#5f000000);
+    z-index: 99999;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.upload_a .upload {
+    font-size: 12px;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 680px;
+    height: 545px;
+    background: #fff;
+}
+
+.upload_a .upload .imagetop {
+    height: 47px;
+    width: 100%;
+    border-bottom: 1px solid #dfdfdf;
+}
+
+
+.upload_a .upload .imagetop  .del{
+    float:right;
+    margin: 10px  15px 0 0;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+.upload_a .upload .imagetop h2 {
+
+    display: inline-block;
+    font-size: 18px;
+    margin: 10px 0 0 20px;
+}
+
+.upload_a .imageBox {
+    position: relative;
+    height: 345px;
+    width:419px;
+    border: 1px solid #aaa;
+    background: #fff;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    cursor: move;
+    margin-left: 20px;
+}
+
+.upload_a .imageBox .thumbBox {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 200px;
+    margin-top: -100px;
+    margin-left: -100px;
+    box-sizing: border-box;
+    border: 1px solid rgb(102, 102, 102);
+    box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.3);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#3f000000,endColorstr=#3f000000);
+    background: none repeat scroll 0% 0% transparent;
+}
+
+.upload_a .imageBox .spinner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    text-align: center;
+    line-height: 400px;
+    background: rgba(0, 0, 0, 0.7);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#7f000000,endColorstr=#7f000000);
+}
+
+/*.upload_a .upload p { line-height: 12px;  line-height: 0px;  height: 0px;  margin: 10px;  color: #bbb  }*/
+.upload .action .new-contentarea {
+    width: 115px;
+    height: 34px;
+    float: left;
+    margin: 15px 0 0 20px;
+}
+
+.upload_a .upload .action {
+    height: 65px;
+    overflow: hidden;
+}
+
+.upload_a .upload .cropped {
+    position: absolute;
+    top:115px;
+    right:20px;
+    width: 196px;
+    height: 345px;
+    border: 1px #dfdfdf solid;
+
+}
+.upload_a .upload .cropped img{
+    width: 132px;
+    height: 132px;
+    margin: 80px 0 0 30px;
+}
+
+/*选择图片上传*/
+.upload_a .upload a.upload-img label:hover {
+    background-color: #ff8525;
+}
+
+.upload_a .upload .new-contentarea label {
+    background-color: #ff8525;
+    border-radius:3px;
+    display: block;
+    color: #fff;
+}
+
+.upload .new-contentarea input[type=file] {
+    width: 188px;
+    height: 60px;
+    background: #333;
+    margin: 0 auto;
+    position: absolute;
+    right: 50%;
+    margin-right: -94px;
+    top: 0;
+    right: 0px;
+    margin-right: 0px;
+    width: 10px;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    z-index: 2;
+}
+
+.upload_a .upload a.upload-img {
+    width: 115px;
+    height: 36px;
+    display: inline-block;
+    line-height: 36px;
+    text-align: center;
+    font-size: 16px;
+    color: #FFF;
+    cursor: pointer;
+}
+
+.upload_a .upload .new-contentarea span {
+    font-size: 14px;
+    position: absolute;
+    bottom: 200px;
+    left: 70px;
+}
+
+.upload_a .upload .Btnsty_peyton {
+    float: left;
+    width: 115px;
+    height: 36px;
+    line-height: 36px;
+    display: inline-block;
+    font-size: 16px;
+    color: #999;
+    border-radius: 3px;
+    text-decoration: none;
+    cursor: pointer;
+    margin: 15px 0 0 20px;
+    text-align: center;
+    border: 1px solid #dfdfdf;
+    background: none;
+    position: relative;
+}
+.upload_a .upload .Btnsty_peyton:hover{
+    background-color: #ff8525;
+    color:#fff;
+}
+.upload_a .upload .jq:hover .jq1{
+    display: none;
+}
+
+.upload_a .upload .Btnsty_sure {
+    float: right;
+    width: 140px;
+    height: 46px;
+    line-height: 43px;
+    display: inline-block;
+    font-size: 16px;
+    color: #FFF;
+    background-color: #ff8525;
+    border-radius: 10px;
+    text-decoration: none;
+    cursor: pointer;
+    margin: 20px 20px 0 0;
+    text-align: center;
+    border: none;
+}
+
+.upload_a .upload .bp {
+    background: #fff;
+    color: #9C9C9C;
+    border: 1px solid #9C9C9C
+}

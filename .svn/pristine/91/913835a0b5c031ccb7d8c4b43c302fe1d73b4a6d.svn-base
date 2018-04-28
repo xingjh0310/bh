@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>发现</title>
+</head>
+<body>
+    <div class="about_main" style="padding-bottom:1.5rem">
+        <a href="/aboutus/about" class="a1">
+            <div class="pull-left"><img src="/img/ab1.png"> </div>
+            <div class="pull-right">
+                <h2>关于铂恒金服</h2>
+                <span>与您相遇，我们期待很久</span>
+            </div>
+        </a>
+        <a href="/help" class="a1" style="background: #6cc6a9">
+            <div class="pull-left"><img src="/img/ab2.png"> </div>
+            <div class="pull-right">
+                <h2>帮助中心</h2>
+                <span>用心服务职位尊贵的您</span>
+            </div>
+        </a>
+        <a href="/activity" class="a1" style="background: #f9c267">
+            <div class="pull-left"><img src="/img/ab3.png"> </div>
+            <div class="pull-right">
+                <h2>精彩活动</h2>
+                <span>马上去参加</span>
+            </div>
+        </a>
+
+    </div>
+
+    <% include ../parent/slide_nav.ejs %>
+    <% include ../parent/bottom.ejs %>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+/*footer*/
+.foot{ width: 100%; background: #3b3f43;}
+.foot .footabot{ border-bottom: 1px solid #444647;   overflow: hidden;padding:38px 0; width: 1103px;margin:0 auto; }
+.foot .footabot .foot_list{padding:0 48px 0 15px;color: #e8e8e8;border-right: 1px solid #444647;float: left;}
+.foot .footabot .foot_list p{margin-bottom:10px;}
+.foot .footabot .foot_list a{color: #e8e8e8}
+.foot .footabot .foot_list h3{font-size: 18px;margin-bottom: 20px;}
+.foot .footabot .font-erwm{padding: 0 30px 0 30px;text-align: center;}
+.foot .footabot .foot-rx{padding-left: 30px;border:none;padding-right:0}
+.foot .footabot .foot-rx .tel{margin:0 0 10px 0;color: #ff8200;font-size: 30px;}
+.foot .footabot .foot-rx .tel img{margin-right:5px;}
+.foot .footabot .foot-rx .time{}
+
+.foot .footqual{ width: 100%; overflow: auto;}
+.foot .footqual .footqualcon{padding:20px 0 30px 0;overflow: auto; width: 1103px; margin:0 auto;}
+.foot .footqual .pull-left p{color: #999;margin: 0;line-height: 1.5}
+.foot .footqual .pull-left div{color: #999;margin: 0;line-height: 1.5}
+.foot .footqual .pull-left div i{display: block; float: left}
+.foot .footabot .foot_list a:hover{text-decoration: underline;}

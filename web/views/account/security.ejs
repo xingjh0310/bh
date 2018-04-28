@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= com.env.seo.title %>安全设置</title>
+    <% include ../parent/static.ejs %>
+    <link rel="stylesheet" type="text/css" href="/css/BH/account/public.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/BH/parent/account_left.css"/>
+</head>
+<body>
+<% include ../parent/top.ejs %>
+<% include ../parent/account_left.ejs %>
+
+<div class="personal_rg">
+
+    <div class="personal_cen inv_main">
+        <div class="persecurity_pre">
+
+            <span class="sp2">您好<i><%= user.mobile.replace(/^(\d{3})(.+)(\w{4})$/, "$1****$3") %></i></span>
+            <span>信息完整度：</span>
+            <div class="progress">
+                <%
+                var s = 1;
+                var dj = '低';
+                if (user.email && user.validEmail) s += 1;
+                if (user.payPassword) s += 1;
+                if (user.realName && user.idCard) s += 1;
+                if (s > 1 && s < 4) dj = '中';
+                else if (s == 4) dj = '高';
+                %>
+                <div class="progress-bar wow"
+                     style="width:<%= (s * 0.25 * 100).toFixed(0) %>%;border-radius:20px;"></div>
+
+            </div>
+            <span class="dj" style="margin-right:300px"><%= dj %></span>
+        </div>
+
+        <ul class="persecurity">
+
+            <li>
+                <div class="li_sec">
+                    <img src="/img/se_1.png"/>
+                    <span>登录密码</span>
+                    <a href="javascript:" class="slide_down"
+                       onclick="$(this).parent().parent().find('#picCode').click()">修改</a>
+                    <a href="javascript:" class="slide_up">收起</a>
+                </div>
+                <div class="secu_form1 secu_form" style="display:none">
+                    <form class="form-horizontal formResetLoginPwd">
+                        <div class="tipsYz"></div>
+                        <div class="tipsMob">验证码已发送，请注意查收</div>
+                        <div class="form-group">
+                            <span class="u2"></span>
+                            <input type="password" class="form-control" name="pwd" _check="password"
+                                   placeholder="请输入新密码">
+                        </div>
+                        <div class="form-group">
+                            <span class="u2"></span>
+                            <input type="password" class="form-control" name="pwd2" _check="pwd2" placeholder="再次输入密码">
+                        </div>
+                        <div class="form-group yanzh_inp">
+                            <input type="text" class="form-control imgCode" id="imgCode" name="imgCode"
+                                   placeholder="验证码"
+                                   _check="validcode" style="margin-right: 10px;"/>
+                            <i class="imgcode"> <img onclick="reloadImgCode(this)" id="picCode"
+                                                     style="width: 105px; height: 47px;cursor: pointer;" class="refresh"
+                                                     src="/getImgCode"/></i>
+                        </div>
+                        <div class="form-group yanzh_inp">
+                            <span class="u5"></span>
+                            <input type="text" style="text-indent:60px;background:#fff;" class="form-control"
+                                   name="code"
+                                   placeholder="手机验证码" name="code" _check="validcode">
+                            <i style="background:#fe8749;font-size:16px;">
+                                <input class="btn_a" type="button"
+                                       onclick="javascript:ZC_api.sendResetLoginPasswordCode();"
+                                       id="sendResetLoginPasswordCode" value="获取" type="button"></i>
+                        </div>
+                        <div class="form-group">
+                            <a href="javascript:" class="btn btn-logoin" onclick="ZC_api.resetLoginPassword()">确定</a>
+                        </div>
+                    </form>
+                </div>
+
+            </li>
+
+            <li>
+                <% if(user.payPassword){ %>
+                <div class="li_sec">
+                    <img src="/img/se_4.png"/>
+                    <span>支付密码</span>
+                    <strong>
+                        ******
+                    </strong>
+                    <a href="javascript:" class="slide_down"
+                       onclick="$(this).parent().parent().find('#picCode').click()">修改</a>
+                    <a href="javascript:" class="slide_up">收起</a>
+                </div>
+                <div class="secu_form1 secu_form hide">
+                    <form class="form-horizontal resetPayPassword">
+                        <div class="tipsYz"></div>
+                        <div class="tipsMob">验证码已发送，请注意查收</div>
+                        <div class="form-group">
+                            <span class="u2"></span>
+                            <input type="password" class="form-control" _check="tradepwd" name="tradePwd"
+                                   placeholder="设置6-12位作为交易密码">
+                        </div>
+                        <div class="form-group">
+                            <span class="u2"></span>
+                            <input type="password" class="form-control" name="tradePwd1" _check="tradepwd1"
+                                   placeholder="再次输入密码">
+                        </div>
+                        <div class="form-group yanzh_inp">
+                            <input type="text" class="form-control  imgCode" name="imgCode" placeholder="图片验证码"
+                                   _check="validcode" style="margin-right: 10px;"/>
+                            <i class="imgcode"> <img onclick="reloadImgCode(this)" id="picCode"
+                                                     style="width: 105px; height: 47px;cursor: pointer;" class="refresh"
+                                                     src="/getImgCode"/></i>
+                        </div>
+
+                        <div class="form-group yanzh_inp">
+                            <span class="u5"></span>
+                            <input type="text" style="text-indent:60px;background:#fff" class="form-control" name="code"
+                                   placeholder="手机验证码" name="code" _check="validcode">
+                            <i style="background:#ff8a10;font-size:16px;"><input class="btn_a" type="button"
+                                                                                 onclick="javascript:ZC_api.sendSavePayPasswordCode();"
+                                                                                 id="sendSavePayPasswordCode" value="获取"
+                                                                                 readonly unselectable="on"/></i>
+                        </div>
+                        <div class="form-group">
+                            <a href="javascript:" class="btn btn-logoin" onclick="ZC_api.resetPayPassword()">确定</a>
+                        </div>
+                    </form>
+                </div>
+
+                <% }else{ %>
+                <div class="li_sec">
+                    <img src="/img/se_5.png"/>
+                    <span>支付密码</span>
+                    <strong style="color:#e44454">
+                        未设置
+                    </strong>
+                    <a href="javascript:" class="slide_down"
+                       onclick="$(this).parent().parent().find('#picCode').click()">设置</a>
+                    <a href="javascript:" class="slide_up">收起</a>
+                </div>
+                <div class="secu_form secu_form hide">
+                    <form class="form-horizontal PayPasswordForm">
+                        <div class="tipsYz"></div>
+                        <div class="form-group">
+                            <span class="u2"></span>
+                            <input type="password" class="form-control" _check="tradepwd" name="tradePwd"
+                                   placeholder="设置6-12位作为交易密码">
+                        </div>
+                        <div class="form-group">
+                            <span class="u2"></span>
+                            <input type="password" class="form-control" name="tradePwd1" _check="tradepwd1"
+                                   placeholder="再次输入密码">
+                        </div>
+                        <div class="form-group yanzh_inp">
+                            <input type="text" class="form-control imgCode" id="imgCode" name="imgCode"
+                                   placeholder="验证码"
+                                   _check="validcode" style="margin-right: 10px;"/>
+                            <i class="imgcode"> <img onclick="reloadImgCode(this)" id="picCode"
+                                                     style="width: 105px; height: 47px;cursor: pointer;" class="refresh"
+                                                     src="/getImgCode"/></i>
+                        </div>
+                        <div class="form-group">
+                            <a href="javascript:" class="btn btn-logoin" onclick="ZC_api.savePayPassword()">确定</a></div>
+                    </form>
+                </div>
+
+                <% } %>
+
+            </li>
+
+            <li>
+                <% if(user.realName && user.idCard){ %>
+                <div class="li_sec">
+                    <img src="/img/se_6.png"/>
+                    <span>实名认证</span>
+                    <strong class="notcertified">
+                        <%= (user.realName ? user.realName.substring(0, 1) + "**" : '') %>&nbsp;(
+                        身份已认证<%= user.idCard ? user.idCard.replace(/^(\d{3})(.+)(\w{4})$/, "$1****$3") : "" %> )
+                    </strong>
+                </div>
+                <% }else{ %>
+                <div class="li_sec">
+                    <img src="/img/se_3.png"/>
+                    <span>实名认证</span>
+                    <strong style="color:#e44454">未认证</strong>
+                    <a href="javascript:" class="slide_down">认证</a>
+                    <a href="javascript:" class="slide_up">收起</a>
+                </div>
+                <% } %>
+                <div class="secu_form hide">
+                    <form class="form-horizontal RealNameForm" 　>
+                        <div class="tipsYz"></div>
+                        <div class="form-group">
+                            <span class="u1"></span>
+                            <input type="text" class="form-control" name="realName" _check="realname"
+                                   placeholder="请输入真实姓名">
+                        </div>
+                        <div class="form-group">
+                            <span class="u2"></span>
+                            <input type="text" class="form-control" name="idCard" _check="idcard" placeholder="请输入身份证号">
+
+                        </div>
+
+                        <div class="form-group">
+                            <a href="javascript:" class="btn btn-logoin" onclick="ZC_api.saveRealName()" style="margin:20px auto 15px">认证</a></div>
+                        <!--<p style="margin-bottom:50px;color:#fe8749">实名认证输入错误3次将被锁定，锁定后请联系在线客服！</p>-->
+                    </form>
+                </div>
+            </li>
+
+            <li>
+                <% if(user.email){ %>
+                <div class="li_sec">
+                    <img src="/img/se_7.png"/>
+                    <span>邮箱认证</span>
+                    <strong>
+                        <%= user.email ? user.email.replace(/^(\d{3})(.+)(\w{4})$/, "$1****$3") : "" %><span
+                                style="margin-left:15px;">(<%= user.validEmail?'已认证':'未认证' %>)</span>
+                    </strong>
+
+                    <a href="javascript:" class="slide_down"
+                       onclick="$(this).parent().parent().find('#picCode').click()">修改</a>
+                    <a href="javascript:" class="slide_up">收起</a>
+                </div>
+                <div class="secu_form hide">
+                    <form class="form-horizontal vEmailForm">
+                        <div class="tipsYz"></div>
+                        <div class="tipsMob">验证码已发送，请注意查收</div>
+                        <div class="form-group">
+                            <span class="u3"></span>
+                            <input type="text" class="form-control" _check="email" name="email" placeholder="请输入邮箱地址">
+                        </div>
+                        <div class="form-group yanzh_inp">
+                            <input type="text" class="form-control  imgCode" name="imgCode" id="imgCode"
+                                   placeholder="图片验证码"
+                                   _check="imagecode" style="margin-right: 10px;"/>
+                            <i class="imgcode"> <img onclick="reloadImgCode(this)" id="picCode"
+                                                     style="width: 105px; height: 47px;cursor: pointer;" class="refresh"
+                                                     src="/getImgCode"/></i>
+                        </div>
+                        <div class="form-group yanzh_inp">
+                            <span class="u5"></span>
+                            <input type="text" class="form-control" name="code" placeholder="手机验证码" _check="validcode"
+                                   style="background:#fff;text-indent:60px;">
+                            <input type="text" id="mobile" value="<%= user.mobile %>" hidden>
+                            <i style="background: #fe8749;border:none"><input class="btn_a" type="button"
+                                                                              onclick="javascript:ZC_api.sendSaveEmailCode();"
+                                                                              id="sendSaveEmailCode" class="sec_code"
+                                                                              value="获取" readonly unselectable="on"></i>
+                        </div>
+                        <div class="form-group">
+                            <a href="javascript:" class="btn btn-logoin" onclick="ZC_api.resetEmail()">确定</a>
+                        </div>
+                    </form>
+                </div>
+                <% }else{ %>
+                <div class="li_sec">
+                    <img src="/img/se_2.png"/>
+                    <span>邮箱认证</span>
+                    <strong style="color:#e44454">未绑定</strong>
+                    <a href="javascript:" class="slide_down">绑定</a>
+                    <a href="javascript:" class="slide_up">收起</a>
+                </div>
+                <div class="secu_form hide">
+                    <form class="form-horizontal vEmailForm" id="vEmailForm">
+                        <div class="tipsYz"></div>
+                        <div class="tipsYz_em">验证邮箱已发送</div>
+                        <div class="form-group">
+                            <span class="u3"></span>
+                            <input type="text" class="form-control" _check="email" name="email" placeholder="请输入邮箱地址">
+                        </div>
+
+                        <div class="form-group">
+                            <a href="javascript:" class="btn btn-logoin email_yzbt" onclick="ZC_api.validEmail()">认证</a>
+                        </div>
+                        <a href="javascript:" class="btn btn-logoin email_yzbt1"
+                           style="background:#c8c8c8;display:none;border-color:#c8c8c8">去邮箱完成验证</a>
+                    </form>
+                </div>
+
+                <% } %>
+
+            </li>
+
+        </ul>
+
+
+    </div>
+</div>
+
+<!--邮箱绑定成功-->
+<div class="modal vailemail_mod" style="display:none">
+    <div class="modal-dialog">
+        <div class="modal-conten">
+            <img src="/img/yx.png">
+            <p class="p1">邮箱修改成功！</p>
+            <a href="/account/security" class="btn_zd">我知道了</a>
+            <p class="time_p"><i class="time22">5</i>秒后返回</p>
+        </div>
+    </div>
+</div>
+
+<% include ../parent/bottom.ejs %>
+
+</body>
+
+</html>

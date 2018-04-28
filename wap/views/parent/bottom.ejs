@@ -1,0 +1,24 @@
+
+<ul class="ui-grid-trisect">
+    <li class="<%= req.url=='/'?'active':'' %>">
+        <a href="/" ><span class="iconfont">&#xe669;</span>首页</a>
+    </li>
+    <li class="<%= req.url=='/debts'?'active':'' %>">
+        <a href="/debts"><span class="iconfont">&#xe6c1;</span>理财</a>
+    </li>
+    <li class="<%= req.url=='/aboutus'?'active':'' %>">
+        <a href="/aboutus"><span class="iconfont">&#xe650;</span>发现</a>
+    </li>
+    <li class="<%= req.url=='/account'?'active':'' %>">
+        <% if(!user){ %>
+            <a href="/inputmobile"><span class="iconfont" >&#xe67b;</span>我的</a>
+        <% }else{ %>
+            <a href="/account"><span class="iconfont" >&#xe67b;</span>我的</a>
+        <% } %>
+    </li>
+</ul>
+
+
+
+
+

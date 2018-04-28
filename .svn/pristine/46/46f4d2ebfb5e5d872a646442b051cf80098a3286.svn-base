@@ -1,0 +1,404 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+<nav class="breadcrumb">
+    <i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 借款标管理 <span class="c-gray en">&gt;</span> 发布借款标
+    <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="Hui-iconfont">&#xe68f;</i>
+    </a>
+</nav>
+<div class="pd-20">
+    <div class="codeView docs-example">
+        <legend>基本信息</legend>
+        <form class="form form-horizontal" id="form">
+            <input type="hidden" name="id" value="<%= debt.id || '' %>"/>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>借款标题：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" id="Title" placeholder="请输入标题" datatype="*4-100"
+                           nullmsg="请输入标题" errormsg="大于4位小于100位" name="title" value="<%= debt.title || '' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>借款金额(元)：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <% if(!debt.id || audit){ %>
+                    <input type="text" class="input-text" placeholder="请输入正整数" datatype="/^\+?[1-9][0-9]*$/" nullmsg="请输入正整数" errormsg="请输入正整数" name="amount" value="<%= debt.amount || '' %>"/>
+                    <% }else{ %>
+                    <span class="select-box"><%= debt.amount || '' %></span>
+                    <% } %>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>预期年化(%)：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <% if(!debt.id || audit){ %>
+                    <input type="text" class="input-text" placeholder="请输入数字(最多保留小数点后两位)" datatype="/^(?!0+$)(?!0*\.0*$)\d{1,8}(\.\d{1,2})?$/" nullmsg="请输入数字(最多保留小数点后两位)" errormsg="请输入数字(最多保留小数点后两位)" name="rate" value="<%= debt.rate ? (debt.rate * 100).toFixed(2) : '' %>"/>
+                    <% }else{ %>
+                    <span class="select-box"><%= (debt.rate * 100).toFixed(2) || '' %></span>
+                    <% } %>
+                </div>
+            </div>
+            <div class="row cl" style="display: block;">
+                <label class="form-label col-xs-4 col-sm-3">含额外利息(%)：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" datatype="/(^$)|(^(?!0+$)(?!0*\.0*$)\d{1,8}(\.\d{1})?$)/" nullmsg="请输入数字(最多保留小数点后一位)" errormsg="请输入数字(最多保留小数点后一位)" placeholder="请输入数字(最多保留小数点后一位)" name="increaseRate" value="<%= (debt.increaseRate && parseFloat(debt.increaseRate) > 0 && parseFloat(debt.increaseRate) < 1) ? parseFloat((debt.increaseRate * 100).toFixed(2)) : '' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>逾期罚息(%)：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <% if(!debt.id || audit){ %>
+                    <input type="text" class="input-text" placeholder="请输入数字(最多保留小数点后两位)" datatype="/^-?[1-9]+(\.\d+)?$|^-?0(\.\d+)?$|^-?[1-9]+[0-9]*(\.\d+)?$/" nullmsg="请输入数字(最多保留小数点后两位)" errormsg="请输入数字(最多保留小数点后两位)" name="overdueRate" value="<%= debt.overdueRate ? (debt.overdueRate * 100).toFixed(2) : '' %>"/>
+                    <% }else{ %>
+                    <span class="select-box"><%= (debt.overdueRate * 100).toFixed(2) || '' %></span>
+                    <% } %>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>有效期类型：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                        <span class="select-box">
+                            <% if(!debt.id || audit){ %>
+                            <select class="select" name="investPeriodType">
+                                <option value="2" <%= debt.investPeriodType==2 ? 'selected=selected' : '' %>>天</option>
+                                <option value="1" <%= debt.investPeriodType==1 ? 'selected=selected' : '' %>>小时</option>
+                            </select>
+                            <% }else{ %>
+                            <%= debt.investPeriodType == 1 ? '小时' : '天' %>
+                            <% } %>
+                        </span>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>有效期：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <% if(!debt.id || audit){ %>
+                    <input type="text" class="input-text" placeholder="请输入正整数"
+                           datatype="/(^[1-9][0-9][0-9]$)|(^[1-9][0-9]$)|(^[1-9]$)$/"
+                           nullmsg="请输入正整数"
+                           errormsg="请输入正整数" name="investPeriod"
+                           value="<%= debt.investPeriod || '' %>"/>
+                    <% }else{ %>
+                    <span class="select-box"><%= debt.investPeriod || '' %></span>
+                    <% } %>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>封闭期(天)：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <% if(!debt.id || audit){ %>
+                    <input type="text" class="input-text" placeholder="请输入正整数"
+                           datatype="/(^[1-9][0-9][0-9]$)|(^[1-9][0-9]$)|(^[1-9]$)$/"
+                           nullmsg="请输入正整数"
+                           errormsg="请输入正整数" name="closedPeriod"
+                           value="<%= debt.closedPeriod || '' %>"/>
+                    <% }else{ %>
+                    <span class="select-box"><%= debt.closedPeriod || '' %></span>
+                    <% } %>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>新手标：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                        <span class="select-box">
+                            <% if(!debt.id || audit){ %>
+                            <select class="select" name="isNew">
+                                <option value="0" <%= !debt.isNew ? 'selected=selected' : '' %>>否</option>
+                                <option value="1" <%= debt.isNew ? 'selected=selected' : '' %>>是</option>
+                            </select>
+                            <% }else{ %>
+                            <%= debt.isNew ? '是' : '否' %>
+                            <% } %>
+                        </span>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>周期类型：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                        <span class="select-box">
+                            <% if(!debt.id || audit){ %>
+                            <select class="select" name="periodUnit">
+                                <% for(var key in _global.periodUnit){ %>
+                                <option <%= debt.periodUnit == _global.periodUnit[key].v ? 'selected=selected' : '' %> value="<%= _global.periodUnit[key].v %>"><%= _global.periodUnit[key].desc %></option>
+                                <% } %>
+                            </select>
+                            <% }else{ %>
+                            <%= _global.getDesc(_global.periodUnit, debt.periodUnit) %>
+                            <% } %>
+                        </span>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>借款周期：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <% if(!debt.id || audit){ %>
+                    <input type="text" class="input-text" placeholder="请输入借款周期" datatype="/(^[1-9][0-9][0-9]$)|(^[1-9][0-9]$)|(^1000&)|(^[1-9]$)$/" nullmsg="请输入借款周期" errormsg="请输入数字" name="period" value="<%= debt.period || '' %>"/>
+                    <% }else{ %>
+                    <span class="select-box"><%= debt.period %></span>
+                    <% } %>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>开始时间：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <% if(!debt.id || audit){ %>
+                    <input type="text" class="input-text Wdate" placeholder="请输入开始时间" nullmsg="请输入开始时间" datatype="*" errormsg="请输入正确时间" id="datemax" name="beginTime" value="<%= new Date(debt.beginTime || new Date()).Format('yyyy-MM-dd hh:mm:ss') %>" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+                    <% }else{ %>
+                    <span class="select-box"><%= new Date(debt.beginTime || new Date()).Format('yyyy-MM-dd hh:mm:ss') %></span>
+                    <% } %>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>项目类型：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                        <span class="select-box">
+                            <select class="select" name="productType">
+                                <% for(var key in _global.productType){ %>
+                                <option <%= debt.productType == _global.productType[key].v ? 'selected=selected' : '' %> value="<%= _global.productType[key].v %>"><%= _global.productType[key].desc %></option>
+                                <% } %>
+                            </select>
+                        </span>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>还款方式：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                        <span class="select-box">
+                            <% if(!debt.id || audit){ %>
+                            <select class="select" name="paymentType">
+                                <% for(var key in _global.paymentType){ %>
+                                <option <%= debt.paymentType == _global.paymentType[key].v ? 'selected=selected' : '' %> value="<%= _global.paymentType[key].v %>"><%= _global.paymentType[key].desc %></option>
+                                <% } %>
+                            </select>
+                            <% }else{ %>
+                            <%= _global.getDesc(_global.paymentType, debt.paymentType) %>
+                            <% } %>
+                        </span>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>计息方式：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                        <span class="select-box">
+                            <% if(!debt.id || audit){ %>
+                            <select class="select" name="interestType">
+                                <% for(var key in _global.interestType){ %>
+                                <option <%= debt.interestType == _global.interestType[key].v ? 'selected=selected' : '' %> value="<%= _global.interestType[key].v %>"><%= _global.interestType[key].desc %></option>
+                                <% } %>
+                            </select>
+                            <% }else{ %>
+                            <%= _global.getDesc(_global.interestType, debt.interestType) %>
+                            <% } %>
+                        </span>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>借款人：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <% if(!debt.id || audit){ %>
+                    <input type="text" class="input-text" placeholder="请输入借款人手机号" nullmsg="请输入借款人手机号" datatype="m" errormsg="请输入正确手机号" id="mobile" name="mobile" value="<%= debt.mobile || '' %>"/>
+                    <% }else{ %>
+                    <span class="select-box"><%= debt.mobile %></span>
+                    <% } %>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>起购金额：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" placeholder="请输入正整数" datatype="/^\+?[1-9][0-9]*$/" nullmsg="请输入正整数" errormsg="请输入正整数" name="minInvestAmount" value="<%= debt.minInvestAmount || 1 %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>最高可投(元)：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" placeholder="" name="maxInvestAmount" placeholder="请输入正整数且小于借款金额" datatype="/^\+?[0-9][0-9]*$/" nullmsg="请输入正整数且小于借款金额" errormsg="请输入正整数且小于借款金额" value="<%= debt.maxInvestAmount || 0 %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>奖励类型：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <select class="select-box" name="awardType" id="awardType">
+                        <option value="0">无</option>
+                        <% for(var key in _global.awardType){ %>
+                        <option <%= debt.awardType == _global.awardType[key].v ? 'selected=selected' : '' %> value="<%= _global.awardType[key].v %>"><%= _global.awardType[key].desc %></option>
+                        <% } %>
+                    </select>
+                </div>
+            </div>
+            <div class="row cl" id="awardNumberDiv" style="<%= debt.awardType > 0 ? '' : 'display: none;' %>">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>奖励数量：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" placeholder="请输入奖励数量" datatype="/^-?[1-9]+(\.\d+)?$|^-?0(\.\d+)?$|^-?[1-9]+[0-9]*(\.\d+)?$/" nullmsg="请输入奖励数量" errormsg="请输入数字" name="awardNumber" id="awardNumber" value="<%= (debt.awardType == _global.awardType.Scale.v ? (debt.awardNumber * 100).toFixed(2) : debt.awardNumber) || 0 %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>购买类型：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <% if(!debt.id || audit){ %>
+                    <select class="select-box" name="investType">
+                        <% for(var key in _global.investType){ %>
+                        <option <%= debt.investType == _global.investType[key].v ? 'selected=selected' : '' %> value="<%= _global.investType[key].v %>"><%= _global.investType[key].desc %></option>
+                        <% } %>
+                    </select>
+                    <% }else{ %>
+                    <span class="select-box"><%= _global.getDesc(_global.investType, debt.investType) %></span>
+                    <% } %>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">约标密码：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" placeholder="请输入约标密码" name="debtPwd" value=""/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">抵押：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <textarea placeholder="请描述抵押" name="collateral" style="width: 320px;height:200px;"><%= (debt && debt.collateral)?debt.collateral:"" %></textarea>
+                </div>
+                <label style="color: red;">例：奥迪A4牌汽车壹辆， 车辆牌号：浙A10003， 发动机号为：HHADSFUEWRAFDS322432，车架号：HHADSFUEWRAFDS322432的车辆</label>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>项目图片：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="hidden" value="<%= debt.imgFiles || '' %>" name="imgFiles" id="imgFiles"/>
+                    <div id="fileList" class="uploader-list"></div>
+                    <div id="filePicker" style="margin-top:10px;">选择图片</div>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>基本信息：</label>
+                <div class="formControls col-10" style="width:75%;">
+                    <script id="safeguard" name="safeguard" type="text/plain" style="width:80%;height:400px;"><%- debt.safeguard || "" %></script>
+                </div>
+            </div>
+            <div class="row cl">
+                <div class="col-10 col-offset-3">
+                    <button id="sub" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存并提交审核</button>
+                    <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+    var ue_safeguard = UE.getEditor('safeguard');
+    var id = '<%= debt.id || '' %>';
+    $(".form").Validform({
+        btnSubmit: '#sub',
+        postonce: true,
+        tiptype: 4,
+        showAllError: true,
+        ajaxPost: true,
+        beforeSubmit: function (curform) {
+            var debt = JSON.stringify($('#form').serializeJson());
+            debt.safeguard = ue_safeguard.getContent();
+            $.ajax({
+                url: '/debt/save',
+                type: 'post',
+                data: {debt: debt},
+                success: function (msg) {
+                    if (!msg.err) {
+                        Huimodal_alert('保存成功', 1000, function () {
+                            if (id) {
+                                parent.load();
+                                layer_close();
+                            } else {
+                                window.location.reload(true);
+                            }
+                        });
+                    }
+                    else {
+                        Huimodal_alert(msg.err, 1000, function () {
+                        });
+                    }
+                }
+            })
+            return false;
+        }
+    });
+
+
+    $(document).ready(function () {
+        initPic();
+        $list = $("#fileList"),
+                $btn = $("#btn-star"),
+                state = "pending",
+                uploader;
+
+        var uploader = WebUploader.create({
+            auto: true,
+            swf: '/lib/webuploader/0.1.5/Uploader.swf',
+
+            // 文件接收服务端。
+            server: '/util/upload?action=uploadimage',
+
+            // 选择文件的按钮。可选。
+            // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+            pick: '#filePicker',
+
+            // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+            resize: false,
+            duplicate: true,
+            // 只允许选择图片文件。
+            accept: {
+                title: 'Images',
+                extensions: 'gif,jpg,jpeg,bmp,png',
+                mimeTypes: 'image/*'
+            }
+        });
+
+        // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+        uploader.on('uploadSuccess', function (file, json) {
+            var $div = $('<div style="width: 100px;height:120px;float:left;" id="' + file.id + '"></div>');
+            var $img = $('<img style="width: 100px;height:100px;" src="' + json.url + '"/>');
+            var $a = $('<a style="margin-left:35px;" href="javascript:void(0);" onclick="$(this).parent().remove();loadFileImg();">删除</a>');
+            $div.append($img).append($a);
+            $list.append($div);
+            loadFileImg();
+        });
+
+        // 文件上传失败，显示上传出错。
+        uploader.on('uploadError', function (file) {
+            Huimodal_alert('上传出错', 1000);
+        });
+
+
+    });
+
+    function initPic() {
+        if ($('#imgFiles').val()) {
+            var arr = $('#imgFiles').val().split('|');
+            $list = $("#fileList");
+            for (var i = 0; i < arr.length; i++) {
+                var $div = $('<div style="width: 100px;height:120px;float:left;"></div>');
+                var $img = $('<img style="width: 100px;height:100px;" src="' + arr[i] + '"/>');
+                var $a = $('<a style="margin-left:35px;" href="javascript:void(0);" onclick="$(this).parent().remove();loadFileImg();">删除</a>');
+                $div.append($img).append($a);
+                $list.append($div);
+            }
+        }
+    }
+
+    function loadFileImg() {
+        $('#imgFiles').val('');
+        $.each($("#fileList").find('img'), function (i, item) {
+            $('#imgFiles').val($('#imgFiles').val() + $(item).attr('src') + (i + 1 == $("#fileList").find('img').length ? '' : '|'));
+        })
+    }
+
+    $('#awardType').change(function () {
+        if ($(this).val() != '0') {
+            $('#awardNumberDiv').show();
+        } else {
+            $('#awardNumberDiv').hide();
+            $('#awardNumber').val(0);
+        }
+    });
+
+</script>
+</html>

@@ -1,0 +1,33 @@
+
+
+<div class="personal_warp">
+    <div class="personal">
+
+<div class="personal_nav">
+
+    <ul class="personal_ul">
+        <li class="personal_e"><span class="icon"></span>账户中心</li>
+        <li class="<%= req.url=='/account'?'active':'' %>"><a href="/account">账户首页</a></li>
+        <li class="personal_e"><span class="icon font1"></span>投资管理</li>
+        <li class="<%= req.url=='/account/invests'?'active':'' %>"><a href="/account/invests">投资记录</a></li>
+        <li class="<%= req.url=='/account/payment'?'active':'' %>"><a href="/account/payment">回款计划</a></li>
+        <li class="<%= req.url=='/account/autoInvest'?'active':'' %>"><a href="/account/autoInvest">自动投标</a></li>
+        <!--li class="<%= req.url=='/account/overdue'?'active':'' %>"><a href="/account/overdue">逾期转让</a></li-->
+        <li class="personal_e" ><span class="icon font2"></span>资金管理</li>
+        <li class="<%= req.url=='/account/cashflow'?'active':'' %>"><a href="/account/cashflow">资金明细</a></li>
+        <li class="personal_e"><span class="icon font3"></span>安全中心</li>
+        <li class="<%= req.url=='/account/security'?'active':'' %>"><a href="/account/security" >安全设置</a></li>
+        <li class="<%= req.url=='/account/bankcards'?'active':'' %>"><a href="/account/bankcards">我的银行卡</a></li>
+        <li class="personal_e"><span class="icon  font4"></span>奖励管理</li>
+        <li class="<%= req.url=='/account/bonus'?'active':''%>"><a href="/account/bonus">红包管理</a></li>
+        <li class="<%= req.url == '/account/coupon' ? 'active' : '' %>"><a href="/account/coupon">我的加息券</a></li>
+        <li class="<%= req.url=='/account/integral'?'active':'' %>"><a href="/account/integral">我的积分</a></li>
+        <li class="<%= req.url=='/account/invite'?'active':'' %>"><a href="/account/invite">邀请有礼</a></li>
+    </ul>
+</div>
+
+        <div class="personal_rg">
+
+
+
+

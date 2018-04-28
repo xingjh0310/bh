@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 红包管理 <span
+            class="c-gray en">&gt;</span> 红包设置列表 <a class="btn btn-success radius r mr-20"
+                                                    style="line-height:1.6em;margin-top:3px"
+                                                    href="javascript:location.replace(location.href);" title="刷新"><i
+                class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+    <div class="">
+        <div style="width:360px;float: left;">
+            日期范围&nbsp;:&nbsp;
+            <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'eTime\')||\'%y-%M-%d\'}'})" id="bTime"
+                   class="input-text Wdate" value="" style="width:120px;" name="bTime" readonly="true"/>
+            &nbsp;-&nbsp;
+            <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'bTime\')}',maxDate:'%y-%M-%d'})" id="eTime"
+                   class="input-text Wdate" style="width:120px;" value="" name="eTime" readonly="true"/>
+        </div>
+        <div style="width:260px;float: left;">&nbsp;&nbsp;状态&nbsp;:&nbsp;<span class="select-box" style="width:160px;">
+				<select class="select" id="state">
+                    <option value="">全部</option>
+                    <option value="1">已启用</option>
+                    <option value="0">未启用</option>
+                </select>
+				</span></div>
+        <button name="" id="" class="btn btn-success" type="button" onclick="ZC_api.loadBonusSetList(1,20)"><i
+                    class="Hui-iconfont">
+                &#xe665;</i> 搜索
+        </button>
+        <button name="" id="" class="btn btn-success" type="button" onclick="edit(null)"><i class="Hui-iconfont">
+                &#xe600;</i> 新增
+        </button>
+    </div>
+    <div class="mt-20">
+        <table class="table table-border table-bordered table-bg table-hover table-sort">
+            <thead>
+            <tr class="text-c">
+                <th width="25"><input type="checkbox" name="" value=""></th>
+                <th width="80">ID</th>
+                <th width="80">名称</th>
+                <th width="80">金额</th>
+                <th width="80">发放场景</th>
+                <th width="80">红包类型</th>
+                <th width="80">状态</th>
+                <th width="120">开始时间</th>
+                <th width="120">结束时间</th>
+                <th width="120">时间</th>
+                <th width="80">操作</th>
+            </tr>
+            </thead>
+            <script type="text/template" id="bonus_tmpl">
+                <tr class="text-c">
+                    <td><input type="checkbox" value="" name=""></td>
+                    <td>{id}</td>
+                    <td>{name}</td>
+                    <td>{amount}</td>
+                    <td>{action}</td>
+                    <td>{type}</td>
+                    <td>{state}</td>
+                    <td>{sendBeginTime}</td>
+                    <td>{sendEndTime}</td>
+                    <td>{time}</td>
+                    <td>{handle}</td>
+                </tr>
+            </script>
+            <tbody id="bonus_list">
+
+            </tbody>
+        </table>
+        <div id="page"></div>
+    </div>
+</div>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+    load();
+    function load() {
+        ZC_api.loadBonusSetList(1, 20);
+    }
+    function edit(id) {
+        var index = layer.open({
+            type: 2,
+            title: '红包设置',
+            content: '/bonus/editset' + (id ? '?id=' + id : '')
+        });
+        layer.full(index);
+    }
+</script>
+</body>
+
+</html>

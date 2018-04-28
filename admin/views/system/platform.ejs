@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 系统设置 <span
+            class="c-gray en">&gt;</span> 平台信息设置 <a class="btn btn-success radius r mr-20"
+                                                    style="line-height:1.6em;margin-top:3px"
+                                                    href="javascript:location.replace(location.href);" title="刷新"><i
+                class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+    <div class="codeView docs-example">
+        <form class="form form-horizontal" id="form">
+            <input type="hidden" name="id" value="<%= platform.id || '' %>"/>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>平台名称：</label>
+                <div class="formControls col-xs-8 col-sm-5" style="width: 60%;">
+                    <input type="text" class="input-text" id="platformName" placeholder="请输入平台名称" datatype="s4-100"
+                           nullmsg="请输入平台名称" errormsg="大于2位小于100位" name="platformName"
+                           value="<%= platform.platformName || '' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>平台Logo：</label>
+                <div class="formControls col-xs-8 col-sm-5" style="width: 60%;" id="webLogoDiv">
+                    <input type="hidden" value="<%= platform.webLogo || '' %>" name="webLogo"/>
+                    <div class="uploader-list fileList"></div>
+                    <div class="filePicker" style="margin-top:10px;">选择图片</div>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>后台Logo：</label>
+                <div class="formControls col-xs-8 col-sm-5" style="width: 60%;" id="adminLogoDiv">
+                    <input type="hidden" value="<%= platform.adminLogo || '' %>" name="adminLogo"/>
+                    <div class="uploader-list fileList"></div>
+                    <div class="filePicker" style="margin-top:10px;">选择图片</div>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>公司名称：</label>
+                <div class="formControls col-xs-8 col-sm-5" style="width: 60%;">
+                    <input type="text" class="input-text" id="companyName" placeholder="请输公司名称" datatype="s4-100"
+                           nullmsg="请输公司名称" errormsg="大于2位小于100位" name="companyName"
+                           value="<%= platform.companyName || '' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>公司地址：</label>
+                <div class="formControls col-xs-8 col-sm-5" style="width: 60%;">
+                    <input type="text" class="input-text" id="address" placeholder="请输公司名称" datatype="s4-100"
+                           nullmsg="请输公司名称" errormsg="大于2位小于100位" name="address" value="<%= platform.address || '' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>客服电话1：</label>
+                <div class="formControls col-xs-8 col-sm-5" style="width: 60%;">
+                    <input type="text" class="input-text" id="phone1" placeholder="客服电话" datatype="s4-100"
+                           errormsg="请输入正确的电话号码" name="phone1" value="<%= platform.phone1 || '' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>客服电话2：</label>
+                <div class="formControls col-xs-8 col-sm-5" style="width: 60%;">
+                    <input type="text" class="input-text" id="phone2" placeholder="客服电话" datatype="s4-100"
+                           errormsg="请输入正确的电话号码" name="phone2" value="<%= platform.phone2 || '' %>"/>
+                </div>
+            </div>
+
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>QQ1：</label>
+                <div class="formControls col-xs-8 col-sm-5" style="width: 60%;">
+                    <input type="text" class="input-text" id="qq1" placeholder="客服QQ" datatype="s4-100"
+                           errormsg="请输入正确的QQ号码" name="qq1" value="<%= platform.qq1 || '' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>QQ2：</label>
+                <div class="formControls col-xs-8 col-sm-5" style="width: 60%;">
+                    <input type="text" class="input-text" id="qq2" placeholder="客服QQ" datatype="s4-100"
+                           errormsg="请输入正确的QQ号码" name="qq2" value="<%= platform.qq2 || '' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>QQ3：</label>
+                <div class="formControls col-xs-8 col-sm-5" style="width: 60%;">
+                    <input type="text" class="input-text" id="qq3" placeholder="客服QQ" datatype="s4-100"
+                           errormsg="请输入正确的QQ号码" name="qq3" value="<%= platform.qq3 || '' %>"/>
+                </div>
+            </div>
+
+
+            <div class="row cl">
+                <div class="col-10 col-offset-3">
+                    <button id="sub" class="btn btn-primary radius" type="button"><i
+                                class="Hui-iconfont">&#xe632;</i> 保存
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+</body>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+    $('#webLogoDiv').createUpload();
+    $('#adminLogoDiv').createUpload();
+    $(".form").Validform({
+        btnSubmit: '#sub',
+        postonce: true,
+        tiptype: 4,
+        showAllError: true,
+        ajaxPost: true,
+        beforeSubmit: function (curform) {
+            //if ($('#AccountId').val()) {
+            $.ajax({
+                url: '/system/savePlatform',
+                type: 'post',
+                data: {platform: JSON.stringify($('#form').serializeJson())},
+                success: function (msg) {
+                    if (!msg.err) {
+                        Huimodal_alert('保存成功', 1000, function () {
+                        });
+                    }
+                    else {
+                        Huimodal_alert(msg.err, 1000, function () {
+                        });
+                    }
+                }
+            })
+            return false;
+            //}
+        }
+    });
+</script>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <link rel="stylesheet" type="text/css" href="/css/BH/debt/list.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/BH/borrow/index.css"/>
+    <title><%= com.env.seo.title %>我要投资</title>
+</head>
+<body>
+
+<% include ../parent/top.ejs %>
+
+<div class="investment_main">
+    <div class="investment_nav">
+
+        <div class="investment_tab">
+            <ul class="tab_list">
+                <li class="active">优选项目</li>
+                <li>转让专区</li>
+            </ul>
+            <div class="investment_tab_main setTabMain">
+
+                <!-- 优选项目 -->
+                <div>
+                    <div class="hb_div">
+                        <div class="inver_name">期限</div>
+                        <div class="filtTag_A">
+                            <ul>
+                                <li><a href="Javascript: void(0)" class="hb_active1">全部</a></li>
+                                <li><a href="Javascript: void(0)">0-1个月</a></li>
+                                <li><a href="Javascript: void(0)">1-3个月</a></li>
+                                <li><a href="Javascript: void(0)">3-6个月</a></li>
+                                <li><a href="Javascript: void(0)">6-12个月</a></li>
+                                <li><a href="Javascript: void(0)">12个月以上</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="hb_div">
+                        <div  class="inver_name">状态</div>
+                        <div class="filtTag_A">
+                            <ul>
+                                <li><a href="Javascript: void(0)" class="hb_active1">全部</a></li>
+                                <li><a href="Javascript: void(0)">正在招标</a></li>
+                                <li><a href="Javascript: void(0)">即将上线</a></li>
+                                <li><a href="Javascript: void(0)">销售满额</a></li>
+                                <li><a href="Javascript: void(0)">正在还款</a></li>
+                                <li><a href="Javascript: void(0)">已还款</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="hb_div">
+                        <div  class="inver_name ">
+                            类型</div>
+                        <div class="filtTag_A">
+                            <ul>
+                                <li><a href="Javascript: void(0)" class="hb_active1">全部</a></li>
+                                <li><a href="Javascript: void(0)">类型1</a></li>
+                                <li><a href="Javascript: void(0)">类型1</a></li>
+                                <li><a href="Javascript: void(0)">类型1</a></li>
+                                <li><a href="Javascript: void(0)">类型1</a></li>
+                                <li><a href="Javascript: void(0)">类型1</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="hb_div">
+                        <div  class="inver_name">
+                            还款方式</div>
+                        <div class="filtTag_A">
+                            <ul>
+                                <li><a href="Javascript: void(0)" class="hb_active1">全部</a></li>
+                                <li><a href="Javascript: void(0)">按月还</a></li>
+                                <li><a href="Javascript: void(0)">一次性还</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 转让专区 -->
+                <div>
+                    <div class="hb_div">
+                        <div class="inver_name">
+                            期限
+                        </div>
+                        <div class="filtTag_A">
+                            <ul>
+                                <li><a href="Javascript: void(0)" class="hb_active1">全部</a></li>
+                                <li><a href="Javascript: void(0)">0-1个月</a></li>
+                                <li><a href="Javascript: void(0)">1-3个月</a></li>
+                                <li><a href="Javascript: void(0)">3-6个月</a></li>
+                                <li><a href="Javascript: void(0)">6-12个月</a></li>
+                                <li><a href="Javascript: void(0)">12个月以上</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="hb_div">
+                        <div  class="inver_name">
+                            状态            </div>
+                        <div class="filtTag_A">
+                            <ul>
+                                <li><a href="Javascript: void(0)" class="hb_active1">全部</a></li>
+                                <li><a href="Javascript: void(0)">正在招标</a></li>
+                                <li><a href="Javascript: void(0)">即将上线</a></li>
+                                <li><a href="Javascript: void(0)">销售满额</a></li>
+                                <li><a href="Javascript: void(0)">正在还款</a></li>
+                                <li><a href="Javascript: void(0)">已还款</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="hb_div">
+                        <div  class="inver_name ">
+                            类型</div>
+                        <div class="filtTag_A">
+                            <ul>
+                                <li><a href="Javascript: void(0)" class="hb_active1">全部</a></li>
+                                <li><a href="Javascript: void(0)">类型1</a></li>
+                                <li><a href="Javascript: void(0)">类型2</a></li>
+                                <li><a href="Javascript: void(0)">类型3</a></li>
+                                <li><a href="Javascript: void(0)">类型4</a></li>
+                                <li><a href="Javascript: void(0)">类型4</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="hb_div">
+                        <div  class="inver_name">
+                            还款方式</div>
+                        <div class="filtTag_A">
+                            <ul>
+                                <li><a href="Javascript: void(0)" class="hb_active1">全部</a></li>
+                                <li><a href="Javascript: void(0)">按月还</a></li>
+                                <li><a href="Javascript: void(0)">一次性还</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="item_main">
+        <div class="">
+            <ul class="item_sx">
+                <li class="active">综合排序</li>
+                <li>年化收益<i class="iconfont">&#xe93b;</i></li>
+                <li>项目期限<i class="iconfont">&#xe93c;</i></li>
+                <li>项目进度<i class="iconfont">&#xe93a;</i></li>
+            </ul>
+        </div>
+
+        <div class=" item_swep ">
+            <!-- 优选项目 -->
+            <div class="you_item" >
+
+                <ul class="item_list">
+                    <script type="text/template" id="debt_tmpl">
+                        <li>
+                            <p class="p1">{title}</p>
+                            <div>
+                                <p class="p1">{rate}<span>%</span></p>
+                                <p class="p2">年化收益</p>
+                            </div>
+                            <div>
+                                <p class="p1">{period}<span>{periodUnit}</span></p>
+                                <p class="p2">项目期限</p>
+                            </div>
+                            <div>
+                                <p class="p1 col999">{amount}</p>
+                                <p class="p2">总额(元)</p>
+                            </div>
+                            <div>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width:80%"></div>
+                                </div>
+                                <p class="p3"><i class="col999">剩余金额：</i>{schedule}<span>{schedule}%</span></p>
+
+                            </div>
+                            <div>
+                                {state}
+                            </div>
+                            <span class="hover-line"></span>
+                        </li>
+                    </script>
+                    <div id="debt_list"></div>
+                </ul>
+                <div id="page" class="  pagination_div">
+                    <ol class="pagination_1">
+
+                    </ol>
+                </div>
+
+
+            </div>
+            <!--转让专区-->
+            <div style="display:none">
+                <ul class="item_list  item_list_zr">
+                    <li>
+                        <p class="p1">项目名称118-558-8</p>
+                        <div>
+                            <p class="p1">8.8<span>%</span></p>
+                            <p class="p2">年化收益</p>
+                        </div>
+                        <div>
+                            <p class="p1">90<span>天</span></p>
+                            <p class="p2">项目期限</p>
+                        </div>
+                        <div>
+                            <p class="p1 col999">1,000,000</p>
+                            <p class="p2">总额(元)</p>
+                        </div>
+                        <div>
+                            <div class="progress">
+                                <div class="progress-bar" style="width:80%;"></div>
+                            </div>
+                            <p class="p3"><i class="col999">剩余金额：</i>600000.00 元<span>80%</span></p>
+                        </div>
+                        <div>
+                            <a href="javscript:" class="btn">立即投资</a>
+                        </div>
+                        <span class="hover-line"></span>
+                    </li>
+                </ul>
+                <div id="page" class="  pagination_div">
+                    <ol class="pagination_1">
+
+                    </ol>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+</div>
+
+
+<% include ../parent/bottom.ejs %>
+<script type="text/javascript">
+    ZC_api.loadDebt(1,10,'');
+
+
+</script>
+</body>
+
+</html>

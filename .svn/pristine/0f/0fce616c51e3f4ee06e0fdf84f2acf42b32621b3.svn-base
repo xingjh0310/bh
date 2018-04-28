@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 用户管理 <span
+            class="c-gray en">&gt;</span> 添加用户等级 <a class="btn btn-success radius r mr-20"
+                                                  style="line-height:1.6em;margin-top:3px"
+                                                  href="javascript:location.replace(location.href);" title="刷新"><i
+                class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+    <div class="codeView docs-example">
+        <form class="form form-horizontal" id="form">
+            <input type="hidden" name="id" value="<%= level.id || '0' %>"/>
+
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>等级名称：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" id="Name" placeholder="请输入等级名称" datatype="s2-100"
+                           nullmsg="请输入等级名称" errormsg="大于2位小于100位" name="name" value="<%= level.name || '' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>满足金额：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" id="Amount" placeholder="请输入满足金额" datatype="n1-100"
+                           nullmsg="请输入满足金额" errormsg="大于2位小于100位" name="amount" value="<%= level.amount || '' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>等级描述：</label>
+
+             <textarea id="remark" name="remark" style="width: 320px;" onkeyup="textarealength(this,200)" nullmsg="备注不能为空！"
+                       dragonfly="true"
+                       datatype="s2-100" placeholder="说点什么...最少输入10个字符" class="textarea" rows="" cols=""
+                       name=""><%= level.remark || ''%></textarea>
+            </div>
+            <div class="row cl">
+                <div class="col-10 col-offset-3">
+                    <button id="sub" class="btn btn-primary radius" type="button"><i
+                                class="Hui-iconfont">&#xe632;</i> 保存
+                    </button>
+                    <button onClick="layer_close();" class="btn btn-default radius" type="button">
+                        &nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+</body>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+    $(".form").Validform({
+        btnSubmit: '#sub',
+        postonce: true,
+        tiptype: 4,
+        showAllError: true,
+        ajaxPost: true,
+        beforeSubmit: function (curform) {
+            //if ($('#AccountId').val()) {
+            $.ajax({
+                url: '/user/saveLevel',
+                type: 'post',
+                data: {level: JSON.stringify($('#form').serializeJson())},
+                success: function (msg) {
+                    if (!msg.err) {
+                        Huimodal_alert('保存成功', 1000, function () {
+                            parent.load();
+                            layer_close();
+                        });
+                    }
+                    else {
+                        Huimodal_alert(msg.err, 1000, function () {
+                        });
+                    }
+                }
+            })
+            return false;
+            //}
+        }
+    });
+</script>
+</html>

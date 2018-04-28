@@ -1,0 +1,84 @@
+.fixed{
+    width: 100%;
+    height: 2.13333333rem/* 100px */;
+    background-color: rgba(0,0,0,.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: url('/img/activities/invite/download.png') no-repeat;
+    background-size: 100% 100%;
+    z-index: 999;
+}
+.container .banner{
+    width: 100%;
+    height: 13.48266667rem/* 632px */;
+    background: url('/img/activities/invite/banner.png') no-repeat;
+    background-size: 100%;
+}
+.container .register_form{
+    width: 14.72rem/* 690px */;
+    height:15.70133333rem/* 736px */;
+    margin: 0 auto;
+    background: url('/img/activities/invite/form_bg.png') no-repeat;
+    background-size: 100%;
+    padding: .64rem/* 30px */;
+    padding-top: 1.90133333rem/* 136px */;
+    box-sizing: border-box;
+}
+.register_tips>.warnning_icon{
+    display: inline-block;
+    width:.59733333rem/* 28px */;
+    height: .59733333rem/* 28px */;
+    background: url('/img/activities/channel/tips.png') no-repeat;
+    vertical-align: middle;
+    background-size: 100% 100%;
+}
+.check>.inner_check{
+    display: inline-block;
+    background: url('/img/activities/invite/check_ok.png') no-repeat;
+    vertical-align: middle;
+    background-size: 90% 70%;
+    background-position: center;
+    float: left;
+}
+#register{
+    width: 100%;
+    height:2.13333333rem/* 100px */;
+    outline: none;
+    background: url('/img/activities/invite/button.png');
+    background-size: 100%;
+    border:none;
+    color: #fff;
+    font-size:.768rem/* 36px */;
+    letter-spacing: 2px;
+    margin-top:.5rem;
+}
+.contents{
+    width: 14.63466667rem/* 686px */;
+    height: 11.73333333rem/* 550px */;
+    margin:0 auto;
+    position: relative;
+    top: -1rem;
+    background: url('/img/activities/invite/fuliBG.png') no-repeat;
+    background-size: 100%;
+    border-radius: 0.45rem;
+}
+.content2{
+    width: 14.63466667rem/* 686px */;
+    height:13.44rem/* 630px */;
+    background: url('/img/activities/invite/pingtaiBG.png') no-repeat;
+    background-size:100% 100%;
+    margin:0 auto;
+    margin-top: 0.4rem;
+
+}
+.content3{
+    width: 14.63466667rem/* 686px */;
+    height:4.736rem/* 222px */;
+    background: url('/img/activities/invite/erweima.png') no-repeat;
+    background-size:100% 100%;
+    margin:0 auto;
+    margin-top: 1.4rem;
+    margin-bottom: 1.4rem;
+}

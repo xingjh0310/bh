@@ -1,0 +1,16 @@
+@charset "utf-8";
+/* 你自己的样式 */
+.borrow_ul{overflow: auto;padding:10px 0 0;border-bottom: 1px solid #eee}
+.borrow_ul li{width: 50%;float:left;text-align: center;cursor: pointer;padding:5px 0;font-size: 14px}
+.borrow_ul li.active{    background: #eee;color:red}
+.borrow_tab>div{display: none}
+
+
+
+
+
+
+
+
+
+

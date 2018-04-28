@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= com.env.seo.title %>邮箱认证</title>
+    <% include ../parent/static.ejs %>
+    <link rel="stylesheet" type="text/css" href="/css/BH/account/public.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/BH/parent/account_left.css"/>
+</head>
+<body>
+<% include ../parent/top.ejs %>
+<div class="personal">
+    <div class="personalcon clear">
+        <% include ../parent/account_left.ejs %>
+        <div class="personalright">
+            <div class="percom">
+                <form>
+                    <h3><a class="active" href="javascript:;">邮箱认证</a><a href="javascript:;"></a></h3>
+                    <p class="pertext"><span class="pertexttitle">邮箱：</span><input name="email" type="text"/></p>
+                    <a class="percoma rea" style="margin-top: 20px;" href="javascript:;" onclick="ZC_api.validEmail()">认证</a>
+                    <div class="perprompt">
+                        <ol>
+                            <li class="perpromptli"><img src="/img/finance_144.png"><span>温馨提示</span></li>
+                            <li>1、 严禁利用充值功能进行信用卡套现、转账、洗钱等行为，一经发现，有权终止该账户使用；</li>
+                            <li>2、 请您合理充值，您所充值金额若未购买理财产品申请提现，将按千分之五收取额外提现费用；</li>
+                            <li>3、 充值期间，请勿关闭浏览器，待充值成功并返回页面后才能入账；</li>
+                            <li>4、 如果充值金额没有及时到账，请联系在线客服。</li>
+                        </ol>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<% include ../parent/bottom.ejs %>
+</html>

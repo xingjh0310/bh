@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>续投</title>
+</head>
+<body>
+<style>
+    img{
+        width: 100%;
+        display: block;
+    }
+</style>
+
+<img src="/img/xutou1.png"/>
+<img src="/img/xutou2.png"/>
+<img src="/img/xutou3.png"/>
+
+</body>
+</html>

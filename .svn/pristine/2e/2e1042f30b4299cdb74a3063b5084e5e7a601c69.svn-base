@@ -1,0 +1,14 @@
+.personal_warp{background: #f5f5f5;padding: 30px 0}
+.personal{width: 1090px;margin: 0 auto;overflow: auto;}
+.personal_nav{float: left;width: 202px;border-right: 2px solid #fafafa;background: #fff;    height: 884px;}
+.personal_ul li a,.personal_ul li{height: 50px;line-height: 50px;text-indent: 58px;display: block;}
+.personal_ul .active{background:#fe8749;}
+.personal_ul .active a{color: #fff}
+.personal_ul li a:hover{background:#fe8749;color:#fff}
+.personal_e{border-top:1px solid  #eee;font-size: 18px;margin-left: -35px;}
+.personal_nav .icon{margin-right:10px;display: inline-block;height: 25px;width: 25px;background: url(/img/font_9.png);vertical-align: middle;}
+.personal_nav .personal_e:first-child .icon{background-position: -13px -56px;}
+.personal_nav .personal_e .font1{background-position: -50px -58px;}
+.personal_nav .personal_e .font2{background-position: -103px -58px;}
+.personal_nav .personal_e .font3{background-position: -148px -58px;}
+.personal_nav .personal_e .font4{background-position: -202px -58px;}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <% include ../../parent/static.ejs %>
+    <title><%= com.env.seo.title %>约投专享</title>
+</head>
+<body>
+<style>
+    .container{
+        width:100%;
+        height:auto;
+        background: #fff;
+        padding-bottom: 100px;
+        overflow: hidden;
+        background: url("/img/activity/ordinaryActivities/banner_XT.png") no-repeat;
+        background-size:1920px 1132px;
+        background-position: top;
+        margin:0 auto;
+    }
+    .margin{
+        width: 1024px;
+        margin:0 auto;
+    }
+    .container .banner{
+        width:100%;
+        height: 1132px;
+    }
+    .content1{
+        width:80%;
+        height: 850px;
+        margin:0 auto;
+        background: url("/img/activity/ordinaryActivities/XT_content.png") no-repeat;
+        background-size: 100%;
+    }
+    .content2{
+        width:100%;
+        height:494px;
+        margin:0 auto;
+        background: url("/img/activity/ordinaryActivities/XT_rule.png") no-repeat;
+        background-size: 100% 100%;
+    }
+    /*button{*/
+        /*width: 100%;*/
+        /*height:148px;*/
+        /*margin: 0 auto;*/
+        /*background: #99c8ff;*/
+        /*border-radius: 100px;*/
+        /*border:none;*/
+        /*font-size: 34px;*/
+        /*letter-spacing: 4px;*/
+        /*color: #fff;*/
+        /*display: block;*/
+        /*outline: none;*/
+        /*cursor: pointer;*/
+        /*margin-top: 80px;*/
+    /*}*/
+    .invest{
+        margin-top:-102px;
+        width:110px;
+        height: 204px;
+        background: url("/img/activity/ordinaryActivities/investbtn.png");
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        position: fixed;
+        cursor: pointer;
+        right:100px;
+        top: 50%;
+        z-index: 99;
+    }
+</style>
+<% include ../../parent/top.ejs %>
+<div class="container">
+    <div class="invest" onclick="window.location.href='/debts'"></div>
+    <div class="margin">
+        <div class="banner"></div>
+        <div class="content1"></div>
+        <div class="content2"></div>
+        <!--<button onclick="window.location.href='/debts'">立即投资</button>-->
+    </div>
+
+</div>
+<% include ../../parent/bottom.ejs %>
+</body>
+</html>

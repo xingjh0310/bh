@@ -1,0 +1,35 @@
+/*团队管理*/
+.team{padding-bottom: 40px;}
+.team1{width:1100px;margin:0 auto}
+.team_main  h2{color:#fe8749;font-size:24px;margin:30px 0}
+.team_main .team2{width:1100px;margin:0 auto;overflow: hidden;padding-bottom:80px;}
+.team_main .team2 .pull-left{width:550px;}
+.team_main .team2-w{background: #f5f5f5;padding:15px 0}
+.team2_p{width:254px;line-height: 1.8;margin-top:60px;}
+.team2_p a{color:#fe8749;margin-top:30px;    display: block;}
+.team2_p h3{font-size:20px;}
+.team2_pic{float:right;position: relative;width: 291px;}
+.team2_pic span{width:251px;height:333px;border:1px solid #fe8749;display:block;position: absolute; }
+.team_pic2 span{width:251px;height:333px;border:1px solid #fe8749;display:block;position: absolute;left:30px;top:50px; }
+.team2_pic img{margin-top:20px;margin-left:19px;position: relative;z-index: 99}
+.team_pic2 img{margin-top:30px;margin-left:13px;position: relative;z-index: 99}
+.team_ul{width:1100px;margin:0 auto;    padding: 45px 0 30px 0;}
+.team_ul ul{overflow:auto;margin-left:-30px;}
+.team_ul ul li{float:left;margin-left:30px;position: relative;    height: 333px;overflow: hidden;margin-bottom:30px;cursor: pointer}
+.team_ul ul li span{position: absolute;width:80%;margin:0 0 24px 20px;-webkit-transition: all 0.3s;bottom:-80px;
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.team_ul ul li:hover span{bottom:0}
+.team_ul ul li span .p1{font-size:24px;}
+.team_warp{position: fixed;background: rgba(0,0,0,0.5);height:100%;width:100%;top:0;left:0;z-index:100;
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#5f000000,endColorstr=#5f000000);}
+.team_pos{height:460px;width:930px;background: #fff;margin:100px auto 0;padding:30px 30px 0 30px;border-radius: 5px;position: relative}
+.team_pos .del_btn{position: absolute;right:28px;top:10px;cursor: pointer}
+.team_pos .pull-left img{height:430px;width:310px;}
+.team_pos .pull-right{width: 570px;
+    overflow: auto;    height: 440px;}
+.team_pos .pull-right p{line-height: 1.8}
+.team_pos .pull-right h2{font-size:20px;    margin-bottom: 10px;}
+.team_pos .pull-right h3{font-size:16px;margin-bottom:25px;}

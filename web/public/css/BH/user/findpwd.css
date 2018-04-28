@@ -1,0 +1,33 @@
+/*找回密码*/
+.pass_warp{background: #f5f5f5;padding-top: 2px;padding-bottom: 80px;}
+.f_pass{width: 1100px;margin:35px auto 0;background: #fff;height:540px;padding-top: 20px;}
+.f_input  .yanzh_inp i .btn_cf{color:#fff;background: rgb(238, 238, 238);}
+.f_step{background: #fff;text-align: center;padding: 50px 0}
+.f_input{width: 330px;margin:80px auto 0;}
+.step_ul{overflow: auto;display: table;margin:30px auto 0;}
+.step_ul li{float: left;}
+.step_ul li:first-child{margin-left: -30px;}
+.step_ul li span{margin-left:30px;height:36px;width: 36px;display: inline-block;border-radius: 50%;text-align: center;line-height: 36px;background: #dfdfdf;color: #fff;font-size: 16px;}
+.step_ul li i{margin-left:30px;height:10px;width: 10px;display: inline-block;border-radius: 50%;background: #dfdfdf;}
+.f_input .yanzh_inp input{background: #fff;text-indent: 60px;}
+.step_ul li span.active,.step_ul li i.active{background:#51a3f5 }
+
+.f_input .btn{height: 45px;line-height: 45px;background: #fe8749;width: 160px;padding: 0;border-radius: 8px;color: #fff;font-size: 16px;display: table;margin: 0 auto}
+.f_input  .yanzh_inp i{font-size: 16px;letter-spacing: 0px;text-align: center;cursor: pointer;background: #ff8200;color: #fff}
+.f_input  .yanzh_inp i input{color: #fff;
+    float: none;
+    border: none;
+    line-height: 47px;
+    padding: 0;
+    height: 45px;
+    border-radius: 4px;
+    width: 95px;
+    background: #ff8a10;
+    cursor: pointer;
+    text-align: center;
+    text-indent: 0;
+    font-size: 16px;}
+.f3_div{text-align:center}
+.f3_div img{margin: 95px 0 25px 0}
+.f3_div p{color: #51a3f5;
+    font-size:16px;}

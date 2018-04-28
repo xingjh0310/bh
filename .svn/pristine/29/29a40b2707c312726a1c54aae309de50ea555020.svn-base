@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= com.env.seo.title %>逾期转让</title>
+    <% include ../parent/static.ejs %>
+    <link rel="stylesheet" type="text/css" href="/css/BH/account/public.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/BH/parent/account_left.css"/>
+</head>
+<body>
+<% include ../parent/top.ejs %>
+
+<% include ../parent/account_left.ejs %>
+
+<div class="personal_cen inv_main">
+
+    <div class="investment_tab setTabMain">
+        <div class="investment_tab_main setTabMain">
+            <div class="hb_div">
+                <div class="inver_name">期限</div>
+                <div class="filtTag_A">
+                    <ul>
+                        <li><a href="Javascript: void(0)" class="hb_active1">全部</a></li>
+                        <li><a href="Javascript: void(0)">今天</a></li>
+                        <li><a href="Javascript: void(0)">最近一周</a></li>
+                        <li><a href="Javascript: void(0)">最近一月</a></li>
+                        <li class="data-right">
+                            <input type="text" data-beatpicker="true" data-beatpicker-position="[-345,50]" id="start"
+                                   onclick="laydate(start)"/>
+                            <div>至</div>
+                            <input type="text" data-beatpicker="true" data-beatpicker-position="[-345,50]" id="end"
+                                   onclick="laydate(end)"/>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+
+            <div class="hb_div">
+                <div class="inver_name">操作类型</div>
+                <div class="filtTag_A">
+                    <ul>
+                        <li><a href="Javascript: void(0)" class="hb_active1">全部</a></li>
+                        <li><a href="Javascript: void(0)">提现</a></li>
+                        <li><a href="Javascript: void(0)">投资</a></li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="table_list">
+        <div class="table_send">
+            <div>
+                <a href="javascript:"><i class="iconfont">&#xe600;</i>导出报表</a>
+                <a href="javascript:"><i class="iconfont">&#xe61d;</i>发送至邮箱</a>
+            </div>
+        </div>
+
+        <table border="0" cellspacing="0" width="100%" class="table dates">
+            <thead>
+            <tr>
+                <th>时间</th>
+                <th>项目名称</th>
+                <th>年化利率</th>
+                <th>剩余期数</th>
+                <th>待收本金(元)</th>
+                <th>待收利息(元)</th>
+                <th>操作</th>
+
+            </tr>
+            </thead>
+
+
+        </table>
+
+    </div>
+
+
+</div>
+
+<% include ../parent/bottom.ejs %>
+
+</body>
+
+</html>

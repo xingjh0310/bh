@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+
+<div class="pd-20">
+    <form class="form form-horizontal" id="form">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>收 件 人：<%= order.addressee||'无'%></label>
+        </div>
+            <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>联系方式：<%= order.telphone||'无'%></label>
+            </div>
+                <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>收货地址：<%= order.prov  || ''%><%= order.city||''%><%= order.area||''%><%= order.address||''%></label>
+                </div>
+        <div class="row cl">
+            发货备注：
+        <textarea id="memo"  class="textarea" rows="" cols=""
+                             style="width: 100%;"><%= order.memo|| '暂无发货备注'%></textarea>
+        </div>
+    </form>
+</div>
+</body>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+</script>
+</html>

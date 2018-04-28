@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 内容管理 <span
+            class="c-gray en">&gt;</span> 渠道统计 <a class="btn btn-success radius r mr-20"
+                                                  style="line-height:1.6em;margin-top:3px"
+                                                  href="javascript:location.replace(location.href);" title="刷新"><i
+                class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+    <div class="">
+        单日时间数据：
+        <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'sTime\')||\'%y-%M-%d\'}'})" id="sTime"
+               class="input-text Wdate"
+               value=""
+               style="width:120px;" name="bTime" readonly="true">
+
+
+
+        区间时间数据：
+        <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'bTime\')||\'%y-%M-%d\'}'})" id="bTime"
+               class="input-text Wdate"
+               value=""
+               style="width:120px;" name="bTime" readonly="true">
+        -
+        <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'eTime\')}',maxDate:'%y-%M-%d'})" id="eTime"
+               class="input-text Wdate" style="width:120px;" value="" name="eTime"
+               readonly="true">
+
+        <div style="width:260px;float: left;">&nbsp;&nbsp;渠道&nbsp;:&nbsp;<span class="select-box"
+                                                                               style="width:160px;">
+				<select class="select" id="channel">
+                    <option value="-1">全部</option>
+                </select>
+				</span></div>
+        <button name="" id="" class="btn btn-success" type="button"
+                onclick="ZC_api.loadchannelct(false)">
+            <i class="Hui-iconfont">
+                &#xe665;</i> 搜索
+        </button>
+        <button name="" id="" class="btn btn-success" type="button"
+                onclick="ZC_api.loadchannelct(true);"><i
+                    class="Hui-iconfont">
+                &#xe644;</i> 导出
+        </button>
+
+    </div>
+    <div class="mt-20">
+        <table class="table table-border table-bordered table-bg table-hover table-sort">
+            <thead>
+            <tr class="text-c">
+                <th width="25"><input type="checkbox" name="" value=""></th>
+
+                <th width="80">渠道</th>
+                <th width="80">单日注册用户数</th>
+                <th width="80">单日实名用户数</th>
+                <th width="80">单日绑卡用户数</th>
+                <th width="80">单日充值用户数</th>
+                <th width="80">单日交易用户数</th>
+                <th width="80">单日充值金额</th>
+                <th width="80">单日交易金额</th>
+                <th width="80">单日提现金额</th>
+                <th width="80">待收金额</th>
+                <th width="80">累计注册用户数</th>
+                <th width="80">累计实名用户数</th>
+                <th width="80">累计绑卡用户数</th>
+                <th width="80">累计充值用户数</th>
+                <th width="80">累计交易用户数</th>
+                <th width="80">累计充值金额</th>
+                <th width="80">累计提现金额</th>
+                <th width="80">累计交易金额</th>
+
+
+            </tr>
+            </thead>
+            <script type="text/template" id="channel_tmpl">
+                <tr class="text-c">
+                    <td><input type="checkbox" value="" name=""></td>
+
+                    <td>{channelName}</td>
+                    <td>{todayRegister}</td>
+                    <td>{todayRealName}</td>
+                    <td>{todayBindCard}</td>
+                    <td>{todayRechargeNum}</td>
+                    <td>{todayTradeNum}</td>
+                    <td>{todayRecharge}</td>
+                    <td>{todayTrade}</td>
+                    <td>{todayWithdraw}</td>
+                    <td>{waitReceive}</td>
+                    <td>{totalRegister}</td>
+                    <td>{totalRealName}</td>
+                    <td>{totalBindCard}</td>
+                    <td>{totalRechargeNum}</td>
+                    <td>{totalTradeNum}</td>
+                    <td>{totalRecharge}</td>
+                    <td>{totalWithdraw}</td>
+                    <td>{totalTrade}</td>
+
+                </tr>
+            </script>
+            <tbody id="channel_list">
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+</body>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+    load();
+    function load() {
+        ZC_api.loadchannelct(false);
+    }
+
+    $(document).ready(function(){
+        $.post("/channel/getChannelList",function (res) {
+            if(res && res.list && res.list instanceof Array){
+                $("#route").html("");
+                $("#route").append('<option value="-1">全部</option>');
+                for(var i=0;i<res.list.length;i++){
+                    $("#channel").append('<option value="'+res.list[i].id+'">'+res.list[i].name+'</option>');
+                }
+            }else{
+                $("#channel").html("");
+                $("#channel").append('<option value="">请选择</option>');
+            }
+        });
+    })
+
+</script>
+</html>

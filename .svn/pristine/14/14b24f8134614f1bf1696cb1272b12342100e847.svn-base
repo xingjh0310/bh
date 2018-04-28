@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+
+<div class="pd-20">
+    <form class="form form-horizontal" id="form" style="padding-left: 50px;">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>用户名称：</label>
+            <div class="formControls col-xs-8 col-sm-5">
+                <label><%= telfee.realname%></label>
+            </div>
+
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>对应手机号：</label>
+
+            <div class="formControls col-xs-8 col-sm-5">
+                <label><%= telfee.mobile%></label>
+            </div>
+
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>话费充值金额：</label>
+            <div class="formControls col-xs-8 col-sm-5">
+                <label><%= telfee.telFee%> 元</label>
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-10 col-offset-3">
+                <input type="hidden" id="rid" value="<%= telfee.id%>"/>
+                <input type="hidden" id="fee" value="<%= telfee.telFee%>"/>
+                <button id="sub" class="btn btn-primary radius" onclick="subAuit()" type="button"><i
+                            class="Hui-iconfont">&#xe632;</i>确认充值
+                </button>
+                <button class="btn btn-default radius" onclick="layer_close()" type="button">
+                    &nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+                <button id="sub" class="btn btn-primary radius" onclick="tovoid()" type="button"><i
+                            class="Hui-iconfont">&#xe632;</i>作废该记录
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+    /**
+     * 确认充值
+     */
+    function subAuit() {
+        $.ajax({
+            url: '/telfee/startOrder',
+            type: 'post',
+            data: {id: $('#rid').val(), telfee: $('#fee').val()},
+            success: function (msg) {
+                if (!msg.err) {
+                    Huimodal_alert('此用户在充值中', 1000, function () {
+                        parent.loadmobilelist();
+                        layer_close();
+                    });
+                }
+                else {
+                    Huimodal_alert(msg.err, 1000, function () {
+                    });
+                }
+            }
+        })
+    }
+
+    /**
+     * 作废该记录
+     */
+    function tovoid() {
+        $.ajax({
+            url: '/telfee/tovoid',
+            type: 'post',
+            data: {id: $('#rid').val()},
+            success: function (msg) {
+                if (!msg.err) {
+                    Huimodal_alert('该记录已作废', 1000, function () {
+                        parent.loadmobilelist();
+                        layer_close();
+                    });
+                }
+                else {
+                    Huimodal_alert(msg.err, 1000, function () {
+                    });
+                }
+            }
+        })
+    }
+
+
+</script>
+</html>

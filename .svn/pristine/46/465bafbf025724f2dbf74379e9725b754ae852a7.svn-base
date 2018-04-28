@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>添加邮箱</title>
+</head>
+<body>
+    <div class="header header_reg" ><a class="iconfont" href="/account/personal"><img src="/img/fh1.png" class="fh_img"></a>添加邮箱</div>
+
+    <div class="login_warp">
+        <p class="p1">*绑定邮箱，轻松梳理理财信息</p>
+        <form class="form-horizontal vEmailForm">
+            <div class="tipsYz"></div>
+
+            <div class="form-group">
+                <span class="u1">验证码</span>
+                <input type="text" class="form-control" name="code" _check="validcode" placeholder="请输入手机验证码">
+                <input class="hq_btn" type="button" onclick="javascript:ZC_api.sendSaveEmailCode();"
+                                                                  id="sendSaveEmailCode"
+                                                                  value="获取验证码">
+            </div>
+            <div class="form-group" >
+                <span class="u1">新邮箱</span>
+                <input type="text" class="form-control" name="email" _check="email" placeholder="请输入有效邮箱号">
+
+            </div>
+            <a href="javascript:" class="btn-logoin"  onclick="ZC_api.validEmail()"  style="margin-top:0.9rem">确定</a>
+
+        </form>
+    </div>
+
+    <% include ../parent/slide_nav.ejs %>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= com.env.seo.title %>提现</title>
+    <% include ../parent/static.ejs %>
+    <link rel="stylesheet" type="text/css" href="/css/BH/account/public.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/BH/parent/account_left.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/BH/account/withdraw.css"/>
+</head>
+<body style="position: relative">
+<% include ../parent/top.ejs %>
+
+<% include ../parent/account_left.ejs %>
+<div class="inv_main ">
+
+    <div class="personal_cen reg_main" style="padding:0">
+        <div style="padding:0 40px">
+            <ul class="yq_ul tixian">
+                <li class="active">我要提现</li>
+                <li>提现记录</li>
+            </ul>
+        </div>
+        <div class="yq_table setTabMain">
+            <div class="reg_zf">
+
+                <form class="form-horizontal" style="padding:25px 40px 78px 40px;">
+                    <div class="yq_table setTabMain">
+
+                        <span class="sp2">提现至银行卡</span>
+                        <ul class="reg_bank">
+                            <li>
+                                <p style="overflow: auto;"><img src="/img/bank/<%= bankCard.bank %>.png" class="regbank_img" style="float:left"/><span style="float: left;margin-top: 8px;"><%= _bank[bankCard.bank].desc %></span></p>
+
+                                <p>
+                                    <span style="color:#999">储蓄卡 </span><%= bankCard.cardId ? bankCard.cardId.replace(/^(\d{4})(.+)(\w{4})$/, "$1************$3") : "" %>
+                                </p>
+                                <img src="/img/cy.png" class="cy_img">
+                            </li>
+
+                        </ul>
+                    </div>
+
+                    <div>
+                        <p><span class="sp2 sp3" style="margin-right:60px">可提现额度</span>
+                            <i><span style="color:#ff8200;font-size:24px;margin-right:8px;"
+                                     name="amount"><%= account.balance %></span>元</i>
+                        </p>
+                    </div>
+                    <div class="tipsYz"
+                         style="margin-left: 140px;margin-top: -20px;width: 170px;margin-bottom:3px;"></div>
+                    <div>
+                        <span class="sp2" style="margin-right:75px;">提现金额</span>
+                        <input id="focus" type="text" name="amount" _check="withdraw_amount" placeholder="输入提现金额"/>
+                        <span style="display: inline-block;margin-left: 30px;color:#999;font-size: 16px;">100元起提</span>
+
+                    </div>
+                    <div>
+                        <span class="sp2" style="margin-right:75px;">交易密码</span>
+                        <input type="password" class="form-control" name="payPassword" _check="tradepwd" placeholder="输入6-12位交易密码">
+                    </div>
+
+                    <a href="javascript:" class="btn" style="margin-left:140px;" onclick="ZC_api.withdraw()">确认提现</a>
+                </form>
+                <div class="withdrawrule" style="border-top:2px solid #f5f5f5;">
+                    <h2 style="padding: 25px 0 23px 0;font-size:18px;"> 提现时间：</h2>
+                    <p style="font-size: 14px;line-height: 25px;">
+                        1、工作日12:00之前申请的提现当日处理完成，12:00之后申请的提现下个工作日处理完成；<br>
+                        2、周五12:00之后的提现申请下个工作日（周一）处理完成；<br>
+                        3、由于不同银行处理业务的时间不同，具体到账时间以银行处理时间为准；<br>
+                        4、节假日及周末，实际到账时间以银行处理时间为准；<br>
+                        5、（国家法定假日除外）如遇国家法定节假日以网站公告为准。
+                    <h2 style="padding: 25px 0 23px 0;font-size:18px;"> 提现规则：</h2>
+                    <p style="font-size: 14px;line-height: 25px;">
+                    1、提现请先绑定银行卡，然后申请提现；<br>
+                    2、提现免费，100起提；<br>
+                    3、您所充值金额若未投资申请提现，将按千分之五收取额外提现费用；<br>
+                    4、如果提现金额在通过审核后48小时内未到账，请及时联系客服：400-1888-686。<br>
+                    </p>
+                </div>
+            </div>
+            <!--提现记录-->
+            <div class="reg_zf">
+                <div class="table_list" style="padding:0 40px;">
+                    <table border="0" cellspacing="0" width="100%" class="table dates">
+                        <thead>
+                        <tr>
+                            <th style="width: 200px;">提现时间</th>
+                            <th style="width: 100px;">提现金额(元)</th>
+                            <th style="width: 148px;">到帐银行卡</th>
+                            <th style="width: 100px;">状态</th>
+                            <!--th style="width: 300px;">审核时间</th-->
+                            <th style="width: 250px;">备注</th>
+                        </tr>
+                        </thead>
+                        <script type="text/template" id="withdraw_tmpl">
+                            <tr>
+                                <td>{time}</td>
+                                <td>￥{amount}</td>
+                                <td>{cardId}</td>
+                                <td>{payState}</td>
+                                <!--td >{payTime}</td-->
+                                <td>{memo}
+                                    <div class="w beizhu">
+                                        <div class="x">
+                                            <p class="p1">资金流水账号</p>
+                                            <p>{id}</p></i>
+
+                                        </div>
+                                    </div>
+                                </td>
+
+                            </tr>
+                        </script>
+                        <tbody id="withdraw_list">
+
+                        </tbody>
+
+                    </table>
+                    <div id="page" class="pagination_div">
+                        <ol class="pagination_1">
+
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="zhao_t"></div>
+<div class="tishi_t">
+      <p class="title">提现2342</p>
+      <div class="tishi_main">
+            <h2 class="msg">是否确定提现？</h2>
+            <ul>
+                <li><a style="background-color: #fe8749;float: left" class="cancel">取消</a></li>
+                <li><a style="background-color: #999999;float: right" class="submit">确定</a></li>
+            </ul>
+      </div>
+</div>
+
+</body>
+<% include ../parent/bottom.ejs %>
+<script type="text/javascript">
+    ZC_api.loadWithdraws(1, 10);
+</script>
+</html>

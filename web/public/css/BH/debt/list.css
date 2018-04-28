@@ -1,0 +1,83 @@
+/*我要投资*/
+.list_title{margin: 20px auto;background: url("/img/list_title.png") no-repeat left center;height: 32px;font-size: 26px;color: #333;padding-left: 20px;width: 1073px}
+.you_item{width:1103px;margin:0 auto;}
+.item_list li{overflow:hidden;padding: 20px 40px;background: #fff;border-bottom: 1px solid #ebebeb;position: relative;}
+.item_list li .p1{font-size: 16px;}
+.item_list li .p1 a{color:#666}
+.awardspan{    color: #fb565c;
+    background: #fff3f3;
+    display: inline-block;
+    padding: 3px 8px;
+    font-size: 12px;
+    border: 1px solid #ffcbcd;
+    border-radius: 5px;
+    margin-left: 15px;}
+.item_list li .p1 a:hover{color:#fa6e28;}
+.item_list li>div{float: left;width: 160px;text-align: center;}
+.item_list li>div .p1{font-size: 30px;margin:5px 0}
+.item_list li>div .p1 span{font-size:14px;}
+.item_list li>div .p2{color: #999}
+
+/*.item_list li>div:nth-child(4){width: 160px;text-align: left;margin-left: 40px;}*/
+/*.item_list li>div:nth-child(5){margin-left: 30px;}*/
+.item_list li .pre_img{position:relative;width: 290px;padding: 0 10px;}
+.item_list li .pre_img img{position:absolute; margin-left: -10px;top:-21px;z-index: 9999}
+.item_list .progress{width:290px;}
+
+.investment_nav{background: #f5f5f5;padding: 1px 0;padding-top: 30px}
+.investment_tab .tab_list{height: 55px;padding: 0;width: 750px;}
+.investment_tab .tab_list .li{line-height: 55px;text-align: center;font-size: 16px;margin: 0 30px;cursor: pointer;float:left}
+.investment_tab .tab_list .li2{display:none;}
+.investment_tab .tab_list .li2 p{
+    float: left;margin-right:15px;line-height: 55px;}
+.investment_tab .tab_list .li2 h3{
+    float: left;margin-right:15px;line-height: 55px;font-size:14px;}
+.investment_tab{background: #fff;width:1103px;margin:0 auto;position: relative}
+.investment_tab ul li{float:left;line-height:2.2;position: relative;}
+.investment_tab ul>.li2_type:nth-child(0){display:none}
+.investment_tab ul li.data-right>div{float:left;color:#999}
+.investment_tab .hb_active1 a{background: #ff8a10;color:#fff;}
+.investment_tab ul li img{
+    display: none;
+}
+.investment_tab ul>.hb_active1 img{
+    display: block;
+    position: absolute;
+    right: 15px;
+    top: -15px;
+}
+.investment_tab ul li a{
+    float:left;
+    height: 30px;width: 75px;
+    text-align: center;
+    display:inline-block;
+    margin-right: 40px;
+    border-radius:15px;
+    -moz-border-radius:15px;
+    -webkit-border-radius:15px;
+    color: #333;
+    border: 1px solid #fff
+}
+.investment_tab ul li a:hover{border: 1px solid #ff8a10;background:#fff; color: #ff8a10;border-radius:15px;-moz-border-radius:15px;-webkit-border-radius:15px;}
+.investment_tab ul li.hb_active1 a:hover{background:#ff8a10;color:#fff;display:inline-block;border: 1px solid #fff;}
+.investment_tab_main>div{height:90px;display: none;}
+.investment_tab_main>div:first-child{display: block;}
+
+/*.investment_tab ul{ overflow: hidden;}*/
+.inv_main .investment_tab ul li .hb_active1{background:#51a3f5;color:#fff;display:inline-block;}
+.inver_name{float:left;margin:40px 40px 0 30px;}
+.investment_tab .hb_icon2:before{background-position:-38px 0;}
+.filtTag_hd ,.filtTag_A, .typeTag_hd ,.typeTag_A {height:42px;padding: 35px 0 0 25px;}
+.investment_tab .hb_div{height:90px;width: 1103px;float: left;border-top:1px solid #ebebeb;border-bottom:1px solid #ebebeb}
+.investment_tab .hb_div_right{height: 165px;position: absolute;  top: 0px;  left: 750px;}
+.investment_tab .hb_div_right .li2{line-height:2;display: none;height:145px;padding-left: 15px;padding-top:20px;}
+.hb_item:hover{box-shadow: 0px 3px 20px #ccc;}
+.type_select{height:30px;width:150px;margin-top: 6px;    float: right;
+    margin-right: 195px;border:1px solid #ebebeb;}
+
+
+.item_sx{ padding:0 40px;height: 48px;line-height: 48px;background:#fff;border-bottom: 1px solid #ebebeb}
+.item_sx li{float: left;width:120px;cursor: pointer }
+.item_sx li.active{color:#51a3f5;}
+.investment_main{padding-bottom: 88px;background: #f5f5f5;}
+.pagination_div{ background: #fff; padding: 25px 0;}

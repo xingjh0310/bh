@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>关于注册登录</title>
+    <link rel="stylesheet" href="/css/base/BH_base.css">
+    <link rel="stylesheet" href="/css/BH/rule.css">
+    <style>
+        .rule-page{padding-bottom: 1rem;}
+    </style>
+</head>
+<body>
+    <div class="rule-page">
+        <div class="rule-title">如何成为铂恒金服大家庭的一员？</div>
+        <ul class="rule-list">
+            <li>①进入铂恒金服（http://www.bohomm.com/）首页，点击【注册】按钮</li>
+            <li>②根据提示信息，填写您的手机号码、验证码、密码等</li>
+            <li>③用户名一经注册，不可修改</li>
+        </ul>
+
+        <div class="rule-title">有推荐人时如何注册？</div>
+        <ul class="rule-list">
+            <li>①直接点击推荐链接进入注册页</li>
+            <li>②或者在注册时填写推荐人的邀请码</li>
+        </ul>
+
+        <div class="rule-title">注册时获取短信验证码失败怎么办？</div>
+        <ul class="rule-list">
+            <li>①请确保手机信号良好，并检查短信是否被安全软件拦截，请进行相关设置。</li>
+            <li>②运营商信息平台不稳定，请稍后再次尝试。</li>
+        </ul>
+
+        <div class="rule-title">忘记登录密码怎么办？如何找回？</div>
+        <ul class="rule-list">
+            <li>如果你忘记了登录密码，请在登录的页面点击【忘记密码】找回。</li>
+        </ul>
+
+        <div class="rule-title">如何修改登录密码？</div>
+        <ul class="rule-list">
+            <li>如果您要修改登录密码，登录【我的账户】—“安全设置”中进行修改。</li>
+        </ul>
+
+        <div class="rule-title">什么是实名认证？</div>
+        <ul class="rule-list">
+            <li>实名认证是指注册用户进行真实身份验证，平台数据直接对接公安系统，未实名认证用户无法进行充值， 也无法进行投资。</li>
+        </ul>
+    </div>
+</body>
+</html>

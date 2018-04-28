@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>关于我们</title>
+    <link rel="stylesheet" type="text/css" href="/css/BH/aboutus/about_nav.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/BH/aboutus/team.css"/>
+</head>
+<body>
+<style>
+    .container_image li {
+        float: left;
+    }
+    .container_image li img{
+        -webkit-transition: all 1s ease;
+        -moz-transition: all 1s ease;
+        transition: all 1s ease;
+    }
+    .container_image li:hover img{
+        transform: scale(1.1, 1.1);
+        -ms-transform: scale(1.1, 1.1); /* IE 9 */
+        -moz-transform: scale(1.1, 1.1); /* Firefox */
+        -webkit-transform: scale(1.1, 1.1); /* Safari 和 Chrome */
+        -o-transform: scale(1.1, 1.1);
+        z-index: 1000;
+    }
+</style>
+<% include ../parent/top.ejs  %>
+
+<div class="about_warp">
+
+    <div class="about_nav_w">
+        <ul class="about_nav">
+            <li style="margin-left:120px;">
+                <a href="/aboutus" >
+                    <span class="iconabout">&#xe657;</span>
+                    <p>公司介绍</p></a>
+            </li>
+            <li class="active">
+                <a href="/aboutus/team" >
+                    <span class="iconabout" style="line-height: 43px">&#xe639;</span>
+                    <p>运营团队</p></a>
+            </li>
+            <li>
+                <a href="/aboutus/news_list" >
+                    <span class="iconabout">&#xe687;</span>
+                    <p>媒体资讯</p></a>
+            </li>
+            <li>
+                <a href="/aboutus/announce_list" >
+                    <span class="iconabout"style="line-height: 43px">&#xe60d;</span>
+                    <p>平台公告</p></a>
+            </li>
+            <li>
+                <a href="/aboutus/contact" >
+                    <span class="iconabout">&#xe6ac;</span>
+                    <p>联系我们</p></a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="team_main">
+
+
+            <div class="team2">
+                <h2 class="h2">运营团队</h2>
+                <div class="pull-left">
+                    <div class="team2_p" style="float:left">
+                        <h3 class="data-name">朱 明 CEO</h3>
+                        <p>朱明,现任杭州博虹金融信息服务有限公司CEO，同时任世界浙商联盟理事，兼任贝壳社贝壳大学创业学院校董以及BAT俱乐部天使投资学院校董，曾被《中国国际财经》杂志评选为2016年中国经济年度创新人物，具备多年金融行业投融资经验及丰富上市公司改制、股权投资工作经验，曾参与主持多家公司资产并购及上市公司非公开发行项目，在项目风险掌控和风险评估方面具有独到见解。</p>
+                        <!--<a href="javascript:" onclick="$('.team_warp1').show()">了解详情>></a>-->
+                    </div>
+                    <div class="team2_pic">
+                        <span></span>
+                        <img src="/img/C88A1921.png">
+                    </div>
+
+                </div>
+                <div class="pull-right">
+                    <div class="team2_pic team_pic2" style="float:left">
+                       <span></span>
+                        <img src="/img/C88A4243.png">
+                    </div>
+                    <div class="team2_p" style="float:right">
+                        <h3>刘代伟  运营总监</h3>
+
+                        <p>刘代伟，现任杭州博虹金融信息服务有限公司运营总监，毕业于中国科学技术大学经济技术学院，具备十年金融行业从业经验，拥有证券从业资格证以及丰富的证券及资产管理公司管理岗位任职经验，擅长于产品的管理，制度以及流程的优化，对行政体制制度管理及绩效考核方面有深刻的理解及素养。</p>
+                         <!--<a href="javascript:"  onclick="$('.team_warp2').show()">了解详情>></a>-->
+                     </div>
+                 </div>
+             </div>
+
+        <div class="team2-w">
+            <div id="gallery" class="team1" style="height: 700px;">
+                <h2 class="h2">团队剪影</h2>
+                <div class="container_image">
+                    <!--<ul id="myRoundabout">-->
+                        <ul class="clearfix">
+                            <li><img src="/img/1-0.png" style="width: 340px; height: 600px;"/></li>
+                            <li style="margin: 0 10px;"><img src="/img/1-1.jpg" style="width: 378px; height: 295px;" /></li>
+                            <li><img src="/img/2-3.jpg"  style="width: 360px; height: 295px;"/></li>
+                            <li style="margin: 6px 10px 0 10px;"><img src="/img/1-4.jpg"  style="width: 360px; height: 295px;"/></li>
+                            <li style=" margin-top: 6px;"><img src="/img/1-5.jpg"  style="width: 378px; height: 295px;"/></li>
+                        </ul>
+                        <!--<li><a href="javascript:"><img src="/img/1-1.jpg" ></a></li>
+                        <li><a href="javascript:"><img src="/img/1-2.jpg" ></a></li>
+                        <li><a href="javascript:"><img src="/img/1-3.jpg" ></a></li>
+                        <li><a href="javascript:"><img src="/img/1-4.jpg" ></a></li>
+                        <li><a href="javascript:"><img src="/img/1-5.jpg"></a></li>
+                    </ul>-->
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+<% include ../parent/bottom.ejs  %>
+<!--<script type="text/javascript" src="/js/jquery-1.4.2.min.js"></script> &lt;!&ndash;中间广告图片1&ndash;&gt;
+
+<script type="text/javascript" src="/js/roundabout.js" ></script> &lt;!&ndash;中间广告图片2&ndash;&gt;
+<script type="text/javascript" src="/js/roundabout_shapes.js" ></script> &lt;!&ndash;中间广告图片3&ndash;&gt;
+<script type="text/javascript" src="/js/gallery_init.js" ></script> &lt;!&ndash;中间广告图片4&ndash;&gt;-->
+
+</body>
+
+</html>

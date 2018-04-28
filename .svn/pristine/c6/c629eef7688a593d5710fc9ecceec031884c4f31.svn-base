@@ -1,0 +1,197 @@
+html,body{margin:0 auto;padding-bottom:1.5em;width:100%;max-width:768px;height:auto;background: #fa573a;}
+.luck-draw-page,.top-box{width: 100%;}
+img{width: 100%;}
+
+.main-box{position:relative;width:100%;height: 8.4rem;background: url("/img/activities/luckDraw/main_bg.png") center no-repeat;background-size: 100% 100%;}
+.luck-cont{position: absolute;top:0;left:50%;margin-left:-3.43rem;
+    z-index: 10;width: 6.86rem;height: 6.86rem;
+    background: url("/img/activities/luckDraw/roundel.png") center no-repeat;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+}
+#luck-btn{position: absolute;top:2.2rem;left:50%;
+    z-index: 99;margin-left:-0.9rem;width: 1.8rem;height: 2.15rem;
+    background: url("/img/activities/luckDraw/pointer.png") center no-repeat;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+}
+.luck-bt{position: absolute;bottom: 0;left: 50%;margin-left:-2.6rem;width: 5.2rem;height: 2.7rem;
+    background: url("/img/activities/luckDraw/main_bt.png") center no-repeat;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+}
+.my-luck-btn{position:absolute;bottom:0.76rem;left:50%;margin-left:-1.02rem;width: 2.04rem;height: 0.5rem;
+    background: url("/img/activities/luckDraw/my_luck_btn.png") center no-repeat;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+}
+
+
+.record-title{margin:0.55rem auto;width: 3.38rem;}
+.record-cont{margin:0 auto;width: 6.9rem;}
+.record-cont-top{width: 100%;}
+.list-box{margin:-0.15rem auto 0;padding:0.4rem 0;width:6.6rem;background: #fff7f0;border-radius: 0 0 0.2rem 0.2rem;}
+.list-wrap{position:relative;height:3.02rem;overflow:hidden;}
+.record-list{position:absolute;top:0;left:0;width: 100%;}
+.record-list .item{line-height:0.6rem;overflow: hidden;}
+.record-list .item div{text-align: center;color: #666;font-size: 0.24rem;}
+.record-list .item div:nth-child(1){width: 2.54rem;}
+.record-list .item div:nth-child(2){width: 1.48rem;}
+.record-list .item div:nth-child(3){width: 2rem;color: #ff3744;}
+
+.rule-list{margin:0 auto;padding:0.16rem 0.3rem 0.3rem;width:6rem;background: #fff7f0;border-radius: 0.16rem;}
+.rule-list li{line-height:0.48rem;font-size: 0.24rem;color: #666;}
+
+.fixed-btn-box{position:fixed;bottom:0;left:0;z-index:100;width: 100%;height: 1rem;background: #f4bb26;}
+.fixed-btn{margin:0 auto;width: 100%;max-width:768px;height: 1rem;line-height:1rem;
+    font-size:0.36rem;color:#fff;text-align:center;letter-spacing:0.02rem;
+    background: -moz-linear-gradient(top, #fed942 0%, #f4bb26 50%);
+    background: -webkit-gradient(linear, top, bottom, color-stop(0%,#fed942), color-stop(50%,#f4bb26));
+    background: -webkit-linear-gradient(top, #fed942 0%,#f4bb26 50%);
+    background: -o-linear-gradient(top, #fed942 0%,#f4bb26 50%);
+    background: -ms-linear-gradient(top, #fed942 0%,#f4bb26 50%);
+    background: linear-gradient(to bottom, #fed942 0%,#f4bb26 50%);
+}
+@media (device-width: 375px) and (device-height: 812px){
+    html,body{padding-bottom:2rem;}
+    .fixed-btn-box{height: 1.5rem;}
+}
+
+.popUp-box{
+    display: none;
+    position: fixed;top:0;left:0;z-index:999;
+    width: 100%;height: 100%;background: rgba(0,0,0,0.5);
+}
+
+.success-box{
+    display: none;
+    position: absolute;top:50%;left:50%;
+    margin-top: -3.39rem;
+    margin-left: -2.51rem;
+    width:5.02rem;
+    height: 6.78rem;
+}
+.success-close-btn-wrap{
+    position: relative;
+    width: 100%;
+    height: 0.78rem;
+}
+.success-close-btn,.fail-close-btn,.my-close-btn{position: absolute;top:0;right:0;width:0.48rem;height: 0.48rem;
+    background: url("/img/activities/luckDraw/close_btn.png") center no-repeat;
+    background-size: 100% 100%;}
+
+.success-cont,.fail-cont{ width: 100%; }
+.success1-wrap,.success2-wrap,.success3-wrap,.success4-wrap{width: 100%;}
+.success2-wrap{
+    width: 100%;
+    height: 0.78rem;
+    font-size: 0.36rem;
+    color: #fff;
+    text-align: center;
+    background: url("/img/activities/luckDraw/success2.png") center no-repeat;
+    background-size: 100% 100%;
+}
+.success3-wrap{
+    width: 100%;
+    height: 1.6rem;
+    background: url("/img/activities/luckDraw/success3.png") center no-repeat;
+    background-size: 100% 100%;
+}
+.success3-txt{width: 2.4rem;line-height: 1.28rem;text-align: right;color: #c0494d;font-size: 0.8rem;}
+.success4-wrap{
+    width: 100%;
+    height: 1.66rem;
+    font-size: 0.24rem;
+    text-align: center;
+    color: #c0494d;
+    letter-spacing: 0.02rem;
+    background: url("/img/activities/luckDraw/success4.png") center no-repeat;
+    background-size: 100% 100%;
+}
+.success-btn,.fail-btn,.my-btn{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left:-1.55rem;
+    width: 3.1rem;
+    height: 0.77rem;
+    background: url("/img/activities/luckDraw/success_btn.png") center no-repeat;
+    background-size: 100% 100%;
+}
+
+.fail-box{
+    display: none;
+    position: absolute;top:50%;left:50%;
+    margin-top:-3.14rem;
+    margin-left:-2.51rem;
+    width: 5.02rem;
+    height: 6.28rem;
+}
+.fial2-wrap{
+    width: 100%;
+    height: 2.14rem;
+    background: #fa593b url("/img/activities/luckDraw/fail2.png") center no-repeat;
+    background-size: 100% 100%;
+}
+.fail2-txt{
+    margin:0 auto;
+    padding-top:0.55rem;
+    width: 4rem;
+    line-height: 0.38rem;
+    color:#c0494d;
+    font-size: 0.28rem;
+    text-align: center;
+}
+.fial3-wrap{
+    width: 100%;
+    height: 1.12rem;
+    background: url("/img/activities/luckDraw/fail3.png") center no-repeat;
+    background-size: 100% 100%;
+}
+
+.my-list{
+    display: none;
+    position: absolute;top:50%;left:50%;
+    margin-top:-3.5rem;
+    margin-left: -3.45rem;
+    width: 6.9rem;
+    height:7rem;
+}
+
+.my-cont{
+    position: relative;
+    width: 6.9rem;
+    height: 5.85rem;
+    background: url("/img/activities/luckDraw/my_bg.png") center no-repeat;
+    background-size: 100% 100%;
+}
+.my-cont-ul{
+    position: absolute;
+    top:2.04rem;
+    left:50%;
+    margin-left: -3.15rem;
+    width: 6.3rem;
+    height: 2.7rem;
+}
+.my-cont-ul li{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    padding:0.14rem 0;border-bottom: 1px dashed #f9e6bf;}
+.my-cont-ul li:nth-child(1){border-top: 1px solid #f9e6bf;}
+.my-cont-ul li:nth-child(3){border-bottom: none;}
+.my-item-prize,.item-prize-time,.item-prize-state{
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    color: #333;
+    font-size: 0.24rem;
+}
+.my-item-prize,.item-prize-state{line-height: 0.58rem;}
+.my-item-prize{padding-left:0.15rem;}
+.item-prize-time{padding-left:0.15rem;text-align: center;color:#666666;}
+.item-prize-state{padding-right:0.3rem;text-align: right;}

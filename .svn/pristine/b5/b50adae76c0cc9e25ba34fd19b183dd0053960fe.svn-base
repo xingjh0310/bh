@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>红包使用规则</title>
+</head>
+
+<body>
+<div class="header" ><a class="iconfont" href="/account/bonus"><img src="/img/fh1.png" class="fh_img"></a>红包使用规则 </div>
+<div class="rule_warp">
+    <p class="p1">*温馨提示</p>
+    <div class="rule_div">
+
+
+        <p>1、红包分为抵扣红包和现金红包；</p>
+        <p>2、 抵扣红包使用条件详见红包标注，您在购买时可直接抵扣金额，如购买1000元使用8元抵扣红包，则实际只需支付992元；</p>
+        <p>3、 自动投标开启后不能使用抵扣红包，使用抵扣红包前请关闭自动投标功能，抵扣红包使用要手动投标！</p>
+        <p>4、现金红包是直接变现的，加入可用余额中！如有疑问，请联系在线客服！</p>
+    </div>
+</div>
+
+</body>
+</html>
+

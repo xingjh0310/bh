@@ -1,0 +1,158 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<style type="text/css">
+    li {
+        line-height: 26px;
+        margin-left: 24px;
+        letter-spacing: 2px;
+    }
+
+    li span {
+        color: #7CB5EC;
+        font-weight: bold;
+        padding: 0 8px;
+        letter-spacing: 0px;
+    }
+</style>
+<body>
+<a class="btn btn-success radius r mr-20"
+   style="line-height:1.6em;margin-top:20px"
+   href="javascript:location.replace(location.href);" title="刷新"><i
+            class="Hui-iconfont">&#xe68f;</i></a>
+<div class="pd-20" style="padding-top:20px;">
+    <p class="f-20 text-success">欢迎使用<%= com.env.platform.platformName %>后台！</p>
+    <div id="container" style="min-width:700px;height:400px"></div>
+    <p style="margin-bottom:0px;"><i style="font-size: 26px;" class="Hui-iconfont">&#xe61e;</i>数据总揽</p>
+    <div class="panel panel-default  mt-20" style="width: 32%;float: left;">
+        <div class="panel-header">数据中心</div>
+        <div class="panel-body" style="height: 230px;">
+            <li class="active">累计注册<span id="totalRegister"></span>人</li>
+            <li class="active">累计投资<span id="totalInvest"></span>元</li>
+            <li class="active">累计收益<span id="totalInterest"></span>元</li>
+            <li class="active">累计借款<span id="totalDebt"></span>笔</li>
+            <li class="active">累计借款金额<span id="totalDebtAmount"></span>元</li>
+            <li class="active">累计待还<span id="totalWaitPaymentCount"></span>笔</li>
+            <li class="active">累计待还金额<span id="totalWaitPaymentAmount"></span>元</li>
+            <li class="active">累计提现金额<span id="totalWithdrawAmount"></span>元</li>
+            <li class="active">累计充值金额<span id="totalRechargeAmount"></span>元</li>
+        </div>
+    </div>
+
+    <div class="panel panel-default  mt-20" style="width: 32%;float: left;margin-left: 20px;">
+        <div class="panel-header">今日数据</div>
+        <div class="panel-body" style="height: 230px;">
+            <li class="">今日借款<span id="todayDebt"></span>笔</li>
+            <li class="">今日注册<span id="todayRegister"></span>人</li>
+            <li class="">今日投资金额<span id="todayInvest"></span>元</li>
+            <li class="">今日续投金额<span id="todayPieceAmount"></span>元</li>
+            <li class="">今日发标金额<span id="todayDebtAmount"></span>元</li>
+            <li class="">今日提现金额<span id="todayWithdrawAmount"></span>元</li>
+            <li class="">今日充值金额<span id="todayRechargeAmount"></span>元</li>
+        </div>
+    </div>
+    <div class="panel panel-default  mt-20" style="width: 32%;float: left;margin-left: 20px;">
+        <div class="panel-header">待处理</div>
+        <div class="panel-body" style="height: 230px;">
+            <li class="active">今日待审核提现<span id="withdrawAuditCount"></span>笔</li>
+            <li class="active">今日待审批提现<span id="withdrawAlreadyCount"></span>笔</li>
+            <li class="active">今日待还款<span id="todayWaitBillCount"></span>笔</li>
+            <li class="active">今日待还款金额<span id="todayWaitBillAmount"></span>元</li>
+        </div>
+    </div>
+</div>
+
+<% include ../main/bottom.ejs %>
+<script type="text/javascript" src="/lib/Highcharts/4.1.7/js/highcharts.js"></script>
+<script type="text/javascript" src="/lib/Highcharts/4.1.7/js/modules/exporting.js"></script>
+<script type="text/javascript">
+    ZC_api.loadTotal();
+    $(function () {
+        Highcharts.setOptions({
+            timezoneOffset: -8
+        });
+        $.post('/main/getTotalInvest', {}, function (data) {
+            $('#container').highcharts({
+                chart: {
+                    zoomType: 'x'
+                },
+                title: {
+                    text: '每日投资金额走势图'
+                },
+                subtitle: {
+                    text: document.ontouchstart === undefined ?
+                            '' : ''
+                },
+                xAxis: {
+                    type: 'datetime',
+                    dateTimeLabelFormats: {
+                        millisecond: '%H:%M:%S.%L',
+                        second: '%H:%M:%S',
+                        minute: '%H:%M',
+                        hour: '%H:%M',
+                        day: '%m-%d',
+                        week: '%m-%d',
+                        month: '%Y-%m',
+                        year: '%Y'
+                    }
+                },
+                tooltip: {
+                    dateTimeLabelFormats: {
+                        millisecond: '%H:%M:%S.%L',
+                        second: '%H:%M:%S',
+                        minute: '%H:%M',
+                        hour: '%H:%M',
+                        day: '%Y-%m-%d',
+                        week: '%m-%d',
+                        month: '%Y-%m',
+                        year: '%Y'
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: '投资金额'
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                credits: {enabled: false},
+                exporting: {enabled: false},
+                plotOptions: {
+                    area: {
+                        fillColor: {
+                            linearGradient: {
+                                x1: 0,
+                                y1: 0,
+                                x2: 0,
+                                y2: 1
+                            },
+                            stops: [
+                                [0, Highcharts.getOptions().colors[0]],
+                                [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                            ]
+                        },
+                        marker: {
+                            radius: 2
+                        },
+                        lineWidth: 1,
+                        states: {
+                            hover: {
+                                lineWidth: 1
+                            }
+                        },
+                        threshold: null
+                    }
+                },
+                series: [{
+                    type: 'area',
+                    name: '当日投资',
+                    data: data
+                }]
+            });
+        });
+    });
+</script>
+</body>
+</html>

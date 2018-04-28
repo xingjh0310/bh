@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<style>
+    .logo {
+        height: 140px;
+        width: 400px;
+        margin-bottom: 64px;
+    }
+
+    .form-label {
+        position: absolute;
+        z-index: 10;
+        left: 18px;
+        width: 0px;
+    }
+
+    .header {
+        top: 0;
+        height: 60px;
+        background: #0F64A5;
+        padding-left: 30px;
+    }
+    .loginWraper{
+        bottom: 46px;
+        height: auto;
+        overflow: auto;
+    }
+</style>
+<body>
+<input type="hidden" id="TenantId" name="TenantId" value=""/>
+<div class="header">
+    <span style="line-height: 60px;height: 41px;font-family:'黑体';font-size: 28px;color:#fff;"><%= com.env.platform.platformName %>
+        后台管理系统</span>
+</div>
+<div class="loginWraper">
+    <div id="loginform" class="loginBox">
+        <!--<div class="logo"><img style="width: 400px;height: 140px;" src="<%= com.env.platform.adminLogo %>"/></div>-->
+        <div class="logo"><img style="width: 400px;height: 140px;" src="/images/111479544830501.png"/></div>
+        <form class="form form-horizontal" action="/login" method="post" style="margin-left: 30px;">
+            <div class="row cl" style="position:relative">
+                <label class="form-label col-3"><i class="Hui-iconfont"><img src="/images/yh_03.png" alt=""></i></label>
+                <div class="formControls col-8">
+                    <input id="" name="name" type="text" placeholder="用户名" class="input-text size-L" style="width:332px;height:45px;border-radius: 25px;text-indent: 35px;">
+                </div>
+            </div>
+            <div class="row cl " style="margin-top: 30px;position:relative">
+                <label class="form-label col-3"><i class="Hui-iconfont"><img src="/images/mm_06.png" alt=""></i></label>
+                <div class="formControls col-8">
+                    <input id="" name="password" type="password" placeholder="密码" class="input-text size-L" style="width:332px;height:45px;border-radius: 25px;text-indent: 35px;">
+                </div>
+            </div>
+            <div id="googleAuthenticator" class="row cl " style="margin-top: 30px;position:relative;display: none;">
+                <label class="form-label col-3"><i class="Hui-iconfont"><img src="/images/mm_06.png" alt=""></i></label>
+                <div class="formControls col-8">
+                    <input  name="googleCode" type="text" placeholder="谷歌身份验证码" class="input-text size-L" style="width:332px;height:45px;border-radius: 25px;text-indent: 35px;">
+                </div>
+            </div>
+            <div class="row" style="width:550px;margin-top: 30px;">
+                <div class="formControls col-8 col-offset-3" style="margin-left:0;">
+                    <input name="" onclick="ZC_api.login();" type="button" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;" style="width:172px;height:50px;border-radius: 25px;background: #65d253;margin-right: 20px;font-size: 18px;color:#fff">
+                    <input name="" type="reset" class="btn btn-default radius size-L" value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;" style="width:135px;height:49px;border-radius: 25px;color:#fff;font-size: 18px;background: #c8cbcd;">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="footer">Copyright 铂恒金服</div>
+</body>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+    $(document).keypress(function (event) {
+        var code = (event.keyCode ? event.keyCode : event.which);
+        if (code == '13') {
+            ZC_api.login();
+        }
+    });
+
+    $(function(){
+        $.ajax({
+            url:'/system/getParamVal?key=google_authenticator',
+            type: 'post',
+            success: function (result) {
+                console.log(result);
+                if (result.data) {
+                    $("#googleAuthenticator").show();
+                }
+            }
+        });
+    });
+</script>
+</html>

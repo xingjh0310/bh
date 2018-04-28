@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>充值</title>
+</head>
+<style>
+
+</style>
+<body>
+<div class="header show_head" ><a class="iconfont" href="/account"><img src="/img/fh2.png" class="fh_img"></a>充值 <a href="/account/rechargelist" class="rule">充值记录</a> </div>
+<div class="rec_main">
+    <form class="form-horizontal"  id="authForm" action="/account/authRecharge" method="post">
+
+    <div class="top">
+
+        <p style="overflow: auto;"><img src="/img/bank/<%= bankCard.bank %>.png" class="regbank_img" style="float:left"/><span style="float: left;padding-top: 0.75rem;"><%= _bank[bankCard.bank].desc %></span></p>
+
+        <p class="p1"> <%= bankCard.cardId ? bankCard.cardId.replace(/^(\d{4})(.+)(\w{4})$/, "$1************$3") : "" %></p>
+        <p class="p2">持卡人：<%= bankCard.accountName %></p>
+        <p style="    margin: 0.6rem 0 0 1.1rem;">*您成功绑定银行卡，如需帮助请联系铂恒客服</p>
+    </div>
+    <p class="p3">可用余额<span class="s1"><%= account.balance %>元</span></p>
+
+        <div class="tipsYz" ></div>
+    <div class="chongzhi">
+        <span>充值金额</span>
+        <input type="number" placeholder="2元起充" id="focus" name="amount"  _check="amount">
+    </div>
+    <input type="text" value="确认" class="sure" onclick="$('#authForm').submit()">
+        </form>
+</div>
+
+<% include ../parent/slide_nav.ejs %>
+</body>
+</html>

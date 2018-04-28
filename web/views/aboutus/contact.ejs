@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>联系我们</title>
+    <link rel="stylesheet" type="text/css" href="/css/BH/aboutus/about_nav.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/BH/aboutus/contact.css"/>
+</head>
+<body>
+
+<% include ../parent/top.ejs  %>
+
+<div class="about_warp">
+    <div class="about_nav_w">
+        <ul class="about_nav">
+            <li style="margin-left:120px;">
+                <a href="/aboutus" >
+                    <span class="iconabout">&#xe657;</span>
+                    <p>公司介绍</p></a>
+            </li>
+            <li>
+                <a href="/aboutus/team" >
+                    <span class="iconabout" style="line-height: 43px">&#xe639;</span>
+                    <p>运营团队</p></a>
+            </li>
+            <li>
+                <a href="/aboutus/news_list" >
+                    <span class="iconabout">&#xe687;</span>
+                    <p>媒体资讯</p></a>
+            </li>
+            <li>
+                <a href="/aboutus/announce_list" >
+                    <span class="iconabout"style="line-height: 43px">&#xe60d;</span>
+                    <p>平台公告</p></a>
+            </li>
+            <li class="active">
+                <a href="/aboutus/contact" >
+                    <span class="iconabout">&#xe6ac;</span>
+                    <p>联系我们</p></a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="con_main">
+        <div class="title">
+            <p class="p1">联系我们</p>
+            <span class="line_span"></span>
+            <p class="p2"> CONTACT US</p>
+            <ul class="con_ul">
+                <li>
+                    <h2>客服服务</h2>
+                     <p>如果您在投资过程中有任何疑问请与客服人员联系</p>
+                    <p>客服热线：400-1888-686</p>
+                    <p>值班时间：9:00-17:00</p>
+                </li>
+                <li>
+                    <h2> 融资业务、机构合作</h2>
+                    <p>如贵司希望和我们展开项目方面的合作，请联系我们</p>
+                    <p>我们会尽快与您联系</p>
+                    <p>电话：400-1888-686</p>
+                    <p>邮箱：bhjfrz@bohomm.com</p>
+                </li>
+                <li>
+                    <h2>商务合作</h2>
+                    <p>如贵司希望与我们建立广告投放或商务合作关系，请联系我们，</p>
+                    <p>我们会尽快与您联系</p>
+                    <p>邮箱：bhjfsw@bohomm.com</p>
+                </li>
+                <li>
+                    <h2>媒体合作</h2>
+                    <p>如果有采访需求，请您将媒体名称、采访内容、联系方式发至以下邮箱，</p>
+                    <p>我们会尽快与您联系</p>
+                    <p>邮箱：bhjfmt@bohomm.com</p>
+
+                </li>
+            </ul>
+            <p class="p1" style="margin-top:40px;">办公地址</p>
+            <span class="line_span"></span>
+            <p class="p2">OFFCE Address</p>
+            <p class="p3">公司地址：杭州余杭区仁和街道云会村云会叉口305室</p>
+            <p class="p3">公司总机：400-1888-686</p>
+            <div class="">
+                <!-- 插入地图 -->
+                <!DOCTYPE html>
+                <html xmlns="http://www.w3.org/1999/xhtml">
+                <head>
+                    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+                    <title>百度地图API自定义地图</title>
+                    <!--引用百度地图API-->
+                    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=gnhBUW7nGyllEetpjQ95qs4M&s=1"></script>
+                </head>
+
+                <body>
+                <!--百度地图容器-->
+                <div style="width:980px;height:305px;font-size:12px;margin:25px 0 0 20px;" id="map"></div>
+
+                </body>
+                <script type="text/javascript">
+                    //创建和初始化地图函数：
+                    function initMap(){
+                        createMap();//创建地图
+                        setMapEvent();//设置地图事件
+                        addMapControl();//向地图添加控件
+                        addMapOverlay();//向地图添加覆盖物
+                    }
+                    function createMap(){
+                        map = new BMap.Map("map");
+                        map.centerAndZoom(new BMap.Point(120.09336,30.433201),18);
+                    }
+                    function setMapEvent(){
+                        map.enableScrollWheelZoom();
+                        map.enableKeyboard();
+                        map.enableDragging();
+                        map.enableDoubleClickZoom()
+                    }
+                    function addClickHandler(target,window){
+                        target.addEventListener("click",function(){
+                            target.openInfoWindow(window);
+                        });
+                    }
+                    function addMapOverlay(){
+                        var markers = [
+                            {content:"杭州余杭区仁和街道云会村云会叉口305室 铂恒金服",title:"",imageOffset: {},position:{lat:30.433201,lng:120.09336}}
+                        ];
+                        for(var index = 0; index < markers.length; index++ ){
+                            var point = new BMap.Point(markers[index].position.lng,markers[index].position.lat);
+                            var marker = new BMap.Marker(point,{icon:new BMap.Icon("/img/mapicon.png", new BMap.Size(116,72),{
+                                imageOffset: new BMap.Size(markers[index].imageOffset.width,markers[index].imageOffset.height)
+                            })});
+                            var label = new BMap.Label(markers[index].title,{offset: new BMap.Size(25,5)});
+                            var opts = {
+                                width: 200,
+                                title: markers[index].title,
+                                enableMessage: false
+                            };
+                            var infoWindow = new BMap.InfoWindow(markers[index].content,opts);
+                            marker.setLabel(label);
+                            addClickHandler(marker,infoWindow);
+                            map.addOverlay(marker);
+                        };
+                    }
+                    //向地图添加控件
+                    function addMapControl(){
+                        var scaleControl = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
+                        scaleControl.setUnit(BMAP_UNIT_IMPERIAL);
+                        map.addControl(scaleControl);
+                        var navControl = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:0});
+                        map.addControl(navControl);
+                        var overviewControl = new BMap.OverviewMapControl({anchor:BMAP_ANCHOR_BOTTOM_RIGHT,isOpen:false});
+                        map.addControl(overviewControl);
+                    }
+                    var map;
+                    initMap();
+                </script>
+                </html>
+
+                <!-- 地图结束 -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ../parent/bottom.ejs  %>
+
+<script type="text/javascript">
+    ZC_api.loadAnnounceList(1,20);
+</script>
+</body>
+
+</html>

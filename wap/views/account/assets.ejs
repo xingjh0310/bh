@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>账户总额</title>
+</head>
+<body>
+<div class="header" ><a class="iconfont" href="/account"><img src="/img/fh1.png" class="fh_img"></a>账户总额</div>
+
+<div class="assets">
+    <div class="container">
+        <div id="container" style="height:5.5rem;background: #fff;"></div>
+        <div class="jine_all">
+            <p class="p2"><%= (account.balance + account.freeze + account.collectCorpus + account.collectInterest).toFixed(2) %></p>
+            <p>账户总额(元)</p>
+        </div>
+    </div>
+    <div class="jine_div">
+        <ul>
+            <li class="li1">
+                <i style="margin-top: 0.2rem;"></i>
+                <div >可用余额：<span class="pull-right"><%= account.balance %>元</span> </div>
+                <div >待收本金：<span class="pull-right"><%= account.collectCorpus %>元</span></div>
+                <div >待收利息：<span class="pull-right"><%= account.collectInterest %>元</span></div>
+            </li>
+            <li><i style="background: #ffd5b3"></i>待收总额：<span class="pull-right"><%= (account.collectCorpus + account.collectInterest).toFixed(2) %>元</span></li>
+            <li><i style="background: #ff8624"></i>冻结金额：<span class="pull-right"><%= account.freeze %>元</span></li>
+        </ul>
+    </div>
+
+    <div class="assets_div">
+        <div class="pull-left">
+            <i></i>已赚收益 <span>¥<%= account.totalReceivedInterest %></span>
+        </div>
+        <span class="line"></span>
+        <div class="pull-right">
+            <i style="margin-left:0.5rem"></i>已赚奖励 <span>¥<%= account.totalRewardAmount%></span>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/js/plugins/echarts-all-3.js"></script>
+<script type="text/javascript">
+    var dom = document.getElementById("container");
+    var myChart = echarts.init(dom);
+    var app = {};
+    option = null;
+    option = {
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b}: {c} ({d}%)"
+        },
+        color: ['#82aff8', '#ffd5b3', '#ff8624'],
+        legend: {
+            show: false,
+            orient: 'vertical',
+            x: 'left',
+            data: ['可用余额', '待收总额', '冻结金额']
+        },
+        series: [
+            {
+                name: '账户概况(元)',
+                type: 'pie',
+                radius: ['50%', '70%'],
+                avoidLabelOverlap: false,
+                label: {
+                    normal: {
+                        show: false,
+                        position: 'center'
+                    },
+                    emphasis: {
+                        show: true,
+                        textStyle: {
+                            fontSize: '20',
+                            fontWeight: 'bold'
+                        }
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        show: true,
+                        length: 20
+                    }
+                },
+                label: {
+                    normal: {
+                        textStyle: {
+                            color: ''
+                        }
+                    }
+                },
+                data: [
+                    {
+                        value:<%= account.balance %>,
+                        name: '可用余额',
+                        itemStyle: {
+                            normal: {
+                                label: {
+                                    show: false
+                                },
+                                labelLine: {
+                                    show: false
+                                }
+                            },
+                            emphasis: {
+                                label: {
+                                    show: true
+                                },
+                                labelLine: {
+                                    show: true,
+                                }
+                            }
+                        }
+                    },
+                    {
+                        value:<%= (account.collectCorpus + account.collectInterest).toFixed(2) %>,
+                        name: '待收总额',
+                        itemStyle: {
+                            normal: {
+                                label: {
+                                    show: false
+                                },
+                                labelLine: {
+                                    show: false
+                                }
+                            },
+                            emphasis: {
+                                label: {
+                                    show: true
+                                },
+                                labelLine: {
+                                    show: true,
+                                }
+                            }
+                        }
+                    },
+                    {
+                        value:<%= account.freeze %>,
+                        name: '冻结金额',
+                        itemStyle: {
+                            normal: {
+                                label: {
+                                    show: false
+                                },
+                                labelLine: {
+                                    show: false
+                                }
+                            },
+                            emphasis: {
+                                label: {
+                                    show: true
+                                },
+                                labelLine: {
+                                    show: true,
+                                }
+                            }
+                        }
+                    }
+
+
+                ]
+            }
+        ]
+    };
+    if (option && typeof option === "object") {
+        myChart.setOption(option, true);
+    }
+</script>
+
+
+
+
+<% include ../parent/slide_nav.ejs %>
+</body>
+</html>

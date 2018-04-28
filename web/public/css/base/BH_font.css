@@ -1,0 +1,47 @@
+/*字体图标*/
+@font-face {font-family: "iconfont";
+    src: url('/fonts/iconfont.eot?t=1471830393'); /* IE9*/
+    src: url('/fonts/iconfont.eot?t=1471830393#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('/fonts/iconfont.woff?t=1471830393') format('woff'), /* chrome, firefox */
+    url('/fonts/iconfont.ttf?t=1471830393') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+    url('/fonts/iconfont.svg?t=1471830393#iconfont') format('svg'); /* iOS 4.1- */
+}
+@font-face {font-family: "iconabout";
+    src: url('/fonts/about.eot?t=1471830393'); /* IE9*/
+    src: url('/fonts/about.eot?t=1471830393#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('/fonts/about.woff?t=1471830393') format('woff'), /* chrome, firefox */
+    url('/fonts/about.ttf?t=1471830393') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+    url('/fonts/about.svg?t=1471830393#iconfont') format('svg'); /* iOS 4.1- */
+}
+@font-face {font-family: "iconhelp";
+    src: url('/fonts/help.eot?t=1471830393'); /* IE9*/
+    src: url('/fonts/help.eot?t=1471830393#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('/fonts/help.woff?t=1471830393') format('woff'), /* chrome, firefox */
+    url('/fonts/help.ttf?t=1471830393') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+    url('/fonts/help.svg?t=1471830393#iconfont') format('svg'); /* iOS 4.1- */
+}
+.iconfont {
+    font-family:"iconfont" !important;
+    font-size:16px;
+    font-style:normal;
+
+}
+.iconabout {
+    font-family:"iconabout" !important;
+    font-size:16px;
+    font-style:normal;
+
+}
+.iconhelp {
+    font-family:"iconhelp" !important;
+    font-size:16px;
+    font-style:normal;
+
+}
+.icon-shengyin:before { content: "\e604"; }
+.icon-daochu:before { content: "\e600"; }
+.icon-youxiang:before { content: "\e61d"; }
+.icon-xiala:before { content: "\e62b"; }
+.icon-shuaxin:before { content: "\3437"; }
+.icon-i:before { content: "\e697"; }
+.icon-wenhao:before { content: "\e6e6"; }

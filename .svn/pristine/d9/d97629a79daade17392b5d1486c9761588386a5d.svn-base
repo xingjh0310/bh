@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>我的红包</title>
+</head>
+<body>
+<div class="header show_head"><a class="iconfont" href="/account"><img src="/img/fh2.png" class="fh_img"></a>我的红包 <a href="/account/bonusrule"  class="rule">红包规则</a></div>
+
+<div class="bonus_main">
+    <ul class="list1">
+        <li class="active"><a href="javascript:;" onclick="$('#state').val(<%= _global.state.Wait.v %>);">未使用(<span
+                        id="total<%= _global.state.Wait.v %>"></span>个)</a></li>
+        <li>
+            <a href="javascript:;" onclick="$('#state').val(<%= _global.state.Complete.v %>);">已使用(<span
+                        id="total<%= _global.state.Complete.v %>"></span>个)</a></li>
+
+    </ul>
+    <span class="line"></span>
+    <div class=" setTabMain bonus_ul">
+        <!--未使用-->
+        <div style="display: block">
+            <script type="text/template" id="bonus<%= _global.state.Wait.v %>_tmpl">
+                <li class="{state}">
+                    <div class="pull-left">
+                        ¥ <span class="sp1">{amount}</span>
+                    </div>
+                    <div class="pull-right">
+                        <h2>{name}</h2>
+                        <p class="sp2">{buy_amount}</p>
+                        <p class="sp3">{period}{period_unit}</p>
+                        <p class="sp3">{product_type}</p>
+                        <p class="sp4">{begin_time}至{end_time}有效</p>
+                    </div>
+                </li>
+            </script>
+
+            <ul class="w_paper" id="bonus<%= _global.state.Wait.v %>_list">
+            </ul>
+            <input type="hidden" value="1" id="pageNo<%= _global.state.Wait.v %>"/>
+        </div>
+        <!--已使用-->
+        <div>
+            <script type="text/template" id="bonus<%= _global.state.Complete.v %>_tmpl">
+                <li class="w2">
+                    <div class="pull-left" style="color:#999">
+                        ¥ <span class="sp1">{amount}</span>
+                    </div>
+                    <div class="pull-right">
+                        <h2>{name}</h2>
+                        <p class="sp2">{buy_amount}</p>
+                        <p class="sp3">{period}{period_unit}</p>
+                        <p class="sp3">{product_type}</p>
+                        <p class="sp4">{begin_time}至{end_time}有效</p>
+                    </div>
+                </li>
+            </script>
+
+            <ul class="w_paper" id="bonus<%= _global.state.Complete.v %>_list">
+
+            </ul>
+            <input type="hidden" value="1" id="pageNo<%= _global.state.Complete.v %>"/>
+        </div>
+        <input type="hidden" value="<%= _global.state.Wait.v %>" id="state"/>
+    </div>
+</div>
+<% include ../parent/slide_nav.ejs %>
+<script type="text/javascript">
+    load(<%= _global.state.Complete.v %>);
+    load(<%= _global.state.Wait.v %>);
+    function load(state) {
+        ZC_api.loadBonusRecord(1, 6, state);
+    }
+    $(window).scroll(function () {
+        var scrollTop = $(this).scrollTop();
+        var scrollHeight = $(document).height();
+        var windowHeight = $(this).height();
+        if (scrollTop + windowHeight == scrollHeight) {
+            $.ShowLoadIng();
+            var pageNo = parseInt($('#pageNo' + $('#state').val()).val()) + 1;
+            ZC_api.loadBonusRecord(pageNo, 6, $('#state').val());
+        }
+    });
+</script>
+</body>
+</html>

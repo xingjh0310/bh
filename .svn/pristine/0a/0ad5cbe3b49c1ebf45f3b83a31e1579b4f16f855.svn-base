@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>推广记录</title>
+</head>
+<body>
+<div class="header"><a class="iconfont" href="/account/invite"><img src="/img/fh1.png" class="fh_img"></a>推广记录</div>
+
+<div class="invite_main">
+    <ul class="list1">
+        <li class="active" _val="User">推广记录</li>
+        <li _val="Award">奖励记录</li>
+    </ul>
+    <span class="line"></span>
+</div>
+
+<div class="setTabMain">
+    <!--推广记录-->
+    <div style="display: block">
+        <script type="text/template" id="invite_tmpl">
+            <li>
+                <P class="p1">{mobile}<span class="pull-right">{real}</span></P>
+                <P class="p2">注册时间：{time}</P>
+            </li>
+        </script>
+
+        <ul class="invite_ul1" id="invite_list">
+
+        </ul>
+        <input type="hidden" value="1" id="pageNoUser"/>
+    </div>
+
+    <!--奖励记录-->
+    <div>
+
+        <script type="text/template" id="inviteAward_tmpl">
+            <li>
+                <P class="p1">{inviteMobile}<span class="pull-right">{time}</span></P>
+                <ol class="invite_ol">
+                    <li>
+                        <P class="p2">{buy_amount}</P>
+                        <P>投资金额(元)</P>
+                    </li>
+                    <li>
+                        <P class="p2" style="color:#11a93b">{period}{period_unit}</P>
+                        <P>投资周期</P>
+                    </li>
+                    <li>
+                        <P class="p2" style="color:#f04324">{amount}</P>
+                        <P>奖励金额(元)</P>
+                    </li>
+                </ol>
+            </li>
+        </script>
+
+        <ul class="invite_ul2" id="inviteAward_list"></ul>
+        <input type="hidden" value="1" id="pageNoAward"/>
+    </div>
+</div>
+<% include ../parent/slide_nav.ejs %>
+
+<script type="text/javascript">
+    load();
+    function load() {
+        ZC_api.loadInviteAward(1, 10, true);
+        ZC_api.loadInviteUser(1, 10,true);
+    }
+
+    $(window).scroll(function () {
+        var scrollTop = $(this).scrollTop();
+        var scrollHeight = $(document).height();
+        var windowHeight = $(this).height();
+        if (scrollTop + windowHeight == scrollHeight) {
+            //alert(scrollTop + ':' + top);
+            $.ShowLoadIng();
+            var type = $('.active').attr('_val');
+            if (type == 'User') {
+                var pageNo = parseInt($('#pageNoUser').val()) + 1;
+                ZC_api.loadInviteUser(pageNo, 10, '');
+            } else {
+                var pageNo = parseInt($('#pageNoAward').val()) + 1;
+                ZC_api.loadInviteAward(pageNo, 10, false);
+            }
+
+        }
+    });
+</script>
+</body>
+</html>

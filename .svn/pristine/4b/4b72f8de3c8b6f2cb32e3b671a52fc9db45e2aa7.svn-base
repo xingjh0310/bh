@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>铂恒金服简介</title>
+</head>
+<body>
+    <div class="header " ><a class="iconfont" href="/aboutus/about"><img src="/img/fh1.png" class="fh_img"></a>铂恒金服简介</div>
+    <div class="about_wrap">
+        <div class="about_main">
+
+            <div class="main1">
+                <div class="title">
+                    <h2>铂恒金服</h2>
+                    <span></span>
+                    <p>COMPANY PROFILE</p>
+                </div>
+                <div class="main1_p">
+                    <p>铂恒金服http://www.bohomm.com/是杭州博虹</p>
+                    <p>金融信息服务有限公司独立运营的一家专注于产业供</p>
+                    <p>应链消费金融信息服务的平台。</p>
+                    <p>我们提供安全、便捷、标准化的理财体验。通过金融产品创新与</p>
+                    <p>互联网体验技术创新，不断降低优质理财产品</p>
+                    <p>投资的资金门槛、资质门槛、知识门槛、流程门槛等，使广</p>
+                    <p>大用户及时获得合适的金融理财服务，践行“普惠金融”理念，</p>
+                    <p>服务企业利益大众。</p>
+
+
+                </div>
+            </div>
+
+            <div class="main2" style="height: 3.5rem">
+                <div class="title">
+                    <h2>平台优势</h2>
+                    <span></span>
+                    <p>COMPANY CULTURE</p>
+                </div>
+
+                <div class="main2_p">
+                    <div class="s1">
+                        <span class="p1">1</span>
+                        <span class="p2">安全</span>
+                        <span class="p3"> 严格审核 撮合交易</span>
+                    </div>
+                    <!--<div class="s2">
+                        <span class="p1">2</span>
+                        <span class="p2">专业</span>
+                        <span class="p3">深圳前海股权交易中心挂牌上市</span>
+                    </div>
+                    <div class="s3">
+                        <span class="p1">3</span>
+                        <span class="p2">实力</span>
+                        <span class="p3">5000万流动性风险质保服务专款</span>
+                    </div>-->
+                    <div class="s4">
+                        <span class="p1">2</span>
+                        <span class="p2">经验</span>
+                        <span class="p3">10年线下资产风控运营经验</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main3">
+                <div class="title">
+                    <h2>资质荣誉</h2>
+                    <span></span>
+                    <p>COMPANY PROFILE/HONOR</p>
+                </div>
+                <div class="main3_p">
+                    <img src="/img/mm10.jpg" alt="">
+                    <img src="/img/mm9.jpg" alt="">
+                    <img src="/img/mm8.jpg" alt="">
+                    <img src="/img/mm7.jpg" alt="">
+                    <img src="/img/mm6.jpg" alt="">
+                    <img src="/img/mm71.jpg" alt="">
+                </div>
+            </div>
+
+            <!--<div class="main4">
+                <div class="title">
+                    <h2>发展历程</h2>
+                    <span></span>
+                    <p>COMPANY HISTORE</p>
+                </div>
+
+                <div class="main4_p">
+
+                    <div style="width:7.4rem;overflow: auto;">
+                        <div class="left">
+                            <p class="p1">2015年></p>
+                            <div style="position: relative">
+                                <span class="cirle c1"></span>
+                                <span class="line l1"></span>
+                                <p class="p2">2015年4月</p>
+                                <p class="p3">平台运营上线</p>
+                            </div>
+                            <p class="p4">2016年></p>
+                            &lt;!&ndash;<div style="position: relative">
+                                <span class="cirle c2"></span>
+                                <span class="line l2"></span>
+                                <p class="p5">2016年10月</p>
+                                <p class="p6">荣获浙江省年度创新金融企业</p>
+                                <p class="p7">股东企业易赛资产挂牌前海股权交易中心</p>
+                            </div>&ndash;&gt;
+                        </div>
+                        <div class="right">
+                            <div style="position: relative;;">
+                                <span class="cirle c3"></span>
+                                <span class="line l3"></span>
+                                <p class="p1">2015年3月</p>
+                                <p class="p2">杭州博虹金融信息服务有限公司成立</p>
+                            </div>
+                            <div style="position: relative;">
+                                <span class="cirle c4"></span>
+                                <span class="line l4"></span>
+                                <p class="p3">2016年11月</p>
+                                <p class="p7">荣获浙江省金融行业十大领先品牌</p>
+                                <p class="p7">荣获中国互联网金融行业十佳诚信品牌</p>
+                                <p class="p7">荣获全国质量服务AAA级企业</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+
+            <div class="main5">
+                <div class="title">
+                    <h2>办公场景</h2>
+                    <span></span>
+                    <p>OFFICE ENVIRONMENT</p>
+                </div>
+
+
+                <div class="main5_p">
+                    <div class="swiper-container">
+                        <ul class="swiper-wrapper gallery">
+                            <li class="swiper-slide">
+                                <a href="/img/1-1.jpg"><img src="/img/1-1.jpg" alt=""></a>
+                            </li>
+                            <li class="swiper-slide">
+                                <a href="/img/1-2.jpg"><img src="/img/1-2.jpg" alt=""></a>
+                            </li>
+                            <li class="swiper-slide">
+                                <a href="/img/1-3.jpg"><img src="/img/1-3.jpg" alt=""></a>
+                            </li>
+                            <li class="swiper-slide">
+                                <a href="/img/1-4.jpg"><img src="/img/1-4.jpg" alt=""></a>
+                            </li>
+                            <li class="swiper-slide">
+                                <a href="/img/1-5.jpg"><img src="/img/1-5.jpg" alt=""></a>
+                            </li>
+                        </ul>
+                        <!-- Add Pagination -->
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <% include ../parent/slide_nav.ejs %>
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+        });
+
+    </script>
+</body>
+</html>

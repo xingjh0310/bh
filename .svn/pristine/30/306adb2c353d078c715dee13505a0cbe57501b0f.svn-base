@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+<div class="pd-20">
+    <form class="form form-horizontal" id="form">
+            <input type="hidden" name="id" value="<%= lotteryActivity.id || '' %>"/>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>标题：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" id="Title" placeholder="请输入标题" datatype="*4-100"
+                           nullmsg="请输入标题" errormsg="大于4位小于100位" name="name" value="<%= lotteryActivity.name || '' %>"/>
+                </div>
+            </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>活动编码：</label>
+            <div class="formControls col-xs-8 col-sm-5">
+                <input type="text" class="input-text" id="Title" placeholder="活动编码" datatype="*4-100" nullmsg="请输入活动编码" errormsg="大于4位小于100位" name="code" value="<%= lotteryActivity.code || '' %>"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>活动类型：</label>
+
+            <div class="formControls col-xs-8 col-sm-5">
+                <select class="select-box" name="type" id="type">
+                    <% for(var key in _global.lotteryType){ %>
+                    <option <%= lotteryActivity.type == _global.lotteryType[key].v ? 'selected=selected' : '' %>
+                            value="<%= _global.lotteryType[key].v %>"><%= _global.lotteryType[key].desc %></option>
+                    <% } %>
+                </select>
+            </div>
+
+        </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>所需积分：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" id="Title" placeholder="请输入积分" datatype="*1-10"
+                           nullmsg="请输入积分" errormsg="大于1位小于10位" name="integral" value="<%= lotteryActivity.integral || '' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>开始时间：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text Wdate" placeholder="请输入开始时间" nullmsg="请输入开始时间" datatype="*"
+                           errormsg="请输入正确时间" id="datemax" name="beginTime"
+                           value="<%= new Date(lotteryActivity.beginTime || new Date()).Format('yyyy-MM-dd hh:mm:ss') %>"
+                           onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" >
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>结束时间：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text Wdate" placeholder="请输入下架时间" nullmsg="请输入下架时间" datatype="*"
+                           errormsg="请输入正确时间" id="datemax" name="endTime"
+                           value="<%= new Date(lotteryActivity.offTime || new Date()).Format('yyyy-MM-dd hh:mm:ss') %>"
+                           onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" >
+                </div>
+            </div>
+         <!--   <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>分类图片：</label>
+                <div class="formControls col-xs-8 col-sm-5" id="imgDiv">
+                    <input type="hidden" value="<%= lotteryActivity.image|| '' %>" name="image" id="image"/>
+                    <div class="uploader-list fileList"></div>
+                    <div class="filePicker" style="margin-top:10px;">选择图片</div>
+                </div>
+            </div>-->
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>启用：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <select class="select-box" name="state" >
+                        <option value="0" <%= lotteryActivity.state == 0 ? 'selected=selected' : '' %>>否</option>
+                        <option value="1" <%= lotteryActivity.state == 1 ? 'selected=selected' : '' %>>是</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row cl">
+                <div class="col-10 col-offset-3">
+                    <button id="sub" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i>
+                        保存或更新
+                    </button>
+                    <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+</body>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+    $(".form").Validform({
+        btnSubmit: '#sub',
+        postonce: true,
+        tiptype: 4,
+        showAllError: true,
+        ajaxPost: true,
+        beforeSubmit: function (curform) {
+            $.ajax({
+                url: '/integralmall/editLotteryActivity',
+                type: 'post',
+                data: {lotteryActivity: JSON.stringify($('#form').serializeJson())},
+                success: function (msg) {
+                    if (msg.err) {
+                        Huimodal_alert(msg.err, 1000, function () {
+                            layer_close();
+                        });
+                    }
+                    else {
+                        Huimodal_alert('操作成功', 2000, function () {
+                            parent.location.reload();
+                            layer_close();
+                        });
+
+                    }
+                }
+            })
+            return false;
+        }
+    });
+
+    $('#imgDiv').createUpload();
+</script>
+</html>

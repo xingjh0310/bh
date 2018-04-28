@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/base/BH_base.css">
+    <style>
+        body{
+            margin: 0;
+            padding:0;
+            width: 100%;
+            height:100%;
+            margin: 0 auto;
+            background: url('/img/activities/redEnvelopes/A_bg2.png') no-repeat;
+            background-size:cover;
+        }
+        .main{
+            width: 100%;
+            padding-bottom: 50px;
+            box-sizing: border-box;
+        }
+        img{
+            width: 100%;
+        }
+        .top{
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+        .ling_qu{
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .youhuiquan{
+            width: 100%;
+            padding:0 12% 0 12%;
+            box-sizing: border-box;
+            margin-bottom: 50px;
+
+        }
+        .youhuiquan ul{
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content:space-between;
+        }
+        .youhuiquan ul li{
+            width: 43%;
+            margin-bottom: 20px;
+        }
+        .youhuiquan p{
+            color: #6b5c92;
+            font-size: 15px;
+            margin-bottom: 30px;
+        }
+        .rule{
+            margin-bottom: 40px;
+        }
+        .rule_Desc{
+            padding:0 5% 0 3%;
+            box-sizing: border-box;
+
+        }
+        .Desc{
+            width: 100%;
+            background-color: #5141a6;
+            padding:18px 3% 15px 3%;
+            box-sizing: border-box;
+            border-radius:15px;
+
+        }
+        .Desc p{
+            color:aliceblue;
+            font-size: 16px;
+            line-height: 28px;
+        }
+        .top_con{
+            width: 78%;
+            margin: 0 auto;
+            margin-top: 50px;
+        }
+        .top_con_tow{
+            margin:0.1rem 0 0.1rem 0;
+        }
+        .baffle{
+            position:fixed;
+            top:0;
+            bottom:0;
+            left:0;
+            right:0;
+            background:#000;
+            opacity:0.7;
+            height:100%;
+            display: none;
+        }
+        .modal{
+            width: 83%;
+            height:6rem;
+            position:fixed;
+            top:0;
+            bottom:0;
+            left:0;
+            right:0;
+            margin:auto;
+            border-radius:18px;
+            background:url("/img/activities/redEnvelopes/A_lay.png") no-repeat;
+            background-size:cover;
+            display: none;
+            text-align: center;
+            padding:30px;
+            box-sizing: border-box;
+
+        }
+        .modal p{
+            color:#f2e9f1;
+            font-size: 0.2rem;
+            line-height:1rem;
+        }
+        .modal .sure{
+            color:#b498ca;
+        }
+        .modal img{
+            margin-top: 0.5rem;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="top">
+            <div class="top_con">
+                <div style="width: 70%;margin: 0 auto;"><img src="/img/activities/redEnvelopes/A_wuyi.png" alt=""></div>
+                <div class="top_con_tow"><img src="/img/activities/redEnvelopes/A_hongbao.png" alt=""></div>
+                <div><img src="/img/activities/redEnvelopes/A_huodong.png" alt=""></div>
+            </div>
+        </div>
+        <div class="ling_qu">
+            <img src="/img/activities/redEnvelopes/A_lingqu.png" alt="">
+        </div>
+        <div class="youhuiquan">
+            <ul>
+                <li><img src="/img/activities/redEnvelopes/A_8.png" alt=""></li>
+                <li><img src="/img/activities/redEnvelopes/A_12.png" alt=""></li>
+                <li><img src="/img/activities/redEnvelopes/A_30.png" alt=""></li>
+                <li><img src="/img/activities/redEnvelopes/A_50.png" alt=""></li>
+            </ul>
+            <p>活动期间,  &nbsp;用户可在活动页面领取投资红包,活动期间每位用户仅可领取一次</p>
+            <div class="btn_lq">
+                <img src="/img/activities/redEnvelopes/A_btn1.png" alt="">
+            </div>
+        </div>
+        <div class="rule">
+            <img src="/img/activities/redEnvelopes/A_1000.png" alt="">
+        </div>
+        <div class="rule_Desc">
+            <div class="Desc">
+                <p>1、活动上线后,&nbsp;&nbsp;所有用户均可领取到四个红包,&nbsp;&nbsp;红包由系统自动发放至注册用户的账户；</p>
+                <p>2、红包有效时间为领取后14天，具体条件请参照红包使用说明；</p>
+                <p>3、红包不可叠加使用；</p>
+                <p>4、如果活动出现漏洞与错误，铂恒金服有权对活动进行修改和完善。在法律范围内，本活动最终解释权归铂恒所有，如有任何疑问请致电客服：</p>
+                <p>400-1888-686。</p>
+            </div>
+        </div>
+        <!--遮挡层-->
+        <div class="baffle">
+
+        </div>
+        <div class="modal">
+
+            <p>恭喜您领取成功</p>
+            <p class="sure">红包已经发送至您的账户</p>
+            <img src="/img/activities/redEnvelopes/A_btn22.png" alt="">
+        </div>
+    </div>
+
+</body>
+<script type="text/javascript" src="/js/plugins/jquery-2.1.4.min.js"></script>
+<script>
+    $('.btn_lq').click(function () {
+        $('.baffle').show();
+        $('.modal').show();
+        $('body').css("overflow","hidden");
+        $.post('/activity/v1_mayDayReceiveRed',{activityId:40},function (res) {
+            console.log(res)
+        })
+    })
+    $('.modal img').click(function(){
+        $('.baffle').hide();
+        $('.modal').hide();
+        $('body').css("overflow","");
+    })
+</script>
+</html>

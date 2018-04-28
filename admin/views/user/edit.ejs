@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+<div class="pd-20">
+    <form class="form form-horizontal" id="form">
+        <input type="hidden" name="id" value="<%= investor.id || '' %>"/>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>手机号码：</label>
+
+            <div class="formControls col-xs-8 col-sm-5" style="width: 80%;">
+                <input type="text" style="width: 70%;" disabled="disabled" class="input-text" id="Mobile"  name="mobile" value="<%= investor.mobile || '' %>"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</label>
+
+            <div class="formControls col-xs-8 col-sm-5" style="width: 80%;">
+                <input type="text" style="width: 70%;" class="input-text" id="Title" placeholder="请输入姓名" datatype="s1-4"
+                       nullmsg="请输入姓名" errormsg="大于1位小于4位" name="realName" value="<%= investor.realName || '' %>"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>身份证号：</label>
+
+            <div class="formControls col-xs-8 col-sm-5" style="width: 80%;">
+                <input type="text" style="width: 70%;" class="input-text" placeholder="请输入身份证号" datatype="s18-18" nullmsg="请输入身份证号"
+                       errormsg="请输入正确的身份证号" name="idCard" value="<%= investor.idCard || '' %>"/>
+            </div>
+
+
+        </div>
+
+        <div class="row cl">
+            <div class="col-10 col-offset-3">
+                <button id="sub" class="btn btn-primary radius" type="button"><i
+                            class="Hui-iconfont">&#xe632;</i> 保存
+                </button>
+                <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+</body>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+    $(".form").Validform({
+        btnSubmit: '#sub',
+        postonce: true,
+        tiptype: 4,
+        showAllError: true,
+        ajaxPost: true,
+        beforeSubmit: function (curform) {
+            //if ($('#AccountId').val()) {
+            $.ajax({
+                url: '/user/saveInvestor',
+                type: 'post',
+                data: {investor: JSON.stringify($('#form').serializeJson())},
+                success: function (msg) {
+                    if (!msg.err) {
+                        Huimodal_alert('保存成功', 1000, function () {
+                            parent.load();
+                            layer_close();
+                        });
+                    }
+                    else {
+                        Huimodal_alert(msg.err, 1000, function () {
+                        });
+                    }
+                }
+            })
+            return false;
+            //}
+        }
+    });
+
+
+</script>
+</html>

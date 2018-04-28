@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>自动投标</title>
+
+</head>
+<body>
+<style>
+    .err {
+        border: 1px solid #f87f82 !important;
+    }
+</style>
+<div class="header show_head cashflow_head"><a class="iconfont" href="/account"><img src="/img/fh2.png" class="fh_img"></a>自动投标 <a href="/account/autorule" class="rule">自动投标说明</a>
+
+
+</div>
+
+<div class="personal_auto">
+
+    <form id="form" class="tou_form">
+        <ul class="auto_list">
+            <li>自动投标<span class="pull-right">
+                    <% if(auto){ %>
+                    <span style="display:none"><%= auto ? auto.state : 0 > 0 ? '已开启' : '已关闭' %></span>
+                    <input type="checkbox" id="checkbox_c1"
+                           class="chk_3" <%= auto.state == com.biz.fields.state.Wait.v ? '' : 'checked="checked"' %>
+                    /><label for="checkbox_c1"
+                              onclick="ZC_api.changeAutoInvest($('#checkbox_c1').is(':checked')?_gbl.state.Wait.v:_gbl.state.Complete.v);"></label>
+                    <% } %>
+                </span>
+            </li>
+
+        </ul>
+        <div class="tipsYz"></div>
+        <ul class="auto_list">
+
+            <li class="auto_type" onclick="$('.auto_type').show()">产品类型（请选择）<span class="pull-right ">
+                    <span class="type_text">
+                    <% for(var key in _global.productType){ %>
+                    <label  <%= ((auto || {}).productType || '').indexOf(_global.productType[key].v) > -1 ? 'class=show' : ' ' %>><%= _global.productType[key].desc %>
+                    </label>
+                    <% } %></span>
+                    <i class="iconfont">&#xe644;</i></span>
+            </li>
+            <li onclick="$('.auto_Period').show()">项目期限<span class="pull-right">
+                     <input class="form-control input_m" name="minPeriodDay"
+                            value="<%= (auto || {}).minPeriodDay || 0 %>"
+                            type="number"/>&nbsp;——&nbsp;<input
+                            name="maxPeriodDay" value="<%= (auto || {}).maxPeriodDay || 0 %>"
+                            class="form-control input_m"
+                            type="number"/> 天</span></li>
+            <li>预期年化<span class="pull-right">
+                   <input class="form-control input_m" name="minRate"
+                          value="<%= (((auto || {}).minRate || 0) * 100).toFixed(2) %>"
+                          type="number"/>&nbsp;——&nbsp;<input
+                            name="maxRate"
+                            class="form-control input_m"
+                            value="<%= (((auto || {}).maxRate || 0) * 100).toFixed(2) %>"
+                            type="number"/>&nbsp;%</span></li>
+            <li>单标金额<span class="pull-right"><input class="form-control input_m" _check="amount" name="minBuy"
+                                                    value="<%= (auto || {}).minBuy || 0 %>"
+                                                    type="number"/>&nbsp;——&nbsp;<input
+                            name="maxBuy" _check="amount"
+                            class="form-control input_m"
+                            value="<%= (auto || {}).maxBuy || 0 %>"
+                            type="number"/> 元</span></li>
+            <li>保留金额<span class="pull-right"><input type="text" name="minBalance" class="bl" _check="balance"
+                                                    placeholder="请输入"
+                                                    value="<%= (auto || {}).minBalance || 0 %>"> 元</span></li>
+        </ul>
+        <div class="auto_swwarp auto_type hide">
+            <div class="auto_sw">
+                <div class="auto_tt" onclick="$('.auto_swwarp').hide()">
+                    确定
+                </div>
+                <% for(var key in _global.productType){ %>
+                <label><input class="regular-checkbox1 regular-checkbox" type="checkbox" _attr="<%= _global.productType[key].desc %>"
+                              name="productType" <%= ((auto || {}).productType || '').indexOf(_global.productType[key].v) > -1 ? 'checked="checked"' : ''  %>
+                              value="<%= _global.productType[key].v %>"
+                              id="<%= _global.productType[key].v %>"/><label
+                            for="<%= _global.productType[key].v %>"></label><%= _global.productType[key].desc %>
+                </label>
+                <% } %>
+            </div>
+        </div>
+
+        <a class="btn automatic" href="javascript:;"
+           onclick="ZC_api.saveAutoInvest($('#checkbox_c1').is(':checked')?_gbl.state.Complete.v:_gbl.state.Wait.v) ">保存自动投标</a>
+
+    </form>
+
+</div>
+
+<% include ../parent/slide_nav.ejs %>
+<script>
+    $('.auto_tt').click(function () {
+        var a="";
+        $('input[type="checkbox"][name="productType"]:checked').each(
+            function() {
+                a=a+" "+$(this).attr('_attr');
+            }
+        );
+        $('.type_text').html(a)
+
+    })
+</script>
+</body>
+</html>

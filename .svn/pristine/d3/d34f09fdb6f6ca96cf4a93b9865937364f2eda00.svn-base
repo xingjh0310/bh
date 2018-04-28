@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>实名认证</title>
+</head>
+<body>
+<div class="header header_reg" ><a class="iconfont" href="/account/personal"><img src="/img/fh1.png" class="fh_img"></a>实名认证</div>
+
+
+<div class="login_warp">
+    <p class="p1">*铂恒金服采用数据加密，100%确保信息安全</p>
+    <form class="form-horizontal RealNameForm">
+        <div class="tipsYz"></div>
+        <div class="form-group">
+            <span class="u1">姓名</span>
+            <input type="text" class="form-control" name="realName" _check="realname" placeholder="请输入真实的姓名">
+        </div>
+        <div class="form-group">
+            <span class="u1">身份证号</span>
+            <input type="text" class="form-control" name="idCard" _check="idcard" placeholder="请输入真实身份证号">
+        </div>
+        <p class="p1" id="err"></p>
+
+        <a href="javascript:" class="btn-logoin"  onclick="ZC_api.saveRealName()"  style="margin-top:0.9rem">确定</a>
+
+    </form>
+</div>
+
+<% include ../parent/slide_nav.ejs %>
+
+
+</body>
+</html>

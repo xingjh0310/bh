@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>我的积分</title>
+</head>
+<body>
+<div class="header "><a class="iconfont" href="/account"><img src="/img/fh1.png" class="fh_img"></a>我的积分 <a href="/account/integralrule" style="color:#333" class="rule">积分规则</a></div>
+
+<div class="integ_main">
+    <div class="integ_bg">
+        <p class="p1"><%= user.score || 0 %></p>
+        <p>可用积分</p>
+    </div>
+    <p class="p2">积分明细</p>
+
+    <script type="text/template" id="record_tmpl">
+        <li>
+            <span class="sp1"></span>
+            <span class="sp2"></span>
+            <p class="p3">{number}<span>分</span></p>
+            <p>{action}<span class="pull-right">{time}</span></p>
+        </li>
+    </script>
+    <ul class="integ_list" id="record_list">
+
+    </ul>
+    <input type="hidden" value="1" id="pageNo"/>
+
+</div>
+
+
+</body>
+
+<% include ../parent/slide_nav.ejs %>
+<script type="text/javascript">
+    ZC_api.loadIntegralRecord(1, 10);
+    $('#pageNo').val(1);
+    $(window).scroll(function () {
+        var scrollTop = $(this).scrollTop();
+        var scrollHeight = $(document).height();
+        var windowHeight = $(this).height();
+        if (scrollTop + windowHeight == scrollHeight) {
+            $.ShowLoadIng();
+            var pageNo = parseInt($('#pageNo').val()) + 1;
+            ZC_api.loadIntegralRecord(pageNo, 10, '');
+        }
+    });
+</script>
+</html>

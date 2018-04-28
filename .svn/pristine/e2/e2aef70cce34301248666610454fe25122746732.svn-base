@@ -1,0 +1,130 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+
+<div class="pd-20">
+    <form class="form form-horizontal" id="form">
+        <div class="row cl">
+            <input type="hidden" name="id" value="<%= prize.id || 0 %>">
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>活动名称：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <select class="select-box" name="lotteryActivityId" id="lotteryActivityId" >
+                        <% for(var i = 0;i < activitys.list.length;i++){ %>
+                        <option <%= prize.lotteryActivityId == activitys.list[i].id ? 'selected=selected' : '' %>
+                                value="<%= activitys.list[i].id %>"><%= activitys.list[i].name %></option>
+                        <% } %>
+                    </select>
+                </div>
+
+            </div>
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>名称：</label>
+            <div class="formControls col-xs-8 col-sm-5">
+                <input type="text" class="input-text" id="name" placeholder="名称"
+                       nullmsg="请输入标题" errormsg="大于4位小于100位" name="name" value="<%= prize.name || '' %>"/>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>商品类型：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <select class="select-box" name="type" id="type">
+                        <% for(var key in _global.goodsType){ %>
+                        <option <%= prize.type == _global.goodsType[key].v ? 'selected=selected' : '' %>
+                                value="<%= _global.goodsType[key].v %>"><%= _global.goodsType[key].desc %></option>
+                        <% } %>
+                    </select>
+                </div>
+
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>数量：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" id="count" placeholder="请输入数量" datatype="*1-10"
+                           nullmsg="请输入数量" errormsg="大于1位小于10位" name="count" value="<%= prize.count || 0 %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>积分数量：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" id="prizeIntegral" placeholder="奖品类型为积分，填写奖品积分，否0"
+                           datatype="*1-10"
+                           errormsg="大于1位小于10位" name="prizeIntegral" value="<%= prize.prizeIntegral || 0 %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>虚拟产品Id：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" id="virtualId" placeholder="虚拟类型填写正常Id,其他为0" datatype="*1-10"
+                           errormsg="大于1位小于10位" name="virtualId" value="<%= prize.virtualId || 0 %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>图片：</label>
+                <div class="formControls col-xs-8 col-sm-5" id="imgDiv">
+                    <input type="hidden" name="img" value="<%= prize.img|| '' %>" id="img"/>
+                    <div class="uploader-list fileList"></div>
+                    <div class="filePicker" style="margin-top:10px;">选择图片</div>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>启&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <select class="select-box" name="state" style="width: 70%">
+                        <option value="0" <%= prize.state == 0 ? 'selected=selected' : '' %>>禁用</option>
+                        <option value="1" <%= prize.state == 1 ? 'selected=selected' : '' %>>启用</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+        <div class="row cl">
+            <div class="col-10 col-offset-3">
+                <button class="btn btn-default radius" onclick="layer_close()" type="button">
+                    &nbsp;&nbsp;取消&nbsp;&nbsp;
+                </button>
+                <button id="sub" class="btn btn-primary radius" type="button"><i
+                            class="Hui-iconfont">&#xe632;</i> 确定
+                </button>
+
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+    $(".form").Validform({
+        btnSubmit: '#sub',
+        postonce: true,
+        tiptype: 4,
+        showAllError: true,
+        ajaxPost: true,
+        beforeSubmit: function (curform) {
+            $.ajax({
+                url: '/integralmall/savePrize',
+                type: 'post',
+                data: {prize: JSON.stringify($('#form').serializeJson())},
+                success: function (msg) {
+                    if (msg.err) {
+                        Huimodal_alert(msg.err, 1000, function () {
+                        });
+
+                    }
+                    else {
+                        Huimodal_alert('保存成功！', 1000, function () {
+                            parent.location.reload();
+                            layer_close();
+                        });
+                    }
+                }
+            })
+            return false;
+        }
+    });
+    $('#imgDiv').createUpload();
+</script>
+</html>

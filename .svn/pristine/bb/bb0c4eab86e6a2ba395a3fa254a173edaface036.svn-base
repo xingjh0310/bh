@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>邀请有礼</title>
+    <link rel="stylesheet" href="/css/base/BH_base.css">
+    <style>
+        html,body{margin:0 auto 1rem;width:100%;max-width:768px;height:auto;background: #ffb640;}
+        img{width: 100%;}
+        .main-box{margin:0 auto;width: 6.9rem;}
+        .main1,.main2,.main3{margin-bottom:0.6rem;width: 100%;}
+        .main1{position: relative;margin-top:0.4rem;padding:0.7rem 0 0.3rem;height: auto;}
+        .main1,.main2-cont,.main3-cont{background: #fff4d3;border-radius: 0.1rem;}
+        .main1-title{
+            position: absolute;
+            top:-0.4rem;
+            left: 50%;
+            margin-left: -1.7rem;
+            width: 3.4rem;
+            height: 0.88rem;
+            background: url("/img/invite/main1_title.png") center no-repeat;
+            background-size: 100% 100%;
+        }
+        .main1-cont{
+            margin:0 auto;
+            width: 4rem;
+            border-radius: 0.2rem;
+            box-shadow: 0 0 0.4rem #ffdfb1;
+            overflow: hidden;
+        }
+        .code-title{
+            width: 100%;
+            height: 1rem;
+            color: #fff;
+            font-size: 0.2rem;
+            background: -moz-linear-gradient(left, #ff5230 0%, #ffb23f 50%);
+            background: -webkit-gradient(linear, left, right, color-stop(0%,#ff5230), color-stop(50%,#ffb23f));
+            background: -webkit-linear-gradient(left, #ff5230 0%,#ffb23f 50%);
+            background: -o-linear-gradient(left, #ff5230 0%,#ffb23f 50%);
+            background: -ms-linear-gradient(left, #ff5230 0%,#ffb23f 50%);
+            background: linear-gradient(to right, #ff5230 0%,#ffb23f 50%);
+        }
+        .code-title div{padding-left:0.25rem;}
+        .code-title div:nth-child(1){padding-top: 0.2rem;}
+        .code-title div:nth-child(2){
+            font-size: 0.32rem;
+            font-weight: bold;
+        }
+        .code-wrap{
+            padding:0.18rem 0 0.24rem;
+            background: #fff;
+        }
+        .code{margin: auto;width: 3rem;height: 3rem;}
+        .invite-btn{margin:0.4rem auto 0;width: 6rem;height: 1rem;
+            line-height: 1rem;
+            text-align: center;
+            color: #fff;
+            font-size: 0.28rem;
+            letter-spacing: 0.02rem;
+            background: #ff5230;
+            border-radius: 0.25rem;
+        }
+        .main2-title{
+            margin:0 auto 0.6rem;
+            width: 4.24rem;
+        }
+        .main2-cont{
+            padding:0.52rem 0 0.4rem;
+        }
+        .main2-cont li{
+            margin:0 auto;
+            width: 5.68rem;
+        }
+        .main2-cont li:nth-child(1),.main2-cont li:nth-child(3){width: 5.52rem;}
+        .main2-cont li:nth-child(1){
+            margin-bottom: 0.12rem;
+        }
+        .main2-cont li:nth-child(3){
+            margin:0.44rem auto 0.12rem;
+        }
+        .txt-box p{
+            line-height: 0.32rem;
+            color: #666;
+            font-size: 0.24rem;
+        }
+        .main3-title{
+            width: 5.24rem;
+        }
+        .main3-cont{padding:0.58rem 0 0.43rem;overflow: hidden;}
+        .main3-cont li{
+            margin:0 auto;
+            width: 5.8rem;
+        }
+        .main3-cont li:nth-child(1){padding-bottom: 0.36rem;}
+        .main3-cont li:nth-child(2){
+            overflow: hidden;
+        }
+        .main3-cont .img-box img{
+            float: left;
+            padding:0.02rem 0.14rem;
+            width: 2.62rem;
+            height: 2.92rem;
+        }
+
+        .fixed-rule-btn{
+            position: fixed;
+            top:40%;
+            right:0;
+            z-index: 999;
+            width: 0.64rem;
+            height: 2.26rem;
+            background: url("/img/invite/rule_btn.png") center no-repeat;
+            background-size: 100% 100%;
+        }
+    </style>
+</head>
+<body>
+    <input type="hidden"  value="<%= inCODE %>" id="inviteCODE">
+    <div class="invite-page">
+        <img src="/img/invite/invite_top.png" alt="邀请送现金 上不封顶" class="top-img">
+        <div class="main-box">
+            <div class="main1">
+                <div class="main1-title"></div>
+                <ul class="main1-cont">
+                    <li class="code-title">
+                        <div>我的邀请码</div>
+                        <% if( phone !==0 ){%>
+                            <div id="userPhone"><%= phone %></div>
+                        <%}%>
+                    </li>
+                    <li class="code-wrap">
+                        <div class="code" id="code"></div>
+                    </li>
+                </ul>
+                <div class="invite-btn" onclick="goAppPage(4)">立即邀请</div>
+            </div>
+            <div class="main2">
+                <div class="main2-title">
+                    <img src="/img/invite/main2_title.png" alt="">
+                </div>
+                <ul class="main2-cont">
+                    <li class="txt-box">
+                        <p>1.邀请好友注册成功并完成首次投资且</p>
+                        <p>单笔金额≥5000元,推荐人可获得8元现金红包。</p>
+                    </li>
+                    <li class="img-box">
+                        <img src="/img/invite/main2_img1.png" alt="">
+                    </li>
+                    <li class="txt-box">
+                        <p>2.好友第二次投资且单笔金额≥5000元，推荐人还可获得5元现金红包。</p>
+                    </li>
+                    <li class="img-box">
+                        <img src="/img/invite/main2_img2.png" alt="">
+                    </li>
+                </ul>
+            </div>
+            <div class="main3">
+                <div class="main2-title main3-title">
+                    <img src="/img/invite/main3_title.png" alt="">
+                </div>
+                <ul class="main3-cont">
+                    <li class="txt-box">
+                        <p>邀请好友注册并完成首投≥5000元，邀请人数达到下面数量，可以额外获取相对应的奖励，具体规则如下：</p>
+                    </li>
+                    <li class="img-box">
+                        <img src="/img/invite/main3_img1.png" alt="">
+                        <img src="/img/invite/main3_img2.png" alt="">
+                        <img src="/img/invite/main3_img3.png" alt="">
+                        <img src="/img/invite/main3_img4.png" alt="">
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <a href="/rule" class="fixed-rule-btn"></a>
+</body>
+    <script src="/js/jquery-2.1.4.min.js"></script>
+    <script src="/js/qrcode.min.js"></script>
+    <script src="/js/BH/public.js"></script>
+    <script>
+        $(function(){
+            var  hostname = location.host;
+            console.log(hostname)
+            new QRCode(document.getElementById('code'),hostname+'/reginvite?mobile='+$('#userPhone').val()+'&invite='+$('#inviteCODE').val());
+        })
+    </script>
+</html>

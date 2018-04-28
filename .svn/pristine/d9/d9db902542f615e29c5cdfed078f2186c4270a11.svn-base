@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>安全保障</title>
+</head>
+<body>
+
+<style>
+
+</style>
+
+    <div class="header" style="position: relative"><a class="iconfont" href="/security"><img src="/img/fh1.png" class="fh_img"></a>安全保障</div>
+
+    <div class="pinch-zoom" style="height: 30rem">
+
+        <img src="/img/suu2.png" style="padding-top:1.08rem"/>
+
+    </div>
+</body>
+
+<% include ../parent/slide_nav.ejs %>
+<script type="text/javascript">
+    $(function () {
+        $('div.pinch-zoom').each(function () {
+            new RTP.PinchZoom($(this), {});
+        });
+    })
+</script>
+</html>

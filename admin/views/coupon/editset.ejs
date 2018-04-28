@@ -1,0 +1,295 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>加息券管理 <span
+            class="c-gray en">&gt;</span> 保存加息券设置 <a class="btn btn-success radius r mr-20"
+                                                     style="line-height:1.6em;margin-top:3px"
+                                                     href="javascript:location.replace(location.href);" title="刷新"><i
+                class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+    <div class="codeView docs-example">
+        <form class="form form-horizontal" id="form">
+            <input type="hidden" name="id" value="<%= couponSet.id || '0' %>"/>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>加息券名称：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" id="name" placeholder="请输入加息券名称" datatype="*"
+                           nullmsg="请输入加息券名称" errormsg="大于4位小于100位" name="name" value="<%= couponSet.name || '' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>加息券利率(%)：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" id="rate" placeholder="请输入加息券利率"
+                           datatype="/^(?!0+$)(?!0*\.0*$)\d{1,8}(\.\d{1,2})?$/"
+                           nullmsg="请输入加息券利率" errormsg="请输入加息券利率" name="rate"
+                           value="<%= ((couponSet.rate || 0) * 100).toFixed(2) %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>启用：</label>
+
+                <div class="formControls col-xs-8 col-sm-5"> <span class="select-box">
+				<select class="select" name="state">
+                    <option value="0" <%= couponSet.state == 0 ? 'selected=selected' : '' %>>否</option>
+                    <option value="1" <%= couponSet.state == 1 ? 'selected=selected' : '' %>>是</option>
+                </select>
+				</span></div>
+            </div>
+            <br/>
+            <legend style="width: 47%;margin-left: 17%;"><h5>发放设置</h5></legend>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>开始时间：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text Wdate" placeholder="请输入开始时间" nullmsg="请输入开始时间" datatype="*"
+                           errormsg="请输入正确时间" id="sendBeginTime" name="sendBeginTime"
+                           value="<%= new Date(couponSet.sendBeginTime || new Date()).Format('yyyy-MM-dd hh:mm:ss') %>"
+                           onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>结束时间：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text Wdate" placeholder="请输入结束时间" nullmsg="请输入结束时间" datatype="*"
+                           errormsg="请输入正确时间" id="sendEndTime" name="sendEndTime"
+                           value="<%= new Date(couponSet.sendEndTime || new Date()).Format('yyyy-MM-dd hh:mm:ss') %>"
+                           onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'sendBeginTime\')}'})">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>发放场景：</label>
+
+                <div class="formControls col-xs-8 col-sm-5"> <span class="select-box">
+				<select class="select" name="sendAction">
+                    <option value="0">人工发放</option>
+                    <% for(var key in _global.actions){ %>
+                    <% if( !_global.actions[key].hidden){ %>
+                    <option <%= couponSet.sendAction == _global.actions[key].v ? 'selected=selected' : '' %>
+                            value="<%= _global.actions[key].v %>"><%= _global.actions[key].desc %></option>
+                    <% }} %>
+                </select>
+				</span></div>
+
+
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>购买金额：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" id="sendBuyAmount" placeholder="请输入单次金额" datatype="n1-10"
+                           nullmsg="请输入单次金额" errormsg="请输入单次金额" name="sendBuyAmount"
+                           value="<%= couponSet.sendBuyAmount || '0' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>购买总额：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" id="sendTotalAmount" placeholder="请输入购买总金额" datatype="n1-10"
+                           nullmsg="请输入购买总金额" errormsg="请输入购买总金额" name="sendTotalAmount"
+                           value="<%= couponSet.sendTotalAmount || '0' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>待收总额：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" id="sendCollect" placeholder="请输入待收总金额" datatype="n1-10"
+                           nullmsg="请输入待收总金额" errormsg="请输入待收总金额" name="sendCollect"
+                           value="<%= couponSet.sendCollect || '0' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>购买次数：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" id="sendInvestCount" placeholder="请输入购买次数" datatype="n1-2"
+                           nullmsg="请输入购买次数" errormsg="请输入购买次数" name="sendInvestCount"
+                           value="<%= couponSet.sendInvestCount || '0' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>首次发放：</label>
+                <div class="formControls col-xs-8 col-sm-5"> <span class="select-box">
+				<select class="select" name="sendFirst">
+                    <option <%= couponSet.sendFirst == _global.state.Complete.v ? 'selected=selected' : '' %>
+                            value="<%= _global.state.Complete.v %>">是
+                    </option>
+                    <option <%= couponSet.sendFirst == _global.state.Wait.v ? 'selected=selected' : '' %>
+                            value="<%= _global.state.Wait.v %>">否
+                    </option>
+                </select>
+				</span></div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>发放至：</label>
+                <div class="formControls col-xs-8 col-sm-5"> <span class="select-box">
+				<select class="select" name="sendInvite">
+                    <option <%= couponSet.sendInvite == _global.accountType.Investor.v ? 'selected=selected' : '' %>
+                            value="0">投资人
+                    </option>
+                    <option <%= couponSet.sendInvite == _global.accountType.Borrower.v ? 'selected=selected' : '' %>
+                            value="1">邀请人
+                    </option>
+                </select>
+				</span></div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>发送个数：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" id="sendCount" placeholder="请输入发送个数" datatype="n1-10"
+                           nullmsg="请输入发送个数" errormsg="请输入发送个数" name="sendCount"
+                           value="<%= couponSet.sendCount || '1' %>"/>
+                </div>
+            </div>
+            <br/>
+            <legend style="width: 47%;margin-left: 17%;"><h5>使用设置</h5></legend>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>期限类型：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <span class="select-box">
+                        <select class="select" name="termType">
+                            <option value="0" <%= couponSet.termType==0?"selected='selected'":''%> >固定期限</option>
+                            <option value="1" <%= couponSet.termType==1?"selected='selected'":''%>>灵活期限</option>
+                        </select>
+                    </span>
+                </div>
+            </div>
+            <div class="row cl term" style="<%= couponSet.termType!=1?"display:none":''%> ">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>有效天数：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" id="term" placeholder="请输入有效天数" datatype="n1-10" nullmsg="请输入有效天数" errormsg="请输入有效天数" name="term" value="<%= couponSet.term || '0' %>"/>
+                </div>
+            </div>
+            <div class="row cl useBeginTime" style="<%= couponSet.termType==1?"display:none":''%> ">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>开始时间：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text Wdate" placeholder="请输入开始时间" nullmsg="请输入开始时间" datatype="*"
+                           errormsg="请输入正确时间" id="useBeginTime" name="useBeginTime"
+                           value="<%= new Date(couponSet.useBeginTime || new Date()).Format('yyyy-MM-dd hh:mm:ss') %>"
+                           onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+                </div>
+            </div>
+            <div class="row cl useEndTime" style="<%= couponSet.termType==1?"display:none":''%> ">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>结束时间：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text Wdate" placeholder="请输入结束时间" nullmsg="请输入结束时间" datatype="*"
+                           errormsg="请输入正确时间" id="useEndTime" name="useEndTime"
+                           value="<%= new Date(couponSet.useEndTime || new Date()).Format('yyyy-MM-dd hh:mm:ss') %>"
+                           onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'useBeginTime\')}'})">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>购买金额：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" id="useBuyAmount" placeholder="请输入单次金额" datatype="n1-10"
+                           nullmsg="请输入单次金额" errormsg="请输入单次金额" name="useBuyAmount"
+                           value="<%= couponSet.useBuyAmount || '0' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>项目类型：</label>
+
+                <div class="formControls col-xs-8 col-sm-5"> <span class="select-box">
+				<select class="select" name="useProductType">
+                    <option value="0">通用</option>
+                    <% for(var key in _global.productType){ %>
+                    <option <%= couponSet.useProductType == _global.productType[key].v ? 'selected=selected' : '' %>
+                            value="<%= _global.productType[key].v %>"><%= _global.productType[key].desc %></option>
+                    <% } %>
+                </select>
+				</span></div>
+
+
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>周期类型：</label>
+                <div class="formControls col-xs-8 col-sm-5"> <span class="select-box">
+				<select class="select" name="usePeriodUnit">
+                    <option value="0">通用</option>
+                    <% for(var key in _global.periodUnit){ %>
+                    <option <%= couponSet.usePeriodUnit == _global.periodUnit[key].v ? 'selected=selected' : '' %>
+                            value="<%= _global.periodUnit[key].v %>"><%= _global.periodUnit[key].desc %></option>
+                    <% } %>
+                </select>
+				</span></div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>周期：</label>
+
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" id="usePeriod" placeholder="请输入周期" datatype="n1-10"
+                           nullmsg="请输入周期" errormsg="请输入周期" name="usePeriod" value="<%= couponSet.usePeriod || '0' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <div class="col-10 col-offset-3">
+                    <button id="sub" class="btn btn-primary radius" type="button"><i
+                                class="Hui-iconfont">&#xe632;</i> 保存
+                    </button>
+                    <button onClick="layer_close();" class="btn btn-default radius" type="button">
+                        &nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+
+    $(".form").Validform({
+        btnSubmit: '#sub',
+        postonce: true,
+        tiptype: 4,
+        showAllError: true,
+        ajaxPost: true,
+        beforeSubmit: function (curform) {
+            $.ajax({
+                url: '/coupon/saveCouponSet',
+                type: 'post',
+                data: {couponSet: JSON.stringify($('#form').serializeJson())},
+                success: function (msg) {
+                    if (!msg.err) {
+                        Huimodal_alert('保存成功', 1000, function () {
+                            parent.load();
+                            layer_close();
+                        });
+                    }
+                    else {
+                        Huimodal_alert(msg.err, 1000, function () {
+                        });
+                    }
+                }
+            })
+            return false;
+            //}
+        }
+    });
+    $.addCss('#sendBody:after{content:\'发放条件\'}');
+    $.addCss('#useBody:after{content:\'使用条件\'}');
+
+    $("select[name='termType']").change(function(){
+        var termType=$("select[name='termType'] option:selected").val();
+        if(termType==0){
+            $(".term").hide();
+            $(".useBeginTime").show();
+            $(".useEndTime").show();
+        }else if(termType==1){
+            $(".term").show();
+            $(".useBeginTime").hide();
+            $(".useEndTime").hide();
+        }
+    })
+</script>
+
+</body>
+
+</html>

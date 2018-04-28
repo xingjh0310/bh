@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>约投</title>
+</head>
+<body>
+<style>
+    img{
+        width: 100%;
+        display: block;
+    }
+</style>
+
+<img src="/img/yuetou1.png"/>
+<img src="/img/yuetou2.png"/>
+<img src="/img/yuetou3.png"/>
+<img src="/img/yuetou4.png"/>
+<img src="/img/yuetou5.png"/>
+
+</body>
+</html>

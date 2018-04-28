@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= com.env.seo.title %>账户中心</title>
+    <% include ../parent/static.ejs %>
+    <link rel="stylesheet" type="text/css" href="/css/BH/account/public.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/BH/parent/account_left.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/BH/account/index.css"/>
+</head>
+<body>
+<% include ../parent/top.ejs %>
+
+<% include ../parent/account_left.ejs %>
+<div class="personal_cen">
+    <div class="personal_top">
+        <div class="pull-right" style="color:#999">
+            上次登录：<%= new Date(user.lastLogin).Format('yyyy-MM-dd hh:mm') %></div>
+    </div>
+    <div class="personal_user_w">
+
+        <div class="personal_user">
+            <img src="<%= user.headImg ? user.headImg : '/img/tx.png' %>" style="margin-top:5px;" class="touxiang img1"
+                 id="image">
+            <div class="pull-right">
+                <p class="p1"><%= user.mobile.replace(/^(\d{3})(.+)(\w{4})$/, "$1****$3") %><span
+                            style="color:#ff8200;margin-left:5px;"></span></p>
+                <p class="mar0 col999">
+                        <% if(user.level){ %>
+                        等级：<span style="color:#fe8749"><%= user.levelName %> </span>
+                        <% }else{
+                        %>
+                        等级：<span style="color:#fe8749">普通 </span>
+                        <% } %>
+                   </p>
+                <div class="personal_ul">
+                    <!--手机认证-->
+                    <% if(user.mobile){ %>
+                    <div class="curron"><span class="acc_tips" style="left:108px">手机已认证</span></div>
+                    <% }else{ %>
+                    <div><span class="acc_tips_w" style="left:-25px">手机未认证,<a href="/account/security" style="color:#FF8624">去认证</a> </span>
+                    </div>
+                    <% } %>
+
+                    <!--实名认证-->
+                    <% if(user.realName){ %>
+                    <div class=" rz_shim curron"><span class="acc_tips " style="left:145px">实名已认证</span></div>
+                    <% }else{ %>
+                    <div class="rz_shim"><span class="acc_tips_w" style="left:145px">实名未认证，<a href="/account/security" style="color:#FF8624">去认证</a></span>
+                    </div>
+                    <% } %>
+
+                    <!--银行卡-->
+                    <% if(account.bindCard){ %>
+                        <div class="rz_bank curron"><span class="acc_tips" style="left:185px">银行卡已绑定</span></div>
+                    <% }else{ %>
+                        <div class="rz_bank"><span class="acc_tips_w" style="left:152px">银行卡未添加，<a
+                                    href="/account/bankcards" style="color:#FF8624">去添加</a> </span></div>
+                    <% } %>
+
+
+
+                    <!--邮箱-->
+                    <% if(user.email && user.validEmail){ %>
+                    <div class="rz_email curron"><span class="acc_tips " style="left:220px">邮箱已认证</span></div>
+                    <% }else{ %>
+                    <div class="rz_email"><span class="acc_tips_w" style="left:190px;">邮箱未认证，<a
+                                    href="/account/security" style="color:#FF8624">去认证</a></span></div>
+                    </a>
+                    <% } %>
+                </div>
+                <%
+                     var s = 1;
+                     if (user.email && user.validEmail) s += 1;
+                     if (user.payPassword) s += 1;
+                     if (user.realName && user.idCard) s += 1;
+                    if(s==4)  {%>
+                <%}else{%>
+                    <a href="/account/security" class="btn">完善送积分</a>
+                <%}%>
+
+            </div>
+        </div>
+        <div class="pull-right">
+            <a href="/account/recharge" target="_blank" style="background: #ff8a10;color:#fff">充值</a>
+            <a href="/account/withdraw">提现</a>
+        </div>
+    </div>
+    <div class="personal_main">
+        <div class="yue">
+            <span class="h3">账户概况</span>
+            <div class="pull-right">
+                <span>累计投资：<%= account.totalInvestAmount %>元</span> 丨
+                <span>累计收益：<%= account.totalReceivedInterest %>元 </span> 丨
+                <span>累计积分：<%= user.score || 0 %></span>
+            </div>
+        </div>
+
+        <div class="jine">
+            <div>
+                <div id="container" style="height: 300px;width:500px;"></div>
+                <div class="jine_all">
+                    <p class="p2"><%= (account.balance + account.freeze + account.collectCorpus + account.collectInterest).toFixed(2) %></p>
+                    <p>账户总额(元)</p>
+                </div>
+                <p style="text-align:center;color:#666;width:500px;font-size:16px">待收本金：<%= account.collectCorpus %>元
+                    待收利息：<%= account.collectInterest %>元</p>
+            </div>
+            <div class="jine_div">
+                <ul>
+                    <li><span style="background: #82aff8"></span>可用余额：<%= account.balance %>元</li>
+                    <li><span></span>待收总额：<%= (account.collectCorpus + account.collectInterest).toFixed(2) %>元</li>
+                    <li><span style="background: #ff8624"></span>冻结金额：<%= account.freeze %>元</li>
+                </ul>
+            </div>
+        </div>
+        <script type="text/javascript" src="/js/echarts-all-3.js"></script>
+        <script type="text/javascript">
+            var dom = document.getElementById("container");
+            var myChart = echarts.init(dom);
+            var app = {};
+            option = null;
+            option = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b}: {c} ({d}%)"
+                },
+                color: ['#82aff8', '#ffd5b3', '#ff8624'],
+                legend: {
+                    show: false,
+                    orient: 'vertical',
+                    x: 'left',
+                    data: ['可用余额', '待收总额', '冻结金额']
+                },
+                series: [
+                    {
+                        name: '账户概况(元)',
+                        type: 'pie',
+                        radius: ['50%', '70%'],
+                        avoidLabelOverlap: false,
+                        label: {
+                            normal: {
+                                show: false,
+                                position: 'center'
+                            },
+                            emphasis: {
+                                show: true,
+                                textStyle: {
+                                    fontSize: '20',
+                                    fontWeight: 'bold'
+                                }
+                            }
+                        },
+                        labelLine: {
+                            normal: {
+                                show: true,
+                                length: 30
+                            }
+                        },
+                        label: {
+                            normal: {
+                                textStyle: {
+                                    color: ''
+                                }
+                            }
+                        },
+                        data: [
+                            {
+                                value:<%= account.balance %>,
+                                name: '可用余额',
+                                itemStyle: {
+                                    normal: {
+                                        label: {
+                                            show: false
+                                        },
+                                        labelLine: {
+                                            show: false
+                                        }
+                                    },
+                                    emphasis: {
+                                        label: {
+                                            show: true
+                                        },
+                                        labelLine: {
+                                            show: true,
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                value:<%= (account.collectCorpus + account.collectInterest).toFixed(2) %>,
+                                name: '待收总额',
+                                itemStyle: {
+                                    normal: {
+                                        label: {
+                                            show: false
+                                        },
+                                        labelLine: {
+                                            show: false
+                                        }
+                                    },
+                                    emphasis: {
+                                        label: {
+                                            show: true
+                                        },
+                                        labelLine: {
+                                            show: true,
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                value:<%= account.freeze %>,
+                                name: '冻结金额',
+                                itemStyle: {
+                                    normal: {
+                                        label: {
+                                            show: false
+                                        },
+                                        labelLine: {
+                                            show: false
+                                        }
+                                    },
+                                    emphasis: {
+                                        label: {
+                                            show: true
+                                        },
+                                        labelLine: {
+                                            show: true,
+                                        }
+                                    }
+                                }
+                            }
+
+
+                        ]
+                    }
+                ]
+            };
+            if (option && typeof option === "object") {
+                myChart.setOption(option, true);
+            }
+        </script>
+    </div>
+
+
+    <div class="personal_play">
+        <h3><span>回款计划</span></h3>
+        <div class="pull-left">
+
+            <div id="demo">
+                <div id="myDatePicker"></div>
+                <div class="paly_date">
+                    <span class="date_span acc_date">10</span>
+                </div>
+            </div>
+        </div>
+        <style>
+
+        </style>
+        <div class="pull-right">
+            <ul>
+                <li class="active">今日回款</li>
+
+            </ul>
+            <div class="personal_play_r setTabMain">
+                <div style="display:block">
+                    <ol>
+                        <li>今日回款本金：<em id="totalCorpus"></em><em>元</em></li>
+                        <li>今日回款利息：<em id="totalInterest"> </em><em>元</em></li>
+                    </ol>
+                    <a href="/account/payment" class="more_a">
+                        <p><img src="/img/gend.png"></p>
+                        <p style="color:#999">查看更多</p>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!--头像上传-->
+<div class="upload_a" style="display: none;">
+    <div class="upload">
+        <div class="imagetop">
+            <h2>更换头像</h2>
+            <img src="/img/sc.png" alt="" class="del">
+        </div>
+        <div class="action">
+            <div class="new-contentarea tc"><a href="javascript:void(0)" class="upload-img">
+
+                    <label for="upload-file"><img src="/img/sc1_06.png" alt="" style="margin:2px 5px 0 0">选择照片</label>
+                </a>
+                <input type="file" class="" name="upload-file" id="upload-file"/>
+            </div>
+            <div class="jq" style="position: relative;width: 115px;height: 36px;float: left;">
+                <img src="/img/jq1_03.png" alt=""  class="jq1" style="position: absolute; margin: 25px 10px 0 40px;z-index: 9999;">
+                <img src="/img/jq.png" alt=""style="position: absolute; margin: 25px 10px 0 40px;z-index: 1000;width:17px;height: 16px;">
+            <input type="button" id="btnCrop" class="Btnsty_peyton" value="裁切">
+            </div>
+        </div>
+        <div class="imageBox">
+            <div class="thumbBox"></div>
+            <div class="spinner" style="display: none;">
+
+            </div>
+        </div>
+
+        <div class="cropped">
+            <img class="cropp_photo" src="/img/tx.png" alt="" s>
+        </div>
+        <input type="button" class="Btnsty_sure" value="确定" onclick="">
+    </div>
+</div>
+
+<% include ../parent/bottom.ejs %>
+<script type="text/javascript">
+    customOptions = {
+        view: {
+            alwaysVisible: true
+        }
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        ZC_api.loadPaymentByDay(new Date().Format('yyyy-MM-dd'));
+        $('#myDatePicker').calendar({
+            width: 492,
+            height: 296,
+
+            onSelected: function (view, date, data) {
+                console.log('view:' + view)
+                ZC_api.loadPaymentByDay(date.Format('yyyy-MM-dd'));
+
+
+                console.log('data:' + (data || 'None'));
+            }
+
+
+
+        });
+        $('#myDatePicker').css("height", "296px");
+    })
+</script>
+</body>
+
+</html>

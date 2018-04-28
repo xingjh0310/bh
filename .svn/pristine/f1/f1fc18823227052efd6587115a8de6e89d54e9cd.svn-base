@@ -1,0 +1,21 @@
+html,body{margin:0 auto;padding-bottom:1rem;width:100%;max-width:768px;height:auto;background: #F39841;}
+.top-box{width: 100%;}
+.top-title{width: 100%;height: 3.76rem;background: url("/img/activities/newUser/top.png") center no-repeat;background-size: 100% 100%;}
+.top-btn{width:100%;height:1.91rem;background: url("/img/activities/newUser/top_btn_bg.png") center no-repeat;background-size: 100% 100%;}
+.top-btn .btn{margin:0 auto;width: 5.36rem;height: 0.97rem;background: url("/img/activities/newUser/top_btn.png")center no-repeat;background-size: 100% 100%;
+    line-height: 0.62rem;
+    font-size: 0.28rem;
+    text-align: center;
+    color: #fff;
+}
+.main-box,.main1,.main2{width: 100%;}
+.main2 .title{margin:0.41rem 0 0.18rem;}
+img{width: 100%;}
+.rule-box .title{margin-top:0.47rem;}
+.fixed-btn-box{position:fixed;bottom:0;left:0;width: 100%;line-height: 1rem;background: #FA392F;}
+.fixed-btn{margin:0 auto;width: 100%;max-width:768px;height: 1rem;background: #fa392f url("/img/activities/newUser/fixed_btn.png")center no-repeat;
+    background-size: 100% 100%;}
+@media (device-width: 375px) and (device-height: 812px){
+    html,body{padding-bottom:1.5rem;}
+    .fixed-btn-box{height: 1.5rem;}
+}

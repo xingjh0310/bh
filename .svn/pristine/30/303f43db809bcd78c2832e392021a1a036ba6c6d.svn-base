@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+<nav class="breadcrumb">
+    <i class="Hui-iconfont">&#xe67f;</i> 首页
+    <span class="c-gray en">&gt;</span> 内容管理
+    <span class="c-gray en">&gt;</span>编辑活动
+    <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px"        href="javascript:location.replace(location.href);" title="刷新">
+        <i class="Hui-iconfont">&#xe68f;</i>
+    </a>
+</nav>
+<div class="pd-20">
+    <div class="codeView docs-example">
+        <form class="form form-horizontal" id="form">
+            <input type="hidden" name="id" value="<%= activity.id || '0' %>"/>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>标题：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" id="Title" placeholder="请输入标题" datatype="*2-100" nullmsg="请输入标题" errormsg="大于2位小于100位" name="title" value="<%= activity.title || '' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>排序：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text" id="Title" placeholder="请输入排序" datatype="n1-3" nullmsg="请输入排序" errormsg="小于999" name="order" value="<%= activity.order || '0' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>图片：</label>
+                <div class="formControls col-xs-8 col-sm-5" id="imgDiv">
+                    <input type="hidden" value="<%= activity.img || '' %>" name="img" id="img"/>
+                    <div class="uploader-list fileList"></div>
+                    <div class="filePicker" style="margin-top:10px;">选择图片</div>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>活动链接：</label>
+                <div class="formControls col-xs-8 col-sm-5" id="urlDiv">
+                    <input type="text" class="input-text" id="url" placeholder="请输入排序" datatype="*2-100" name="url" value="<%= activity.url || '' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>开始时间：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text Wdate" placeholder="请输入开始时间" nullmsg="请输入开始时间" datatype="*" errormsg="请输入正确时间" id="beginTime" name="beginTime" value="<%= new Date(activity.beginTime || new Date()).Format('yyyy-MM-dd hh:mm:ss') %>" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>结束时间：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <input type="text" class="input-text Wdate" placeholder="请输入结束时间" nullmsg="请输入结束时间" datatype="*" errormsg="请输入正确时间" id="endTime" name="endTime" value="<%= new Date(activity.endTime || new Date()).Format('yyyy-MM-dd hh:mm:ss') %>" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'beginTime\')}'})">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>展示方式：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <select class="select-box" name="showType" style="width:66%;">
+                        <% for(var key in _global.showType){ %>
+                        <option <%= activity.showType == _global.showType[key].v ? 'selected=selected' : '' %>
+                                value="<%= _global.showType[key].v %>"><%= _global.showType[key].desc %></option>
+                        <% } %>
+                    </select>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>状态：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <select class="select-box" name="state" style="width:66%;">
+                        <option value="0" <%= activity.state == 0 ? 'selected=selected' : '' %>>禁用</option>
+                        <option value="1" <%= activity.state == 1 ? 'selected=selected' : '' %>>启用</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row cl">
+                <div class="col-10 col-offset-3">
+                    <button id="sub" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+                    <button onClick="layer_close();" class="btn btn-default radius" type="button">取消&nbsp;&nbsp;</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+    $(".form").Validform({
+        btnSubmit: '#sub',
+        postonce: true,
+        tiptype: 4,
+        showAllError: true,
+        ajaxPost: true,
+        beforeSubmit: function (curform) {
+            $.ajax({
+                url: '/content/saveActivity',
+                type: 'post',
+                data: {activity: JSON.stringify($('#form').serializeJson())},
+                success: function (msg) {
+                    if (!msg.err) {
+                        Huimodal_alert('保存成功', 1000, function () {
+                            parent.load();
+                            layer_close();
+                        });
+                    }
+                    else {
+                        Huimodal_alert(msg.err, 1000, function () {
+                        });
+                    }
+                }
+            })
+            return false;
+        }
+    });
+    $('#imgDiv').createUpload();
+    $('#urlDiv').createUpload({type: 'uploadzip', mime: '.zip'});
+</script>
+</html>

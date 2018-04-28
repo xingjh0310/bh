@@ -1,0 +1,7 @@
+.about_nav{overflow: hidden;height: 117px;margin: 0 auto;width:1103px;}
+.about_nav_w{background: #f5f5f5;border-top:1px solid #ff8624}
+.about_nav li{float: left;cursor: pointer;margin-left:145px;text-align: center;font-size:14px;}
+.about_nav li span{display:inline-block;height:43px;width:43px;line-height: 40px;color:#999;border-radius: 50%;border:1px solid #999;font-size:28px;margin-top:25px;margin-bottom:8px;}
+.about_nav li span:hover{background: #fe8749;color:#fff;border-color: #fe8749 }
+.about_nav li.active span{background: #fe8749;color:#fff;border-color: #fe8749}
+.about_nav .active a {}

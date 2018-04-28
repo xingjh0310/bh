@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+
+<div class="pd-20">
+    <form class="form form-horizontal" id="form">
+        <div class="row cl">
+            <input type="hidden" name="id" value="<%= goodsType.id||''%>">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>分类标题：</label>
+            <div class="formControls col-xs-8 col-sm-5">
+                <input type="text" class="input-text" id="name" placeholder="分类标题" datatype="*1-10"
+                       nullmsg="请输入标题" errormsg="大于4位小于100位" name="name" value="<%= goodsType.name|| ''%>" />
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>分类图片：</label>
+                <div class="formControls col-xs-8 col-sm-5" id="imgDiv">
+                    <input type="hidden" value="<%= goodsType.img || '' %>" name="img" id="img"/>
+                    <div class="uploader-list fileList"></div>
+                    <div class="filePicker" style="margin-top:10px;">选择图片</div>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>启&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <select class="select-box" name="state" style="width: 100%">
+                        <option value="0" <%= goodsType.state == 0 ? 'selected=selected' : '' %>>禁用</option>
+                        <option value="1" <%= goodsType.state == 1 ? 'selected=selected' : '' %>>启用</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+        <div class="row cl">
+            <div class="col-10 col-offset-3">
+                <button class="btn btn-default radius" onclick="layer_close()" type="button">
+                    &nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+                <button id="sub" class="btn btn-primary radius" type="button"><i
+                            class="Hui-iconfont">&#xe632;</i> 确定
+                </button>
+
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+    $(".form").Validform({
+        btnSubmit: '#sub',
+        postonce: true,
+        tiptype: 4,
+        showAllError: true,
+        ajaxPost: true,
+        beforeSubmit: function (curform) {
+            //if ($('#AccountId').val()) {
+            $.ajax({
+                url: '/integralmall/editType',
+                type: 'post',
+                data: {goodsType: JSON.stringify($('#form').serializeJson())},
+                success: function (msg) {
+                    if (!msg.err) {
+                        Huimodal_alert('保存成功！', 1000, function () {
+                            parent.location.reload();
+                            layer_close();
+                        });
+                    }
+                    else {
+                        Huimodal_alert(msg.err, 1000, function () {
+                        });
+                    }
+                }
+            })
+            return false;
+            //}
+        }
+    });
+    $('#imgDiv').createUpload();
+</script>
+</html>

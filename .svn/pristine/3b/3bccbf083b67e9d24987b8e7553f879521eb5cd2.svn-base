@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: #f5f5f5">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <link rel="stylesheet" type="text/css" href="/css/BH/aboutus/platformData.css"/>
+    <title>平台数据</title>
+</head>
+<body style="background: #fff;">
+<% include ../parent/top.ejs  %>
+<div class="record">
+    <div class="recordBan"></div>
+    <div class="recordDiv">
+        <h2 style="margin-bottom: 44px;"><img src="/img/recordTitle.png" /></h2>
+        <ul class="clearfix">
+            <li>
+                <i class="i1"></i>
+                <p>累计创造收益</p>
+                <span><%= (parseFloat(total.totalInterest)).toFixed(2) %></span>
+            </li>
+            <li>
+                <i class="i2"></i>
+                <p>预期年化区间</p>
+                <span><%= (total.startRate && parseFloat(total.startRate)>0)?((parseFloat(total.startRate) * 100).toFixed(2)):0 %>%~<%=(total.endRate && parseFloat(total.endRate)>0)? ((parseFloat(total.endRate) * 100).toFixed(2)):0 %>%</span>
+            </li>
+            <li>
+                <i class="i3"></i>
+                <p>今日成交额</p>
+                <span><%= parseFloat((total.todayInvest && !isNaN(total.todayInvest))?total.todayInvest:0).toFixed(2) %></span>
+            </li>
+            <li>
+                <i class="i4"></i>
+                <p>累计成交额</p>
+                <span><%= parseFloat((total.totalInvest && !isNaN(total.totalInvest))?total.totalInvest:0).toFixed(2) %></span>
+            </li>
+            <li>
+                <i class="i5"></i>
+                <p>累计注册人数</p>
+                <span><%= parseInt((total.totalRegister && !isNaN(total.totalRegister))?total.totalRegister:0) %></span>
+            </li>
+            <li>
+                <i class="i6"></i>
+                <p>累计待收金额</p>
+                <span><%= parseFloat((total.totalWaitPaymentAmount && !isNaN(total.totalWaitPaymentAmount))?total.totalWaitPaymentAmount:0).toFixed(2) %></span>
+            </li>
+            <li>
+                <i class="i7"></i>
+                <p>累计借款笔数</p>
+                <span><%= parseInt((total.totalDebt && !isNaN(total.totalDebt))?total.totalDebt:0) %></span>
+            </li>
+            <li>
+                <i class="i8"></i>
+                <p>累计借款金额</p>
+                <span><%= parseFloat((total.totalDebtAmount && !isNaN(total.totalDebtAmount))?total.totalDebtAmount:0).toFixed(2) %></span>
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+
+
+
+
+
+<% include ../parent/bottom.ejs  %>
+
+</body>
+
+</html>

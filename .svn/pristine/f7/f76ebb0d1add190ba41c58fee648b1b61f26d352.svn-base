@@ -1,0 +1,18 @@
+.valide{    width: 660px;
+    height: 136px;margin:160px auto;}
+
+.valide p{
+    color: #333;
+    font-size: 30px;
+    margin: 10px 0 40px 0;
+}
+.valide a{
+    margin: 5px 0 8px 0;
+    text-align:center;border-radius: 8px;
+    padding: 0;
+    height: 40px;
+    line-height: 40px;
+    border:1px solid  #ff8a10;
+    color: #ff8a10;
+    font-size: 16px;display:block;width:146px;
+}

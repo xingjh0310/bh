@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+
+<div class="pd-20">
+    <div class="mt-20">
+        <style>
+            .lottery_tab {
+                margin-top: 40px;
+            }
+
+            .lottery_tab ul li {
+                width: 300px;
+                height: 200px;
+                border: 1px solid #000;
+                float: left;
+                margin-right: 15px;
+                margin-top: 15px;
+            }
+        </style>
+        <div class="lottery_tab">
+            <ul>
+
+                <% for(var i = 0;i < detail.list.length;i++){ %>
+                <li> <span style="border-right: 1px solid #dcdcdc"><a
+                                href="javascript:void(0);"
+                                onclick="editPrize(<%= detail.list[i].id %>)" ><img src="<%= detail.list[i].img%>" style="width: 301px;height: 202px"/></a></span>
+                    </li>
+                <% } %>
+                <a href="javascript:void(0)" onclick="editPrize(<%= lotteryActivityId %>)">
+                    <li id="jia">
+                        <img src="/images/yy.png" style="width: 64px;margin: auto;padding-top: 60px;display: block">
+                        <p style="text-align: center;margin-top: 15px;">点击添加</p>
+                    </li>
+                </a>
+
+            </ul>
+        </div>
+        <div id="page"></div>
+    </div>
+</div>
+
+</body>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+    if ($(".lottery_tab ul li").length >= 9) {
+        $("#jia").hide();
+    }
+
+
+    function editPrize(id) {
+        var index = layer.open({
+            type: 2,
+            title: '编辑',
+            content: '/integralmall/editprize' + (id ? '?id=' + id : '')
+        });
+        layer.full(index);
+    }
+
+</script>
+</html>

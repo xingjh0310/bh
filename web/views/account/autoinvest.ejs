@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= com.env.seo.title %>自动投标</title>
+    <% include ../parent/static.ejs %>
+    <link rel="stylesheet" type="text/css" href="/css/BH/account/public.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/BH/parent/account_left.css"/>
+</head>
+<body>
+<% include ../parent/top.ejs %>
+
+<% include ../parent/account_left.ejs %>
+<div class=" inv_main" style="background: #fff">
+    <div class="personal_cen ">
+
+        <% if(!auto || edit){ %>
+        <form id="form" class="tou_form">
+            <div class="tipsYz"></div>
+            <div class="pertab_two pertabblock">
+                <div class="form-group">
+                    <span>自动状态</span>
+
+                    <%= (auto || {}).state > 0 ? '已开启' : '已关闭' %>
+
+                </div>
+                <div class="form-group">
+                    <span>产品类型</span>
+                    <% for(var key in _global.productType){ %>
+                    <label><input class="regular-checkbox1 regular-checkbox" type="checkbox"
+                                  name="productType" <%= ((auto || {}).productType || '').indexOf(_global.productType[key].v) > -1 ? 'checked="checked"' : '' %>
+                                  value="<%= _global.productType[key].v %>"
+                                  id="<%= _global.productType[key].v %>"/><label
+                                for="<%= _global.productType[key].v %>"></label><%= _global.productType[key].desc %>
+                    </label>
+                    <% } %>
+
+                </div>
+
+                <div class="form-group">
+                    <span>年化利率范围</span>
+                    <input  type="number" class="form-control" name="minRate"
+                           value="<%= (((auto || {}).minRate || 0) * 100).toFixed(2) %>"
+                          />%<i class="mr_i">至</i><input
+                            name="maxRate"
+                            class="form-control"
+                            value="<%= (((auto || {}).maxRate || 0) * 100).toFixed(2) %>"
+                            type="number"/>%
+                </div>
+
+                <div class="form-group">
+                    <span>单标投资金额</span>
+                    <input class="form-control" _check="amount" name="minBuy" value="<%= (auto || {}).minBuy || 0 %>"
+                           type="number"/>元<i class="mr_i">至</i><input
+                            name="maxBuy" _check="amount"
+                            class="form-control"
+                            value="<%= (auto || {}).maxBuy || 0 %>"
+                            type="number"/>元
+                </div>
+
+                <div class="form-group">
+                    <span>借款期限</span>
+                    <input class="form-control" name="minPeriodDay" value="<%= (auto || {}).minPeriodDay || 0 %>"
+                           type="number"/>&nbsp;——&nbsp;<input
+                            name="maxPeriodDay" value="<%= (auto || {}).maxPeriodDay || 0 %>" class="form-control"
+                            type="number"/>天
+                </div>
+
+                <div class="form-group">
+                    <span>账户保留金额</span>
+                    <input class="form-control" _check="balance" value="<%= (auto || {}).minBalance || 0 %>" name="minBalance"
+                           type="text"/>元
+                </div>
+
+
+                <a class="btn percoma automatic" href="javascript:;"
+                   onclick="ZC_api.saveAutoInvest( <%= (auto || {}).state %>||_gbl.state.Wait.v)">保存自动投标</a>
+
+            </div>
+        </form>
+        <% }else{ %>
+        <form id="form" class="tou_form">
+            <div class="pertab_two pertabblock">
+                <div class="form-group"><span>自动状态</span><%= auto.state > 0 ? '已开启' : '已关闭' %></div>
+                <div class="form-group">
+
+                    <span>产品类型</span>
+                    <% for(var key in _global.productType){ %>
+                    <label><input class="regular-checkbox1 regular-checkbox" disabled="disabled" type="checkbox"
+                                  name="productType" <%= (auto.productType || '').indexOf(_global.productType[key].v) > -1 ? 'checked="checked"' : '' %>
+                                  value="<%= _global.productType[key].v %>"/><label></label><%= _global.productType[key].desc %>
+                    </label>
+                    <% } %>
+
+                </div>
+                <div class="form-group"><span>年化利率范围</span><%= (auto.minRate * 100).toFixed(2) %>%
+                    <i class="mr_i">至</i><%= (auto.maxRate * 100).toFixed(2) %>%
+                </div>
+
+                <div class="form-group"><span>单标投资金额</span><%= (auto.minBuy).toFixed(0) %>
+                    元<i class="mr_i">至</i><%= (auto.maxBuy).toFixed(0) %>元
+                </div>
+
+                <div class="form-group"><span>账户保留金额</span><%= auto.minBalance %>&nbsp;元</div>
+                <div class="form-group"><span>借款期限</span><%= auto.minPeriodDay %>&nbsp;——&nbsp;<%= auto.maxPeriodDay %>
+                    &nbsp;天
+                </div>
+                <div class="autobtn_gr">
+                    <% if(auto.state > 0){ %>
+                    <a class="btn auto_btn" href="javascript:;"
+                       onclick="ZC_api.changeAutoInvest(_gbl.state.Wait.v);">关闭自动投标</a>
+                    <% }else{ %>
+                    <a class="btn auto_btn" href="javascript:;"
+                       onclick="ZC_api.changeAutoInvest(_gbl.state.Complete.v);"> 开启自动投标</a>
+                    <% } %>
+                    <a class="btn auto_btn" href="/account/autoInvestEdit">
+                        修改自动投标</a>
+                </div>
+
+            </div>
+        </form>
+        <% } %>
+
+    </div>
+
+    <div class="tou_shm">
+        <h2>自动投标说明</h2>
+        <p>1、 自动购买成功后，排名移到队尾；</p>
+        <p>2、 理财产品成功发布开放购买后，您所开启的自动购买功能开始运作；</p>
+        <p>3、 修改、关闭自动购买功能后再次开启，排名移到队尾；</p>
+        <p>4、 账户可用余额小于产品起购金额时，系统会自动跳过您的自动购买功能，排名移到队尾；</p>
+        <p>5、 自动投标开启后不能使用红包，使用红包前请关闭自动投标功能，红包使用要手动投标。</p>
+    </div>
+
+</div>
+<% include ../parent/bottom.ejs %>
+</body>
+
+</html>

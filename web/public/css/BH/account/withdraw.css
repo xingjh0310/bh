@@ -1,0 +1,64 @@
+/*提现弹框*/
+.zhao_t{
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left:0;
+    right: 0;
+    width: 100%;
+    background-color: #000;
+    opacity: 0.2;
+    display: none;
+}
+.tishi_t{
+    width: 600px;
+    height:340px;
+    background-color: #fff;
+    position: absolute;
+    top:23%;
+    left:50%;
+    margin-left: -190px;
+    display: none;
+}
+.tishi_t p{
+    height: 55px;
+    width: 580px;
+    color: #333;
+    font-size: 18px;
+    padding-left: 20px;
+    border-bottom: 1px solid #eee;
+    line-height: 55px;
+}
+.tishi_t .tishi_main{
+    width: 400px;
+    height: 160px;
+    margin:auto;
+    margin-top:55px;
+}
+.tishi_t .tishi_main h2{
+    color: #333;
+    text-align: center;
+    font-size: 24px;
+    margin-bottom:70px;
+}
+.tishi_t .tishi_main ul{
+    width: 360px;
+    height: 45px;
+    margin: auto;
+}
+.tishi_t .tishi_main ul li{
+    width:180px;
+    height: 45px;
+    float: left;
+}
+.tishi_t .tishi_main ul li a{
+    width: 140px;
+    height: 45px;
+    color: #fff;
+    text-align: center;
+    line-height:45px;
+    font-size: 18px;
+    display: block;
+    border-radius: 10px;
+    cursor: pointer;
+}

@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>项目详情</title>
+    <script src="/js/jquery-2.1.1.js"></script>
+    <link rel="stylesheet" href="/css/common.css">
+</head>
+<body>
+<style>
+    .details_t .details_tab{
+        border: 0;
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .details_t .details_tab tr{
+        border-top: 1px solid #ddd;
+    }
+    .details_t .details_tab tr:last-child td{
+        border-bottom: 1px solid #ddd;
+    }
+    .details_t .details_tab tr:last-child th{
+        border-bottom: 1px solid #ddd;
+    }
+    .details_t .details_tab th{
+        border: 1px solid #ddd;
+        border-bottom: 0;
+        vertical-align: middle;
+        width: 30%;
+    }
+    .details_t .details_tab td{
+        border-width: 1px 1px 1px 0;
+        border: 1px solid #ddd;
+        border-left: 0;
+        border-bottom: 0;
+        padding: 0.1rem;
+    }
+
+</style>
+<div style="display: block; padding: 0.5rem 0.3rem; background: #fff;" class="details_t">
+    <table class="table details_tab" cellspacing="0" border="0">
+        <thead>
+        <tr>
+            <th style="">产品名称</th>
+            <td style=""><%= debt.title %></td>
+        </tr>
+        <tr>
+            <th style="">认购规模</th>
+            <td style="">本产品认购总额<%= debt.amount %>元</td>
+        </tr>
+        <tr>
+            <th style="">起购及递增金额</th>
+            <td style="">起投<%= debt.minInvestAmount %>元，递增<%= debt.minInvestAmount %>元</td>
+        </tr>
+        <tr>
+            <th style="">产品介绍</th>
+            <td style="">本产品为合作机构推送的优质债权项目，该产品为固定收益类金融产品，资金投向用途为汽车抵（质）押借款、个人消费借款、房产抵押借款等。</td>
+        </tr>
+        <tr>
+            <th style="">资金托管信息</th>
+            <td style="">第三方支付机构富友支付提供专业的综合支付体系和资金结算</td>
+        </tr>
+        <tr>
+            <th style="">认购准备</th>
+            <td style="">1.提前了解产品申购时银行卡限额的支持情况。 2.产品限量抢购，抢购请提前在个人账户准备理财资金。</td>
+        </tr>
+        <tr>
+            <th style="">是否可转让</th>
+            <td style="">不可转让</td>
+        </tr>
+        <tr>
+            <th style="">合作机构</th>
+            <td style="">杭州后浪资产管理有限公司：深耕浙江本土车金融市场，除自身运营，还是杭州几大一线车金融互金平台的重要资产运营商。杭州后浪资产管理有限公司拥有强大的民间资本、财富管理、 项目运营能力，积累10年线下资产风控运营经验。</td>
+        </tr>
+        <tr>
+            <th style="">盈科律师事务所</th>
+            <td style="">为平台上的项目提供专业的法律支持，任何发生争议，需要以法律程序解决争议的项目，铂恒金服将以专门的法律援助为投资者处理相关法律争议。</td>
+        </tr>
+        <tr>
+            <th style="">E签宝</th>
+            <td style="">为平台所有电子协议提供符合《电子签名法》的电子签名，保障在线电子合同合法合规，实现在线投资人、借款人、担保方、平台方四方电子签章、电子协议公正安全。</td>
+        </tr>
+    </table>
+
+</div>
+
+</body>
+</html>

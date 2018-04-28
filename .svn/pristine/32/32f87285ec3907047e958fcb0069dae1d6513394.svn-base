@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>积分规则</title>
+    <link rel="stylesheet" href="/css/base/BH_base.css">
+    <link rel="stylesheet" href="/css/BH/rule.css">
+</head>
+<body>
+    <div class="rule-page">
+        <div class="rule-title">积分规则</div>
+        <ul class="rule-list">
+            <li>1、投资可获得积分；</li>
+            <li>2、完成任务可获得积分，比如：完成实名、绑卡、设置交易密码等可获得相应积分；</li>
+            <li>3、通过官网举行的活动获得积分，具体信息请等待官网公告。平台活动积分将按照活动规则说明执行赋予；</li>
+            <li>4、积分均取整数赋予，如遇小数将履行四舍五入制赋予。</li>
+        </ul>
+    </div>
+</body>
+</html>

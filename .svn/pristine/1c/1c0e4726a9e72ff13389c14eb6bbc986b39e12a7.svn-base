@@ -1,0 +1,139 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+<div class="pd-20">
+    <div class="codeView docs-example">
+        <form class="form form-horizontal" id="form">
+            <input type="hidden" id="id" name="id" value="<%= supervisor.id || '' %>"/>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>登陆名：</label>
+                <div class="formControls col-xs-8 col-sm-5" style="width: 60%;">
+                    <input type="text" style="width: 52.5%;" class="input-text" id="name" placeholder="请输入登录名" datatype="/^[0-9A-Za-z]{5,12}$/" nullmsg="请输入登录名" errormsg="请输入登录名" name="name" value="<%= supervisor.name || '' %>" <%= supervisor.name ? 'disabled="disabled"' : '' %>/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>密码：</label>
+                <div class="formControls col-xs-8 col-sm-5" style="width: 60%;">
+                    <input type="password" style="width: 52.5%;" class="input-text" id="password" placeholder="请输入登录密码" datatype="/^\s*$/|s3-25" errormsg="请输入登录密码" name="password"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</label>
+                <div class="formControls col-xs-8 col-sm-5" style="width: 60%;">
+                    <input type="text" style="width: 52.5%;" class="input-text" id="Title" placeholder="请输入真实姓名" datatype="s1-4" nullmsg="请输入真实姓名" errormsg="请输入真实姓名" name="realName" value="<%= supervisor.realName || '' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>手机号码：</label>
+                <div class="formControls col-xs-8 col-sm-5" style="width: 60%;">
+                    <input type="text" style="width: 52.5%;" class="input-text" id="mobile" placeholder="请输入手机号" datatype="m" nullmsg="请输入手机号" errormsg="请输入正确手机号" name="mobile" value="<%= supervisor.mobile || '' %>"/>
+                </div>
+            </div>
+
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>角色：</label>
+                <div class="formControls col-xs-8 col-sm-5"> <span class="select-box">
+                    <select class="select" name="roleId">
+                        <% for(var i = 0;i < roles.length;i++){ %>
+                        <option value="<%= roles[i].id %>" <%= supervisor.roleId == roles[i].id ? 'selected=selected' : '' %>><%= roles[i].name %></option>
+                        <% } %>
+                    </select>
+                </span>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>禁用：</label>
+                <div class="formControls col-xs-8 col-sm-5"> <span class="select-box">
+                    <select class="select" name="lock">
+                        <option value="0" <%= !supervisor.lock ? 'selected=selected' : '' %>>否</option>
+                        <option value="1" <%= supervisor.lock ? 'selected=selected' : '' %>>是</option>
+                    </select>
+                </span>
+                </div>
+            </div>
+            <div class="row cl" id="googleAuthenticator">
+                <label class="form-label col-xs-4 col-sm-3">谷歌身份验证：</label>
+                <div class="formControls col-xs-3 col-sm-5">
+                    用户名：<%= supervisor.googleName || '--' %>
+                </div>
+                <div class="formControls col-xs-3 col-sm-5">
+                    key:    <%= supervisor.googleKey || '--' %>
+                </div>
+                <button id="googleAuthenticator" onclick="genSecret()" class="btn btn-primary radius" type="button"><i class="Hui-iconfont" >&#xe632;</i> 生成
+                </button>
+            </div>
+            <div class="row cl">
+                <div class="col-10 col-offset-3">
+                    <button id="sub" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+                    <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+    $(".form").Validform({
+        btnSubmit: '#sub',
+        postonce: true,
+        tiptype: 4,
+        showAllError: true,
+        ajaxPost: true,
+        beforeSubmit: function (curform) {
+            $.ajax({
+                url: '/supervisors/saveSupervisors',
+                type: 'post',
+                data: {supervisor: JSON.stringify($('#form').serializeJson())},
+                success: function (msg) {
+                    if (!msg.err) {
+                        Huimodal_alert('保存成功', 1000, function () {
+                            parent.load();
+                            layer_close();
+                        });
+                    }
+                    else {
+                        Huimodal_alert(msg.err, 1000, function () {
+                        });
+                    }
+                }
+            })
+            return false;
+        }
+    });
+
+    $(function(){
+        $.ajax({
+            url:'/system/getParamVal?key=google_authenticator',
+            type: 'post',
+            success: function (result) {
+                console.log(result);
+                if (!result.data) {
+                    $("#googleAuthenticator").hide();
+                }
+            }
+        });
+    });
+
+    function genSecret() {
+        var id = $("#id").val();
+        var name = $("#name").val();
+        confirm({
+            title: "生成谷歌验证账号", content: '确认生成吗', okText: '是', noText: '否', ok: function () {
+                $.post('/supervisors/genSecret', {id: id,name:name}, function (msg) {
+                    if (!msg.err){
+                        location.replace(location.href);
+                    }else{
+                        Huimodal_alert(msg.err, 1000, function () {
+                            location.replace(location.href);
+                        });
+                    }
+                });
+            }, no: function () {
+
+            }
+        });
+    }
+</script>
+</html>

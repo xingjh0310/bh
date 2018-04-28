@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>邀请有礼奖励规则</title>
+    <link rel="stylesheet" href="/css/base/BH_base.css">
+    <style>
+        html,body{
+            margin:0 auto;
+            width: 100%;
+            max-width:768px;
+            height: auto;
+            background: -moz-linear-gradient(top, #ff5531 0%, #ffb640 30%);
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff5531), color-stop(30%,#ffb640));
+            background: -webkit-linear-gradient(top, #ff5531 0%,#ffb640 30%);
+            background: -o-linear-gradient(top, #ff5531 0%,#ffb640 30%);
+            background: -ms-linear-gradient(top, #ff5531 0%,#ffb640 30%);
+            background: linear-gradient(to bottom, #ff5531 0%,#ffb640 30%);
+        }
+        .invite-rule-page{
+            width: 100%;
+        }
+        .rule-main1{margin-bottom: 0.34rem;}
+        img{width: 100%;}
+        .main1-cont1{
+            width: 100%;
+            height: auto;
+            background: url("/img/invite/rule/main1_top.png") center no-repeat;
+            background-size: 100% 100%;
+        }
+        .main1-cont1-list,.main1-cont2,.main2-cont{
+            margin:0 auto;
+            width:6.92rem;
+            background: #fff;
+        }
+        .main1-cont1-list{
+            padding-top: 0.24rem;
+            border-radius: 0.1rem 0.1rem 0 0;
+        }
+        .main1-cont2{
+            padding-bottom:0.28rem;
+            border-radius: 0 0 0.1rem 0.1rem;
+        }
+        .main1-cont2-table{
+            margin:0 auto;
+            width: 6rem;
+        }
+        .main1-cont2-list{width: 100%;}
+        .txt-item{
+            padding:0 0.31rem;
+            line-height: 0.36rem;
+            font-size: 0.24rem;
+            color: #333;
+        }
+        .mb38{margin-bottom: 0.38rem;}
+
+
+        .title2{
+            margin:0 auto;
+            width:2.52rem;
+        }
+        .main2-cont{
+            margin-top:0.2rem;
+            padding:0.25rem 0 0.18rem;
+            border-radius: 0.1rem;
+        }
+
+        .rule-bottom{
+            position: relative;
+            width: 100%;
+            height: 1.66rem;
+        }
+        .bottom-l,.bottom-r{
+            position: absolute;
+        }
+        .bottom-l{
+            bottom:0;
+            left: 0;
+            width: 1.4rem;
+            height: 0.8rem;
+            background: url("/img/invite/rule/bottom_l.png") center no-repeat;
+            background-size: 100% 100%;
+        }
+        .bottom-r{
+            bottom: 0.06rem;
+            right: 0.06rem;
+            width: 2.28rem;
+            height: 1.52rem;
+            background: url("/img/invite/rule/bottom_r.png") center no-repeat;
+            background-size: 100% 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="invite-rule-page">
+        <div class="rule-main1">
+            <img src="/img/invite/rule/title1.png" alt="" class="title1">
+            <div class="main1-cont">
+                <div class="main1-cont1">
+                    <ul class="main1-cont1-list">
+                        <li class="txt-item mb38">
+                            1.活动期间，邀请好友注册成功并完成首次投资且单笔金额
+                            ≥5000元，推荐人可获得<span style="color:#ff5431;">8元现金红包</span>；好友第二次投资且
+                            单笔金额≥5000元，推荐人还可获得<span style="color:#ff5431;">5元现金红包</span>。
+                        </li>
+                        <li class="txt-item mb38">
+                            2.邀请单个好友可得现金红包两个封顶，在完成规定要求的
+                            投资后，由系统自动发放至您的铂恒金服账户中，您可在
+                            【我的账户】-【我的红包】中查看；
+                        </li>
+                        <li class="txt-item">
+                            3.每人可邀请好友人数不设上限，邀请人数越多，推广奖励
+                            越多；奖励规则如下：
+                        </li>
+                    </ul>
+                </div>
+                <div class="main1-cont2">
+                    <div class="main1-cont2-table">
+                        <img src="/img/invite/rule/main1_table.png" alt="">
+                    </div>
+                    <ul class="main1-cont2-list">
+                        <li class="txt-item mb38">
+                            4.满足条件后须找在线客服登记，现金红包将在5个工作日
+                            内发放至您的铂恒金服账户中。
+                        </li>
+                        <li class="txt-item">
+                            5.本活动最终解释权归铂恒金服所有，如有任何疑问请致电
+                            客服热线<span style="color:#ff5431;">400-1888-686</span>。
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="rule-main2">
+            <div class="title2">
+                <img src="/img/invite/rule/title2.png" alt="">
+            </div>
+            <ul class="main2-cont">
+                <li class="txt-item mb38">
+                    1.好友注册时，请他/她在<span style="color:#ff5431;">"推荐人"</span>一栏填写您的邀请码。
+                </li>
+                <li class="txt-item">
+                    2.直接分享您的推荐链接来邀请好友注册。(邀请码、邀请
+                    链接请在“我的账户”--“邀请有礼”中查询)。
+                </li>
+            </ul>
+        </div>
+        <div class="rule-bottom">
+            <div class="bottom-l"></div>
+            <div class="bottom-r"></div>
+        </div>
+    </div>
+</body>
+</html>

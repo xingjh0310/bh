@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>平台公告</title>
+    <link rel="stylesheet" type="text/css" href="/css/BH/aboutus/about_nav.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/BH/aboutus/announce_list.css"/>
+</head>
+<body>
+
+<% include ../parent/top.ejs  %>
+
+<div class="about_warp">
+    <div class="about_nav_w">
+        <ul class="about_nav">
+            <li style="margin-left:120px;">
+                <a href="/aboutus" >
+                    <span class="iconabout">&#xe657;</span>
+                    <p>公司介绍</p></a>
+            </li>
+            <li>
+                <a href="/aboutus/team" >
+                    <span class="iconabout" style="line-height: 43px">&#xe639;</span>
+                    <p>运营团队</p></a>
+            </li>
+            <li>
+                <a href="/aboutus/news_list" >
+                    <span class="iconabout">&#xe687;</span>
+                    <p>媒体资讯</p></a>
+            </li>
+            <li class="active">
+                <a href="/aboutus/announce_list" >
+                    <span class="iconabout"style="line-height: 43px">&#xe60d;</span>
+                    <p>平台公告</p></a>
+            </li>
+            <li>
+                <a href="/aboutus/contact" >
+                    <span class="iconabout">&#xe6ac;</span>
+                    <p>联系我们</p></a>
+            </li>
+        </ul>
+    </div>
+    <div class="about_main">
+
+        <div class="about_gg about_gg_xq">
+            <P class="p1"><a href="/aboutus/announce_list"><< 返回列表</a></P>
+            <h3><%=news.title%></h3>
+            <%- news.content %>
+            <p class="p2"><%= news.author %></p>
+            <p class="p2"><%= new Date(news.time).Format('yyyy-MM-dd') %></p>
+
+        </div>
+
+
+
+    </div>
+</div>
+
+<% include ../parent/bottom.ejs  %>
+
+
+</body>
+
+</html>

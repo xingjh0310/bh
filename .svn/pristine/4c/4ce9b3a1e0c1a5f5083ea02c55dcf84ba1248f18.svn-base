@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 银行管理 <span
+            class="c-gray en">&gt;</span> 保存银行设置 <a class="btn btn-success radius r mr-20"
+                                                    style="line-height:1.6em;margin-top:3px"
+                                                    href="javascript:location.replace(location.href);" title="刷新"><i
+                class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+    <div class="codeView docs-example">
+        <form class="form form-horizontal" id="form">
+            <input type="hidden" name="id" value="<%= bank.id || '' %>"/>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>银行编号：</label>
+                <div class="formControls col-xs-8 col-sm-5" style="width: 60%;">
+                    <input type="text" class="input-text" id="bankCode" placeholder="请输入银行编号" datatype="s2-100"
+                           nullmsg="请输入银行编号" name="bankCode"
+                           value="<%= bank.bankCode || '' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>银行名称：</label>
+                <div class="formControls col-xs-8 col-sm-5" style="width: 60%;">
+                    <input type="text" class="input-text" id="bankName" placeholder="请输入银行名称" datatype="s2-100"
+                           nullmsg="请输入银行名称"  name="bankName"
+                           value="<%= bank.bankName || '' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>银行LOGO：</label>
+                <div class="formControls col-xs-8 col-sm-5" style="width: 60%;" id="adminLogoDiv">
+                    <input type="hidden" value="<%= bank.bankImg || '' %>" name="bankImg"/>
+                    <div class="uploader-list fileList"></div>
+                    <div class="filePicker" style="margin-top:10px;">选择图片</div>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>单笔限额：</label>
+                <div class="formControls col-xs-8 col-sm-5" style="width: 60%;">
+                    <input type="text" class="input-text" id="limitSingle" placeholder="请输单笔限额" datatype="s2-100"
+                           nullmsg="请输单笔限额" errormsg="大于2位小于100位" name="limitSingle"  _check="amount"
+                           value="<%= bank.limitSingle || '' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>单日限额：</label>
+                <div class="formControls col-xs-8 col-sm-5" style="width: 60%;">
+                    <input type="text" class="input-text" id="limitDaily" placeholder="请输单日限额" datatype="s2-100"
+                           nullmsg="请输单日限额" errormsg="大于2位小于100位" name="limitDaily"  _check="amount"
+                           value="<%= bank.limitDaily || '' %>"/>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>月限额：</label>
+                <div class="formControls col-xs-8 col-sm-5" style="width: 60%;">
+                    <input type="text" class="input-text" id="limitMonthly" placeholder="请输月限额" datatype="s2-100"
+                           nullmsg="请输月限额" errormsg="大于2位小于100位" name="limitMonthly"  _check="amount"
+                           value="<%= bank.limitMonthly || '' %>"/>
+                </div>
+            </div>
+
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>银行是否允许使用：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <select class="select" name="state">
+                        <option value="0" <%= bank.state == 0 ? 'selected=selected' : '' %>>否</option>
+                        <option value="1" <%= bank.state == 1 ? 'selected=selected' : '' %>>是</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>银行是否撤销：</label>
+                <div class="formControls col-xs-8 col-sm-5">
+                    <select class="select" name="deleteState">
+                        <option value="0" <%= bank.deleteState == 0 ? 'selected=selected' : '' %>>是</option>
+                        <option value="1" <%= bank.deleteState == 1 ? 'selected=selected' : '' %>>否</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row cl">
+                <div class="col-10 col-offset-3">
+                    <button id="sub" class="btn btn-primary radius" type="button"><i
+                                class="Hui-iconfont">&#xe632;</i> 保存
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+</body>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+    $('#webLogoDiv').createUpload();
+    $('#adminLogoDiv').createUpload();
+    $(".form").Validform({
+        btnSubmit: '#sub',
+        postonce: true,
+        tiptype: 4,
+        showAllError: true,
+        ajaxPost: true,
+        beforeSubmit: function (curform) {
+            $.ajax({
+                url: '/banklimit/saveBanklimit',
+                type: 'post',
+                data: {bankLimit: JSON.stringify($('#form').serializeJson())},
+                success: function (msg) {
+                    if (!msg.err) {
+                        Huimodal_alert('保存成功', 1000, function () {
+                            parent.load();
+                            layer_close();
+                        });
+                    }
+                    else {
+                        Huimodal_alert(msg.err, 1000, function () {
+                        });
+                    }
+                }
+            })
+            return false;
+
+        }
+    });
+</script>
+</html>

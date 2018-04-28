@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>注册</title>
+    <style type="text/css">
+        body {
+            width: 100%;
+            background: #4e205f;
+            height: 100%;
+            overflow: hidden;
+        }
+        html{
+            height: 100%; position: relative;overflow: hidden;
+        }
+        .share_01 {
+            width: 100%;
+            height: 6.38rem;
+            background: url(/img/share_01.png) no-repeat;
+            background-size: 100% 100%;
+        }
+        .share_02 {
+            width: 100%;height: 5.79rem;background: url(/img/share_02.png) no-repeat; background-size: 100% 100%;
+        }
+        .share_02 div {
+            width: 65%;
+            margin: 0 auto;
+
+        }
+        .share_02 div input {
+            height: 0.87rem;
+            width: 98.5%;
+            border-radius: 20px;
+            -webkit-border-radius: 20px;
+            -o-border-radius: 20px;
+            -moz-border-radius: 20px;
+            -ms-border-radius: 20px;
+            text-indent: 0.8em;
+            outline: none;
+            color: #333;
+            font-size: 0.27rem;
+            border:none;
+        }
+
+        .share_02 div a {
+            display: block;
+            text-align: center;
+            height: 0.96rem;
+            line-height: 0.9rem;
+            color: #775101;
+            background: url("/img/share_04.png");
+            background-size: 100% 100%;
+            font-size: 0.27rem;
+            width: 100%;
+            border-radius: 4px;
+            -webkit-border-radius: 4px;
+            -o-border-radius: 4px;
+            -moz-border-radius: 4px;
+            -ms-border-radius: 4px;
+            text-decoration: none;
+            margin: 0.5rem auto;
+        }
+
+        .share_02 div p {
+            font-size: 0.24rem;
+            text-align: center;
+            color: #c688fe;
+        }
+        .img_div{
+            position: absolute;
+            width: 100%;
+            bottom:0;
+            left:0;
+            height: 1.65rem;
+            background: url("/img/share_06.png");
+            background-size: 100% 100%;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="share_01"></div>
+<div class="share_02">
+
+    <div>
+        <form class="form-horizontal" action="/user/inputMobile" method="post">
+            <div class="tipsYz" style="height: 20px;"></div>
+            <input type="text" name="mobile" _check="mobile" placeholder="请输入手机号" maxlength="11"/>
+            <input name="inviteCode" value="<%= inviteCode %>" type="hidden"/>
+            <a href="javascript:;" onclick="ZC_api.registerInvite()" class="a1">完成注册即送红包大礼</a>
+            <p>* 此活动只限未注册铂恒金服用户</p>
+
+
+        </form>
+    </div>
+
+</div>
+<div class="img_div">
+    <img src="" class="share_img1">
+</div>
+
+<% include ../parent/slide_nav.ejs %>
+
+</body>
+</html>

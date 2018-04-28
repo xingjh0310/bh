@@ -1,0 +1,52 @@
+<!-- 侧边导航 -->
+<div class="side_nav">
+    <div class="div6">
+
+            <a href="activity"><img src="/img/lh.png" style="width:140px;"></a>
+
+    </div>
+    <div class="div1">
+        <div class="one">
+            <p class="p2">全国服务热线</p>
+            <p class="p1">400-1888-686</p>
+            <p class="p3">人工服务时间</p>
+            <p>工作日 <span class="p1"> 9:00-17:00</span></p>
+        </div>
+    </div>
+    <div  class="div5">
+        <div class="two">
+            <img src="img/148.png">
+            <p class="p1">扫一扫下载APP</p>
+        </div>
+
+    </div>
+    <div  class="div2">
+        <div class="two">
+            <img src="img/3.jpg">
+            <p class="p1">扫一扫关注我们</p>
+        </div>
+
+    </div>
+    <div  class="div3">
+        <div class="the" style="width: auto;margin-top: 40px;background: none">
+            <!-- WPA start -->
+            <script src="//wp.qiye.qq.com/qidian/2852150274/8b0629a780ca41a1bbb66b7d9fc25b0e" charset="utf-8"></script>
+            <!-- WPA end -->
+            <!--<a href="tencent://message/?uin=1683819040&Site=https://www.bohomm.com/&Menu=yes"> <img src="img/qq.png">
+            <p class="p1" >官方客服QQ：1683819040</p></a>-->
+        </div>
+    </div>
+    <div  class="div4">
+        <div style="background-position: -117px -148px;">
+            <ul class="for">
+                <li><img src="/img/phh.png">累计投资：<%= new Number(total.totalInvest || 0).toFixed(2) %>元</li>
+                <li><img src="/img/phh.png">累计收益：<%= new Number(total.totalInterest || 0).toFixed(2) %>元</li>
+                <li><img src="/img/phh.png">今日投资：<%= new Number(total.todayInvest || 0).toFixed(2) %>元</li>
+                <li><img src="/img/phh.png">累计注册：<%= total.totalRegister || 0 %>人</li>
+            </ul>
+        </div>
+
+
+    </div>
+    <div class="return_top"></div>
+</div>

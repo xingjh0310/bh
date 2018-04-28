@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>建议</title>
+</head>
+<body >
+<style>
+    /*意见反馈*/
+    .back .form-back textarea{resize:none;overflow-y: scroll;width:6.82rem;height: 3.1rem;background: #fff;font-size: 0.28rem;color:#B8B8B8;border: none;margin:0.2rem 0.2rem 0 0.25rem;padding:0.1rem 0.2rem 0.2rem  0.2rem; line-height: 2;}
+    .back .form-back p{font-size: 0.28rem;color:#585858;text-align: right;padding-right: 0.4rem;}
+    .back .form-back input{width:7rem;height: 1rem;border-radius:0.15rem;background: #D7D7D7;color:#fff;font-size:0.32rem;margin-left: 0.3rem;border: none;}
+</style>
+<div class="back">
+    <form action="" class="form-back">
+        <textarea  id="text"  onkeyup="javascript:checkWord(this);" onmousedown="javascript:checkWord(this);" name="content" placeholder="感谢您对我们平台的关注，您的意见我们一定认真听取！"></textarea>
+        <p>还可以输入<span  id="wordCheck">300</span>个字</p>
+        <input type="submit" id="tijiao" value="提交">
+    </form>
+</div>
+
+
+<% include ../parent/slide_nav.ejs %>
+<script>
+    var maxstrlen = 300;
+    function Q(s) { return document.getElementById(s); }
+
+    function checkWord(c) {
+        len = maxstrlen;
+        var str = c.value;
+        myLen = getStrleng(str);
+        var wck = Q("wordCheck");
+
+        if (myLen > len * 2) {
+            c.value = str.substring(0, i + 1);
+        }
+        else {
+            wck.innerHTML = Math.floor((len * 2 - myLen) / 2);
+        }
+    }
+
+    function getStrleng(str) {
+        myLen = 0;
+        i = 0;
+        for (; (i < str.length) && (myLen <= maxstrlen * 2); i++) {
+            if (str.charCodeAt(i) > 0 && str.charCodeAt(i) < 128)
+                myLen++;
+            else
+                myLen += 2;
+        }
+        return myLen;
+    }
+
+    $("#text").focus(function () {
+        $("#tijiao").css("background", "#FF8200");
+    })
+</script>
+</body>

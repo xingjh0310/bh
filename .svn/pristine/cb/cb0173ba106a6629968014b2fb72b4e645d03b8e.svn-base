@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>推荐</title>
+</head>
+<body>
+
+<div class="header header_reg" ><a class="iconfont" href="/inputmobile"><img src="/img/fh1.png" class="fh_img"></a>推荐</div>
+
+
+<div class="login_warp">
+    <p class="p1">*铂恒金服不会在任何地方泄露您的号码</p>
+    <form class="form-horizontal">
+        <div class="tipsYz"></div>
+
+        <div class="form-group">
+            <span class="u1">手机号码</span>
+            <input type="text" class="form-control" name="mobile" _check="mobile" id="mobile" placeholder="输入手机号码">
+        </div>
+
+        <div class="form-group" >
+            <span class="u1">验证码</span>
+            <input type="text" class="form-control" name="code" _check="validcode" placeholder="请输入验证码">
+            <input type="button" onclick="javascript:ZC_api.sendRegisterCode($('#mobile').val());" id="subRegisterCode" value="获取验证码" class="hq_btn" >
+        </div>
+
+        <div class="form-group">
+            <span class="u1">登入密码</span>
+            <input type="password" class="form-control" name="pwd" _check="password" placeholder="请输入登入密码" id="password">
+            <span class="hq_btn show_ps" id="togglePassword"></span>
+        </div>
+        <p class="p1">6~20位的字符，可包含数字、英文字母、符号</p>
+        <div class="yqm_div">
+            <p class="p3">邀请码<span class="iconfont"> &#xe644;</span></p>
+            <div class="form-group hide">
+                <span class="u1">邀请码</span>
+                <input type="text" class="form-control" name="invite" placeholder="请输入邀请码(选填)" value="<%= invite %>" >
+            </div>
+        </div>
+
+        <p class="p2"><input type="checkbox" checked="checked" id="check">已阅读并同意<a href="javascript:" class="col999" onclick="$('.alertbox').show();">《注册协议》</a>
+        </p>
+
+
+        <a href="javascript:" class="btn-logoin" onclick="ZC_api.recommend()" style="margin-top:0.9rem">立即注册</a>
+
+    </form>
+
+</div>
+
+<% include ../parent/slide_nav.ejs %>
+
+
+</body>
+</html>

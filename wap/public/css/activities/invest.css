@@ -1,0 +1,15 @@
+html,body{margin:0 auto;padding-bottom:2.3rem;width:100%;max-width:768px;height:auto;background: #fff;}
+.top-box,.main-box,.rule-box{width: 100%;}
+.main-box .main{margin:0.25rem 0 0.88rem;}
+img{display:block;margin:0 auto;width: 100%;}
+.fixed-btn-box{position:fixed;bottom:0;left:0;
+    width: 100%;height: 1.6rem;
+    background: url("/img/activities/invest/fixed_bg.png")center no-repeat;
+    background-size: 100% 100%;}
+.fixed-btn{position:absolute;bottom:0;left:0;
+    width: 100%;height:1rem;line-height: 1rem;text-align: center;color: #fff;font-size: 0.28rem;letter-spacing:0.06rem;}
+@media (device-width: 375px) and (device-height: 812px){
+    html,body{padding-bottom:2.8rem;}
+    .fixed-btn-box{height: 2.1rem;}
+    .fixed-btn{bottom:0.5rem;}
+}

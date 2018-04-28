@@ -1,0 +1,21 @@
+/*平台公告*/
+.about_gg {width:1000px;margin:30px auto 0;min-height:500px;}
+.about_gg h2{border-bottom:1px solid #ebebeb;font-size:20px;line-height: 2;padding:0 15px;}
+.about_gg_ul li{height: 60px;line-height: 60px;overflow: auto;font-size:16px;border-bottom:1px solid #eee;padding:0 15px;}
+.about_gg_ul li span{float: right;color:#999}
+.about_gg_ul li i{display:inline-block;height:5px;width:5px;background: #999;border-radius: 50%;margin-right:15px;}
+.about_gg_ul li:hover a{color:#ff6600;text-decoration: underline}
+.about_gg_ul li:hover span{color:#ff6600}
+.about_gg_ul li:hover i{background:#ff6600 }
+.pagination_div .active{border:1px solid #51a3f5;border-radius: 5px;}
+.pagination_div .active a{color: #51a3f5}
+.about_gg .pagination_div {padding: 60px 0}
+.about_gg .p1{    text-indent: 0em;}
+.about_gg .p1 a{  color:#ff6600}
+/*平台公告内容*/
+.about_gg_xq{padding-bottom: 90px;}
+.about_gg h3{text-align: center;font-size: 18px;margin:10px 0 70px 0;position: relative}
+.about_gg h3 a{font-size: 14px;float: right;color: #51a3f5;position: absolute;
+    top:5px;right:0;}
+.about_gg_xq .p1{margin-bottom: 0;text-indent: 2em;line-height: 2}
+.about_gg_xq .p2{text-align: right;}

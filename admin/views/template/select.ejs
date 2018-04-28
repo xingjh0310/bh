@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 系统设置 <span
+            class="c-gray en">&gt;</span> 预览协议模版 <a class="btn btn-success radius r mr-20"
+                                                style="line-height:1.6em;margin-top:3px"
+                                                href="javascript:location.replace(location.href);" title="刷新"><i
+                class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+    <div class="cl">
+        <div class="col-10">
+            <button onClick="layer_close();" class="btn btn-default radius" type="button">
+                &nbsp;&nbsp;返回&nbsp;&nbsp;</button>
+        </div>
+    </div>
+    <div class="codeView docs-example" style="padding-top: 10px;">
+        <%- template.content %>
+    </div>
+
+</div>
+
+
+</body>
+<% include ../main/bottom.ejs %>
+</html>

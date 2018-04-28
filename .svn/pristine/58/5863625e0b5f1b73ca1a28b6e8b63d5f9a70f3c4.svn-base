@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #f1f1f1">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <title><%= com.env.seo.title %>积分规则</title>
+</head>
+
+<body>
+<div class="header" ><a class="iconfont" href="/account/integral"><img src="/img/fh1.png" class="fh_img"></a>积分规则 </div>
+<div class="rule_warp">
+    <p class="p1">*温馨提示</p>
+    <div class="rule_div">
+        <p>1、投资可获得积分；</p>
+        <p>  2、完成任务可获得积分，比如：完成实名、绑卡、设置交易密码等可获得相应积分；</p>
+        <p>  3、通过官网举行的活动获得积分，具体信息请等待官网公告。平台活动积分将按照活动规则说明执行赋予；</p>
+        <p>  4、积分均取整数赋予，如遇小数将履行四舍五入制赋予。</p>
+    </div>
+</div>
+
+</body>
+</html>
+

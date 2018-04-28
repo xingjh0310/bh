@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<body>
+
+<div class="pd-20">
+    <form class="form form-horizontal" id="form" style="padding-left: 50px;">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>应还款时间：</label>
+
+            <div class="formControls col-xs-8 col-sm-5">
+                <label><%= bill.time %></label>
+            </div>
+
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>应还款本金：</label>
+
+            <div class="formControls col-xs-8 col-sm-5">
+                <label><%= bill.paymentCorpus.toFixed(2) %>元</label>
+            </div>
+
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>应还款利息：</label>
+
+            <div class="formControls col-xs-8 col-sm-5">
+                <label><%= bill.paymentInterest.toFixed(2) %>元</label>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>实际还款本金：</label>
+
+            <div class="formControls col-xs-8 col-sm-5">
+                <label><%= bill.realPaymentCorpus.toFixed(2) %>元</label>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>实际还款利息：</label>
+
+            <div class="formControls col-xs-8 col-sm-5">
+                <label><%= bill.realPaymentInterest.toFixed(2) %>元</label>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>逾期罚息：</label>
+
+            <div class="formControls col-xs-8 col-sm-5">
+                <label><%= bill.overdueFine.toFixed(2) %>元</label>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>总共还款：</label>
+
+            <div class="formControls col-xs-8 col-sm-5">
+                <label><%= (bill.realPaymentCorpus + bill.realPaymentInterest + bill.overdueFine).toFixed(2) %>元</label>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>借款账户余额：</label>
+
+            <div class="formControls col-xs-8 col-sm-5">
+                <label><%= bill.balance.toFixed(2) %>元</label>
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-10 col-offset-3">
+                <input type="hidden" id="group" value="<%= bill.group %>"/>
+                <input type="hidden" id="debtId" value="<%= bill.debtId %>"/>
+                <input type="hidden" id="advance" value="<%= bill.advance %>"/>
+                <button id="sub" class="btn btn-primary radius" onclick="subAuit()" type="button"><i
+                            class="Hui-iconfont">&#xe632;</i> 还款
+                </button>
+                <button class="btn btn-default radius" onclick="layer_close()" type="button">
+                    &nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+    function subAuit() {
+        $.ajax({
+            url: '/debt/payment',
+            type: 'post',
+            data: {debtId: $('#debtId').val(), group: $('#group').val(), advance: $('#advance').val()},
+            success: function (msg) {
+                if (!msg.err) {
+                    Huimodal_alert('还款成功', 1000, function () {
+                        parent.loadDebt();
+                        layer_close();
+                    });
+                }
+                else {
+                    Huimodal_alert(msg.err, 1000, function () {
+                    });
+                }
+            }
+        })
+    }
+</script>
+</html>

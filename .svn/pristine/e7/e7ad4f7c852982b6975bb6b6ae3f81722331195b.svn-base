@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <% include ../parent/static.ejs %>
+    <link rel="stylesheet" type="text/css" href="/css/BH/security/index.css"/>
+    <title><%= com.env.seo.title %>安全保障</title>
+
+</head>
+<body>
+
+<% include ../parent/top.ejs  %>
+
+<!-- banner -->
+<div class="security_bn">
+</div>
+<div class="secu_nav floatCtro ">
+    <ul>
+        <li><img src="/img/s2.png">风控审核</li>
+        <li><img src="/img/s3.png">资金安全</li>
+        <li><img src="/img/s4.png">产品甄选</li>
+        <li><img src="/img/s5.png">主体资质</li>
+        <li><img src="/img/s1.png">法律保障</li>
+    </ul>
+</div>
+
+
+<!-- main -->
+<div class="security_main">
+
+    <div class="security_d1" style="background: #fff;" id="float01">
+        <div class="sec_h1">
+            <h1 >风控审核保障</h1>
+            <img src="/img/aa1.png">
+                <span> <p class="p5" style="margin-top:40px;margin-bottom:10px;">铂恒金服针对每一个撮合产品类别进行全流程的跟进，对贷款需求、贷款资质情况、资金去向和回款途径清楚明晰，</p>
+                <p class="p5">从项目接收项目审核到运维监测，均由近十年金融运营经验的专业风险管理团队把关。</p></span>
+
+        </div>
+
+        <!--<span class="spin circle" style="border-radius:50%;height:100px;width:100px;display:block;background: #f5f5f5"></span>-->
+        <ul class="security_list2">
+            <li >
+                   <img src="/img/a9.png" >
+                <p class="p2">线下实地考察</p>
+            </li>
+            <li>
+                <img src="/img/a7.png">
+                <p class="p2">公司信用审核</p>
+            </li>
+            <li>
+                <img src="/img/a10.png">
+                <p class="p2">专业风控审查</p>
+            </li>
+            <li>
+                <img src="/img/a13.png">
+                <p class="p2">贷后还款管理</p>
+            </li>
+        </ul>
+            <ul class="sec_tab">
+                <li style="display:block">身份验证<img src="/img/ic1.png">资质验证<img src="/img/ic1.png">欺诈监测<img src="/img/ic1.png">涉诉、失信信息验证</li>
+                <li>资料审核<img src="/img/ic1.png">实地征信调查<img src="/img/ic1.png">还款能力评估<img src="/img/ic1.png">授信额度决策</li>
+                <li>大数据核验<img src="/img/ic1.png">系统模型筛选<img src="/img/ic1.png">合同确认<img src="/img/ic1.png">第三方权威机构认证</li>
+                <li>资产跟踪<img src="/img/ic1.png">还款提醒<img src="/img/ic1.png">逾期预警<img src="/img/ic1.png">强大的清收</li>
+
+            </ul>
+
+
+    </div>
+
+
+    <div class="security_bg" style="background: #eef6ff;" id="float02">
+        <div class="security_d1">
+            <h1>资金安全保障</h1>
+            <ul class="sec_list4">
+                <li>
+                    <span>坚持信息中介</span>
+                    <p>铂恒金服坚持定位信息中介，不碰触撮合资金；
+                        按照网贷P2P行业管理办法积极对接银行资金存管；</p>
+                </li>
+                <li>
+                    <span>合格投资人措施</span>
+                    <p>平台对每位投资人进行手机号、身份证、银行卡的
+                        实名且同名验证；
+                        保障投资人在充值、提现等各个环节的账户安全
+                        投资人提现仅限本人绑定的本人银行卡；</p>
+                </li>
+                <li>
+                    <span>账户信息安全</span>
+                    <p>投资人账户资金安全受签约中国人保公司承保，
+                        当账户资金安全出现问题，由人保赔付；</p>
+                </li>
+                <li style="margin-left:230px">
+                    <span>在线电子合同法律保障</span>
+                    <p>牵手E签宝电子签章，保障在线电子合同合法合规
+                        实现在线投资人、借款人、担保方、平台方四方
+                        电子签章、电子协议公正安全；
+                    </p>
+                </li>
+                <li>
+                    <span>自主研发的安全技术保障</span>
+
+                    <p>数据主动备份
+                        三层防火墙隔离系统，有效的入侵防范及容灾备份；
+                        确保数据安全
+                        256位高强度SSL安全加密保障网站安全，防范钓鱼
+                        网站和其他恶意模仿网站；<a name="securName2" ></a></p>
+
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+        <div class="security_d1" id="float03">
+            <div class="sec_h1">
+                <h1 >产品甄选保障</h1>
+                <img src="/img/aa1.png">
+                <span> <p class="p5">铂恒金服只甄选有保障的产品推送给投资人</p>
+                <p class="p5">  产品本身的风控特显，决定平台投资人资金安全</p></span>
+
+            </div>
+
+            <ul class="security_list">
+
+
+
+
+                <li class="li2">
+                    <div style="position: relative">
+                    <div class="securit_img">
+                        <img src="/img/a33.png" class="show_img">
+                        <img src="/img/a333.png" class="hide_img">
+                    </div>
+                    <div >
+                    <h2>铂金宝</h2>
+                        本项目为车位抵押贷款产品，借款方属于洲本资产推荐，具有稳定收入、信用良好，同时具有车位的优质企业或个人。所有借款都根据客户的收入情况、过往履约情况以及资产状况进行评估授信，同时经过银行风控体系进行风控，并纳入中国人民银行征信中心的数据库。洲本资产与多家银行在贷款方面有深度合作，为该借款方提供了担保保障。<se></se>                    </div>
+
+                    </div>
+
+                </li>
+                <li class="li1" ><div style="position: relative">
+                        <div class="securit_img">
+                            <img src="/img/a111.png" class="show_img">
+                            <img src="/img/a4.png" class="hide_img">
+                        </div>
+                        <div >
+                            <h2>恒盈宝</h2>
+                            本项目为汽车消费金融产品，借款方属于汽车经销商和国鸿租赁推荐、铂恒金服筛选、具有稳定收入、信用良好的优质汽车消费者。该产品服务通过汽车以租代购的方式实现：借款方在租赁期间仅拥有车辆的使用权，所有权归国鸿租赁；在租赁期满并交齐租金后，由国鸿租赁将汽车过户给借款方。租赁期间由安邦保险为租赁汽车进行承保。国鸿租赁在汽车金融行业有着二十年成功运作经验，为该借款产品提供了全面的风控保障。
+                        </div>
+                        <div class="animated securit_img1  " style="display: none" >
+                            <img src="/img/s3c.png" style="">
+                        </div>
+                    </div>
+
+                </li>
+
+                <li class="li1" ><div style="position: relative">
+                        <div class="securit_img">
+                            <img src="/img/a555.png" class="show_img">
+                            <img src="/img/a51.png" class="hide_img">
+                        </div>
+                        <div >
+                            <h2>铂信宝</h2>
+                            本项目是属于贷款垫资产品。银行向借款人贷款授信至下款期间，洲本资产先行垫付借款，待银行贷款审批发放后归还垫资金款项。借款方为合作机构推荐具有房产、车辆、稳定收入、信用良好的优质个人。所有借款都根据客户的收入情况、过往履约情况以及资产状况进行评估授信，经过银行风控体系进行风控，并纳入中国人民银行征信中心的数据库。合作机构与多家银行在信用贷款方面有深度合作，为该借款产品提供了全面的风控保障。
+                        </div>
+                        <div class="animated securit_img1  " style="display: none" >
+                            <img src="/img/s3c.png" style="">
+                        </div>
+                    </div>
+
+                </li>
+
+
+            </ul>
+
+        </div>
+    <a name="securName3"></a>
+
+    <div class="security_bg" style="background:#eef6ff" id="float04">
+        <div class="security_d1" style="width:1100px;  height: auto;">
+
+            <h1>系统安全保障</h1>
+            <ul class="security_list3" style="">
+                <li>
+                    <p>1、采用最高安全级别SSL加密认证，用户信息均采用多重技术加密措施进行存储；</p>
+                    <p>2、引入阿里云云盾技术保驾护航，异地设有第二灾难应急备用服务器。</p>
+                    <p>3、实行24小时全天候实时监控保护，保障交易环境的安全性和稳定性。</p>
+                </li>
+
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="security_d1" id="float05">
+        <div class="sec_h2">
+            <h1>法律保障 合法合规</h1>
+            <p>盈科律所战略合作<a href="http://www.yingkelawyer.com/"> <img src="/img/ls.png"></a> </p></span>
+        </div>
+
+
+        <ul class="security_list5">
+           <li>
+               <div>
+                   <img src="/img/fa1.png">
+                   <img src="/img/fa2.png" class="hide_span">
+
+               </div>
+               <h2>合规审查</h2>
+               <P>出具相关法律意见书，保证了债权
+                   形成和转让过程中合规合法性</P>
+           </li>
+            <li>
+                <div>
+                    <img src="/img/fa3.png">
+                   <span class="hide_span">
+                       <p style="padding-top:38px;">查看</p>
+                         <p> <a href="http://www.yingkelawyer.com/"> 盈科律师事务所</a></p>
+                   </span>
+                </div>
+                <h2>战略合作</h2>
+                <P>铂恒金服与盈科律所签署战略合作
+                    模式，所有项目全程监控形成</P>
+            </li>
+            <li>
+                <div>
+                    <img src="/img/fa5.png">
+                    <img src="/img/fa6.png" class="hide_span">
+                </div>
+                <h2>法律援助</h2>
+                <P>专业的律师团队为平台保驾护航
+               </P>
+            </li>
+        </ul>
+        <% if(!user){ %>
+        <a href="/login" class="btn">开启我的理财之旅</a>
+        <% }else{%>
+        <a href="/debts" class="btn">开启我的理财之旅</a>
+        <%}%>
+
+    </div>
+
+
+
+</div>
+
+
+
+
+
+<% include ../parent/bottom.ejs  %>
+
+</body>
+
+</html>
