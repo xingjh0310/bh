@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>铂恒活动</title>
     <link rel="stylesheet" href="/css/base/BH_base.css">
     <style>
         body{
@@ -78,8 +78,7 @@
         }
         .top_con{
             width: 78%;
-            margin: 0 auto;
-            margin-top: 50px;
+            margin: 0.05rem auto 0;
         }
         .top_con_tow{
             margin:0.1rem 0 0.1rem 0;
@@ -128,6 +127,11 @@
     </style>
 </head>
 <body>
+    <% if(fromWrap){ %>
+    <input type="hidden" value="<%= fromWrap %>" id="isWrap">
+    <% }else { %>
+    <input type="hidden" value="<%= 0 %>" id="isWrap">
+    <% } %>
     <% if(user.id){ %>
     <input type="hidden" value="<%= user.id %>" id="userId">
     <% }else { %>
@@ -156,10 +160,7 @@
                 <li><img src="/img/activities/redEnvelopes/A_30.png" alt=""></li>
                 <li><img src="/img/activities/redEnvelopes/A_50.png" alt=""></li>
             </ul>
-            <p>活动期间,  &nbsp;用户可在活动页面领取投资红包,活动期间每位用户仅可领取一次</p>
-            <!--<div class="btn_lq">-->
-                <!--<img src="/img/activities/redEnvelopes/A_btn1.png" alt="">-->
-            <!--</div>-->
+            <p>活动期间,用户可在活动页面领取投资红包,活动期间每位用户仅可领取一次。</p>
             <div class="btn_lq">
                 <% if(!isReceived){ %>
                 <img src="/img/activities/redEnvelopes/A_btn1.png" alt="">
@@ -185,7 +186,6 @@
 
         </div>
         <div class="modal">
-
             <p>恭喜您领取成功</p>
             <p class="sure">红包已经发送至您的账户</p>
             <img class="send" onclick="goToDebts()" src="/img/activities/redEnvelopes/A_btn22.png" alt="">
@@ -194,41 +194,57 @@
 
 </body>
 <script type="text/javascript" src="/js/plugins/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="/js/BH/public.js"></script>
 <script>
+    var systemType = phoneType();
+    var isWrap = $('#isWrap').val() == 0 ? false: true;
     $('.btn_lq').click(function () {
-
-//        var id = window.location.search;
-//        console.log(id)
         var userId = $('#userId').val();
         var activityId = $('#activityId').val();
         if(!userId){
-            window.location.href = '/login?r=redEnvelopes';
-            return false;
+            if(isWrap){
+                window.location.href="/login";
+                return false;
+            }else if(isWrap==0 && systemType==2){
+                window.location.href="/login?r=luckDraw";
+                return false;
+            }else {
+                goAppPage(1);
+                return false;
+            }
+
         }
-            $.ajax({
-                url: "/activity/v1_mayDayReceiveBonus",
-                type: "post",
-                data: {activityId:40},
-                success: function (res) {
-                    console.log(res)
-                    if(res.code == -1){
-                        window.location.href = '/login?r=redEnvelopes';
+        $.ajax({
+            url: "/activity/v1_mayDayReceiveBonus",
+            type: "post",
+            data: {activityId:activityId},
+            success: function (res) {
+                if(res.code == -1){
+                    if(isWrap){
+                        window.location.href="/login";
+                        return false;
+                    }else if(isWrap==0 && systemType==2){
+                        window.location.href="/login?r=luckDraw";
+                        return false;
+                    }else {
+                        goAppPage(1);
                         return false;
                     }
-                    if(res.code == 1){
-                        $('.baffle').show();
-                        $('.modal').show();
-                        $('body').css("overflow","hidden");
-                        $('.btn_lq img').attr("src","/img/activities/redEnvelopes/A-yilingqu.png");
-                    }
-                    if(res.code == -2){
+                }
+                if(res.code == 1){
+                    $('.baffle').show();
+                    $('.modal').show();
+                    $('body').css("overflow","hidden");
+                    $('.btn_lq img').attr("src","/img/activities/redEnvelopes/A-yilingqu.png");
+                }
+                if(res.code == -2){
 //                        $('.baffle').show();
 //                        $('.modal').show();
 //                        $('body').css("overflow","hidden");
-                        $('.btn_lq img').attr("src","/img/activities/redEnvelopes/A-yilingqu.png");
-                    }
+                    $('.btn_lq img').attr("src","/img/activities/redEnvelopes/A-yilingqu.png");
                 }
-            })
+            }
+        })
     })
     $('.modal img').click(function(){
         $('.baffle').hide();
@@ -236,7 +252,12 @@
         $('body').css("overflow","");
     })
     function goToDebts(){
-        window.location.href='/debts'
+        event.stopPropagation();
+        if(isWrap || systemType==2){
+            window.location.href="/debts";
+        }else {
+            goAppPage(2);
+        }
     }
 </script>
 </html>
